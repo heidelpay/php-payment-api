@@ -118,7 +118,6 @@ class DebitCardPaymentMethod extends AbstractPaymentMethod
              * to use a payment frame for the input of credit card information
              */
             
-            $this->getRequest()->getFrontend()->set('enabled','TRUE');
             $this->getRequest()->getFrontend()->set('payment_frame_origin',$PaymentFrameOrigin);
             $this->getRequest()->getFrontend()->set('prevent_async_redirect',$PreventAsyncRedirect);
             $this->getRequest()->getFrontend()->set('css_path',$CssPath);

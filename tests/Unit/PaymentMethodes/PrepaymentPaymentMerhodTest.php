@@ -170,6 +170,8 @@ class PrepaymentPaymentMerhodTest extends TestCase
       
   	  $this->paymentObject->authorize();
   	  
+  	  $this->paymentObject->getRequest()->getFrontend()->set('enabled','FALSE');
+  	  
   	  /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);

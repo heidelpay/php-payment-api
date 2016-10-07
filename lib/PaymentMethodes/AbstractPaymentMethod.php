@@ -260,7 +260,7 @@ abstract class AbstractPaymentMethod {
 	    if ($this->_canAuthorise) {	    
 	    $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".PA");
 	    $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
-	    $this->getRequest()->getFrontend()->set('enabled','FALSE');
+	    $this->getRequest()->getFrontend()->set('enabled','TRUE');
 	    
 	    $uri = $this->getPaymentUrl();
 	    $this->_requestArray = $this->getRequest()->prepareRequest();
