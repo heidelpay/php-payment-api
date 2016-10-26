@@ -37,7 +37,6 @@ class ProcessingParameterGroup extends AbstractParameterGroup {
      */
     public $recoverable = NULL;
     
-    
     /**
      * ProcessingResult
      * @var string payment transaction result 
@@ -82,6 +81,23 @@ class ProcessingParameterGroup extends AbstractParameterGroup {
      * @var string status code of the transaction (100.100.100)
      */
     public $status_code = NULL;
+    
+    /**
+     * Magic setter without property exception
+     *
+     *  This class has his own setter, because criterions can be used as key value store.
+     *  You can use any key and value which is a valid post parameter.
+     *
+     * @param string $key
+     * @param string $value
+     * @return \Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup
+     */
+    
+    public function set($key, $value){
+        $key = strtolower($key);
+        $this->$key = $value;
+        return $this;
+    }
     
     /**
      * ProcessingResult getter

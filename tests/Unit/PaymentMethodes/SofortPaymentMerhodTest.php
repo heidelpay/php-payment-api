@@ -1,10 +1,10 @@
 <?php
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethodes;
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod as  Prepayment;
+use \Heidelpay\PhpApi\PaymentMethodes\SofortPaymentMethod as  Sofort;
 /**
  *
- *  Prepayment Test
+ *  Sofort Test
  *
  *  Connection tests can fail due to network issues and scheduled downtimes.
  *  This does not have to mean that your integration is broken. Please verify the given debug information
@@ -19,7 +19,7 @@ use \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod as  Prepayment;
  * @category UnitTest
  */
 
-class PrepaymentPaymentMerhodTest extends TestCase
+class SofortPaymentMerhodTest extends TestCase
 {
     /** 
      * SecuritySender
@@ -41,7 +41,7 @@ class PrepaymentPaymentMerhodTest extends TestCase
      * 
      * @var string TransactionChannel
      */
-    protected $TransactionChannel = '31HA07BC8142C5A171749A60D979B6E4';
+    protected $TransactionChannel = '31HA07BC8142C5A171749CDAA43365D2';
     /**
      * SandboxRequest
      * 
@@ -121,7 +121,7 @@ class PrepaymentPaymentMerhodTest extends TestCase
     
     /**
      * PaymentObject
-     * @var \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod
+     * @var \Heidelpay\PhpApi\PaymentMethodes\SofortPaymentMethod
      */
     protected $paymentObject = NULL;
     /**
@@ -131,20 +131,20 @@ class PrepaymentPaymentMerhodTest extends TestCase
       date_default_timezone_set('UTC');
   }
   /**
-   * Set up function will create a prepaymet object for each testcase
+   * Set up function will create a sofort object for each testcase
    * @see PHPUnit_Framework_TestCase::setUp()
    */
   public function  setUp() {
-  	$Prepayment = new Prepayment();
+  	$Sofort = new Sofort();
   	
-  	$Prepayment->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
+  	$Sofort->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
   	
-  	$Prepayment->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, NULL, $this->shopperId, $this->addressStreet,$this->addressState,$this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
+  	$Sofort->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, NULL, $this->shopperId, $this->addressStreet,$this->addressState,$this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
   	
   	
-  	$Prepayment->_dryRun=TRUE;
+  	$Sofort->_dryRun=TRUE;
   	
-  	$this->paymentObject = $Prepayment;
+  	$this->paymentObject = $Sofort;
   	
   }
   
@@ -158,15 +158,15 @@ class PrepaymentPaymentMerhodTest extends TestCase
   }
     
   /**
-   * Test case for a single prepayment authorisation
-   * @return string payment reference id for the prepayment authorize transaction
+   * Test case for a single sofort authorize
+   * @return string payment reference id for the sofort authorize transaction
    * @group connectionTest
    */
   public function testAuthorize()
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      $this->paymentObject->getRequest()->getFrontend()->set('enabled','FALSE');
+      $this->paymentObject->getRequest()->async('DE','https://dev.heidelpay.de');
       
   	  $this->paymentObject->authorize();
   	  
@@ -175,38 +175,9 @@ class PrepaymentPaymentMerhodTest extends TestCase
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1],1));
-      $this->assertFalse($response[1]->isPending(), 'authorize is pending');
       $this->assertFalse($response[1]->isError(),'authorize failed : '.print_r($response[1]->getError(),1));
       
       return (string)$response[1]->getPaymentReferenceId();
   }
   
-  /**
-   * Test case for a prepayment reversal of a existing authorisation
-   * @var string payment reference id of the prepayment authorisation
-   * @return string payment reference id for the prepayment reversal transaction
-   * @depends testAuthorize
-   * @group connectionTest
-   */
-  
-  public function testReversal(string $referenceId)
-  {
-      
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
-  
-      $this->paymentObject->reversal($referenceId);
-  
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(),1));
-      $this->assertFalse($response[1]->isPending(), 'reversal is pending');
-      $this->assertFalse($response[1]->isError(),'reversal failed : '.print_r($response[1]->getError(),1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
-  }
-  
-     
 }

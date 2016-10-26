@@ -2,7 +2,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethodes;
 use PHPUnit\Framework\TestCase;
 use \Heidelpay\PhpApi\PaymentMethodes\DebitCardPaymentMethod as  DebitCard;
-use Zend\Validator\CreditCard;
 /**
  *
  *  Debit card test
