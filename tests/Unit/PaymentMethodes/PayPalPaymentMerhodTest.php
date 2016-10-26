@@ -1,10 +1,10 @@
 <?php
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethodes;
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod as  Prepayment;
+use \Heidelpay\PhpApi\PaymentMethodes\PayPalPaymentMethod as  PayPal;
 /**
  *
- *  Prepayment Test
+ *  PayPal Test
  *
  *  Connection tests can fail due to network issues and scheduled downtimes.
  *  This does not have to mean that your integration is broken. Please verify the given debug information
@@ -19,7 +19,7 @@ use \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod as  Prepayment;
  * @category UnitTest
  */
 
-class PrepaymentPaymentMerhodTest extends TestCase
+class PayPalPaymentMerhodTest extends TestCase
 {
     /** 
      * SecuritySender
@@ -121,7 +121,7 @@ class PrepaymentPaymentMerhodTest extends TestCase
     
     /**
      * PaymentObject
-     * @var \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod
+     * @var \Heidelpay\PhpApi\PaymentMethodes\SofortPaymentMethod
      */
     protected $paymentObject = NULL;
     /**
@@ -131,20 +131,20 @@ class PrepaymentPaymentMerhodTest extends TestCase
       date_default_timezone_set('UTC');
   }
   /**
-   * Set up function will create a prepaymet object for each testcase
+   * Set up function will create a PayPal object for each testcase
    * @see PHPUnit_Framework_TestCase::setUp()
    */
   public function  setUp() {
-  	$Prepayment = new Prepayment();
+  	$PayPal = new PayPal();
   	
-  	$Prepayment->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
+  	$PayPal->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
   	
-  	$Prepayment->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, NULL, $this->shopperId, $this->addressStreet,$this->addressState,$this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
+  	$PayPal->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, NULL, $this->shopperId, $this->addressStreet,$this->addressState,$this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
   	
   	
-  	$Prepayment->_dryRun=TRUE;
+  	$PayPal->_dryRun=TRUE;
   	
-  	$this->paymentObject = $Prepayment;
+  	$this->paymentObject = $PayPal;
   	
   }
   
@@ -158,15 +158,15 @@ class PrepaymentPaymentMerhodTest extends TestCase
   }
     
   /**
-   * Test case for a single prepayment authorisation
-   * @return string payment reference id for the prepayment authorize transaction
+   * Test case for a single PayPal authorisation
+   * @return string payment reference id for the PayPal authorize transaction
    * @group connectionTest
    */
   public function testAuthorize()
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      $this->paymentObject->getRequest()->getFrontend()->set('enabled','FALSE');
+      $this->paymentObject->getRequest()->async('DE','https://dev.heidelpay.de');
       
   	  $this->paymentObject->authorize();
   	  
@@ -175,38 +175,34 @@ class PrepaymentPaymentMerhodTest extends TestCase
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1],1));
-      $this->assertFalse($response[1]->isPending(), 'authorize is pending');
       $this->assertFalse($response[1]->isError(),'authorize failed : '.print_r($response[1]->getError(),1));
       
       return (string)$response[1]->getPaymentReferenceId();
   }
   
   /**
-   * Test case for a prepayment reversal of a existing authorisation
-   * @var string payment reference id of the prepayment authorisation
-   * @return string payment reference id for the prepayment reversal transaction
-   * @depends testAuthorize
+   * Test case for a single PayPal debit
+   * @return string payment reference id for the PayPal authorize transaction
    * @group connectionTest
    */
   
-  public function testReversal(string $referenceId)
+  public function testDebit()
   {
-      
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
+      $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+      $this->paymentObject->getRequest()->async('DE','https://dev.heidelpay.de');
+      
   
-      $this->paymentObject->reversal($referenceId);
-  
+      $this->paymentObject->debit();
+      	
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(),1));
-      $this->assertFalse($response[1]->isPending(), 'reversal is pending');
-      $this->assertFalse($response[1]->isError(),'reversal failed : '.print_r($response[1]->getError(),1));
-      
+      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1],1));
+      $this->assertFalse($response[1]->isError(),'debit failed : '.print_r($response[1]->getError(),1));
+  
       return (string)$response[1]->getPaymentReferenceId();
   }
   
-     
 }

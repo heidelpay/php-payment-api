@@ -43,7 +43,7 @@ class CriterionParameterGroup extends AbstractParameterGroup {
      * Sdk version
      * @var string version
      */
-    public $sdk_version = "16.10.7";
+    public $sdk_version = "16.10.27";
     
     /**
      * CriterionPaymentMethod getter
