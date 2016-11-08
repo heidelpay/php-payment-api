@@ -34,6 +34,13 @@ abstract class AbstractMethod {
     protected $address = NULL;
     
     /**
+     * ConfigParameterGroup
+     * @var \Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup
+     */
+    
+    protected $config = NULL;
+    
+    /**
      * ContactParameterGroup
      * @var \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
@@ -162,6 +169,19 @@ abstract class AbstractMethod {
         }
         return $this->address;
     }
+    
+    /**
+     * Config getter
+     * @return \Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup
+     */
+    public function getConfig()
+    {
+        if ($this->config === NULL ) {
+            return $this->config = new \Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup();
+        }
+        return $this->config;
+    }
+    
     
     /**
      * Contact getter

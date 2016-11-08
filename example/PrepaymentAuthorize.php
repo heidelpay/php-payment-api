@@ -3,7 +3,7 @@ namespace Heidelpay\Excample\PhpApi;
 /**
  * Prepayment authorize example
  * 
- * This is a coding example for prepayment authorize with the Heidelpay PhpApi 
+ * This is a coding example for prepayment authorize using heidelpay php-api 
  * extension. 
  *
  *
@@ -47,7 +47,7 @@ require_once __DIR__.'/../../../autoload.php';
   */
  $Prepayment->getRequest()->async(
         'EN',                                    // Languarge code for the Frame   
-        'https://dev.heidelpay.de/response.php'  // Response url from your application
+        HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
      );
  
  /**
@@ -86,16 +86,20 @@ require_once __DIR__.'/../../../autoload.php';
 	<title>Prepayment authorize example</title>
 </head>
 <body>
-<form method="post" class="formular" id="paymentFrameForm"> 
 <?php 
     if ($Prepayment->getResponse()->isSuccess()) {
-        echo '<pre>'. print_r($Prepayment,1).'</pre>';
+        echo '<a href="'.$Prepayment->getResponse()->getPaymentFromUrl().'">place prepayment</a>';
+    } else { 
+        echo '<pre>'. print_r($Prepayment->getResponse()->getError(),1).'</pre>';
     }
  ?>
- </form>
+ <p>It is not necessary to show the redirect url to your customer. You can  
+ use php header to forward your customer directly.<br/>
+ For example:<br/>
+ header('Location: '.$Prepayment->getResponse()->getPaymentFromUrl());
+ </p> 
  </body>
  </html>
- 
  
  
  

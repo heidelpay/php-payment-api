@@ -1,9 +1,9 @@
 <?php
 namespace Heidelpay\Excample\PhpApi;
 /**
- * Credit card registration example
+ * Sofort authorize example
  * 
- * This is a coding example for credit card registration using heidelpay php-api 
+ * This is a coding example for Sofort authorize using the heidelpay php-api 
  * extension. 
  *
  *
@@ -29,23 +29,23 @@ require_once __DIR__.'/../../../autoload.php';
 /**
  * Load a new instance of the payment method 
  */
- $CreditCard = new \Heidelpay\PhpApi\PaymentMethodes\CreditCardPaymentMethod();
+ $Sofort = new \Heidelpay\PhpApi\PaymentMethodes\SofortPaymentMethod();
  
  /** 
-  * Set up your authentification data for Heidepay api
+  * Set up your authentification data for heidepay api
   * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
   */
- $CreditCard->getRequest()->authentification( 
+ $Sofort->getRequest()->authentification( 
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
        '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
        '93167DE7',                          // UserPassword
-       '31HA07BC8142C5A171744F3D6D155865',  // TransactionChannel credit card without 3d secure
+       '31HA07BC8142C5A171749CDAA43365D2',  // TransactionChannel credit card without 3d secure
        TRUE                                 // Enable sandbox mode
      );
  /**
   * Set up asynchronous request parameters
   */
- $CreditCard->getRequest()->async(
+ $Sofort->getRequest()->async(
         'EN',                                    // Languarge code for the Frame   
         HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
      );
@@ -53,7 +53,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up customer information required for risk checks 
   */                               
- $CreditCard->getRequest()->customerAddress(
+ $Sofort->getRequest()->customerAddress(
      'Heidel',                  // Given name
      'Berger-Payment'           // Family name
      ,NULL,                     // Company Name
@@ -69,7 +69,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up basket or transaction information 
   */
- $CreditCard->getRequest()->basketData(
+ $Sofort->getRequest()->basketData(
      '2843294932',                  // Reference Id of your application 
      23.12,                         // Amount of this request
      'EUR',                         // Currency code of this request
@@ -77,30 +77,27 @@ require_once __DIR__.'/../../../autoload.php';
      );
  
  /**
-  * Set necessary parameters for Heidelpay payment Frame and send a registration request
+  * Send authorize request
   */
- $CreditCard->registration(
-     HeidelpayPhpApiURL,                                    // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     'FALSE',                                               // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'style.css'   // CSSPath - css url to style the Heidelpay payment frame 
-     );                                
+ $Sofort->authorize();                                
  ?>
 <html>
 <head>
-	<title>Credit card registration example</title>
+	<title>Sofort authorize example</title>
 </head>
 <body>
-<form method="post" class="formular" id="paymentFrameForm"> 
 <?php 
-    if ($CreditCard->getResponse()->isSuccess()) {
-        echo '<iframe id="paymentIframe" src="'.$CreditCard->getResponse()->getPaymentFromUrl().'" style="height:250px;"></iframe><br />';
+    if ($Sofort->getResponse()->isSuccess()) {
+        echo '<a href="'.$Sofort->getResponse()->getPaymentFromUrl().'">to Sofort</a>';
     } else { 
-        echo '<pre>'. print_r($CreditCard->getResponse()->getError(),1).'</pre>';
+        echo '<pre>'. print_r($Sofort->getResponse()->getError(),1).'</pre>';
     }
  ?>
- <button type="submit">Submit data</button></td>
- </form>
- <script type="text/javascript" src="./js/creditCardFrame.js"></script>
+ <p>It is not necessary to show the redirect url to your customer. You can  
+ use php header to forward your customer directly.<br/>
+ For example:<br/>
+ header('Location: '.$Sofort->getResponse()->getPaymentFromUrl());
+ </p> 
  </body>
  </html>
  

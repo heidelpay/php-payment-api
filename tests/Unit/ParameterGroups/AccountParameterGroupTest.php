@@ -43,6 +43,19 @@ class AccountParameterGroupTest extends TestCase {
     }
     
     /**
+     * Iban getter/setter test
+     */
+    public function testIban(){
+    
+        $Account = new Account();
+    
+        $value = "DE89370400440532013000";
+        $Account->set("iban",$value);
+    
+        $this->assertEquals($value, $Account->getIban());
+    }
+    
+    /**
      * Expiry month getter/setter test
      */
     

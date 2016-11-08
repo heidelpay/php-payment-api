@@ -1,8 +1,8 @@
 ![Logo](https://dev.heidelpay.de/devHeidelpay_400_180.jpg)
 
-# Welcome to the heidelpay payment api
+# Welcome to the heidelpay payment api for php
 
-This is the php payment api for heidelpay payment methodes. The library will help you to easily integrate heidelpay into your application.
+This is the php payment api for heidelpay. The library will help you to easily integrate heidelpay into your application.
 
 
 ## Currently supported payment methods:
@@ -12,6 +12,8 @@ This is the php payment api for heidelpay payment methodes. The library will hel
 * prepayment
 * Sofort
 * PayPal
+* direct debit
+* iDeal
 
 
 ### SYSTEM REQUIREMENTS
@@ -26,13 +28,11 @@ by now.
 
 ## LICENSE
 
-You can find a copy of this license in [LICENSE.md](LICENSE.md).
+You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 ## Documentation
 
 Please visit https://dev.heidelpay.de/PhpApi/ for the developer documentation.
-Use http://dev.heidelpay.de/packages/ and composer for integration in your app.
-
 
 ### UnitTest
 
@@ -41,11 +41,14 @@ This library comes with a set of unit tests. Please be so kind and do not run al
 ### Examples
 
 Integration examples can be found in the example folder. Just open the
+
 _enableExamples.php and change
+
 define('HeidelpayPhpApiExamples', FALSE);
+
 to
+
 define('HeidelpayPhpApiExamples', TRUE);
 
 Please make sure to switch it off again, after you lunch your application.
-
 
