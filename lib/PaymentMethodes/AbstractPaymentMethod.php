@@ -348,7 +348,6 @@ abstract class AbstractPaymentMethod {
 	    if ($this->_canDebit) {
 	        $this->getRequest()->getPaymemt()->set('code',$this->_paymentCode.".DB");
 	        $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
-	        $this->getRequest()->getFrontend()->set('enabled','TRUE');
 	        if ($this->_brand !== NULL) $this->getRequest()->getAccount()->set('brand', $this->_brand);
 	         
 	           $uri = $this->getPaymentUrl();
@@ -507,7 +506,6 @@ abstract class AbstractPaymentMethod {
 	    if ($this->_canRegistration) {
 	        $this->getRequest()->getPaymemt()->set('code',$this->_paymentCode.".RG");
 	        $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
-	        $this->getRequest()->getFrontend()->set('enabled','TRUE');
 	        if ($this->_brand !== NULL) $this->getRequest()->getAccount()->set('brand', $this->_brand);
 	
 	       $uri = $this->getPaymentUrl();

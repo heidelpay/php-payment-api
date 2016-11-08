@@ -1,0 +1,83 @@
+
+Lizenzvereinbarung Plug-in
+
+I. Präambel
+
+Diese Lizenzvereinbarung Plug-in (nachfolgend – „Vereinbarung“) bildet einen Vertrag zwischen dem Nutzer des Plug-ins und der Heidelberger Payment GmbH (nachfolgend „heidelpay“).
+
+Das Plug-in von heidelpay ist ein Software-Programm, welches die Schnittstelle zum Payment-System von heidelpay mit einer Anwendung (zum Beispiel: Shopsystem, Warenwirtschaft, Debitorenmanagement etc.) verbindet. Das Plug-in dient dem Datenaustausch zwischen dem Payment-System von heidelpay und der Anwendung. Das Plug-in erweitert den Funktionsumfang der Anwendung hinsichtlich der mit heidelpay gesondert vertraglich vereinbarten Leistungen. 
+
+Diese Vereinbarung regelt die Bestimmungen unter denen heidelpay die Nutzung des zur Verfügung gestellten Plug-in gestattet. 
+
+Dies vorausgeschickt, treffen der Nutzer und heidelpay die folgende Vereinbarung:
+
+II. Begriffsbestimmungen
+
+	Object Code	Die maschinenlesbare, übersetzte Form des Plug-ins.
+
+	Plug-in	Das  unter dieser Lizenzvereinbarung angebotene Programm, das von heidelpay nach den Bestim-mungen dieser Lizenzvereinbarung verbreitet oder öffentlich zugänglich gemacht hat.
+
+	Source Code	Die für Menschen lesbare, in Programmiersprache dargestellte Form des Plug-in.
+
+	Verändern	Jede Erweiterung, Kürzung und Bearbeitung des Plug-ins, insbesondere Weiterentwicklungen
+
+	Verbreiten	Die öffentliche Weitergabe des Plug-ins, biespielsweise das Bereitstellen zum Download auf öffent-lich zugänglichen Internetseiten.
+
+III. Geltenden Bestimmungen
+
+Im Falle eines zwischen dem Nutzer und heidelpay abgeschlossenen Händlervertrages für die Abwicklung der dort bestimmten Leistungen, gilt der Händlervertrag ab Vertragsschluss und gilt in diesem Fall zusätzlich zu dieser Ver-einbarung. Im Falle des Widerspruchs zwischen dieser Vereinbarung und dem Händlervertrag hat der Händlerver-trag Vorrang.
+
+IV. Lizenz
+
+	1. Diese Vereinbarung räumt nur solchen Nutzern Nutzungsrechte ein, die Unternehmer im Sinne des BGB sind. Eine Nutzung durch Verbraucher ist nicht gestattet. 
+	2. Die von heidelpay im Rahmen dieser Vereinbarung gewährte Lizenz, ist für den Nutzer unentgeltlich.
+	3. Unter der Voraussetzung der Einhaltung der Bestimmungen dieser Vereinbarung, erteilt heidelpay dem Nut-zer das zeitlich unbefristete, widerrufliche, räumlich auf Europa begrenzte Recht, das Plug-in zu verändern, unverändert oder in veränderter Form zu dem in der Präambel dargestellten Zweck für geschäftliche Zwecke zu nutzen, d.h. das Plug-in zu speichern, ablaufen zu lassen, zu vervielfältigen, zu verbreiten und öffentlich zugänglich zu machen.
+	4. Heidelpay kann neue Versionen/Updates des Plug-ins anbieten, die zum Beispiel Fehlerbehebungen und neue Funktionalitäten beinhalten können. Heidelpay empfiehlt daher die regelmässige Überprüfung der Ak-tualität des Plug-in, dies wird auf der Seite http://dev.heidelpay.de veröffentlicht. Auch diese neuen Versio-nen/Updates unterliegen den Bedingungen dieser Vereinbarung.
+
+V. Beschränkungen
+
+	1. Durch diese Vereinbarung erfolgt keine Übertragung jedweder Schutzrechte von heidelpay. 
+	2. Das Recht, das Plug-in zu verändern und diese veränderte Version zu vervielfältigen, zu verbreiten oder öf-fentlich zugänglich zu machen, setzt voraus, dass
+		a. die im Source Code bzw. Object Code enthaltenen Hinweise auf diese Lizenz erhalten bleiben; und
+		b. alle Hinweise und Vermerke im Source Code bzw. Object Code, hinsichtlich des Urhebers des Plug-in un-verändert bleiben; und
+		c. ein deutlicher Hinweis erteilt wird, dass es sich um eine veränderte Version des Plug-in handelt, eine Do-kumentation darüber, welche Teile verändert wurden, mitgeliefert wird; und
+		d. Heidelpay für sämtliche aus der Veränderung resultierende Ansprüche freigestellt wird und zudem das veränderte Plug-in mit einer Klarstellung versehen wird, dass heidelpay für das Plug-in in der veränderten Form keine Haftung übernimmt; und
+		e. das veränderte Plug-in unter einer Lizenzvereinbarung zur Verfügung gestellt wird, die das Interesse von heidelpay entsprechend den Bedingungen dieser Vereinbarung schützt; und
+		f. die im Zusammenhang mit dem Plug-in angezeigten rechtlichen Hinweise nicht entfernt, verdeckt oder abgeändert werden.
+	3. Der Nutzer sichert zu, dass er bei der Nutzung des Plug-in von heidelpay die geltenden nationalen und inter-nationalen Gesetze einhält; 
+	4. Der Nutzer sichert zu, heidelpay unverzüglich zu informieren, wenn Dritte ihm gegenüber Ansprüche im Zu-sammenhang mit dem Plug-in anmelden und/oder behaupten, das Plug-in verletze Rechte Dritter, und hei-delpay alle Dokumente und/oder Informationen zur Verfügung zu stellen, die der Nutzer im Zusammenhang mit einem solchen Anspruch erhält.
+
+VI. Datenschutz
+
+Es gelten die Datenschutzbestimmugen, abrufbar unter https://dev.heidelpay.de/datenschutzerklaerung/ .
+
+VII. FREISTELLUNG
+
+Der Nutzer erklärt sich einverstanden, heidelpay, deren Tochtergesellschaften, angeschlossenen Unternehmen, Geschäftsführer, leitenden Angestellten, Mitarbeiter, Vertreter, Geschäftspartner und Lizenzgeber gegen alle An-sprüche oder Forderungen Dritter, einschließlich Gerichtskosten, angemessener Anwaltsgebühren und Sachver-ständigenkosten, freizustellen, die entstehen weil: 
+	(a) die Nutzung des Plug-ins von heidelpay unter Verletzung der Bestimmungen dieser Vereinbarung erfolgt; oder 
+	(b) der Nutzer gegen geltende Gesetze oder aufsichtsrechtliche Bestimmungen verstösst oder 
+	(c) der Nutzer seine Identität in einer falschen, betrügerischen, böswilligen oder unzutreffenden Weise dar-stellt.
+
+VIII. TECHNISCHER SUPPORT
+
+Heidelpay kann dem Nutzer, welcher das Plug-in in unverändertem Zustand nutzt, Support zur Verfügung stellen. Hierzu bedarf es einer gesonderten Vereinbarung zwischen dem Nutzer und heidelpay.
+
+IX.LAUFZEIT UND KÜNDIGUNG 
+
+	1. Diese Vereinbarung kann von den Parteien jederzeit fristlos gekündigt werden.
+	2. Es steht heidelpay frei, das Downloadangebot jederzeit einzustellen.
+	3. Alle Rechte des Nutzers aus dieser Vereinbarung erlöschen unmittelbar, sobald der Nutzer wesentliche Best-immungen dieser Vereinbarung verletzt.
+	4. Sobald diese Vereinbarung beendet ist oder der Nutzer seine Rechte gemäss Ziffer 3 verliert, hat der Nutzer sämtliche Kopien des Plug-ins (und alle entsprechenden Sicherungen) zu löschen.
+
+X. HAFTUNG
+
+	1. Da die Lizenz unentgeltlich zur Verfügung gestellt wird, handelt es sich um einen Schenkungsvertrag, Daher haftet heidelpay für etwaige Schäden nur gem. § 524 BGB.
+	2. Soweit ein Schaden - unmittelbar oder mittelbar - auf einem Datenverlust beruht und heidelpay nach Ziffer 1 hierfür haftbar gemacht werden kann, ist die Haftung von heidelpay auf den Wiederherstellungsaufwand be-schränkt, der bei regelmäßiger gefahrentsprechender Datensicherung eingetreten wäre.
+	3. Ansprüche auf Schadensersatz, ausgenommen solche aus einer vorsätzlichen oder grob fahrlässigen Pflicht-verletzung, einer Verletzung des Lebens, des Körpers, der Gesundheit, unerlaubter Handlung oder aus dem Produkthaftungsgesetz, verjähren spätestens in einem Jahr von dem Zeitpunkt an, an dem die geschädigte Partei von dem Schaden und den Umständen, aus denen sich die Anspruchsberechtigung ergibt, Kenntnis er-langt, ohne Rücksicht auf Kenntnis drei Jahre ab dem schädigenden Ereignis. Kürzere gesetzliche Verjäh-rungsfristen bleiben unberührt.
+
+XI. Schlussbestimmungen
+	
+	1. Diese Vereinbarung unterliegt den Gesetzen der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Der ausschließliche Gerichtsstand ist das Landgericht Heidelberg. 
+	2. In einige Länder, inklusive der Vereinigten Staaten von Amerika, gelten Exportbeschränkungen. Das Plug-in kann solchen Beschränkungen unterliegen. Diese sind insbesondere zu beachten, als das Plug-in in andere Länder exportiert wird. Wenn der Nutzer das Plug-in exportiert, ist allein er für die Einhaltung der maßgebli-chen Regelungen verantwortlich. In jedem Fall ist es untersagt, das Plug-in in ein Land zu exportieren, wel-ches einem Embargo der Vereinigten Staaten von Amerika oder der Europäischen Union unterliegt, oder ei-ner Person zu überlassen, an die eine Lieferung nach U.S. amerikanischen oder europäischen Regelung un-tersagt ist.
+	3. Diese Bestimmungen oder die Nutzung des Plug-ins begründet kein Joint Venture, keine Teilhaberschaft, kei-ne Beschäftigung mit heidelpay und keine Befugnis zur Vertretung von heidelpay.
+	4. Die Bestimmungen der Abschnitte IV, V, VI, VII, X, XI. überdauern die Beendigung dieser Bestimmungen, gleich aus welchem Grund.

@@ -1,9 +1,9 @@
 <?php
 namespace Heidelpay\Excample\PhpApi;
 /**
- * Credit card registration example
+ * Direct debit registration example
  * 
- * This is a coding example for credit card registration using heidelpay php-api 
+ * This is a coding example for direct debit registration using heidelpay php-api 
  * extension. 
  *
  *
@@ -29,13 +29,13 @@ require_once __DIR__.'/../../../autoload.php';
 /**
  * Load a new instance of the payment method 
  */
- $CreditCard = new \Heidelpay\PhpApi\PaymentMethodes\CreditCardPaymentMethod();
+ $DirectDebit = new \Heidelpay\PhpApi\PaymentMethodes\DirectDebitPaymentMethod();
  
  /** 
   * Set up your authentification data for Heidepay api
   * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
   */
- $CreditCard->getRequest()->authentification( 
+ $DirectDebit->getRequest()->authentification( 
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
        '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
        '93167DE7',                          // UserPassword
@@ -45,7 +45,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up asynchronous request parameters
   */
- $CreditCard->getRequest()->async(
+ $DirectDebit->getRequest()->async(
         'EN',                                    // Languarge code for the Frame   
         HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
      );
@@ -53,7 +53,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up customer information required for risk checks 
   */                               
- $CreditCard->getRequest()->customerAddress(
+ $DirectDebit->getRequest()->customerAddress(
      'Heidel',                  // Given name
      'Berger-Payment'           // Family name
      ,NULL,                     // Company Name
@@ -69,7 +69,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up basket or transaction information 
   */
- $CreditCard->getRequest()->basketData(
+ $DirectDebit->getRequest()->basketData(
      '2843294932',                  // Reference Id of your application 
      23.12,                         // Amount of this request
      'EUR',                         // Currency code of this request
@@ -79,28 +79,33 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set necessary parameters for Heidelpay payment Frame and send a registration request
   */
- $CreditCard->registration(
-     HeidelpayPhpApiURL,                                    // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     'FALSE',                                               // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'style.css'   // CSSPath - css url to style the Heidelpay payment frame 
+ $DirectDebit->registration(
+     'https://dev.heidelpay.de', // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
+     'FALSE',                    // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
+     'http://www.heidelpay.de'   // CSSPath - css url to style the Heidelpay payment frame 
      );                                
  ?>
 <html>
 <head>
-	<title>Credit card registration example</title>
+	<title>Direct Debit registration example</title>
 </head>
 <body>
-<form method="post" class="formular" id="paymentFrameForm"> 
+<form method="post" class="formular" action="
 <?php 
-    if ($CreditCard->getResponse()->isSuccess()) {
-        echo '<iframe id="paymentIframe" src="'.$CreditCard->getResponse()->getPaymentFromUrl().'" style="height:250px;"></iframe><br />';
-    } else { 
-        echo '<pre>'. print_r($CreditCard->getResponse()->getError(),1).'</pre>';
+    if ($DirectDebit->getResponse()->isSuccess()) {
+        echo $DirectDebit->getResponse()->getPaymentFromUrl();
+    }
+?>
+" id="paymentFrameForm"> 
+<?php 
+    if ($DirectDebit->getResponse()->isError()) {
+        echo '<pre>'. print_r($DirectDebit->getResponse()->getError(),1).'</pre>';
     }
  ?>
+ Holder:<input type="text" name="ACCOUNT.HOLDER" value="" /><br/>
+ IBan:<input type="text" name="ACCOUNT.IBAN" value="" /><br/>
  <button type="submit">Submit data</button></td>
  </form>
- <script type="text/javascript" src="./js/creditCardFrame.js"></script>
  </body>
  </html>
  

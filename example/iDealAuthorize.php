@@ -1,9 +1,9 @@
 <?php
 namespace Heidelpay\Excample\PhpApi;
 /**
- * Credit card registration example
+ * iDeal authorize example
  * 
- * This is a coding example for credit card registration using heidelpay php-api 
+ * This is a coding example for iDeal authorize using heidelpay php-api 
  * extension. 
  *
  *
@@ -29,23 +29,23 @@ require_once __DIR__.'/../../../autoload.php';
 /**
  * Load a new instance of the payment method 
  */
- $CreditCard = new \Heidelpay\PhpApi\PaymentMethodes\CreditCardPaymentMethod();
+ $iDeal = new \Heidelpay\PhpApi\PaymentMethodes\IDealPaymentMethod();
  
  /** 
   * Set up your authentification data for Heidepay api
   * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
   */
- $CreditCard->getRequest()->authentification( 
+ $iDeal->getRequest()->authentification( 
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
        '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
        '93167DE7',                          // UserPassword
-       '31HA07BC8142C5A171744F3D6D155865',  // TransactionChannel credit card without 3d secure
+       '31HA07BC8142C5A171744B56E61281E5',  // TransactionChannel credit card without 3d secure
        TRUE                                 // Enable sandbox mode
      );
  /**
   * Set up asynchronous request parameters
   */
- $CreditCard->getRequest()->async(
+ $iDeal->getRequest()->async(
         'EN',                                    // Languarge code for the Frame   
         HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
      );
@@ -53,7 +53,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up customer information required for risk checks 
   */                               
- $CreditCard->getRequest()->customerAddress(
+ $iDeal->getRequest()->customerAddress(
      'Heidel',                  // Given name
      'Berger-Payment'           // Family name
      ,NULL,                     // Company Name
@@ -69,7 +69,7 @@ require_once __DIR__.'/../../../autoload.php';
  /**
   * Set up basket or transaction information 
   */
- $CreditCard->getRequest()->basketData(
+ $iDeal->getRequest()->basketData(
      '2843294932',                  // Reference Id of your application 
      23.12,                         // Amount of this request
      'EUR',                         // Currency code of this request
@@ -77,30 +77,41 @@ require_once __DIR__.'/../../../autoload.php';
      );
  
  /**
-  * Set necessary parameters for Heidelpay payment Frame and send a registration request
+  * Set necessary parameters for iDeal authorize using heidelpay php-api
   */
- $CreditCard->registration(
-     HeidelpayPhpApiURL,                                    // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     'FALSE',                                               // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'style.css'   // CSSPath - css url to style the Heidelpay payment frame 
+ $iDeal->authorize(
      );                                
  ?>
 <html>
 <head>
-	<title>Credit card registration example</title>
+	<title>iDeal authorize example</title>
 </head>
 <body>
-<form method="post" class="formular" id="paymentFrameForm"> 
+<form method="post" class="formular" action="
 <?php 
-    if ($CreditCard->getResponse()->isSuccess()) {
-        echo '<iframe id="paymentIframe" src="'.$CreditCard->getResponse()->getPaymentFromUrl().'" style="height:250px;"></iframe><br />';
-    } else { 
-        echo '<pre>'. print_r($CreditCard->getResponse()->getError(),1).'</pre>';
+    if ($iDeal->getResponse()->isSuccess()) {
+        echo $iDeal->getResponse()->getPaymentFromUrl();
+    }
+?>
+" id="paymentFrameForm"> 
+<?php 
+    if ($iDeal->getResponse()->isError()) {
+        echo '<pre>'. print_r($iDeal->getResponse()->getError(),1).'</pre>';
     }
  ?>
+ Bankland:<select name="ACCOUNT.COUNTRY">
+ <?php foreach ($iDeal->getResponse()->getConfig()->getBankCountry() AS $cKey => $cValue)
+     echo '<option value="'.$cKey.'">'.$cValue.'</option>';
+ ?>
+ </select><br/>
+ Bankname<select name="ACCOUNT.BANKNAME">
+ <?php foreach ($iDeal->getResponse()->getConfig()->getBrands() AS $cKey => $cValue)
+     echo '<option value="'.$cKey.'">'.$cValue.'</option>';
+ ?>
+ </select><br/>
+ Holder:<input type="text" name="ACCOUNT.HOLDER" value="" /><br/>
  <button type="submit">Submit data</button></td>
  </form>
- <script type="text/javascript" src="./js/creditCardFrame.js"></script>
  </body>
  </html>
  

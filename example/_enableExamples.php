@@ -13,4 +13,11 @@
  * @category example
  */
 
+/* Set to true if you want to enable the examples */
 define('HeidelpayPhpApiExamples', FALSE);
+
+/* Please set this to your url. It must be reachable over the net*/
+define('HeidelpayPhpApiURL', 'http://'.$_SERVER["HTTP_HOST"]);
+
+/* Please enter the path from root directory to the example folder */ 
+define('HeidelpayPhpApiFolder', '/vendor/heidelpay/php-api/example/');

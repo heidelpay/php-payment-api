@@ -430,9 +430,6 @@ class CreditCardPaymentMerhodTest extends TestCase
   }
   
   /**
-   * 
-   */
-  /**
    * Tast case for a credit card rebill of an existing debit or capture
    * @var string payment reference id of the credit card debit or capture
    * @return string payment reference id for the credit card rebill transaction
