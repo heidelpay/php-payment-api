@@ -2,9 +2,11 @@
 	"name" : "heidelpay/php-api",
 	"description" : "Client library for heidelpay payments.",
 	"license" : "Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.",
-	"version" : "16.11.3",
+	"version" : "16.12.19",
 	"authors" : [{
 			"name" : "Jens Richter"
+		}, {
+			"name" : "Ronja Wann"
 		}
 	],
 	"require" : {
