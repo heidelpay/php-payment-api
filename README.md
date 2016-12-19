@@ -14,7 +14,11 @@ This is the php payment api for heidelpay. The library will help you to easily i
 * PayPal
 * direct debit
 * iDeal
-
+* Giropay
+* Przelewy24
+* PostFinance Card
+* PostFinance EFinance
+* EPS
 
 ### SYSTEM REQUIREMENTS
 

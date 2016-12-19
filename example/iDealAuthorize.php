@@ -90,7 +90,7 @@ require_once __DIR__.'/../../../autoload.php';
 <form method="post" class="formular" action="
 <?php 
     if ($iDeal->getResponse()->isSuccess()) {
-        echo $iDeal->getResponse()->getPaymentFromUrl();
+        echo $iDeal->getResponse()->getPaymentFormUrl();
     }
 ?>
 " id="paymentFrameForm"> 

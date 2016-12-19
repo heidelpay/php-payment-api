@@ -24,7 +24,7 @@ if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== TRUE) exi
 /** 
  * Require the composer autoloader file 
  */
-require_once __DIR__.'/../../../autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 /**
  * Load a new instance of the payment method 
@@ -93,7 +93,7 @@ require_once __DIR__.'/../../../autoload.php';
 <form method="post" class="formular" id="paymentFrameForm"> 
 <?php 
     if ($DebitCard->getResponse()->isSuccess()) {
-        echo '<iframe id="paymentIframe" src="'.$DebitCard->getResponse()->getPaymentFromUrl().'" style="height:250px;"></iframe><br />';
+        echo '<iframe id="paymentIframe" src="'.$DebitCard->getResponse()->getPaymentFormUrl().'" style="height:250px;"></iframe><br />';
     } else { 
         echo '<pre>'. print_r($DebitCard->getResponse()->getError(),1).'</pre>';
     }

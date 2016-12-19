@@ -93,7 +93,7 @@ require_once __DIR__.'/../../../autoload.php';
 <form method="post" class="formular" action="
 <?php 
     if ($DirectDebit->getResponse()->isSuccess()) {
-        echo $DirectDebit->getResponse()->getPaymentFromUrl();
+        echo $DirectDebit->getResponse()->getPaymentFormUrl();
     }
 ?>
 " id="paymentFrameForm"> 

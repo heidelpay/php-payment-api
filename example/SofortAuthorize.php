@@ -88,7 +88,7 @@ require_once __DIR__.'/../../../autoload.php';
 <body>
 <?php 
     if ($Sofort->getResponse()->isSuccess()) {
-        echo '<a href="'.$Sofort->getResponse()->getPaymentFromUrl().'">to Sofort</a>';
+        echo '<a href="'.$Sofort->getResponse()->getPaymentFormUrl().'">to Sofort</a>';
     } else { 
         echo '<pre>'. print_r($Sofort->getResponse()->getError(),1).'</pre>';
     }

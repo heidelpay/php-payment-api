@@ -88,7 +88,7 @@ require_once __DIR__.'/../../../autoload.php';
 <body>
 <?php 
     if ($Prepayment->getResponse()->isSuccess()) {
-        echo '<a href="'.$Prepayment->getResponse()->getPaymentFromUrl().'">place prepayment</a>';
+        echo '<a href="'.$Prepayment->getResponse()->getPaymentFormUrl().'">place prepayment</a>';
     } else { 
         echo '<pre>'. print_r($Prepayment->getResponse()->getError(),1).'</pre>';
     }
