@@ -88,7 +88,7 @@ require_once __DIR__.'/../../../autoload.php';
 <body>
 <?php 
     if ($PayPal->getResponse()->isSuccess()) {
-        echo '<a href="'.$PayPal->getResponse()->getPaymentFromUrl().'">to PayPal</a>';
+        echo '<a href="'.$PayPal->getResponse()->getPaymentFormUrl().'">to PayPal</a>';
     } else { 
         echo '<pre>'. print_r($PayPal->getResponse()->getError(),1).'</pre>';
     }

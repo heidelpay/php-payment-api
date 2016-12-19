@@ -140,7 +140,7 @@ class Response extends AbstractMethod
      * 
      * @return string|boolean PaymentFormUrl
      */
-    public function getPaymentFromUrl()
+    public function getPaymentFormUrl()
     {
         /*
          * 

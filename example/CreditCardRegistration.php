@@ -93,7 +93,7 @@ require_once __DIR__.'/../../../autoload.php';
 <form method="post" class="formular" id="paymentFrameForm"> 
 <?php 
     if ($CreditCard->getResponse()->isSuccess()) {
-        echo '<iframe id="paymentIframe" src="'.$CreditCard->getResponse()->getPaymentFromUrl().'" style="height:250px;"></iframe><br />';
+        echo '<iframe id="paymentIframe" src="'.$CreditCard->getResponse()->getPaymentFormUrl().'" style="height:250px;"></iframe><br />';
     } else { 
         echo '<pre>'. print_r($CreditCard->getResponse()->getError(),1).'</pre>';
     }
