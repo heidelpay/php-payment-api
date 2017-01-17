@@ -21,12 +21,6 @@
 	"autoload" : {
 		"psr-4" : {
 			"Heidelpay\\PhpApi\\" : "lib"
-		},
-		"autoload-dev" : {
-			"psr-4" : {
-				"Heidelpay\\Test\\PhpApi\\" : "test/",
-				"Heidelpay\\Example\\PhpApi\\" : "example/"
-			}
 		}
 	},
 	"support" : {
