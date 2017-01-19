@@ -147,13 +147,13 @@ class ResponseTest extends TestCase
    * @group integrationTest
    */
   
-  public function testGetPaymentFromUrl()
+  public function testGetPaymentFormUrl()
   {
            
       /** iframe url for credit and debit card*/
       $expectedUrl = 'http://dev.heidelpay.de';
       $this->_resposneObject->getFrontend()->set('payment_frame_url', $expectedUrl);
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFromUrl());
+      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
       
       
       $expectedUrl = 'http://www.heidelpay.de';
@@ -161,7 +161,7 @@ class ResponseTest extends TestCase
       
       /** url in case of credit and debit card refernce Transaction */
       $this->_resposneObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFromUrl());
+      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
       
       /** unset reference id */
       $this->_resposneObject->getIdentification()->set('referenceid', NULL);
@@ -171,7 +171,7 @@ class ResponseTest extends TestCase
       
       $this->_resposneObject->getPaymemt()->set('code', 'OT.PA');
       $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFromUrl());
+      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
   }
   
   /**

@@ -8,7 +8,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="tests/bootstrap.php"
 >
     <testsuite name="HeidelPay PHP-Api Testsuite">
         <directory>./tests/</directory>

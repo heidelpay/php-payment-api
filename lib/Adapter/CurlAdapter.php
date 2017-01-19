@@ -30,9 +30,9 @@ class CurlAdapter extends AbstractAdapter {
      * @return array result of the transaction and a instance of the response object
      */
     
-    public function sendPost($uri=NULL, $post=NULL)
+    public function sendPost($uri=null, $post=null)
     {
-        $request = $result = NULL;
+        $request = $result = null;
         $response = $error = $info = array();
         
         if (curl_init()) {
@@ -73,14 +73,13 @@ class CurlAdapter extends AbstractAdapter {
                 'PROCESSING_RETURN_CODE' => 'CON.ERR.CUR'
             );
         }
-        
-        if (empty($error)  && is_string($response)) {
-        
-        parse_str ($response, $result);
+
+        if (empty($error) && is_string($response)) {
+            parse_str($response, $result);
         }
-        
+
         $responseObject = new Response($result);
-    	
-    	return   array($result, $responseObject);
+
+        return array($result, $responseObject);
     }
 }
