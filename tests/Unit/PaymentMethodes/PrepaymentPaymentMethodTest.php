@@ -183,13 +183,13 @@ class PrepaymentPaymentMerhodTest extends TestCase
   
   /**
    * Test case for a prepayment reversal of a existing authorisation
-   * @var string payment reference id of the prepayment authorisation
+   * @param $referenceId string payment reference id of the prepayment authorisation
    * @return string payment reference id for the prepayment reversal transaction
    * @depends testAuthorize
    * @group connectionTest
    */
   
-  public function testReversal(string $referenceId)
+  public function testReversal($referenceId)
   {
       
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");

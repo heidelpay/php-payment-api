@@ -195,17 +195,19 @@ class DirectDebitPaymentMerhodTest extends TestCase
       
       return (string)$response[1]->getPaymentReferenceId();
   }
-  
-    
-  /**
-   * Capture Test
-   * @depends testAuthorize
-   */
-  
-  public function testCapture(string $referenceId)
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 13.12, $this->currency, $this->secret);
+
+
+    /**
+     * Capture Test
+     * @depends testAuthorize
+     * @param $referenceId string
+     * @return string
+     */
+
+    public function testCapture($referenceId)
+    {
+        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 13.12, $this->currency, $this->secret);
   
       $this->paymentObject->capture($referenceId);
   
@@ -250,13 +252,13 @@ class DirectDebitPaymentMerhodTest extends TestCase
   
   /**
    * Test case for direct debit refund
-   * @var string reference id of the direct debit to refund
+   * @param string $referenceId reference id of the direct debit to refund
    * @return string payment reference id of the direct debit refund transaction
    * @depends testDebit
    * @group connectionTest
    */
   
-  public function testRefund(string $referenceId)
+  public function testRefund($referenceId)
   {
       
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
@@ -304,13 +306,13 @@ class DirectDebitPaymentMerhodTest extends TestCase
   
   /**
    * Test case for a direct debit reversal of a existing authorisation
-   * @var string payment reference id of the direct debit authorisation
+   * @param string $referenceId payment reference id of the direct debit authorisation
    * @return string payment reference id for the credit card reversal transaction
    * @depends testAuthorize
    * @group connectionTest
    */
   
-  public function testReversal(string $referenceId)
+  public function testReversal($referenceId)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -331,12 +333,12 @@ class DirectDebitPaymentMerhodTest extends TestCase
   
   /**
    * Tast case for a direct debit rebill of an existing debit or capture
-   * @var string payment reference id of the direct debit debit or capture
+   * @param $referenceId string payment reference id of the direct debit debit or capture
    * @return string payment reference id for the direct debit rebill transaction
    * @depends testDebit
    * @group connectionTest
    */
-  public function testRebill(string $referenceId)
+  public function testRebill($referenceId)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -356,13 +358,13 @@ class DirectDebitPaymentMerhodTest extends TestCase
   
   /**
    * Test case for direct debit authorisation on a registration
-   * @var string reference id of the direct debit registration
+   * @param $referenceId string reference id of the direct debit registration
    * @return string payment reference id of the direct debit authorisation
    * @depends testRegistration
    * @group  connectionTest
    */
   
-  public function testAuthorizeOnRegistration(string $referenceId)
+  public function testAuthorizeOnRegistration($referenceId)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
