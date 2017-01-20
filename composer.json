@@ -1,43 +1,45 @@
 {
-	"name" : "heidelpay/php-api",
-	"description" : "Client library for heidelpay payments.",
-	"license" : "Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.",
-	"version" : "17.1.17",
-	"authors" : [{
-			"name" : "Jens Richter"
-		}, {
-			"name" : "Ronja Wann"
-		}
-	],
-	"require" : {
-		"php" : ">=5.6.0",
-		"lib-curl" : ">=7.26.0",
-		"lib-openssl" : ">=1.0.1.5",
-		"ext-mcrypt" : "*"
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "~5.7",
-		"friendsofphp/php-cs-fixer": "^2.0"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"Heidelpay\\PhpApi\\" : "lib"
-		}
-	},
-	"autoload-dev" : {
-		"psr-4" : {
-			"Heidelpay\\Tests\\PhpApi\\Unit\\" : "tests/Unit"
-		}
-	},
-	"support" : {
-		"email" : "development@heidelpay.de"
-	},
-	"homepage" : "https://dev.heidelpay.de",
-	"type" : "library",
-	"keywords" : [
-		"payment-api",
-		"php",
-		"api",
-		"sdk"
-	]
+  "name": "heidelpay/php-api",
+  "description": "Client library for heidelpay payments.",
+  "license": "Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.",
+  "version": "17.1.17",
+  "authors": [
+    {
+      "name": "Jens Richter"
+    },
+    {
+      "name": "Ronja Wann"
+    }
+  ],
+  "require": {
+    "php" : ">=5.6.0",
+    "lib-curl" : "*",
+    "lib-openssl" : "*",
+    "ext-mcrypt" : "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.7",
+    "friendsofphp/php-cs-fixer": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Heidelpay\\PhpApi\\": "lib"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Heidelpay\\Tests\\PhpApi\\Unit\\": "tests/Unit"
+    }
+  },
+  "support": {
+    "email": "development@heidelpay.de"
+  },
+  "homepage": "https://dev.heidelpay.de",
+  "type": "library",
+  "keywords": [
+    "payment-api",
+    "php",
+    "api",
+    "sdk"
+  ]
 }
