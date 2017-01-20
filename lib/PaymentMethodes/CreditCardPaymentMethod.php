@@ -1,100 +1,95 @@
 <?php
 namespace Heidelpay\PhpApi\PaymentMethodes;
 
-use \Heidelpay\PhpApi\PaymentMethodes\AbstractPaymentMethod as AbstractPaymentMethod;
-use Heidelpay\Tests\PhpApi\Unit\PaymentMethodes\DebitCardPaymentMerhodTest;
-use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * Credit Card Payment Class
- * 
+ *
  * This class will be used for every credit card transaction
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
  *
  * @package  Heidelpay
  * @subpackage PhpApi
  * @category PhpApi
  */
-
 class CreditCardPaymentMethod extends AbstractPaymentMethod
 {
     
     /**
      * Payment code for this payment method
+     *
      * @var string payment code
      */
-    
     protected $_paymentCode = 'CC';
     
         /**
      * Weather this Payment method can authorise transactions or not
+     *
      * @var boolean canAuthorise
      */
-    
-    protected $_canAuthorise = TRUE;
+    protected $_canAuthorise = true;
     
     /**
      * Weather this Payment method can capture transactions or not
+     *
      * @var boolean canCapture
      */
-    
-    protected $_canCapture = TRUE;
+    protected $_canCapture = true;
     
     /**
      * Weather this Payment method can debit transactions or not
+     *
      * @var boolean canDebit
      */
-    
-    protected $_canDebit = TRUE;
+    protected $_canDebit = true;
     
     /**
      * Weather this Payment method can refund transactions or not
+     *
      * @var boolean canRefund
      */
-    
-    protected $_canRefund = TRUE;
+    protected $_canRefund = true;
     
     /**
      * Weather this Payment method can reversal transactions or not
+     *
      * @var boolean canReversal
      */
-    
-    protected $_canReversal = TRUE;
+    protected $_canReversal = true;
     
     /**
      * Weather this Payment method can rebill transactions or not
+     *
      * @var boolean canRebill
      */
-    
-    protected $_canRebill = TRUE;
+    protected $_canRebill = true;
     
     /**
      * Weather this Payment method can register account data or not
      *
      * @var boolean canRegistration
      */
-    
-    protected $_canRegistration = TRUE;
+    protected $_canRegistration = true;
     
     /**
      * Weather this Payment method can debit on registered account data or not
      *
      * @var boolean canDebitOnRegistration
      */
-    
-    protected $_canDebitOnRegistration = TRUE;
+    protected $_canDebitOnRegistration = true;
     
     /**
      * Weather this Payment method can authorize on registered account data or not
      *
      * @var boolean canAuthorizeOnRegistration
      */
-    
-    protected $_canAuthorizeOnRegistration = TRUE;
+    protected $_canAuthorizeOnRegistration = true;
     
     /**
      * Payment type authorisation
@@ -105,22 +100,23 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      * used to get the redirect to their systems.
      * Because of payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
-     * 
+     *
      * @param string PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not  
-     * @param string CSSPath - css url to style the Heidelpay payment frame  
+     * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
+     * @param string CSSPath - css url to style the Heidelpay payment frame
+     * @param null|mixed $PaymentFrameOrigin
+     * @param mixed      $PreventAsyncRedirect
+     * @param null|mixed $CssPath
      *
      * @return \Heidelpay\PhpApi\PaymentMethodes\CreditCardPaymentMethod|boolean
      */
-
-    public function authorize($PaymentFrameOrigin = NULL, $PreventAsyncRedirect = "FALSE", $CssPath = NULL)
+    public function authorize($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
         if ($this->_canAuthorise) {
-            
-            $this->getRequest()->getFrontend()->set('enabled','TRUE');
-            $this->getRequest()->getFrontend()->set('payment_frame_origin',$PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect',$PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path',$CssPath);
+            $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
+            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
             
             return parent::authorize();
         }
@@ -134,19 +130,20 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      * to use a payment frame solution to handle the customers credit card information.
      *
      * @param string PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not  
+     * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
      * @param string CSSPath - css url to style the Heidelpay payment frame
-     * 
+     * @param null|mixed $PaymentFrameOrigin
+     * @param mixed      $PreventAsyncRedirect
+     * @param null|mixed $CssPath
+     *
      * @return \Heidelpay\PhpApi\PaymentMethodes\CreditCardPaymentMethod|boolean
      */
-    
-    public function debit($PaymentFrameOrigin = NULL, $PreventAsyncRedirect = "FALSE", $CssPath = NULL)
+    public function debit($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
         if ($this->_canDebit) {
-    
-            $this->getRequest()->getFrontend()->set('payment_frame_origin',$PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect',$PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path',$CssPath);
+            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
     
             return parent::debit();
         }
@@ -160,22 +157,24 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      * to charge this account later or even to make a recurring payment.
      * Because of the payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
-     * 
+     *
      * @param string PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not  
-     * @param string CSSPath - css url to style the Heidelpay payment frame        
+     * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
+     * @param string CSSPath - css url to style the Heidelpay payment frame
+     * @param null|mixed $PaymentFrameOrigin
+     * @param mixed      $PreventAsyncRedirect
+     * @param null|mixed $CssPath
      *
      * @return \Heidelpay\PhpApi\PaymentMethodes\CreditCardPaymentMethod|boolean
      */
-    public function registration($PaymentFrameOrigin = NULL, $PreventAsyncRedirect = "FALSE", $CssPath = NULL)
+    public function registration($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
         if ($this->_canRegistration) {
             /**
              */
-    
-            $this->getRequest()->getFrontend()->set('payment_frame_origin',$PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect',$PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path',$CssPath);
+            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
     
             return parent::registration();
         }
