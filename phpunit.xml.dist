@@ -16,7 +16,8 @@
 
     <filter>
         <whitelist>
-            <directory>./src/</directory>
+            <directory>./lib/</directory>
         </whitelist>
     </filter>
+
 </phpunit>

@@ -26,7 +26,6 @@ return PhpCsFixer\Config::create()
             'normalize_index_brace' => true,
             'phpdoc_align' => true,
             'phpdoc_separation' => true,
-            'php_unit_strict' => true
         )
     )
     ->setFinder($finder);
