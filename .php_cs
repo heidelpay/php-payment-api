@@ -1,8 +1,8 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__.'/lib');
-
+    ->in(__DIR__.'/lib')
+    ->in(__DIR__.'/tests');
 
 return PhpCsFixer\Config::create()
     ->setUsingCache(false)
@@ -26,6 +26,7 @@ return PhpCsFixer\Config::create()
             'normalize_index_brace' => true,
             'phpdoc_align' => true,
             'phpdoc_separation' => true,
+            'php_unit_strict' => true
         )
     )
     ->setFinder($finder);
