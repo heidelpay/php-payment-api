@@ -1,28 +1,33 @@
 <?php
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Conatct;
+use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Conatct;
+
 /**
  * Unit test for ContactParameterGroup
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
+ *
  * @category unittest
  */
-class ContactParameterGroupTest extends TestCase {
-    
+class ContactParameterGroupTest extends TestCase
+{
     /**
      * Email getter/setter test
      */
-    public function testEmail(){
-        
+    public function testEmail()
+    {
         $Contact = new Conatct();
         
         $email = "development@heidelpay.de";
-        $Contact->set('email',$email);
+        $Contact->set('email', $email);
         
         $this->assertEquals($email, $Contact->getEmail());
     }
@@ -30,16 +35,13 @@ class ContactParameterGroupTest extends TestCase {
     /**
      * IP setter/getter test
      */
-    
-    public function testIp(){
-    
+    public function testIp()
+    {
         $Contact = new Conatct();
         
         $ip = "127.0.0.1";
-        $Contact->set('ip',$ip);
+        $Contact->set('ip', $ip);
         
         $this->assertEquals($ip, $Contact->getIp());
     }
-    
-       
 }
