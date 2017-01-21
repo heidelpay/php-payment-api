@@ -272,6 +272,7 @@ class DebitCardPaymentMerhodTest extends TestCase
    * @return string payment reference id to the debit card debit transaction
    * @depends testRegistration
    * @group  connectionTest
+   *
    * @param mixed $referenceId
    */
   public function testDebitOnRegistration($referenceId)

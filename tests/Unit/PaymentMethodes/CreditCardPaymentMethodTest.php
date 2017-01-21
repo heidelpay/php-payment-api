@@ -321,6 +321,7 @@ class CreditCardPaymentMerhodTest extends TestCase
   
   /**
    * @depends testAuthorizeOnRegistration
+   *
    * @param mixed $referenceId
    */
   public function testCapture($referenceId)
@@ -442,6 +443,7 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @return string payment reference id for the credit card reversal transaction
    * @depends testAuthorize
    * @group connectionTest
+   *
    * @param mixed $referenceId
    */
   public function testReversal($referenceId)
@@ -470,6 +472,7 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @return string payment reference id for the credit card rebill transaction
    * @depends testDebit
    * @group connectionTest
+   *
    * @param mixed $referenceId
    */
   public function testRebill($referenceId)
