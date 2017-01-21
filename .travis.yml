@@ -27,7 +27,6 @@ cache:
 
 before_script:
   - mkdir -p "$HOME/.php-cs-fixer"
-  - phpenv config-rm xdebug.ini
   - composer self-update
   - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
   - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
