@@ -1,27 +1,30 @@
 <?php
 namespace Heidelpay\Tests\PhpApi\Unit;
+
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\Request;
+use Heidelpay\PhpApi\Request;
 
 /**
- * 
- *  This unit test will cover an error in the connetcton and an simple post request to the sandbox payment system. 
- *  Please note that conncection test can fail due to network issues and sheduled downtimes.   
+ *
+ *  This unit test will cover an error in the connetcton and an simple post request to the sandbox payment system.
+ *  Please note that conncection test can fail due to network issues and sheduled downtimes.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
- * 
+ *
  * @package  Heidelpay
  * @subpackage PhpApi
  * @category UnitTest
  */
-
 class RequestTest extends TestCase
 {
-   /**
+    /**
     * Authentification test
+    *
     * @desc This test will check if the authentification parameters are set.
     * @group integrationTest
     */
@@ -33,9 +36,9 @@ class RequestTest extends TestCase
       $UserLogin      = '31ha07bc8142c5a171744e5aef11ffd3'; // UserLogin
       $UserPassword   = '93167DE7';                         // UserPassword
       $TransactionChannel = '31HA07BC8142C5A171744F3D6D155865'; // TransactionChannel credit card without 3d scure
-      $SandboxRequest = TRUE ;
+      $SandboxRequest = true;
       
-      $Request->authentification( $SecuritySender, $UserLogin, $UserPassword, $TransactionChannel, $SandboxRequest);
+      $Request->authentification($SecuritySender, $UserLogin, $UserPassword, $TransactionChannel, $SandboxRequest);
       
       $this->assertEquals($SecuritySender, $Request->getSecurity()->getSender());
       $this->assertEquals($UserLogin, $Request->getUser()->getLogin());
@@ -46,11 +49,11 @@ class RequestTest extends TestCase
   
   /**
    * Asyn test
+   *
    * @desc This test will check if the request can be set to async
    * @group integrationTest
    */
-  
-  public function testAsync() 
+  public function testAsync()
   {
       $Request = new Request();
       
@@ -62,30 +65,28 @@ class RequestTest extends TestCase
       $this->assertEquals($LanguageCode, $Request->getFrontend()->getLanguage());
       $this->assertEquals($ResponseUrl, $Request->getFrontend()->getResponseUrl());
       $this->assertEquals('TRUE', $Request->getFrontend()->getEnabled());
-      
   }
   
   /**
    * Customer adress test
+   *
    * @desc This test will check if all customer parameters can be added to the request object
    * @group integrationTest
    */
-    
   public function testCustomerAddress()
   {
+      $Request = new Request();
       
-     $Request = new Request(); 
-      
-     $nameGiven = 'Heidel';
-     $nameFamily ='Berger-Payment';
-     $nameCompany = 'DevHeidelpay';
-     $shopperId = '12344';
-     $addressStreet = 'Vagerowstr. 18';
-     $addressState  = 'DE-BW';
-     $addressZip    = '69115';
-     $addressCity    = 'Heidelberg';
-     $addressCountry = 'DE';
-     $contactMail = "development@heidelpay.de";
+      $nameGiven = 'Heidel';
+      $nameFamily ='Berger-Payment';
+      $nameCompany = 'DevHeidelpay';
+      $shopperId = '12344';
+      $addressStreet = 'Vagerowstr. 18';
+      $addressState  = 'DE-BW';
+      $addressZip    = '69115';
+      $addressCity    = 'Heidelberg';
+      $addressCountry = 'DE';
+      $contactMail = "development@heidelpay.de";
      
      
       $Request->customerAddress($nameGiven, $nameFamily, $nameCompany, $shopperId, $addressStreet, $addressState, $addressZip, $addressCity, $addressCountry, $contactMail);
@@ -103,13 +104,12 @@ class RequestTest extends TestCase
   
   /**
    * Basket data test
+   *
    * @desc This test will check if all customer parameters can be added to the request object
    * @group integrationTest
    */
-  
   public function testBasketData()
   {
-      
       $Request = new Request();
       
       $shopIdentifier = '2843294932';
@@ -122,18 +122,17 @@ class RequestTest extends TestCase
       $this->assertEquals($shopIdentifier, $Request->getIdentification()->getTransactionId());
       $this->assertEquals($amount, $Request->getPresentation()->getAmount());
       $this->assertEquals($currency, $Request->getPresentation()->getCurrency());
-      $this->assertEquals(hash('sha512',$shopIdentifier.$secret), $Request->getCriterion()->getSecretHash());
-      
+      $this->assertEquals(hash('sha512', $shopIdentifier.$secret), $Request->getCriterion()->getSecretHash());
   }
   
   /**
    * Prepare request test
+   *
    * @desc This test will convert the request object to post array format
    * @group integrationTest
    */
-  
-  public function testPrepareRequest() {
-  
+  public function testPrepareRequest()
+  {
       $Request = new Request();
       
       $shopIdentifier = '2843294932';
@@ -157,8 +156,5 @@ class RequestTest extends TestCase
        );
 
       $this->assertEquals($referenceVars, $Request->prepareRequest());
-      
   }
-  
-    
 }

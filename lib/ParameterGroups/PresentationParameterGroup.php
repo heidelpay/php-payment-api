@@ -1,53 +1,59 @@
 <?php
 namespace Heidelpay\PhpApi\ParameterGroups;
-use \Heidelpay\PhpApi\ParameterGroups\AbstractParameterGroup;
+
 /**
  * This class provides the api parameter for amount and currency.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
  *
  * @package  Heidelpay
  * @subpackage PhpApi
  * @category PhpApi
  */
-
-class PresentationParameterGroup extends AbstractParameterGroup {
+class PresentationParameterGroup extends AbstractParameterGroup
+{
     
     /**
      * PresentationAmount
-     * 
+     *
      * Order or transaction amount.
-     * @var float amount (mandatory) 
+     *
+     * @var float amount (mandatory)
      */
-    public $amount = NULL;
+    public $amount = null;
     
     /**
      * PresentationCurrency
-     * 
+     *
      * Currency of the transaction. ISO 4217
+     *
      * @var string currency code ISO 4217 (mandatory)
      */
-    public $currency = NULL;
+    public $currency = null;
     
     /**
      * PresentationAmount getter
+     *
      * @return string amount
      */
-    
-    public function getAmount(){
+    public function getAmount()
+    {
         return $this->amount;
     }
     
     /**
      * PresentationCurrency getter
+     *
      * @return string currency
      */
-    
-    public function getCurrency(){
+    public function getCurrency()
+    {
         return $this->currency;
     }
 }

@@ -1,19 +1,22 @@
 <?php
 
 namespace Heidelpay\PhpApi\Adapter;
-use \Heidelpay\PhpApi\Adapter\AbstractAdapter;
-use \Heidelpay\PhpApi\Response;
+
+use Heidelpay\PhpApi\Response;
+
 /**
  * Standard curl adapter
  *
  * You can use this adapter for your project or you can
- * create one based on a standard library like zend-http 
- * or guzzlehttp. 
+ * create one based on a standard library like zend-http
+ * or guzzlehttp.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
  *
  * @package  Heidelpay
@@ -21,66 +24,66 @@ use \Heidelpay\PhpApi\Response;
  * @category PhpApi
  */
  
-class CurlAdapter extends AbstractAdapter {
-    
+class CurlAdapter extends AbstractAdapter
+{
     /**
      * send post request to payment server
-     * @param $uri string url of the target system 
+     *
+     * @param $uri string url of the target system
      * @param $post array post payload for a payment request
+     *
      * @return array result of the transaction and a instance of the response object
      */
-    
-    public function sendPost($uri=NULL, $post=NULL)
+    public function sendPost($uri=null, $post=null)
     {
-        $request = $result = NULL;
+        $request = $result = null;
         $response = $error = $info = array();
         
         if (curl_init()) {
             $request = curl_init();
-            curl_setopt ($request, CURLOPT_URL, $uri);
-            curl_setopt ($request, CURLOPT_HEADER, 0);
-            curl_setopt ($request, CURLOPT_FAILONERROR, TRUE);
-            curl_setopt ($request, CURLOPT_TIMEOUT, 60);
-            curl_setopt ($request, CURLOPT_CONNECTTIMEOUT, 60);
+            curl_setopt($request, CURLOPT_URL, $uri);
+            curl_setopt($request, CURLOPT_HEADER, 0);
+            curl_setopt($request, CURLOPT_FAILONERROR, true);
+            curl_setopt($request, CURLOPT_TIMEOUT, 60);
+            curl_setopt($request, CURLOPT_CONNECTTIMEOUT, 60);
             
             if (is_array($post)) {
-                curl_setopt ($request, CURLOPT_POST, TRUE);
-                curl_setopt ($request,  CURLOPT_POSTFIELDS, http_build_query($post));
+                curl_setopt($request, CURLOPT_POST, true);
+                curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($post));
             }
             
-            curl_setopt ($request, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt ($request, CURLOPT_SSL_VERIFYPEER, 1);
-            curl_setopt ($request, CURLOPT_SSL_VERIFYHOST, 2);
-            curl_setopt( $request, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-            curl_setopt ($request, CURLOPT_USERAGENT, "PhpApi");
+            curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 1);
+            curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 2);
+            curl_setopt($request, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+            curl_setopt($request, CURLOPT_USERAGENT, "PhpApi");
             
-            $response = curl_exec ($request);
-            $error = curl_error ($request);
+            $response = curl_exec($request);
+            $error = curl_error($request);
             $info = curl_getinfo($request, CURLINFO_HTTP_CODE);
             
-            curl_close ($request);
+            curl_close($request);
             
             if (isset($error) and !empty($error)) {
-                $errorCode = (is_array($info) && array_key_exists('CURLINFO_HTTP_CODE',$info)) ? $info['CURLINFO_HTTP_CODE'] : 'DEF'; 
+                $errorCode = (is_array($info) && array_key_exists('CURLINFO_HTTP_CODE', $info)) ? $info['CURLINFO_HTTP_CODE'] : 'DEF';
                 $result = array( 'PROCESSING_RESULT' => 'NOK',
                     'PROCESSING_RETURN' => 'Connection error http status '.$error,
                     'PROCESSING_RETURN_CODE' => 'CON.ERR.'.$errorCode
                 );
             }
-        }else {
+        } else {
             $result = array( 'PROCESSING_RESULT' => 'NOK',
                 'PROCESSING_RETURN' => 'Connection error php-curl not installed',
                 'PROCESSING_RETURN_CODE' => 'CON.ERR.CUR'
             );
         }
-        
-        if (empty($error)  && is_string($response)) {
-        
-        parse_str ($response, $result);
+
+        if (empty($error) && is_string($response)) {
+            parse_str($response, $result);
         }
-        
+
         $responseObject = new Response($result);
-    	
-    	return   array($result, $responseObject);
+
+        return array($result, $responseObject);
     }
 }

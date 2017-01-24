@@ -1,45 +1,46 @@
 <?php
 namespace Heidelpay\Tests\PhpApi\Unit;
+
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\Response;
+use Heidelpay\PhpApi\Response;
 
 /**
- * 
- *  This unit test will cover the response object.   
+ *
+ *  This unit test will cover the response object.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
- * 
+ *
  * @package  Heidelpay
  * @subpackage PhpApi
  * @category UnitTest
  */
-
 class ResponseTest extends TestCase
 {
     /**
      * @var \Heidelpay\PhpApi\Response
      */
-    
-    protected $_resposneObject = NULL;
+    protected $_resposneObject = null;
     
     /**
      * setUp sample response Object
-     * 
+     *
      * {@inheritDoc}
+     *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    
-    public function setUp() {
-        
+    public function setUp()
+    {
         $responseSample = array(
             'NAME_FAMILY' => 'Berger-Payment',
             'IDENTIFICATION_TRANSACTIONID' => '2843294932',
             'ADDRESS_COUNTRY' => 'DE',
             'ADDRESS_STREET' => 'Vagerowstr. 18',
-            'FRONTEND_ENABLED' => TRUE,
+            'FRONTEND_ENABLED' => true,
             'PRESENTATION_AMOUNT' => 23.12,
             'TRANSACTION_MODE' => 'CONNECTOR_TEST',
             'ACCOUNT_EXPIRY_MONTH' => '05',
@@ -73,7 +74,7 @@ class ResponseTest extends TestCase
             'ADDRESS_STATE' => 'DE-BW',
             'ADDRESS_ZIP' => '69115',
             'ACCOUNT_NUMBER' => '545301******9543',
-            'FRONTEND_PREVENT_ASYNC_REDIRECT' => FALSE,
+            'FRONTEND_PREVENT_ASYNC_REDIRECT' => false,
             'PROCESSING_REASON' => 'SUCCESSFULL',
             'PROCESSING_RETURN' => "Request successfully processed in 'Merchant in Connector Test Mode'",
             'TRANSACTION_CHANNEL' => '31HA07BC8142C5A171744F3D6D155865',
@@ -81,23 +82,24 @@ class ResponseTest extends TestCase
             'PAYMENT_CODE' => 'CC.RG'
             );
         
-            $this->_resposneObject = new Response($responseSample);
-        
+        $this->_resposneObject = new Response($responseSample);
     }
     
    /**
     * function test for isSuccess method
+    *
     * @group integrationTest
     */
   public function testIsSuccess()
   {
-    $this->assertTrue($this->_resposneObject->isSuccess(), 'isSuccess should be true');
-    $this->_resposneObject->getProcessing()->set('result', 'NOK');
-    $this->assertFalse($this->_resposneObject->isSuccess(), 'isSuccess should be false.');
+      $this->assertTrue($this->_resposneObject->isSuccess(), 'isSuccess should be true');
+      $this->_resposneObject->getProcessing()->set('result', 'NOK');
+      $this->assertFalse($this->_resposneObject->isSuccess(), 'isSuccess should be false.');
   }
   
   /**
    * function test for isPending method
+   *
    * @group integrationTest
    */
   public function testIsPending()
@@ -109,6 +111,7 @@ class ResponseTest extends TestCase
   
   /**
    * function test for isError method
+   *
    * @group integrationTest
    */
   public function testIsError()
@@ -116,11 +119,11 @@ class ResponseTest extends TestCase
       $this->assertFalse($this->_resposneObject->isError(), 'isError should be false');
       $this->_resposneObject->getProcessing()->set('result', 'NOK');
       $this->assertTrue($this->_resposneObject->isError(), 'isError should be true');
-      
   }
   
   /**
    * function test for getError method
+   *
    * @group integrationTest
    */
   public function testGetError()
@@ -130,11 +133,12 @@ class ResponseTest extends TestCase
             'message' => "Request successfully processed in 'Merchant in Connector Test Mode'"
        );
   
-   $this->assertEquals($expectedError ,$this->_resposneObject->getError());   
+      $this->assertEquals($expectedError, $this->_resposneObject->getError());
   }
   
   /**
    * function test for getPaymentReferenceID method
+   *
    * @group integrationTest
    */
   public function testGetPaymentReferenceId()
@@ -144,16 +148,16 @@ class ResponseTest extends TestCase
   
   /**
    * function test for getPaymentFromUrl methode
+   *
    * @group integrationTest
    */
-  
-  public function testGetPaymentFromUrl()
+  public function testGetPaymentFormUrl()
   {
            
       /** iframe url for credit and debit card*/
       $expectedUrl = 'http://dev.heidelpay.de';
       $this->_resposneObject->getFrontend()->set('payment_frame_url', $expectedUrl);
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFromUrl());
+      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
       
       
       $expectedUrl = 'http://www.heidelpay.de';
@@ -161,22 +165,21 @@ class ResponseTest extends TestCase
       
       /** url in case of credit and debit card refernce Transaction */
       $this->_resposneObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFromUrl());
+      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
       
       /** unset reference id */
-      $this->_resposneObject->getIdentification()->set('referenceid', NULL);
+      $this->_resposneObject->getIdentification()->set('referenceid', null);
        
       
       /** url for non credit or debit card transactions */
-      
       $this->_resposneObject->getPaymemt()->set('code', 'OT.PA');
       $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFromUrl());
+      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
   }
   
   /**
    * function test for verifySecurityHash
+   *
    * @group integrationTest
    */
-   
 }

@@ -1,18 +1,11 @@
 <?php
-namespace HeidelpayTests\PhpApi;
 
-/**
- * Autoloader for php-unit testing.
- *
- * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
- * @link  https://dev.heidelpay.de/PhpApi
- * @author  Jens Richter
- * 
- * @package  Heidelpay
- * @subpackage PhpApi
- * @category UnitTestAutoloader
- */
+require_once  __DIR__ . '/../vendor/autoload.php';
 
 
-require_once __DIR__.'/../vendor/autoload.php';
+// Fix broken OpenSSL lib on Travis CI
+if (getenv('TRAVIS')) {
+    if (!defined('CURL_SSLVERSION_TLSv1_2')) {
+        define('CURL_SSLVERSION_TLSv1_2', 6);
+    }
+}

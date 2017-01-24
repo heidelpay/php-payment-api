@@ -1,24 +1,29 @@
 <?php
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup as Frontend;
+use Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup as Frontend;
+
 /**
  * Unit test for FrontendParameterGroup
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
+ *
  * @category unittest
  */
-class FrontendParameterGroupTest extends TestCase {
-    
+class FrontendParameterGroupTest extends TestCase
+{
     /**
      * Enabled getter/setter test
      */
-    public function testEnabled(){
-        
+    public function testEnabled()
+    {
         $Frontend = new Frontend();
         
         $value = 'false';
@@ -26,11 +31,12 @@ class FrontendParameterGroupTest extends TestCase {
         
         $this->assertEquals($value, $Frontend->getEnabled());
     }
+
     /**
      * Language getter/setter test
      */
-    public function testLanguage(){
-    
+    public function testLanguage()
+    {
         $Frontend = new Frontend();
     
         $value = 'EN';
@@ -38,11 +44,12 @@ class FrontendParameterGroupTest extends TestCase {
     
         $this->assertEquals($value, $Frontend->getLanguage());
     }
+
     /**
      * Redirect url getter/setter test
      */
-    public function testRedirectUrl(){
-    
+    public function testRedirectUrl()
+    {
         $Frontend = new Frontend();
     
         $value = 'https://dev.heidelpay.de';
@@ -54,8 +61,8 @@ class FrontendParameterGroupTest extends TestCase {
     /**
      * Response url getter/setter test
      */
-    public function testResponseUrl(){
-    
+    public function testResponseUrl()
+    {
         $Frontend = new Frontend();
     
         $value = 'https://dev.heidelpay.de';
@@ -65,18 +72,18 @@ class FrontendParameterGroupTest extends TestCase {
     }
     
     /**
-     * Payment frame origin getter/setter test 
+     * Payment frame origin getter/setter test
      */
-    
     public function testPaymentFrameOrigin()
     {
         $Frontend = new Frontend();
         
         $value = 'https://dev.heidelpay.de';
-        $Frontend->set('payment_frame_origin',$value);
+        $Frontend->set('payment_frame_origin', $value);
         
         $this->assertEquals($value, $Frontend->getPaymentFrameOrigin());
     }
+
     /**
      * Payment frame url getter/setter test
      */
@@ -85,7 +92,7 @@ class FrontendParameterGroupTest extends TestCase {
         $Frontend = new Frontend();
     
         $value = 'https://dev.heidelpay.de';
-        $Frontend->set('payment_frame_url',$value);
+        $Frontend->set('payment_frame_url', $value);
     
         $this->assertEquals($value, $Frontend->getPaymentFrameUrl());
     }
@@ -93,7 +100,6 @@ class FrontendParameterGroupTest extends TestCase {
     /**
      * Payment css path getter/setter test
      */
-    
     public function testPaymentCssPath()
     {
         $Frontend = new Frontend();
@@ -103,6 +109,7 @@ class FrontendParameterGroupTest extends TestCase {
     
         $this->assertEquals($value, $Frontend->getCssPath());
     }
+
     /**
      * Prevent async redirect getter/setter test
      */
@@ -115,7 +122,4 @@ class FrontendParameterGroupTest extends TestCase {
     
         $this->assertEquals($value, $Frontend->getPreventAsyncRedirect());
     }
-    
-    
-    
 }

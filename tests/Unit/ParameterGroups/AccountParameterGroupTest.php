@@ -2,29 +2,32 @@
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
 use PHPUnit\Framework\TestCase;
-use \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup as Account;
+use Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup as Account;
+
 /**
  * Unit test for AccountParameterGroup
- * 
+ *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
+ *
  * @category unittest
  */
-class AccountParameterGroupTest extends TestCase {
-    
+class AccountParameterGroupTest extends TestCase
+{
     /**
      * Brand getter/setter test
      */
-    
-    public function testBrand(){
-    
+    public function testBrand()
+    {
         $Account = new Account();
     
         $value = "Master";
-        $Account->set("brand",$value);
+        $Account->set("brand", $value);
     
         $this->assertEquals($value, $Account->getBrand());
     }
@@ -32,12 +35,12 @@ class AccountParameterGroupTest extends TestCase {
     /**
      * Holder getter/setter test
      */
-    public function testHolder(){
-        
+    public function testHolder()
+    {
         $Account = new Account();
         
         $name = "Hans Meister";
-        $Account->set("holder",$name);
+        $Account->set("holder", $name);
         
         $this->assertEquals($name, $Account->getHolder());
     }
@@ -45,12 +48,12 @@ class AccountParameterGroupTest extends TestCase {
     /**
      * Iban getter/setter test
      */
-    public function testIban(){
-    
+    public function testIban()
+    {
         $Account = new Account();
     
         $value = "DE89370400440532013000";
-        $Account->set("iban",$value);
+        $Account->set("iban", $value);
     
         $this->assertEquals($value, $Account->getIban());
     }
@@ -58,13 +61,12 @@ class AccountParameterGroupTest extends TestCase {
     /**
      * Expiry month getter/setter test
      */
-    
-    public function testExpiryMonth(){
-    
+    public function testExpiryMonth()
+    {
         $Account = new Account();
     
         $value = "05";
-        $Account->set("expiry_month",$value);
+        $Account->set("expiry_month", $value);
     
         $this->assertEquals($value, $Account->getExpiryMonth());
     }
@@ -72,13 +74,12 @@ class AccountParameterGroupTest extends TestCase {
     /**
      * Expiry year getter/setter test
      */
-    
-    public function testExpiryYear(){
-    
+    public function testExpiryYear()
+    {
         $Account = new Account();
     
         $value = "2080";
-        $Account->set("expiry_year",$value);
+        $Account->set("expiry_year", $value);
     
         $this->assertEquals($value, $Account->getExpiryYear());
     }
@@ -86,15 +87,13 @@ class AccountParameterGroupTest extends TestCase {
     /**
      * Number getter/setter test
      */
-    
-    public function testNumber(){
-    
+    public function testNumber()
+    {
         $Account = new Account();
     
         $value = "1234567890";
-        $Account->set("number",$value);
+        $Account->set("number", $value);
     
         $this->assertEquals($value, $Account->getNumber());
     }
-    
 }
