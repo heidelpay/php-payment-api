@@ -37,4 +37,3 @@ script:
   - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
 after_success:
-  - travis_retry php vendor/bin/coveralls -v
