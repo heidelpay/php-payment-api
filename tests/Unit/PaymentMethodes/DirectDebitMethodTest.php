@@ -230,6 +230,7 @@ class DirectDebitPaymentMethodTest extends TestCase
      *
      * @depends Authorize
      * @test
+     *
      * @param $referenceId string
      *
      * @return string

@@ -325,6 +325,7 @@ class CreditCardPaymentMerhodTest extends TestCase
   /**
    * @depends AuthorizeOnRegistration
    * @test
+   *
    * @param mixed $referenceId
    */
   public function Capture($referenceId=null)
@@ -450,6 +451,7 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @depends Authorize
    * @group connectionTest
    * @test
+   *
    * @param mixed $referenceId
    */
   public function Reversal($referenceId=null)

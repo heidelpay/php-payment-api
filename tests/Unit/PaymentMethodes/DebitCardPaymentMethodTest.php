@@ -274,6 +274,7 @@ class DebitCardPaymentMerhodTest extends TestCase
    * @depends Registration
    * @group  connectionTest
    * @test
+   *
    * @param mixed $referenceId
    */
   public function DebitOnRegistration($referenceId=null)
@@ -325,6 +326,7 @@ class DebitCardPaymentMerhodTest extends TestCase
     /**
      * @depends AuthorizeOnRegistration
      * @test
+     *
      * @param $referenceId string
      *
      * @return string
