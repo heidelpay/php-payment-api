@@ -89,8 +89,9 @@ class ResponseTest extends TestCase
     * function test for isSuccess method
     *
     * @group integrationTest
+    * @test
     */
-  public function testIsSuccess()
+  public function IsSuccess()
   {
       $this->assertTrue($this->_resposneObject->isSuccess(), 'isSuccess should be true');
       $this->_resposneObject->getProcessing()->set('result', 'NOK');
@@ -101,8 +102,9 @@ class ResponseTest extends TestCase
    * function test for isPending method
    *
    * @group integrationTest
+   * @test
    */
-  public function testIsPending()
+  public function IsPending()
   {
       $this->assertFalse($this->_resposneObject->isPending(), 'isPending should be false');
       $this->_resposneObject->getProcessing()->set('status_code', '80');
@@ -113,8 +115,9 @@ class ResponseTest extends TestCase
    * function test for isError method
    *
    * @group integrationTest
+   * @test
    */
-  public function testIsError()
+  public function IsError()
   {
       $this->assertFalse($this->_resposneObject->isError(), 'isError should be false');
       $this->_resposneObject->getProcessing()->set('result', 'NOK');
@@ -125,8 +128,9 @@ class ResponseTest extends TestCase
    * function test for getError method
    *
    * @group integrationTest
+   * @test
    */
-  public function testGetError()
+  public function GetError()
   {
       $expectedError = array(
             'code' => '000.100.112',
@@ -140,18 +144,20 @@ class ResponseTest extends TestCase
    * function test for getPaymentReferenceID method
    *
    * @group integrationTest
+   * @test
    */
-  public function testGetPaymentReferenceId()
+  public function GetPaymentReferenceId()
   {
       $this->assertEquals('31HA07BC8108A9126F199F2784552637', $this->_resposneObject->getPaymentReferenceId());
   }
   
   /**
-   * function test for getPaymentFromUrl methode
+   * function test for getPaymentFormUrl method
    *
    * @group integrationTest
+   * @test
    */
-  public function testGetPaymentFormUrl()
+  public function GetPaymentFormUrl()
   {
            
       /** iframe url for credit and debit card*/
@@ -181,5 +187,6 @@ class ResponseTest extends TestCase
    * function test for verifySecurityHash
    *
    * @group integrationTest
+   * @test
    */
 }

@@ -235,8 +235,9 @@ class CreditCardPaymentMerhodTest extends TestCase
    *
    * @return string payment reference id to the credit card registration
    * @group  connectionTest
+   * @test
    */
-  public function testRegistration()
+  public function Registration()
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -270,15 +271,16 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @param $referenceId string reference id of the credit card registration
    *
    * @return string payment reference id to the credit card debit transaction
-   * @depends testRegistration
+   * @depends Registration
    * @group  connectionTest
+   * @test
    */
-  public function testDebitOnRegistration($referenceId)
+  public function DebitOnRegistration($referenceId=null)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
       
-      $this->paymentObject->debitOnRegistration($referenceId);
+      $this->paymentObject->debitOnRegistration((string)$referenceId);
       
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
@@ -298,15 +300,16 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @param mixed $referenceId
    *
    * @return string payment reference id of the credit card authorisation
-   * @depends testRegistration
+   * @depends Registration
    * @group  connectionTest
+   * @test
    */
-  public function testAuthorizeOnRegistration($referenceId)
+  public function AuthorizeOnRegistration($referenceId=null)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
       
-      $this->paymentObject->authorizeOnRegistration($referenceId);
+      $this->paymentObject->authorizeOnRegistration((string)$referenceId);
   
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
@@ -320,16 +323,16 @@ class CreditCardPaymentMerhodTest extends TestCase
   }
   
   /**
-   * @depends testAuthorizeOnRegistration
-   *
+   * @depends AuthorizeOnRegistration
+   * @test
    * @param mixed $referenceId
    */
-  public function testCapture($referenceId)
+  public function Capture($referenceId=null)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
       
-      $this->paymentObject->capture($referenceId);
+      $this->paymentObject->capture((string)$referenceId);
   
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
@@ -348,15 +351,16 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @param $referenceId string reference id of the credit card debit/capture to refund
    *
    * @return string payment reference id of the credit card refund transaction
-   * @depends testCapture
+   * @depends Capture
    * @group connectionTest
+   * @test
    */
-  public function testRefund($referenceId)
+  public function Refund($referenceId=null)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
       
-      $this->paymentObject->refund($referenceId);
+      $this->paymentObject->refund((string)$referenceId);
   
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
@@ -374,8 +378,9 @@ class CreditCardPaymentMerhodTest extends TestCase
    *
    * @return string payment reference id for the credit card debit transaction
    * @group connectionTest
+   * @test
    */
-  public function testDebit()
+  public function Debit()
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -407,8 +412,9 @@ class CreditCardPaymentMerhodTest extends TestCase
    *
    * @return string payment reference id for the credit card authorize transaction
    * @group connectionTest
+   * @test
    */
-  public function testAuthorize()
+  public function Authorize()
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -441,17 +447,17 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @var string payment reference id of the credit card authorisation
    *
    * @return string payment reference id for the credit card reversal transaction
-   * @depends testAuthorize
+   * @depends Authorize
    * @group connectionTest
-   *
+   * @test
    * @param mixed $referenceId
    */
-  public function testReversal($referenceId)
+  public function Reversal($referenceId=null)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
   
-      $this->paymentObject->reversal($referenceId);
+      $this->paymentObject->reversal((string)$referenceId);
   
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();
@@ -470,17 +476,18 @@ class CreditCardPaymentMerhodTest extends TestCase
    * @var string payment reference id of the credit card debit or capture
    *
    * @return string payment reference id for the credit card rebill transaction
-   * @depends testDebit
+   * @depends Debit
    * @group connectionTest
+   * @test
    *
    * @param mixed $referenceId
    */
-  public function testRebill($referenceId)
+  public function Rebill($referenceId=null)
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
   
-      $this->paymentObject->rebill($referenceId);
+      $this->paymentObject->rebill((string)$referenceId);
   
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->prepareRequest();

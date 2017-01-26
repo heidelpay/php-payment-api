@@ -27,8 +27,9 @@ class RequestTest extends TestCase
     *
     * @desc This test will check if the authentification parameters are set.
     * @group integrationTest
+    * @test
     */
-  public function testAuthentification()
+  public function PrepareAuthentificationData()
   {
       $Request = new Request();
       
@@ -48,12 +49,13 @@ class RequestTest extends TestCase
   }
   
   /**
-   * Asyn test
+   * Set parameter for no synchron response
    *
    * @desc This test will check if the request can be set to async
    * @group integrationTest
+   * @test
    */
-  public function testAsync()
+  public function Async()
   {
       $Request = new Request();
       
@@ -68,12 +70,13 @@ class RequestTest extends TestCase
   }
   
   /**
-   * Customer adress test
+   * Customer address test
    *
    * @desc This test will check if all customer parameters can be added to the request object
    * @group integrationTest
+   * @test
    */
-  public function testCustomerAddress()
+  public function CustomerAddress()
   {
       $Request = new Request();
       
@@ -107,8 +110,9 @@ class RequestTest extends TestCase
    *
    * @desc This test will check if all customer parameters can be added to the request object
    * @group integrationTest
+   * @test
    */
-  public function testBasketData()
+  public function SetBasketData()
   {
       $Request = new Request();
       
@@ -130,8 +134,9 @@ class RequestTest extends TestCase
    *
    * @desc This test will convert the request object to post array format
    * @group integrationTest
+   * @test
    */
-  public function testPrepareRequest()
+  public function PrepareRequest()
   {
       $Request = new Request();
       
@@ -152,7 +157,7 @@ class RequestTest extends TestCase
         'REQUEST.VERSION' => '1.0',
         'TRANSACTION.MODE' => 'CONNECTOR_TEST',
         'CRITERION.SDK_NAME' => 'Heidelpay\PhpApi',
-        'CRITERION.SDK_VERSION' => '16.12.19'
+        'CRITERION.SDK_VERSION' => '17.1.17'
        );
 
       $this->assertEquals($referenceVars, $Request->prepareRequest());
