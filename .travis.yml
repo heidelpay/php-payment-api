@@ -33,7 +33,10 @@ before_script:
   - if [ "$deps" = "low" ]; then composer --prefer-source --prefer-lowest --prefer-stable update; fi;
 
 script:
+  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
   - ./vendor/bin/phpunit
   - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
 after_success:
+
+  - travis_retry php vendor/bin/coveralls -v
