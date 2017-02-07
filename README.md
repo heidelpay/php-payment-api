@@ -1,5 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/heidelpay/php-api/badge.svg?branch=develop)](https://coveralls.io/github/heidelpay/php-api?branch=develop)
 [![Build Status](https://travis-ci.org/heidelpay/php-api.svg?branch=master)](https://travis-ci.org/heidelpay/php-api)
+
 ![Logo](https://dev.heidelpay.de/devHeidelpay_400_180.jpg)
 
 # Welcome to the heidelpay payment api for php
