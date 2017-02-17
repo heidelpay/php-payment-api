@@ -1,6 +1,8 @@
 <?php
 namespace Heidelpay\PhpApi\ParameterGroups;
 
+use Heidelpay\PhpApi\Exceptions\UndefinedPropertyException;
+
 /**
  *  The AbstractParameterGroup provides functions for every parameter group which extends this class
  *
@@ -44,7 +46,7 @@ abstract class AbstractParameterGroup
             $this->$key = $value;
             return $this;
         } else {
-            throw new \Exception('Property does not exist: '.$key.' in '. $this->getClassName(), 500);
+            throw new UndefinedPropertyException('Property does not exist: '.$key.' in '. $this->getClassName(), 500);
         }
     }
 }
