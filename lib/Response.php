@@ -48,6 +48,9 @@ class Response extends AbstractMethod
                       case 'address':
                             $this->getAddress()->set($ResponseGroup[1], $ArrayValue);
                             break;
+                      case 'account':
+                            $this->getAccount()->set($ResponseGroup[1], $ArrayValue);
+                            break;
                       case 'config':
                             $this->getConfig()->set($ResponseGroup[1], $ArrayValue);
                             break;

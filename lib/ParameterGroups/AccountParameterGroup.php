@@ -17,11 +17,24 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class AccountParameterGroup extends AbstractParameterGroup
 {
-    
     /**
-     * Brand name of the given accound data (for example iDeal)
+     * Bank - The domestic code of the bank which holds the direct debit or credit transfer account.
      *
-     * @var string brand of the given accout
+     * @var string bank of the given account
+     */
+    public $bank = null;
+
+    /**
+     * Bankname - Especially of interest for OnlineTransfer methods to determine which bank was chosen.
+     *
+     * @var string bankname of the given account
+     */
+    public $bankname = null;
+
+    /**
+     * Brand name of the given account data (for example iDeal)
+     *
+     * @var string brand of the given account
      */
     public $brand = null;
     
@@ -31,47 +44,81 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @var string bic of the given accout
      */
     public $bic = null;
+
+    /**
+     * Country - Bank or Account Country
+     *
+     * @var string country of the given account
+     */
+    public $country = null;
     
     /**
      * Expiry month used for credit and debit cards
      *
-     * @var string expiry month of the given accout
+     * @var string expiry month of the given account
      */
     public $expiry_month = null;
     
     /**
      * Expiry year used for credit and debit cards
      *
-     * @var string expiry year of the given accout
+     * @var string expiry year of the given account
      */
     public $expiry_year = null;
     
    /**
     * Owner of the given account data
     *
-     * @var string holder of the given accout
+     * @var string holder of the given account
      */
     public $holder = null;
     
     /**
      * International bank account number
      *
-     * @var string iban of the given accout
+     * @var string iban of the given account
      */
     public $iban = null;
+
+    /**
+     * Identification - Used for SEPA mandate ID
+     *
+     * @var string sepa mandate id from the payment response
+     */
+    public $identification = null;
     
     /**
      * Account number can be used for non sepa direct debit transactions
      *
-     * @var string number of the given accout
+     * @var string number of the given account
      */
     public $number = null;
     
     
     /**
-     * @var string verification of the given accout
+     * @var string verification of the given account
      */
     public $verification = null;
+
+    /**
+     *  AccountBank getter
+     *
+     * @return string bank
+     */
+    public function getBank()
+    {
+        return $this->bank;
+    }
+
+    /**
+     *  AccountBankname getter
+     *
+     * @return string bankname
+     */
+    public function getBankName()
+    {
+        return $this->bankname;
+    }
     
     /**
      *  AccountBrand getter
@@ -81,6 +128,26 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getBrand()
     {
         return $this->brand;
+    }
+
+    /**
+     *  AccountBic getter
+     *
+     * @return string bic
+     */
+    public function getBic()
+    {
+        return $this->bic;
+    }
+
+    /**
+     *  AccountCountry getter
+     *
+     * @return string country
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
     
     /**
@@ -122,6 +189,17 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->iban;
     }
+
+
+    /**
+     * AccountIdentification getter
+     *
+     * @return string identification
+     */
+    public function getIdentification()
+    {
+        return $this->identification;
+    }
     
     /**
      * AccountNumber getter
@@ -131,5 +209,15 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * AccountVerification getter
+     *
+     * @return string verification
+     */
+    public function getVerification()
+    {
+        return $this->verification;
     }
 }

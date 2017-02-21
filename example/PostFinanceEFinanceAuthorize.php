@@ -48,7 +48,7 @@ $PostFinanceEFinance->getRequest()->authentification(
 $PostFinanceEFinance->getRequest()->customerAddress(
 
         'Heidel',                  // Given name
-        'Berger-Payment'           // Family name, null,                     // Company Name
+        'Berger-Payment',           // Family name, null,                     // Company Name
         '12344',                   // Customer id of your application
         'Vagerowstr. 18',          // Billing address street
         'DE-BW',                   // Billing address state

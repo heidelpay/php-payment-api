@@ -20,7 +20,16 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class NameParameterGroup extends AbstractParameterGroup
 {
-    
+
+    /**
+     * NameBirthdate
+     *
+     * Date in the format YYYY-MM-DD e.g. 1970-09-12
+     *
+     * @var string company name (optional)
+     */
+    public $birthdate = null;
+
     /**
      * NameCompany
      *
@@ -47,7 +56,37 @@ class NameParameterGroup extends AbstractParameterGroup
      * @var string family name of the customer (mandatory)
      */
     public $family = null;
-    
+
+
+    /**
+     * NameSalutation
+     *
+     * Salutation of the customer, may be used as value for place holders (e.g. in dunning mail templates)
+     *
+     * @var string salutation of the customer (MR/MRS) (conditional mandatory)
+     */
+    public $salutation = null;
+
+
+    /**
+     * NameTitle
+     *
+     * Title of the customer
+     *
+     * @var string tile of the customer (optional)
+     */
+    public $title = null;
+
+    /**
+     * NameBirthdate getter
+     *
+     * @return string title
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
     /**
      * NameCompany getter
      *
@@ -76,5 +115,25 @@ class NameParameterGroup extends AbstractParameterGroup
     public function getFamily()
     {
         return $this->family;
+    }
+
+    /**
+     * NameSalutation getter
+     *
+     * @return string salutation
+     */
+    public function getSalutation()
+    {
+        return $this->salutation;
+    }
+
+    /**
+     * NameTitle getter
+     *
+     * @return string title
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

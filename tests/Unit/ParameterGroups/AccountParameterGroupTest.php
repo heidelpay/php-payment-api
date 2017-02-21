@@ -20,6 +20,35 @@ use Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup as Account;
 class AccountParameterGroupTest extends TestCase
 {
     /**
+     * Bank getter/setter test
+     * @test
+     */
+    public function Bank()
+    {
+        $Account = new Account();
+
+        $value = "Heidelpay";
+        $Account->set("bank", $value);
+
+        $this->assertEquals($value, $Account->getBank());
+    }
+
+    /**
+     * BankName getter/setter test
+     * @test
+     */
+
+    public function BankName()
+    {
+        $Account = new Account();
+
+        $value = "Sofort";
+        $Account->set("bankname", $value);
+
+        $this->assertEquals($value, $Account->getBankName());
+    }
+
+    /**
      * Brand getter/setter test
      */
     public function testBrand()
@@ -30,6 +59,35 @@ class AccountParameterGroupTest extends TestCase
         $Account->set("brand", $value);
     
         $this->assertEquals($value, $Account->getBrand());
+    }
+
+    /**
+     * Bic getter/setter test
+     * @test
+     */
+    public function Bic()
+    {
+        $Account = new Account();
+
+        $value = "COBADEFFXXX";
+        $Account->set("bic", $value);
+
+        $this->assertEquals($value, $Account->getBic());
+    }
+
+
+    /**
+     * Country getter/setter test
+     * @test
+     */
+    public function Country()
+    {
+        $Account = new Account();
+
+        $value = "DE";
+        $Account->set("country", $value);
+
+        $this->assertEquals($value, $Account->getCountry());
     }
     
     /**
@@ -56,6 +114,21 @@ class AccountParameterGroupTest extends TestCase
         $Account->set("iban", $value);
     
         $this->assertEquals($value, $Account->getIban());
+    }
+
+
+    /**
+     * Sepa Mandate Identification getter/setter test
+     * @test
+     */
+    public function Identification()
+    {
+        $Account = new Account();
+
+        $value = "3516.0799.6864";
+        $Account->set("identification", $value);
+
+        $this->assertEquals($value, $Account->getIdentification());
     }
     
     /**
@@ -95,5 +168,19 @@ class AccountParameterGroupTest extends TestCase
         $Account->set("number", $value);
     
         $this->assertEquals($value, $Account->getNumber());
+    }
+
+    /**
+     * Verification getter/setter test
+     * @test
+     */
+    public function Verification()
+    {
+        $Account = new Account();
+
+        $value = "***";
+        $Account->set("verification", $value);
+
+        $this->assertEquals($value, $Account->getVerification());
     }
 }
