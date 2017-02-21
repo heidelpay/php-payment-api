@@ -44,4 +44,32 @@ class ContactParameterGroupTest extends TestCase
         
         $this->assertEquals($ip, $Contact->getIp());
     }
+
+    /**
+     * Mobile setter/getter test
+     * @test
+     */
+    public function Mobile()
+    {
+        $Contact = new Conatct();
+
+        $value = "+49 555 22 1340";
+        $Contact->set('mobile', $value);
+
+        $this->assertEquals($value, $Contact->getMobile());
+    }
+
+    /**
+     * Phone setter/getter test
+     * @test
+     */
+    public function Phone()
+    {
+        $Contact = new Conatct();
+
+        $value = "+49 6221 64 71 400";
+        $Contact->set('phone', $value);
+
+        $this->assertEquals($value, $Contact->getPhone());
+    }
 }
