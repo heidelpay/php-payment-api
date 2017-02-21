@@ -224,7 +224,7 @@ class Response extends AbstractMethod
                  * PaymentFrameUrl for credit and debitcard
                  */
             $code = $type = null;
-            list($code, $type) = explode('.', $this->getPaymemt()->getCode());
+            list($code, $type) = explode('.', $this->getPayment()->getCode());
             if (($code == 'CC' or $code == 'DC') and $this->getIdentification()->getReferenceId() === null and $this->getFrontend()->getPaymentFrameUrl() !== null) {
                 return $this->getFrontend()->getPaymentFrameUrl();
             }

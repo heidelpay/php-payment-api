@@ -157,7 +157,7 @@ class RequestTest extends TestCase
         'REQUEST.VERSION' => '1.0',
         'TRANSACTION.MODE' => 'CONNECTOR_TEST',
         'CRITERION.SDK_NAME' => 'Heidelpay\PhpApi',
-        'CRITERION.SDK_VERSION' => '17.1.17'
+        'CRITERION.SDK_VERSION' => '17.2.22'
        );
 
       $this->assertEquals($referenceVars, $Request->prepareRequest());
