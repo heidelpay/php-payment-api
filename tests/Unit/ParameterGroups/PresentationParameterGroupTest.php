@@ -44,4 +44,18 @@ class PresentationParameterGroupTest extends TestCase
     
         $this->assertEquals($value, $Presentation->getCurrency());
     }
+
+    /**
+     * Usage getter/setter test
+     * @test
+     */
+    public function PresentationUsage()
+    {
+        $Presentation = new Presentation();
+
+        $value = 'Heidelpay Invoice ID 12345';
+        $Presentation->set('usage', $value);
+
+        $this->assertEquals($value, $Presentation->getUsage());
+    }
 }

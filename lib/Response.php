@@ -18,17 +18,60 @@ namespace Heidelpay\PhpApi;
  */
 class Response extends AbstractMethod
 {
+
+    /**
+     * ConnectorParameterGroup
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup
+     */
+    protected $connector = null;
+
+    /**
+     * ProcessingParameterGroup
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
+     */
+    protected $processing = null;
+
     /**
      * The constructor will take a given response in post format and convert
      * it to a response object
      *
      * @param array $RawResponse
      */
-    public function __construct($RawResponse=null)
+    public function __construct($RawResponse = null)
     {
         if ($RawResponse !== null and is_array($RawResponse)) {
             $this->splitArray($RawResponse);
         }
+    }
+
+    /**
+     * Processing getter
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
+     */
+    public function getProcessing()
+    {
+        if ($this->processing === null) {
+            return $this->processing = new \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup();
+        }
+
+        return $this->processing;
+    }
+
+    /**
+     * Connector getter
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup
+     */
+    public function getConnector()
+    {
+        if ($this->connector === null) {
+            return $this->connector = new \Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup();
+        }
+
+        return $this->connector;
     }
 
     /**
@@ -42,55 +85,61 @@ class Response extends AbstractMethod
     {
         foreach ($RawResponse as $ArrayKey => $ArrayValue) {
             $ResponseGroup = explode('_', strtolower($ArrayKey), 2);
-            
+
             if (is_array($ResponseGroup)) {
                 switch ($ResponseGroup[0]) {
-                      case 'address':
-                            $this->getAddress()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case 'account':
-                            $this->getAccount()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case 'config':
-                            $this->getConfig()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case 'contact':
-                            $this->getContact()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case 'criterion':
-                            $this->getCriterion()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "frontend":
-                            $this->getFrontend()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "identification":
-                            $this->getIdentification()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "name":
-                            $this->getName()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "payment":
-                            $this->getPaymemt()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "presentation":
-                            $this->getPresentation()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "processing":
-                            $this->getProcessing()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "request":
-                            $this->getRequest()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "security":
-                            $this->getSecurity()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "transaction":
-                            $this->getTransaction()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                      case "user":
-                            $this->getUser()->set($ResponseGroup[1], $ArrayValue);
-                            break;
-                 }
+                    case 'address':
+                        $this->getAddress()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case 'account':
+                        $this->getAccount()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case 'basket':
+                        $this->getBasket()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case 'criterion':
+                        $this->getCriterion()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case 'config':
+                        $this->getConfig()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case 'contact':
+                        $this->getContact()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case 'connector':
+                        $this->getConnector()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "frontend":
+                        $this->getFrontend()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "identification":
+                        $this->getIdentification()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "name":
+                        $this->getName()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "payment":
+                        $this->getPayment()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "presentation":
+                        $this->getPresentation()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "processing":
+                        $this->getProcessing()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "request":
+                        $this->getRequest()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "security":
+                        $this->getSecurity()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "transaction":
+                        $this->getTransaction()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                    case "user":
+                        $this->getUser()->set($ResponseGroup[1], $ArrayValue);
+                        break;
+                }
             }
         }
         return $this;
@@ -108,7 +157,7 @@ class Response extends AbstractMethod
         }
         return false;
     }
-    
+
     /**
      * Response is pending
      *
@@ -142,11 +191,11 @@ class Response extends AbstractMethod
      */
     public function getError()
     {
-        return array( 'code' => $this->getProcessing()->getReturnCode(),
-                     'message' => $this->getProcessing()->getReturn()
-       );
+        return array('code' => $this->getProcessing()->getReturnCode(),
+            'message' => $this->getProcessing()->getReturn()
+        );
     }
-    
+
     /**
      * Get payment reference id or uniqe id
      *
@@ -156,7 +205,7 @@ class Response extends AbstractMethod
     {
         return $this->getIdentification()->getUniqueId();
     }
-    
+
     /**
      * Payment from url
      *
@@ -174,19 +223,19 @@ class Response extends AbstractMethod
             /*
                  * PaymentFrameUrl for credit and debitcard
                  */
-                $code = $type = null;
+            $code = $type = null;
             list($code, $type) = explode('.', $this->getPaymemt()->getCode());
             if (($code == 'CC' or $code == 'DC') and $this->getIdentification()->getReferenceId() === null and $this->getFrontend()->getPaymentFrameUrl() !== null) {
                 return $this->getFrontend()->getPaymentFrameUrl();
             }
-                /*
-                 * Redirect url
-                 */
-                if ($this->getFrontend()->getRedirectUrl() !== null) {
-                    return $this->getFrontend()->getRedirectUrl();
-                }
+            /*
+             * Redirect url
+             */
+            if ($this->getFrontend()->getRedirectUrl() !== null) {
+                return $this->getFrontend()->getRedirectUrl();
+            }
         }
-                
+
         throw new \Exception('PaymentFromUrl is unset!');
     }
 
@@ -205,26 +254,26 @@ class Response extends AbstractMethod
      *
      * @return boolean
      */
-    public function verifySecurityHash($secret=null, $identificationTransactionId=null)
+    public function verifySecurityHash($secret = null, $identificationTransactionId = null)
     {
         if ($secret === null or $identificationTransactionId === null) {
             throw new \Exception('$secret or $identificationTransactionId undefined');
         }
-        
+
         if ($this->getProcessing()->getResult() === null) {
             throw new \Exception('The response object seems to be empty or it is not a valid heidelpay response!');
         }
-        
+
         if ($this->getCriterion()->getSecretHash() === null) {
             throw new \Exception('Empty secret hash, this could be some kind of manipulation or misconfiguration!');
         }
-        
-        $referenceHash = hash('sha512', $identificationTransactionId.$secret);
-        
+
+        $referenceHash = hash('sha512', $identificationTransactionId . $secret);
+
         if ($referenceHash === (string)$this->getCriterion()->getSecretHash()) {
             return true;
         }
-        
+
         throw new \Exception('Hash does not match. This could be some kind of manipulation or misconfiguration!');
     }
 }

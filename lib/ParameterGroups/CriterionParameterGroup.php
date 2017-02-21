@@ -3,7 +3,7 @@
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
- * This class provides a key value store for api parmater
+ * This class provides a key value store for api parameter
  *
  * All parameter that start with Criterion will be given to the payment api and
  * send back in return. This class also provides some special parameter like

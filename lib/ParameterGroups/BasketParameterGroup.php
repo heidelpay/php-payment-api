@@ -25,7 +25,7 @@ class BasketParameterGroup extends AbstractParameterGroup
     /**
      * Basket id
      *
-     * ID of the basket thatwas transmitted
+     * ID of the basket that was transmitted
      * via the basket API to the payment system.
      *
      * @var string reference id of a transmitted basket (optional)

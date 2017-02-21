@@ -2,7 +2,10 @@
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
- * This class provides every api parmater related to the customers account data
+ * This class provides every api parameter related to the customers account data
+ *
+ * The Account group holds all information regarding a credit card or bank account.
+ * Many parameters depend on the chosen payment method.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -21,6 +24,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Bank - The domestic code of the bank which holds the direct debit or credit transfer account.
      *
      * @var string bank of the given account
+     * @deprecated please use IBan and Bic instead
      */
     public $bank = null;
 
@@ -104,6 +108,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *  AccountBank getter
      *
      * @return string bank
+     * @deprecated  please use IBan and Bic instead
      */
     public function getBank()
     {

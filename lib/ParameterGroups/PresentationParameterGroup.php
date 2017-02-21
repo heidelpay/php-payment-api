@@ -36,7 +36,20 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * @var string currency code ISO 4217 (mandatory)
      */
     public $currency = null;
-    
+
+    /**
+     * PresentationUsage
+     *
+     * Provides the dynamic part of the descriptor, which appears on the
+     * customer’s statement. Enables the end customer to associate the
+     * transaction on the statement to the online transaction.
+     *
+     * If a dynamic descriptor can be set, depends on the used connector.
+     *
+     * @var string usage
+     */
+    public $usage = null;
+
     /**
      * PresentationAmount getter
      *
@@ -55,5 +68,15 @@ class PresentationParameterGroup extends AbstractParameterGroup
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * PresentationUsage getter
+     *
+     * @return string usage
+     */
+    public function getUsage()
+    {
+        return $this->usage;
     }
 }

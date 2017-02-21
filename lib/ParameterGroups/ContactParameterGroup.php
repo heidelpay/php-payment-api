@@ -2,7 +2,7 @@
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
- * This class provides every api parmater related to the customers contact data
+ * This class provides every api parameter related to the customers contact data
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.

@@ -2,9 +2,9 @@
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
- * This class provides every api parmater related to the customers billingaddress data
+ * This class provides every api parameter related to the customers billingaddress data
  *
- * Depending on the used payment methode paymentend and shipping address should
+ * Depending on the used payment method billing and shipping address should
  * be equal.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

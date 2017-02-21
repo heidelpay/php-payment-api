@@ -33,7 +33,14 @@ abstract class AbstractMethod
      * @var \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
     protected $address = null;
-    
+
+    /**
+     * BasketParameterGroup
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup
+     */
+    protected $basket = null;
+
     /**
      * ConfigParameterGroup
      *
@@ -86,7 +93,7 @@ abstract class AbstractMethod
     /**
      * Post
      *
-     * @var
+     * @var \Heidelpay\PhpApi\ParameterGroups\PostParameterGroup
      */
     protected $post = null;
     
@@ -96,13 +103,7 @@ abstract class AbstractMethod
      * @var \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
     protected $presentation = null;
-    
-    /**
-     * ProcessingParameterGroup
-     *
-     * @var \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
-     */
-    protected $processing = null;
+
     
     /**
      * RequestParameterGroup
@@ -171,7 +172,20 @@ abstract class AbstractMethod
         }
         return $this->address;
     }
-    
+
+    /**
+     * Basket getter
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup
+     */
+    public function getBasket()
+    {
+        if ($this->basket === null) {
+            return $this->basket = new \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup;
+        }
+        return $this->basket;
+    }
+
     /**
      * Config getter
      *
@@ -255,7 +269,7 @@ abstract class AbstractMethod
      *
      * @return \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup
      */
-    public function getPaymemt()
+    public function getPayment()
     {
         if ($this->payment === null) {
             return $this->payment = new \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup;
@@ -274,20 +288,6 @@ abstract class AbstractMethod
             return $this->presentation = new \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup;
         }
         return $this->presentation;
-    }
-
-    /**
-     * Processing getter
-     *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
-     */
-    public function getProcessing()
-    {
-        if ($this->processing === null) {
-            return $this->processing = new \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup();
-        }
-    
-        return $this->processing;
     }
 
     /**

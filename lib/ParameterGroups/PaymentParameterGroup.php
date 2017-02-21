@@ -4,6 +4,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
 /**
  * This class provides the api parameter for payment code
  *
+ * The Payment group determines which payment method and type to use and provides all
+ * monetary payment details of the transaction.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
