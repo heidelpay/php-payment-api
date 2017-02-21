@@ -2,194 +2,211 @@
 namespace Heidelpay\PhpApi;
 
 /**
- * Abstract request/response class 
- * 
+ * Abstract request/response class
+ *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
  *
  * @package  Heidelpay
  * @subpackage PhpApi
  * @category PhpApi
  */
-
-
-
-abstract class AbstractMethod {
+abstract class AbstractMethod
+{
     /* Post Parameter Group */
     
     /**
      * AccountParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    protected $account = NULL;
+    protected $account = null;
     
     /**
      * AddressParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
-    
-    protected $address = NULL;
-    
+    protected $address = null;
+
+    /**
+     * BasketParameterGroup
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup
+     */
+    protected $basket = null;
+
     /**
      * ConfigParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup
      */
-    
-    protected $config = NULL;
+    protected $config = null;
     
     /**
      * ContactParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
-    
-    protected $contact = NULL;
+    protected $contact = null;
     
     /**
      * CriterionParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup
      */
-    
-    protected $criterion = NULL;
+    protected $criterion = null;
     
     /**
      * FrontendParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    
-    protected $frontend = NULL;
+    protected $frontend = null;
     
     /**
      * IdentificationParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
-    
-    protected $identification = NULL;
+    protected $identification = null;
     
     /**
      * NameParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
      */
-    
-    protected $name = NULL;
+    protected $name = null;
     
     /**
      * PaymentParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup
      */
-    
-    protected $payment = NULL;
+    protected $payment = null;
     
     /**
      * Post
-     * @var 
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\PostParameterGroup
      */
-    
-    protected $post = NULL;
+    protected $post = null;
     
     /**
      * PresentationParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
-    
-    protected $presentation = NULL;
-    
-    /**
-     * ProcessingParameterGroup
-     * @var \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
-     */
-    
-    protected $processing = NULL;
+    protected $presentation = null;
+
     
     /**
      * RequestParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup
      */
-    
-    protected $request = NULL;
+    protected $request = null;
     
     /**
      * SecurityParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup
      */
-    
-    protected $security = NULL;
+    protected $security = null;
     
     /**
      * ShopParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\ShopParameterGroup
      */
-    
-    protected $shop = Null;
+    protected $shop = null;
     
     /**
      * ShopmoduleParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\ShopmoduleParameterGroup
      */
-    
-    
-    protected $shopmodule = NULL;
+    protected $shopmodule = null;
     
     /**
      * TransactionParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
      */
-    
-    protected $transaction = NULL;
+    protected $transaction = null;
     
     /**
      * UserParameterGroup
+     *
      * @var \Heidelpay\PhpApi\ParameterGroups\UserParameterGroup
      */
-    
-    protected $user = NULL;
+    protected $user = null;
     
     /**
      * Account getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    
     public function getAccount()
     {
-        if ($this->account === NULL ) {
+        if ($this->account === null) {
             return $this->account = new \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup;
         }
         return $this->account;
     }
+
     /**
      * Address getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
     public function getAddress()
     {
-        if ($this->address === NULL ) {
+        if ($this->address === null) {
             return $this->address = new \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup;
         }
         return $this->address;
     }
-    
+
+    /**
+     * Basket getter
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup
+     */
+    public function getBasket()
+    {
+        if ($this->basket === null) {
+            return $this->basket = new \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup;
+        }
+        return $this->basket;
+    }
+
     /**
      * Config getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup
      */
     public function getConfig()
     {
-        if ($this->config === NULL ) {
+        if ($this->config === null) {
             return $this->config = new \Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup();
         }
         return $this->config;
     }
     
-    
     /**
      * Contact getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
     public function getContact()
     {
-        if ($this->contact === NULL ) {
+        if ($this->contact === null) {
             return $this->contact = new \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup;
         }
         return $this->contact;
@@ -197,121 +214,129 @@ abstract class AbstractMethod {
     
     /**
      * Criterion getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup
      */
     public function getCriterion()
     {
-        if ($this->criterion === NULL ) {
+        if ($this->criterion === null) {
             return $this->criterion = new \Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
         }
         return $this->criterion;
     }
+
     /**
      * Frondend getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function getFrontend()
     {
-        if ($this->frontend === NULL ) {
+        if ($this->frontend === null) {
             return $this->frontend = new \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup;
         }
         return $this->frontend;
     }
+
     /**
      * Identification getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
     public function getIdentification()
     {
-        if ($this->identification === NULL ) {
+        if ($this->identification === null) {
             return $this->identification = new \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup;
         }
         return $this->identification;
     }
+
     /**
      * Name getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
      */
     public function getName()
     {
-        if ($this->name === NULL ) {
+        if ($this->name === null) {
             return $this->name = new \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup;
         }
         return $this->name;
     }
+
     /**
      * Payment getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup
      */
-    public function getPaymemt()
+    public function getPayment()
     {
-        if ($this->payment === NULL ) {
+        if ($this->payment === null) {
             return $this->payment = new \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup;
         }
         return $this->payment;
     }
+
     /**
      * Presentation getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
     public function getPresentation()
     {
-        if ($this->presentation === NULL ) {
+        if ($this->presentation === null) {
             return $this->presentation = new \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup;
         }
         return $this->presentation;
     }
-    /**
-     * Processing getter
-     * @return \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
-     */
-    public function getProcessing(){
-        if ($this->processing === NULL) {
-            return $this->processing = new \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup();
-        }
-    
-        return $this->processing;
-    }
+
     /**
      * Request getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup
      */
     public function getRequest()
     {
-        if ($this->request === NULL ) {
+        if ($this->request === null) {
             return $this->request = new \Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup;
         }
         return $this->request;
     }
+
     /**
      * Security getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup
      */
     public function getSecurity()
     {
-        if ($this->security === NULL ) {
+        if ($this->security === null) {
             return $this->security = new \Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup;
         }
         return $this->security;
     }
+
     /**
      * Transaction getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
      */
     public function getTransaction()
     {
-        if ($this->transaction === NULL ) {
+        if ($this->transaction === null) {
             return $this->transaction = new \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup;
         }
         return $this->transaction;
     }
+
     /**
      * User getter
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\UserParameterGroup
      */
     public function getUser()
     {
-        if ($this->user === NULL ) {
+        if ($this->user === null) {
             return $this->user = new \Heidelpay\PhpApi\ParameterGroups\UserParameterGroup;
         }
         return $this->user;

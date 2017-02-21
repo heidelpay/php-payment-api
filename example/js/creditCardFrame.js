@@ -18,7 +18,7 @@ var paymentFrameIframe = document.getElementById('paymentIframe');
 /**
  * Get hostname and protocol from paymentIframe
  */
-targetOrigin = getDomainFromUrl(paymentIframe.src);
+targetOrigin = getDomainFromUrl(paymentFrameIframe.src);
 
 /**
  * Get the form element

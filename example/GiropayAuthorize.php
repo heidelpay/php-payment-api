@@ -1,5 +1,6 @@
 <?php
-namespace Heidelpay\Excample\PhpApi;
+namespace Heidelpay\Example\PhpApi;
+
 /**
  * Sofort authorize example
  *
@@ -9,8 +10,11 @@ namespace Heidelpay\Excample\PhpApi;
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
+ *
  * @category example
  */
 
@@ -18,18 +22,19 @@ namespace Heidelpay\Excample\PhpApi;
  * For security reason all examples are disabled by default.
  */
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== TRUE) exit();
+if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+    exit();
+}
 
 
 /**
  * Require the composer autoloader file
  */
-require_once __DIR__.'/../../../autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 
 /**
  * Load a new instance of the payment method
  */
-
 $Giropay = new \Heidelpay\PhpApi\PaymentMethodes\GiropayPaymentMethod();
 
 $Giropay->getRequest()->authentification(
@@ -37,39 +42,39 @@ $Giropay->getRequest()->authentification(
        '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
        '93167DE7',                          // UserPassword
        '31HA07BC8142C5A171740166AF277E03',  // TransactionChannel Giropay
-       TRUE                                 // Enable sandbox mode
+       true                                 // Enable sandbox mode
      );
 
 $Giropay->getRequest()->customerAddress(
 
-		'Heidel',                  // Given name
-		'Berger-Payment'           // Family name
-		,NULL,                     // Company Name
-		'12344',                   // Customer id of your application
-		'Vagerowstr. 18',          // Billing address street
-		'DE-BW',                   // Billing address state
-		'69115',                   // Billing address post code
-		'Heidelberg',              // Billing address city
-		'DE',                      // Billing address country code
-		'support@heidelpay.de'     // Customer mail address
-		
-		);
+        'Heidel',                  // Given name
+        'Berger-Payment',           // Family name
+        null,                     // Company Name
+        '12344',                   // Customer id of your application
+        'Vagerowstr. 18',          // Billing address street
+        'DE-BW',                   // Billing address state
+        '69115',                   // Billing address post code
+        'Heidelberg',              // Billing address city
+        'DE',                      // Billing address country code
+        'support@heidelpay.de'     // Customer mail address
+        
+        );
 
-$Giropay->getRequest()->async(   
-		
-		'EN',                                    // Languarge code for the Frame   
+$Giropay->getRequest()->async(
+        
+        'EN', // Languarge code for the Frame
         HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
-        		
+                
    );
 
 $Giropay->getRequest()->basketData(
-		
-		'2843294932',                  // Reference Id of your application
-		23.12,                         // Amount of this request
-		'EUR',                         // Currency code of this request
-		'39542395235ßfsokkspreipsr'    // A secret passphrase from your application
-		
-		);
+        
+        '2843294932',                  // Reference Id of your application
+        23.12,                         // Amount of this request
+        'EUR',                         // Currency code of this request
+        '39542395235ßfsokkspreipsr'    // A secret passphrase from your application
+        
+        );
 
 $Giropay->authorize();
 ?>
@@ -81,8 +86,8 @@ $Giropay->authorize();
 <?php 
     if ($Giropay->getResponse()->isSuccess()) {
         echo '<a href="'.$Giropay->getResponse()->getPaymentFormUrl().'">to Giropay</a>';
-    } else { 
-        echo '<pre>'. print_r($Giropay->getResponse()->getError(),1).'</pre>';
+    } else {
+        echo '<pre>'. print_r($Giropay->getResponse()->getError(), 1).'</pre>';
     }
  ?>
  <p>It is not necessary to show the redirect url to your customer. You can  

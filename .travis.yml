@@ -1,0 +1,38 @@
+language: php
+dist: trusty
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.6
+      env: deps=no
+    - php: 7
+      env: deps=no
+    - php: 7
+      env: deps=high
+    - php: 7.1
+      env: deps=no
+    - php: 7.1
+      env: deps=high
+
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
+    - $HOME/.local
+
+before_script:
+  - mkdir -p "$HOME/.php-cs-fixer"
+  - composer self-update
+  - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
+  - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
+
+
+script:
+  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+
+after_success:
+
+  - travis_retry php vendor/bin/coveralls -v

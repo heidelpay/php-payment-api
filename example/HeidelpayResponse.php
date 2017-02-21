@@ -7,8 +7,11 @@
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ *
  * @link  https://dev.heidelpay.de/PhpApi
+ *
  * @author  Jens Richter
+ *
  * @category example
  */
 
@@ -16,23 +19,25 @@
  * For security reason all examples are disabled by default.
  */
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== TRUE) exit();
+if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+    exit();
+}
 
 /*Require the composer autoloader file */
-require_once __DIR__.'/../../../autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 
 $HeidelpayResponse = new  Heidelpay\PhpApi\Response($_POST);
 
 $secretPass = "39542395235ßfsokkspreipsr";
 
-$identificationTransactionId = $HeidelpayResponse->getIdentification()->getTransactionId(); 
+$identificationTransactionId = $HeidelpayResponse->getIdentification()->getTransactionId();
 
 try {
-    $HeidelpayResponse->verifySecurityHash($secretPass,$identificationTransactionId);
+    $HeidelpayResponse->verifySecurityHash($secretPass, $identificationTransactionId);
 } catch (\Exception $e) {
     /* If the verification does not match this can mean some kind of manipulation or
      * miss configuration. So you can log $e->getMessage() for debugging.*/
-    return ;
+    return;
 }
  
 if ($HeidelpayResponse->isSuccess()) {
@@ -45,9 +50,7 @@ if ($HeidelpayResponse->isSuccess()) {
     echo HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpaySuccess.php';
     
     /*save order */
-    
-} elseif ($HeidelpayResponse->isError()){
-        
+} elseif ($HeidelpayResponse->isError()) {
     $error = $HeidelpayResponse->getError();
     
     echo HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayError.php?errorMessage='.urlencode(htmlspecialchars($error['message']));
