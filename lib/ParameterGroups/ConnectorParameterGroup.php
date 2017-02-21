@@ -30,6 +30,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      * foreign customers to make cross-border credit transfers.
      *
      * @var string account bank
+     *
      * @deprecated please use IBan and Bic instead
      */
     public $account_bank = null;
@@ -78,6 +79,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      * Account number of the processing bank account. Includes also possible check digits.
      *
      * @var string account number
+     *
      * @deprecated please use IBan and Bic instead
      */
     public $account_number = null;
@@ -86,6 +88,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      * Account bank getter
      *
      * @return string account bank
+     *
      * @deprecated please use IBan and Bic instead
 
      */
@@ -138,6 +141,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      * Account number getter
      *
      * @return string account number
+     *
      * @deprecated please use IBan and Bic instead
      */
     public function getAccountNumber()

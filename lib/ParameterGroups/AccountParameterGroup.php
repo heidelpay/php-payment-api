@@ -24,6 +24,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Bank - The domestic code of the bank which holds the direct debit or credit transfer account.
      *
      * @var string bank of the given account
+     *
      * @deprecated please use IBan and Bic instead
      */
     public $bank = null;
@@ -108,6 +109,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *  AccountBank getter
      *
      * @return string bank
+     *
      * @deprecated  please use IBan and Bic instead
      */
     public function getBank()

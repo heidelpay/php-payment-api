@@ -178,7 +178,7 @@ class ResponseTest extends TestCase
        
       
       /** url for non credit or debit card transactions */
-      $this->_resposneObject->getPaymemt()->set('code', 'OT.PA');
+      $this->_resposneObject->getPayment()->set('code', 'OT.PA');
       $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
       $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
   }

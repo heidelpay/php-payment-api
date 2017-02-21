@@ -21,6 +21,7 @@ class ConnectorParameterGroupTest extends TestCase
 {
     /**
      * AccountBank getter/setter test
+     *
      * @test
      */
     public function AccountBank()
@@ -35,6 +36,7 @@ class ConnectorParameterGroupTest extends TestCase
 
     /**
      * AccountBic getter/setter test
+     *
      * @test
      */
     public function AccountBic()
@@ -49,6 +51,7 @@ class ConnectorParameterGroupTest extends TestCase
 
     /**
      * AccountCountry getter/setter test
+     *
      * @test
      */
     public function AccountCountry()
@@ -63,6 +66,7 @@ class ConnectorParameterGroupTest extends TestCase
 
     /**
      * AccountHolder getter/setter test
+     *
      * @test
      */
     public function AccountHolder()
@@ -77,6 +81,7 @@ class ConnectorParameterGroupTest extends TestCase
 
     /**
      * AccountIBan getter/setter test
+     *
      * @test
      */
     public function AccountIBan()
@@ -91,6 +96,7 @@ class ConnectorParameterGroupTest extends TestCase
 
     /**
      * AccountNumber getter/setter test
+     *
      * @test
      */
     public function AccountNumber()

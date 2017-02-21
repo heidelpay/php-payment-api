@@ -47,6 +47,7 @@ class PresentationParameterGroupTest extends TestCase
 
     /**
      * Usage getter/setter test
+     *
      * @test
      */
     public function PresentationUsage()
