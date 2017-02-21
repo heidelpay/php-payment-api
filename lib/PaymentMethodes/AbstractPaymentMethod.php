@@ -266,7 +266,7 @@ abstract class AbstractPaymentMethod
     public function authorize()
     {
         if ($this->_canAuthorise) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".PA");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".PA");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             if ($this->_brand !== null) {
                 $this->getRequest()->getAccount()->set('brand', $this->_brand);
@@ -298,7 +298,7 @@ abstract class AbstractPaymentMethod
     public function authorizeOnRegistration($PaymentRefernceId)
     {
         if ($this->_canAuthorizeOnRegistration) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".PA");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".PA");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
@@ -328,7 +328,7 @@ abstract class AbstractPaymentMethod
     public function capture($PaymentRefernceId)
     {
         if ($this->_canCapture) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".CP");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".CP");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
@@ -359,7 +359,7 @@ abstract class AbstractPaymentMethod
     public function debit()
     {
         if ($this->_canDebit) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".DB");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".DB");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             if ($this->_brand !== null) {
                 $this->getRequest()->getAccount()->set('brand', $this->_brand);
@@ -392,7 +392,7 @@ abstract class AbstractPaymentMethod
     public function debitOnRegistration($PaymentRefernceId)
     {
         if ($this->_canDebitOnRegistration) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".DB");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".DB");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
@@ -424,7 +424,7 @@ abstract class AbstractPaymentMethod
     public function rebill($PaymentRefernceId)
     {
         if ($this->_canRebill) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".RB");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RB");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
@@ -459,7 +459,7 @@ abstract class AbstractPaymentMethod
     public function refund($PaymentRefernceId)
     {
         if ($this->_canRefund) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".RF");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RF");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
@@ -495,7 +495,7 @@ abstract class AbstractPaymentMethod
     public function reversal($PaymentRefernceId)
     {
         if ($this->_canReversal) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".RV");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RV");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
@@ -529,7 +529,7 @@ abstract class AbstractPaymentMethod
     public function registration()
     {
         if ($this->_canRegistration) {
-            $this->getRequest()->getPaymemt()->set('code', $this->_paymentCode.".RG");
+            $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RG");
             $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
             if ($this->_brand !== null) {
                 $this->getRequest()->getAccount()->set('brand', $this->_brand);
