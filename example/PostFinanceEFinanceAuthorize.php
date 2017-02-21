@@ -30,7 +30,7 @@ if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
 /**
  * Require the composer autoloader file
  */
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 
 /**
  * Load a new instance of the payment method
@@ -48,7 +48,8 @@ $PostFinanceEFinance->getRequest()->authentification(
 $PostFinanceEFinance->getRequest()->customerAddress(
 
         'Heidel',                  // Given name
-        'Berger-Payment',           // Family name, null,                     // Company Name
+        'Berger-Payment',           // Family name
+        null,                     // Company Name
         '12344',                   // Customer id of your application
         'Vagerowstr. 18',          // Billing address street
         'DE-BW',                   // Billing address state
