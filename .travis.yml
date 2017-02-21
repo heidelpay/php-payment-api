@@ -9,20 +9,10 @@ matrix:
     - php: 7
       env: deps=no
     - php: 7
-      env: deps=low
-    - php: 7
       env: deps=high
     - php: 7.1
       env: deps=no
     - php: 7.1
-      env: deps=low
-    - php: 7.1
-      env: deps=high
-      php: 7.2
-      env: deps=no
-      php: 7.2
-      env: deps=low
-      php: 7.2
       env: deps=high
 
 
@@ -37,7 +27,7 @@ before_script:
   - composer self-update
   - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
   - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
-  - if [ "$deps" = "low" ]; then composer --prefer-source --prefer-lowest --prefer-stable update; fi;
+
 
 script:
   - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml

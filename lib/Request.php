@@ -164,12 +164,12 @@ class Request extends AbstractMethod
      */
     public function send($uri=null, $post=null, $adapter=null)
     {
+        $client = new \Heidelpay\PhpApi\Adapter\CurlAdapter();
+
         if (is_object($adapter)) {
             $client = new $adapter;
-        } else {
-            $client = new \Heidelpay\PhpApi\Adapter\CurlAdapter();
         }
-        
+
         return $client->sendPost($uri, $post);
     }
 }

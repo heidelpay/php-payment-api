@@ -45,8 +45,8 @@ abstract class AbstractParameterGroup
         if (property_exists($this, $key)) {
             $this->$key = $value;
             return $this;
-        } else {
-            throw new UndefinedPropertyException('Property does not exist: '.$key.' in '. $this->getClassName(), 500);
         }
+
+        throw new UndefinedPropertyException('Property does not exist: '.$key.' in '. $this->getClassName(), 500);
     }
 }
