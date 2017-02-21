@@ -24,7 +24,7 @@ if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
 }
 
 /*Require the composer autoloader file */
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 
 $HeidelpayResponse = new  Heidelpay\PhpApi\Response($_POST);
 
