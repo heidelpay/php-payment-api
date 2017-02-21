@@ -17,6 +17,9 @@ namespace Heidelpay\PhpApi\PaymentMethodes;
  * @subpackage PhpApi
  * @category PhpApi
  */
+
+use \Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
+
 abstract class AbstractPaymentMethod
 {
     
@@ -242,7 +245,7 @@ abstract class AbstractPaymentMethod
         $mode = $this->getRequest()->getTransaction()->getMode();
         
         if ($mode === null) {
-            throw new \Exception('Transaction mode is not set');
+            throw new UndefinedTransactionModeException('Transaction mode is not set');
             return false;
         } elseif ($mode == 'LIVE') {
             return $this->_liveUrl;
