@@ -37,7 +37,7 @@ abstract class AbstractPaymentMethod
     /**
      * HTTP Adapter for payment connection
      *
-     * @var \Heidelpay\PhpApi/Adapter
+     * @var \Heidelpay\PhpApi\Adapter
      */
     protected $_adapter = null;
     
