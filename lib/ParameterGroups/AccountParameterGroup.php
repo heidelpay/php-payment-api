@@ -190,7 +190,6 @@ class AccountParameterGroup extends AbstractParameterGroup
         return $this->iban;
     }
 
-
     /**
      * AccountIdentification getter
      *

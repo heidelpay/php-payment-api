@@ -21,6 +21,7 @@ class AccountParameterGroupTest extends TestCase
 {
     /**
      * Bank getter/setter test
+     *
      * @test
      */
     public function Bank()
@@ -35,9 +36,9 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * BankName getter/setter test
+     *
      * @test
      */
-
     public function BankName()
     {
         $Account = new Account();
@@ -63,6 +64,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Bic getter/setter test
+     *
      * @test
      */
     public function Bic()
@@ -75,9 +77,9 @@ class AccountParameterGroupTest extends TestCase
         $this->assertEquals($value, $Account->getBic());
     }
 
-
     /**
      * Country getter/setter test
+     *
      * @test
      */
     public function Country()
@@ -116,9 +118,9 @@ class AccountParameterGroupTest extends TestCase
         $this->assertEquals($value, $Account->getIban());
     }
 
-
     /**
      * Sepa Mandate Identification getter/setter test
+     *
      * @test
      */
     public function Identification()
@@ -172,6 +174,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Verification getter/setter test
+     *
      * @test
      */
     public function Verification()

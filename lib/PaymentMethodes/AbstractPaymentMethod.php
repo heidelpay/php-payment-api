@@ -17,8 +17,7 @@ namespace Heidelpay\PhpApi\PaymentMethodes;
  * @subpackage PhpApi
  * @category PhpApi
  */
-
-use \Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
 
 abstract class AbstractPaymentMethod
 {

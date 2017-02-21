@@ -32,7 +32,6 @@ class AbstractPaymentMethodTest extends TestCase
      *
      * @var \Heidelpay\PhpApi\PaymentMethodes\SofortPaymentMethod
      */
-
     protected $paymentObject = null;
 
     /**
@@ -49,6 +48,7 @@ class AbstractPaymentMethodTest extends TestCase
 
     /**
      * Request setter/getter test
+     *
      * @test
      */
     public function Request()
@@ -61,6 +61,7 @@ class AbstractPaymentMethodTest extends TestCase
 
     /**
      * Response setter/getter test
+     *
      * @test
      */
     public function Response()
@@ -70,6 +71,7 @@ class AbstractPaymentMethodTest extends TestCase
 
     /**
      * Adaptere setter/getter test
+     *
      * @test
      */
     public function Adapter()
@@ -82,17 +84,18 @@ class AbstractPaymentMethodTest extends TestCase
 
     /**
      * getPaymentUrl test
+     *
      * @test
      */
     public function getPaymentUrl()
     {
-
         $this->paymentObject->getRequest()->getTransaction()->set('mode', 'LIVE');
         $this->assertEquals('https://heidelpay.hpcgw.net/ngw/post', $this->paymentObject->getPaymentUrl());
     }
 
     /**
      * getPaymentUrl exception test
+     *
      * @test
      */
     public function getPaymentUrlException()
@@ -100,8 +103,5 @@ class AbstractPaymentMethodTest extends TestCase
         $this->paymentObject->getRequest()->getTransaction()->set('mode', null);
         $this->expectException(UndefinedTransactionModeException::class);
         $this->paymentObject->getPaymentUrl();
-
-
     }
-
 }

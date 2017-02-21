@@ -18,6 +18,13 @@ matrix:
       env: deps=low
     - php: 7.1
       env: deps=high
+      php: 7.2
+      env: deps=no
+      php: 7.2
+      env: deps=low
+      php: 7.2
+      env: deps=high
+
 
 cache:
   directories:
@@ -34,7 +41,6 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-  - ./vendor/bin/phpunit
   - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
 after_success:

@@ -22,6 +22,7 @@ class BasketParameterGroupTest extends TestCase
 {
     /**
      * BasketId getter/setter test
+     *
      * @test
      */
     public function Id()
@@ -36,19 +37,20 @@ class BasketParameterGroupTest extends TestCase
 
     /**
      * GetClassName test
+     *
      * @test
      */
-
     public function getClassName()
     {
         $Basket = new Basket();
 
         $value = "Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup";
-        $this->assertEquals($value,$Basket->getClassName());
+        $this->assertEquals($value, $Basket->getClassName());
     }
 
     /**
      * Undefined property exception test
+     *
      * @test
      */
     public function undefinedPropertyExcetion()

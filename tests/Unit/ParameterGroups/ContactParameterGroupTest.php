@@ -47,6 +47,7 @@ class ContactParameterGroupTest extends TestCase
 
     /**
      * Mobile setter/getter test
+     *
      * @test
      */
     public function Mobile()
@@ -61,6 +62,7 @@ class ContactParameterGroupTest extends TestCase
 
     /**
      * Phone setter/getter test
+     *
      * @test
      */
     public function Phone()

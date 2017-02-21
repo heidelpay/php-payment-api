@@ -21,6 +21,7 @@ class NameParameterGroupTest extends TestCase
 {
     /**
      * Birthdate getter/setter test
+     *
      * @test
      */
     public function Birthdate()
@@ -74,6 +75,7 @@ class NameParameterGroupTest extends TestCase
 
     /**
      * Salutation getter/setter test
+     *
      * @test
      */
     public function Salutation()
@@ -85,8 +87,10 @@ class NameParameterGroupTest extends TestCase
 
         $this->assertEquals($value, $Name->getSalutation());
     }
+
     /**
      * Title getter/setter test
+     *
      * @test
      */
     public function Title()
