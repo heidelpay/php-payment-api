@@ -21,7 +21,7 @@ use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
 
-class PrepaymentPaymentMethod extends AbstractPaymentMethod
+class PrepaymentPaymentMethod
 {
     use BasicPaymentMethodTrait;
     use AuthorizeTransactionType;
