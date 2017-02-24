@@ -3,10 +3,10 @@
 namespace Heidelpay\PhpApi\TransactionTypes;
 
 /**
- * Transaction type refund
+ * Transaction type finalize
  *
- * This payment type will be used to give a charge amount or even parts of
- * it back to the given account.
+ * This payment type will be used to inform heidelpay about goods ship out.
+ * Necessary for secured direct debit,secured invoice and Santander.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -19,21 +19,21 @@ namespace Heidelpay\PhpApi\TransactionTypes;
  * @subpackage PhpApi
  * @category PhpApi
  */
-trait RefundTransactionType
+trait FinalizeTransactionType
 {
     /**
-     * Payment type refund
+     * Payment type finalize
      *
-     * This payment type will be used to give a charge amount or even parts of
-     * it back to the given account.
+     * This payment type will be used to inform heidelpay about goods ship out.
+     * Necessary for secured direct debit,secured invoice and Santander.
      *
-     * @param mixed $PaymentReferenceId payment reference id ( uniqe id of the debit or capture)
+     * @param mixed $PaymentReferenceId reference id ( uniqe id of the debit or capture)
      *
      * @return \Heidelpay\PhpApi\PaymentMethodes\AbstractPaymentMethod|boolean
      */
-    public function refund($PaymentReferenceId)
+    public function finalize($PaymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RF");
+        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".FI");
         $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);

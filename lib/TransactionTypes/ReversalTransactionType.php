@@ -28,8 +28,7 @@ trait ReversalTransactionType
      * it back to the given account. This can be used to lower an amount on an
      * invoice for example.
      *
-     * @param string payment reference id ( unique id of the authorisation)
-     * @param mixed $PaymentReferenceId
+     * @param mixed $PaymentReferenceId payment reference id ( unique id of the authorisation)
      *
      * @return \Heidelpay\PhpApi\PaymentMethodes\AbstractPaymentMethod|boolean
      */
