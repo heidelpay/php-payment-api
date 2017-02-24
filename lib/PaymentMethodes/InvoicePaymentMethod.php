@@ -1,9 +1,10 @@
 <?php
-
 namespace Heidelpay\PhpApi\PaymentMethodes;
 
 /**
- * Prepayment Payment Class
+ * Invoice Payment Class
+ *
+ * This payment method is the classic unsecured invoice.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -21,7 +22,7 @@ use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
 
-class PrepaymentPaymentMethod extends AbstractPaymentMethod
+class InvoicePaymentMethod
 {
     use BasicPaymentMethodTrait;
     use AuthorizeTransactionType;
@@ -33,7 +34,7 @@ class PrepaymentPaymentMethod extends AbstractPaymentMethod
      *
      * @var string payment code
      */
-    protected $_paymentCode = 'PP';
+    protected $_paymentCode = 'IV';
 
     /**
      * Payment brand name for this payment method

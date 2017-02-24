@@ -22,102 +22,32 @@ use Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod as  Prepayment;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class PrepaymentPaymentMerhodTest extends TestCase
+class PrepaymentPaymentMethodTest extends TestCase
 {
     /**
-     * SecuritySender
-     *
-     * @var string SecuritySender
+     * @var array authentification parameter for heidelpay api
      */
-    protected $SecuritySender = '31HA07BC8142C5A171745D00AD63D182';
-    /**
-     * UserLogin
-     *
-     * @var string UserLogin
-     */
-    protected $UserLogin      = '31ha07bc8142c5a171744e5aef11ffd3';
-    /**
-     * UserPassword
-     *
-     * @var string UserPassword
-     */
-    protected $UserPassword   = '93167DE7';
-    /**
-     * TransactionChannel
-     *
-     * @var string TransactionChannel
-     */
-    protected $TransactionChannel = '31HA07BC8142C5A171749A60D979B6E4';
-    /**
-     * SandboxRequest
-     *
-     * Request will be send to Heidelpay sandbox payment system.
-     *
-     * @var string
-     */
-    protected $SandboxRequest = true;
-    
-    /**
-     * Customer given name
-     *
-     * @var string nameGiven
-     */
-    protected $nameGiven = 'Heidel';
-    /**
-     * Customer family name
-     *
-     * @var string nameFamily
-     */
-    protected $nameFamily ='Berger-Payment';
-    /**
-     * Customer company name
-     *
-     * @var string nameCompany
-     */
-    protected $nameCompany = 'DevHeidelpay';
-    /**
-     * Customer id
-     *
-     * @var string shopperId
-     */
-    protected $shopperId = '12344';
-    /**
-     * customer billing address street
-     *
-     * @var string addressStreet
-     */
-    protected $addressStreet = 'Vagerowstr. 18';
-    /**
-     * customer billing address state
-     *
-     * @var string addressState
-     */
-    protected $addressState  = 'DE-BW';
-    /**
-     * customer billing address zip
-     *
-     * @var string addressZip
-     */
-    protected $addressZip    = '69115';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCity    = 'Heidelberg';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCountry = 'DE';
-    /**
-     * customer mail address
-     *
-     * @var string contactMail
-     */
-    protected $contactMail = "development@heidelpay.de";
-    
+    protected $authentification = array(
+        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
+        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
+        '93167DE7', //UserPassword
+        '31HA07BC8142C5A171749A60D979B6E4', //TransactionChannel
+        true //Sandbox mode
+    );
+
+    protected $customerDetails = array(
+        'Heidel', //NameGiven
+        'Berger-Payment', //NameFamily
+        null, //NameCompany
+        '1234', //IdentificationShopperId
+        'Vagerowstr. 18', //AddressStreet
+        'DE-BW', //AddressState
+        '69115', //AddressZip
+        'Heidelberg', //AddressCity
+        'DE', //AddressCountry
+        'development@heidelpay.de' //Costumer
+    );
+
     /**
      * Transaction currency
      *
@@ -149,6 +79,7 @@ class PrepaymentPaymentMerhodTest extends TestCase
   public function __construct()
   {
       date_default_timezone_set('UTC');
+      parent::__construct();
   }
 
   /**
@@ -160,13 +91,10 @@ class PrepaymentPaymentMerhodTest extends TestCase
   {
       $Prepayment = new Prepayment();
     
-      $Prepayment->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
+      $Prepayment->getRequest()->authentification(...$this->authentification);
     
-      $Prepayment->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId, $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
-    
-    
-      $Prepayment->_dryRun=true;
-    
+      $Prepayment->getRequest()->customerAddress(...$this->customerDetails);
+        
       $this->paymentObject = $Prepayment;
   }
   
@@ -181,56 +109,86 @@ class PrepaymentPaymentMerhodTest extends TestCase
   {
       return substr(strrchr($method, '\\'), 1);
   }
-    
-  /**
-   * Test case for a single prepayment authorisation
-   *
-   * @return string payment reference id for the prepayment authorize transaction
-   * @group connectionTest
-   */
-  public function testAuthorize()
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-      
-      $this->paymentObject->authorize();
-      
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));
-      $this->assertFalse($response[1]->isPending(), 'authorize is pending');
-      $this->assertFalse($response[1]->isError(), 'authorize failed : '.print_r($response[1]->getError(), 1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
-  }
-  
-  /**
-   * Test case for a prepayment reversal of a existing authorisation
-   *
-   * @param $referenceId string payment reference id of the prepayment authorisation
-   *
-   * @return string payment reference id for the prepayment reversal transaction
-   * @depends testAuthorize
-   * @group connectionTest
-   */
-  public function testReversal($referenceId)
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
-  
-      $this->paymentObject->reversal($referenceId);
-  
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
-      $this->assertFalse($response[1]->isPending(), 'reversal is pending');
-      $this->assertFalse($response[1]->isError(), 'reversal failed : '.print_r($response[1]->getError(), 1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
-  }
+
+    /**
+     * Test case for a single prepayment authorisation
+     *
+     * @return string payment reference id for the prepayment authorize transaction
+     * @group connectionTest
+     * @test
+     */
+    public function Authorize()
+    {
+        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+
+        $this->paymentObject->authorize();
+
+        /* verify response */
+        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+
+        /* transaction result */
+        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
+        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize is pending');
+        $this->assertFalse($this->paymentObject->getResponse()->isError(),
+            'authorize failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+
+        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+    }
+
+    /**
+     * Test case for a prepayment reversal of a existing authorisation
+     *
+     * @param $referenceId string payment reference id of the prepayment authorisation
+     *
+     * @return string payment reference id for the prepayment reversal transaction
+     * @depends Authorize
+     * @group connectionTest
+     * @test   *
+     */
+    public function Reversal($referenceId)
+    {
+        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
+
+        $this->paymentObject->reversal($referenceId);
+
+        /* verify response */
+        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+
+        /* transaction result */
+        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
+        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
+        $this->assertFalse($this->paymentObject->getResponse()->isError(),
+            'reversal failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+
+        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+    }
+
+    /**
+     * Test case for prepayment refund
+     *
+     * @param string $referenceId reference id of the prepayment to refund
+     *
+     * @return string payment reference id of the prepayment refund transaction
+     * @depends Authorize
+     * @test
+     * @group connectionTest
+     */
+    public function Refund($referenceId=null)
+    {
+        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
+
+        /* the refund can not be processed because there will be no receipt automatically on the sandbox */
+        $this->paymentObject->_dryRun = true;
+
+        $this->paymentObject->refund((string)$referenceId);
+
+        $this->assertEquals('PP.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
+        return true;
+    }
 }
