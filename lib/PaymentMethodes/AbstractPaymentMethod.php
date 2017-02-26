@@ -128,7 +128,7 @@ abstract class AbstractPaymentMethod
             }
         
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
         
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -158,7 +158,7 @@ abstract class AbstractPaymentMethod
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
     
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -192,7 +192,7 @@ abstract class AbstractPaymentMethod
             }
         
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
         
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -221,7 +221,7 @@ abstract class AbstractPaymentMethod
             }
              
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
         
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -252,7 +252,7 @@ abstract class AbstractPaymentMethod
             $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
             $this->getRequest()->getIdentification()->set('referenceId', $PaymentRefernceId);
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
              
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -288,7 +288,7 @@ abstract class AbstractPaymentMethod
             }
             
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
     
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -323,7 +323,7 @@ abstract class AbstractPaymentMethod
             }
              
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
              
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -359,7 +359,7 @@ abstract class AbstractPaymentMethod
             }
     
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
     
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
@@ -391,7 +391,7 @@ abstract class AbstractPaymentMethod
             }
     
             $uri = $this->getPaymentUrl();
-            $this->_requestArray = $this->getRequest()->prepareRequest();
+            $this->_requestArray = $this->getRequest()->convertToArray();
         
             if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
                 list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());

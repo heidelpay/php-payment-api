@@ -136,7 +136,7 @@ class RequestTest extends TestCase
    * @group integrationTest
    * @test
    */
-  public function PrepareRequest()
+  public function convertToArray()
   {
       $Request = new Request();
       
@@ -160,6 +160,6 @@ class RequestTest extends TestCase
         'CRITERION.SDK_VERSION' => '17.2.22'
        );
 
-      $this->assertEquals($referenceVars, $Request->prepareRequest());
+      $this->assertEquals($referenceVars, $Request->convertToArray());
   }
 }

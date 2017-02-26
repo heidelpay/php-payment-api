@@ -35,18 +35,7 @@ trait AuthorizeTransactionType
     public function authorize()
     {
         $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".PA");
-        $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
-        if ($this->_brand !== null) {
-            $this->getRequest()->getAccount()->set('brand', $this->_brand);
-        }
-
-        $uri = $this->getPaymentUrl();
-        $this->_requestArray = $this->getRequest()->prepareRequest();
-
-        if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
-            list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
-        }
-
+        $this->prepareRequest();
         return $this;
     }
 }

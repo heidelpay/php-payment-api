@@ -18,36 +18,21 @@ namespace Heidelpay\PhpApi\PaymentMethodes;
  * @subpackage PhpApi
  * @category PhpApi
  */
-class SofortPaymentMethod extends AbstractPaymentMethod
+use Heidelpay\PhpApi\PaymentMethodes\BasicPaymentMethodTrait;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
+
+class SofortPaymentMethod
 {
-    
+    use BasicPaymentMethodTrait;
+    use AuthorizeTransactionType;
+    use RefundTransactionType;
     /**
      * Payment code for this payment method
      *
      * @var string payment code
      */
     protected $_paymentCode = 'OT';
-    
-    /**
-     * Weather this Payment method can authorise transactions or not
-     *
-     * @var boolean canAuthorise
-     */
-    protected $_canAuthorise = true;
-    
-    /**
-     * Weather this Payment method can refund transactions or not
-     *
-     * @var boolean canRefund
-     */
-    protected $_canRefund = true;
-    
-    /**
-     * Weather this Payment method can reversal transactions or not
-     *
-     * @var boolean canReversal
-     */
-    protected $_canReversal = true;
         
     /**
      * Payment brand name for this payment method

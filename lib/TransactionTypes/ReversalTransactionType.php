@@ -35,20 +35,9 @@ trait ReversalTransactionType
     public function reversal($PaymentReferenceId)
     {
         $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RV");
-        $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
-        if ($this->_brand !== null) {
-            $this->getRequest()->getAccount()->set('brand', $this->_brand);
-        }
-
-        $uri = $this->getPaymentUrl();
-        $this->_requestArray = $this->getRequest()->prepareRequest();
-
-        if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
-            list($this->_responseArray, $this->_response) = $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
-        }
-
+        $this->prepareRequest();
         return $this;
     }
 }

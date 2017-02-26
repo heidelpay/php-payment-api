@@ -187,8 +187,9 @@ class SofortPaymentMerhodTest extends TestCase
    *
    * @return string payment reference id for the sofort authorize transaction
    * @group connectionTest
+   * @test
    */
-  public function testAuthorize()
+  public function Authorize()
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -197,7 +198,7 @@ class SofortPaymentMerhodTest extends TestCase
       $this->paymentObject->authorize();
       
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));
@@ -205,4 +206,28 @@ class SofortPaymentMerhodTest extends TestCase
       
       return (string)$response[1]->getPaymentReferenceId();
   }
+
+    /**
+     * Test case for Sofort refund
+     *
+     * @param string $referenceId reference id of the Sofort to refund
+     *
+     * @return string payment reference id of the Sofort refund transaction
+     * @depends Authorize
+     * @test
+     * @group connectionTest
+     */
+    public function Refund($referenceId=null)
+    {
+        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
+
+        /* the refund can not be processed because there will be no receipt automatically on the sandbox */
+        $this->paymentObject->_dryRun = true;
+
+        $this->paymentObject->refund((string)$referenceId);
+
+        $this->assertEquals('OT.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
+        return true;
+    }
 }

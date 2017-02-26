@@ -197,7 +197,7 @@ class PostFinanceEFinancePaymentMerhodTest extends TestCase
       $this->paymentObject->authorize();
       
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));

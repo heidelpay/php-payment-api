@@ -197,7 +197,7 @@ class IdealPaymentMerhodTest extends TestCase
       $this->paymentObject->authorize();
       
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       /* test if config parameters exists */

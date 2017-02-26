@@ -255,7 +255,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
       
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -285,7 +285,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->debitOnRegistration((string)$referenceId);
       
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -313,7 +313,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->authorizeOnRegistration((string)$referenceId);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -339,7 +339,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->capture((string)$referenceId);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -367,7 +367,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->refund((string)$referenceId);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -401,7 +401,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -435,7 +435,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -463,7 +463,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->reversal((string)$referenceId);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
@@ -491,7 +491,7 @@ class DebitCardPaymentMerhodTest extends TestCase
       $this->paymentObject->rebill((string)$referenceId);
   
       /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->prepareRequest();
+      $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));

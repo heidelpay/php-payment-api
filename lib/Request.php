@@ -134,7 +134,7 @@ class Request extends AbstractMethod
      *
      * @return array request
      */
-    public function prepareRequest()
+    public function convertToArray()
     {
         $array = array();
         $request = (array) get_object_vars($this);
