@@ -18,7 +18,6 @@ namespace Heidelpay\PhpApi\PaymentMethodes;
  * @subpackage PhpApi
  * @category PhpApi
  */
-use Heidelpay\PhpApi\PaymentMethodes\BasicPaymentMethodTrait;
 use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
 
