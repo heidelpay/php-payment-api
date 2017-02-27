@@ -130,15 +130,12 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     {
         $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-        //$this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-
+        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
         $this->paymentObject->authorize();
-
-        print_r($this->paymentObject);
 
         /* verify response */
         $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
