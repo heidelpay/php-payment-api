@@ -56,68 +56,21 @@ class EPSPaymentMerhodTest extends TestCase
      * @var string
      */
     protected $SandboxRequest = true;
-    
-    /**
-     * Customer given name
-     *
-     * @var string nameGiven
-     */
-    protected $nameGiven = 'Heidel';
-    /**
-     * Customer family name
-     *
-     * @var string nameFamily
-     */
-    protected $nameFamily ='Berger-Payment';
-    /**
-     * Customer company name
-     *
-     * @var string nameCompany
-     */
-    protected $nameCompany = 'DevHeidelpay';
-    /**
-     * Customer id
-     *
-     * @var string shopperId
-     */
-    protected $shopperId = '12344';
-    /**
-     * customer billing address street
-     *
-     * @var string addressStreet
-     */
-    protected $addressStreet = 'Vagerowstr. 18';
-    /**
-     * customer billing address state
-     *
-     * @var string addressState
-     */
-    protected $addressState  = 'DE-BW';
-    /**
-     * customer billing address zip
-     *
-     * @var string addressZip
-     */
-    protected $addressZip    = '69115';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCity    = 'Heidelberg';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCountry = 'AT';
-    /**
-     * customer mail address
-     *
-     * @var string contactMail
-     */
-    protected $contactMail = "development@heidelpay.de";
-    
+
+    protected $customerDetails = array(
+        'Heidel', //NameGiven
+        'Berger-Payment', //NameFamily
+        null, //NameCompany
+        '1234', //IdentificationShopperId
+        'Vagerowstr. 18', //AddressStreet
+        'DE-BW', //AddressState
+        '69115', //AddressZip
+        'Heidelberg', //AddressCity
+        'DE', //AddressCountry
+        'development@heidelpay.de' //Costumer
+    );
+
+
     /**
      * Transaction currency
      *

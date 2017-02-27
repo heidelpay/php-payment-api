@@ -26,6 +26,8 @@ This is the php payment api for heidelpay. The library will help you to easily i
 * EPS
 * invoice
 * invoice secured b2c
+* direct debit secured b2c
+* Santander invoice
 
 ### SYSTEM REQUIREMENTS
 

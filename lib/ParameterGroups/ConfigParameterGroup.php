@@ -31,6 +31,13 @@ class ConfigParameterGroup extends AbstractParameterGroup
      * @var string brands
      */
     public $brands = null;
+
+    /**
+     * optin text for santander invoice
+     *
+     * @var string optin text for santander invoice
+     */
+    public $optin_text = null;
         
     /**
      * Config bankcountry getter
@@ -50,5 +57,15 @@ class ConfigParameterGroup extends AbstractParameterGroup
     public function getBrands()
     {
         return json_decode($this->brands, true);
+    }
+
+    /**
+     * Config Option  text getter
+     *
+     * @return array optin text
+     */
+    public function getOptinText()
+    {
+        return json_decode($this->optin_text, true);
     }
 }
