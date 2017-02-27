@@ -41,14 +41,7 @@ class Przelewy24PaymentMethod extends AbstractPaymentMethod
      * @var boolean canRefund
      */
     protected $_canRefund = true;
-    
-    /**
-     * Weather this Payment method can reversal transactions or not
-     *
-     * @var boolean canReversal
-     */
-    protected $_canReversal = true;
-        
+
     /**
      * Payment brand name for this payment method
      *

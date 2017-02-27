@@ -1,5 +1,16 @@
 <?php
+
 namespace Heidelpay\PhpApi\PaymentMethods;
+
+use Heidelpay\PhpApi\TransactionTypes\RegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\DebitTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\DebitOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\CaptureTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
 
 /**
  * Debit Card Payment Class
@@ -18,78 +29,40 @@ namespace Heidelpay\PhpApi\PaymentMethods;
  * @subpackage PhpApi
  * @category PhpApi
  */
-class DebitCardPaymentMethod extends AbstractPaymentMethod
+class DebitCardPaymentMethod
 {
+    use BasicPaymentMethodTrait;
+    use RegistrationTransactionType {
+        registration as registrationParent;
+    }
+    use AuthorizeTransactionType {
+        authorize as authorizeParent;
+    }
+    use DebitTransactionType {
+        debit as debitParent;
+    }
+    use AuthorizeOnRegistrationTransactionType;
+    use DebitOnRegistrationTransactionType;
+    use RefundTransactionType;
+    use ReversalTransactionType;
+    use CaptureTransactionType;
+    use RebillTransactionType;
+
     /**
      * Payment code for this payment method
      *
      * @var string payment code
      */
     protected $_paymentCode = 'DC';
-    
+
+
     /**
-     * Weather this Payment method can authorise transactions or not
+     * Payment brand name for this payment method
      *
-     * @var boolean canAuthorise
+     * @var string brand name
      */
-    protected $_canAuthorise = true;
-    
-    /**
-     * Weather this Payment method can capture transactions or not
-     *
-     * @var boolean canCapture
-     */
-    protected $_canCapture = true;
-    
-    /**
-     * Weather this Payment method can debit transactions or not
-     *
-     * @var boolean canDebit
-     */
-    protected $_canDebit = true;
-    
-    /**
-     * Weather this Payment method can refund transactions or not
-     *
-     * @var boolean canRefund
-     */
-    protected $_canRefund = true;
-    
-    /**
-     * Weather this Payment method can reversal transactions or not
-     *
-     * @var boolean canReversal
-     */
-    protected $_canReversal = true;
-    
-    /**
-     * Weather this Payment method can rebill transactions or not
-     *
-     * @var boolean canRebill
-     */
-    protected $_canRebill = true;
-    
-    /**
-     * Weather this Payment method can register account data or not
-     *
-     * @var boolean canRegistration
-     */
-    protected $_canRegistration = true;
-    
-    /**
-     * Weather this Payment method can debit on registered account data or not
-     *
-     * @var boolean canDebitOnRegistration
-     */
-    protected $_canDebitOnRegistration = true;
-    
-    /**
-     * Weather this Payment method can authorize on registered account data or not
-     *
-     * @var boolean canAuthorizeOnRegistration
-     */
-    protected $_canAuthorizeOnRegistration = true;
-    
+    protected $_brand = null;
+
     /**
      * Payment type authorisation
      *
@@ -103,7 +76,6 @@ class DebitCardPaymentMethod extends AbstractPaymentMethod
      * @param string PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
      * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
      * @param string CSSPath - css url to style the Heidelpay payment frame
-
      * @param null|mixed $PaymentFrameOrigin
      * @param mixed      $PreventAsyncRedirect
      * @param null|mixed $CssPath
@@ -112,20 +84,18 @@ class DebitCardPaymentMethod extends AbstractPaymentMethod
      */
     public function authorize($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
-        if ($this->_canAuthorise) {
-            /**
-             * Because of the payment card industriy restictions (Aka pci3) you have
-             * to use a payment frame for the input of credit card information
-             */
-            $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
-            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
-            
-            return parent::authorize();
-        }
+        /**
+         * Because of the payment card industriy restictions (Aka pci3) you have
+         * to use a payment frame for the input of credit card information
+         */
+        $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
+        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+
+        return $this->authorizeParent();
     }
-    
+
     /**
      * Payment type debit
      *
@@ -136,7 +106,6 @@ class DebitCardPaymentMethod extends AbstractPaymentMethod
      * @param string PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
      * @param boolean PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
      * @param string CSSPath - css url to style the Heidelpay payment frame
-
      * @param null|mixed $PaymentFrameOrigin
      * @param mixed      $PreventAsyncRedirect
      * @param null|mixed $CssPath
@@ -145,17 +114,15 @@ class DebitCardPaymentMethod extends AbstractPaymentMethod
      */
     public function debit($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
-        if ($this->_canDebit) {
-            /**
-             * Because of the payment card industriy restictions (Aka pci3) you have
-             * to use a payment frame for the input of credit card information
-             */
-            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
-    
-            return parent::debit();
-        }
+        /**
+         * Because of the payment card industriy restictions (Aka pci3) you have
+         * to use a payment frame for the input of credit card information
+         */
+        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+
+        return $this->debitParent();
     }
 
     /**
@@ -178,16 +145,14 @@ class DebitCardPaymentMethod extends AbstractPaymentMethod
      */
     public function registration($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
-        if ($this->_canRegistration) {
-            /**
-             * Because of the payment card industriy restictions (Aka pci3) you have
-             * to use a payment frame for the input of credit card information
-             */
-            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
-    
-            return parent::registration();
-        }
+        /**
+         * Because of the payment card industriy restictions (Aka pci3) you have
+         * to use a payment frame for the input of credit card information
+         */
+        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+
+        return $this->registrationParent();
     }
 }

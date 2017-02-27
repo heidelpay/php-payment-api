@@ -1,6 +1,16 @@
 <?php
 namespace Heidelpay\PhpApi\PaymentMethods;
 
+use Heidelpay\PhpApi\TransactionTypes\RegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\DebitTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\DebitOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\CaptureTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
+
 /**
  * Credit Card Payment Class
  *
@@ -18,79 +28,39 @@ namespace Heidelpay\PhpApi\PaymentMethods;
  * @subpackage PhpApi
  * @category PhpApi
  */
-class CreditCardPaymentMethod extends AbstractPaymentMethod
+class CreditCardPaymentMethod
 {
-    
+    use BasicPaymentMethodTrait;
+    use RegistrationTransactionType {
+        registration as registrationParent;
+    }
+    use AuthorizeTransactionType {
+        authorize as authorizeParent;
+    }
+    use DebitTransactionType {
+        debit as debitParent;
+    }
+    use AuthorizeOnRegistrationTransactionType;
+    use DebitOnRegistrationTransactionType;
+    use RefundTransactionType;
+    use ReversalTransactionType;
+    use CaptureTransactionType;
+    use RebillTransactionType;
+
     /**
      * Payment code for this payment method
      *
      * @var string payment code
      */
     protected $_paymentCode = 'CC';
-    
-        /**
-     * Weather this Payment method can authorise transactions or not
-     *
-     * @var boolean canAuthorise
-     */
-    protected $_canAuthorise = true;
-    
+
     /**
-     * Weather this Payment method can capture transactions or not
+     * Payment brand name for this payment method
      *
-     * @var boolean canCapture
+     * @var string brand name
      */
-    protected $_canCapture = true;
-    
-    /**
-     * Weather this Payment method can debit transactions or not
-     *
-     * @var boolean canDebit
-     */
-    protected $_canDebit = true;
-    
-    /**
-     * Weather this Payment method can refund transactions or not
-     *
-     * @var boolean canRefund
-     */
-    protected $_canRefund = true;
-    
-    /**
-     * Weather this Payment method can reversal transactions or not
-     *
-     * @var boolean canReversal
-     */
-    protected $_canReversal = true;
-    
-    /**
-     * Weather this Payment method can rebill transactions or not
-     *
-     * @var boolean canRebill
-     */
-    protected $_canRebill = true;
-    
-    /**
-     * Weather this Payment method can register account data or not
-     *
-     * @var boolean canRegistration
-     */
-    protected $_canRegistration = true;
-    
-    /**
-     * Weather this Payment method can debit on registered account data or not
-     *
-     * @var boolean canDebitOnRegistration
-     */
-    protected $_canDebitOnRegistration = true;
-    
-    /**
-     * Weather this Payment method can authorize on registered account data or not
-     *
-     * @var boolean canAuthorizeOnRegistration
-     */
-    protected $_canAuthorizeOnRegistration = true;
-    
+    protected $_brand = null;
+
     /**
      * Payment type authorisation
      *
@@ -112,14 +82,12 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      */
     public function authorize($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
-        if ($this->_canAuthorise) {
-            $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
-            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+        $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
+        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
             
-            return parent::authorize();
-        }
+        return $this->authorizeParent();
     }
     
     /**
@@ -140,13 +108,11 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      */
     public function debit($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
-        if ($this->_canDebit) {
-            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
     
-            return parent::debit();
-        }
+        return $this->debitParent();
     }
     
     /**
@@ -169,14 +135,10 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      */
     public function registration($PaymentFrameOrigin = null, $PreventAsyncRedirect = "FALSE", $CssPath = null)
     {
-        if ($this->_canRegistration) {
-            /**
-             */
-            $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-            $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-            $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
     
-            return parent::registration();
-        }
+        return $this->registrationParent();
     }
 }

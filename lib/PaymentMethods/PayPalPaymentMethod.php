@@ -2,6 +2,16 @@
 
 namespace Heidelpay\PhpApi\PaymentMethods;
 
+use Heidelpay\PhpApi\TransactionTypes\RegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\DebitTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\DebitOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\CaptureTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
+
 /**
  * PayPal Payment Class
  *
@@ -17,8 +27,18 @@ namespace Heidelpay\PhpApi\PaymentMethods;
  * @subpackage PhpApi
  * @category PhpApi
  */
-class PayPalPaymentMethod extends AbstractPaymentMethod
+class PayPalPaymentMethod
 {
+    use BasicPaymentMethodTrait;
+    use RegistrationTransactionType;
+    use AuthorizeTransactionType;
+    use DebitTransactionType;
+    use AuthorizeOnRegistrationTransactionType;
+    use DebitOnRegistrationTransactionType;
+    use RefundTransactionType;
+    use ReversalTransactionType;
+    use CaptureTransactionType;
+    use RebillTransactionType;
     
     /**
      * Payment code for this payment method
@@ -26,68 +46,11 @@ class PayPalPaymentMethod extends AbstractPaymentMethod
      * @var string payment code
      */
     protected $_paymentCode = 'VA';
-    
-    /**
-     * Weather this Payment method can authorise transactions or not
-     *
-     * @var boolean canAuthorise
-     */
-    protected $_canAuthorise = true;
-    
-    /**
-     * Weather this Payment method can refund transactions or not
-     *
-     * @var boolean canRefund
-     */
-    protected $_canRefund = true;
-    
-    /**
-     * Weather this Payment method can reversal transactions or not
-     *
-     * @var boolean canReversal
-     */
-    protected $_canReversal = true;
-    
-    /**
-     * Weather this Payment method can capture transactions or not
-     *
-     * @var boolean canCapture
-     */
-    protected $_canCapture = true;
-    
-    /**
-     * Weather this Payment method can debit transactions or not
-     *
-     * @var boolean canDebit
-     */
-    protected $_canDebit = true;
 
-    /**
-     * Weather this Payment method can register account data or not
-     *
-     * @var boolean canRegistration
-     */
-    protected $_canRegistration = true;
-        
     /**
      * Payment brand name for this payment method
      *
      * @var string brand name
      */
-
-    /**
-     * Weather this Payment method can debit on registered account data or not
-     *
-     * @var boolean canDebitOnRegistration
-     */
-    protected $_canDebitOnRegistration = true;
-
-    /**
-     * Weather this Payment method can authorize on registered account data or not
-     *
-     * @var boolean canAuthorizeOnRegistration
-     */
-    protected $_canAuthorizeOnRegistration = true;
-
     protected $_brand = "PAYPAL";
 }
