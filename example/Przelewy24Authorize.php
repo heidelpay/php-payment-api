@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$Przelewy24 = new \Heidelpay\PhpApi\PaymentMethodes\Przelewy24PaymentMethod();
+$Przelewy24 = new \Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod();
 
 $Przelewy24->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender

@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
- $DirectDebit = new \Heidelpay\PhpApi\PaymentMethodes\DirectDebitPaymentMethod();
+ $DirectDebit = new \Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod();
  
  /**
   * Set up your authentification data for Heidepay api

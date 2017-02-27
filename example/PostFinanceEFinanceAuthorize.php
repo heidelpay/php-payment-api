@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$PostFinanceEFinance = new \Heidelpay\PhpApi\PaymentMethodes\PostFinanceEFinancePaymentMethod();
+$PostFinanceEFinance = new \Heidelpay\PhpApi\PaymentMethods\PostFinanceEFinancePaymentMethod();
 
 $PostFinanceEFinance->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender

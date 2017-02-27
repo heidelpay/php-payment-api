@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
- $Sofort = new \Heidelpay\PhpApi\PaymentMethodes\SofortPaymentMethod();
+ $Sofort = new \Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod();
  
  /**
   * Set up your authentification data for heidepay api

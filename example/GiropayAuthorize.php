@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$Giropay = new \Heidelpay\PhpApi\PaymentMethodes\GiropayPaymentMethod();
+$Giropay = new \Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod();
 
 $Giropay->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender

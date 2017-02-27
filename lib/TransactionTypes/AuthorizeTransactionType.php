@@ -30,7 +30,7 @@ trait AuthorizeTransactionType
      * like Sofort and Giropay (so called online payments) this type will be
      * used just to get the redirect to their systems.
      *
-     * @return \Heidelpay\PhpApi\PaymentMethodes\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
      */
     public function authorize()
     {

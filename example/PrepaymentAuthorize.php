@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
- $Prepayment = new \Heidelpay\PhpApi\PaymentMethodes\PrepaymentPaymentMethod();
+ $Prepayment = new \Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod();
  
  /**
   * Set up your authentification data for Heidepay api

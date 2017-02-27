@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
- $PayPal = new \Heidelpay\PhpApi\PaymentMethodes\PayPalPaymentMethod();
+ $PayPal = new \Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod();
  
  /**
   * Set up your authentification data for heidepay api
