@@ -61,11 +61,33 @@ class PayPalPaymentMethod extends AbstractPaymentMethod
      * @var boolean canDebit
      */
     protected $_canDebit = true;
+
+    /**
+     * Weather this Payment method can register account data or not
+     *
+     * @var boolean canRegistration
+     */
+    protected $_canRegistration = true;
         
     /**
      * Payment brand name for this payment method
      *
      * @var string brand name
      */
+
+    /**
+     * Weather this Payment method can debit on registered account data or not
+     *
+     * @var boolean canDebitOnRegistration
+     */
+    protected $_canDebitOnRegistration = true;
+
+    /**
+     * Weather this Payment method can authorize on registered account data or not
+     *
+     * @var boolean canAuthorizeOnRegistration
+     */
+    protected $_canAuthorizeOnRegistration = true;
+
     protected $_brand = "PAYPAL";
 }
