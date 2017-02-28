@@ -6,8 +6,8 @@ use Heidelpay\PhpApi\Request;
 
 /**
  *
- *  This unit test will cover an error in the connetcton and an simple post request to the sandbox payment system.
- *  Please note that conncection test can fail due to network issues and sheduled downtimes.
+ *  This unit test will cover an error in the connection and an simple post request to the sandbox payment system.
+ *  Please note that connection test can fail due to network issues and scheduled downtime.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -162,4 +162,35 @@ class RequestTest extends TestCase
 
       $this->assertEquals($referenceVars, $Request->convertToArray());
   }
+
+    /**
+     * Basket parameter group getter test
+     *
+     * @test
+     */
+  public function getBasket()
+  {
+      $Request = new Request();
+
+      $Request->getBasket();
+      $value = "31HA07BC8129FBB819367B2205CD6FB4";
+      $Request->getBasket()->set('id', $value);
+      $this->assertEquals($value, $Request->getBasket()->getId());
+  }
+
+    /**
+     * Request parameter group getter test
+     *
+     * @test
+     */
+    public function getRequest()
+    {
+        $Request = new Request();
+
+        $Request->getRequest();
+        $value = '1.2';
+        $Request->getRequest()->set('version', $value);
+
+        $this->assertEquals($value, $Request->getRequest()->getVersion());
+    }
 }

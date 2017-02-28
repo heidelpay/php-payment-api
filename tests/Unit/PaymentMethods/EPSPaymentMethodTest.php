@@ -117,7 +117,6 @@ class EPSPaymentMerhodTest extends TestCase
     
       $EPS->getRequest()->customerAddress(...$this->customerDetails);
     
-    
       $EPS->_dryRun=true;
     
       $this->paymentObject = $EPS;
@@ -149,13 +148,9 @@ class EPSPaymentMerhodTest extends TestCase
       
       $this->paymentObject->authorize();
 
-      
       /* prepare request and send it to payment api */
       $request =  $this->paymentObject->getRequest()->convertToArray();
       $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-
-
       
       $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));
       $this->assertFalse($response[1]->isError(), 'authorize failed : '.print_r($response[1]->getError(), 1));

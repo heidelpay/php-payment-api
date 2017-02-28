@@ -28,7 +28,7 @@ class BasketParameterGroupTest extends TestCase
     public function BasketId()
     {
         $Basket = new Basket();
-        
+
         $value = "31HA07BC8129FBB819367B2205CD6FB4";
         $Basket->set('id', $value);
         

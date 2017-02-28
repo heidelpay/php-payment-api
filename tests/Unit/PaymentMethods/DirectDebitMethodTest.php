@@ -8,7 +8,7 @@ use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod as  DirectDebit;
  *
  *  Direct debit Test
  *
- *  Connection tests can fail due to network issues and scheduled downtimes.
+ *  Connection tests can fail due to network issues and scheduled downtime.
  *  This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -209,6 +209,8 @@ class DirectDebitPaymentMethodTest extends TestCase
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
       $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
       $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+
+      $this->paymentObject->setAdapter('\Heidelpay\PhpApi\Adapter\CurlAdapter');
       
       $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
       $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
