@@ -200,6 +200,21 @@ class ResponseTest extends TestCase
   }
 
     /**
+     * PaymentFormUrlPaymentCodeException test
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function getPaymentFormUrlPaymentCodeException()
+    {
+        $Response = new Response();
+
+        $Response->getFrontend()->set('redirect_url', null);
+        $this->expectException(PaymentFormUrlException::class);
+        $Response->getPaymentFormUrl();
+    }
+
+    /**
      * PaymentFormUrlException test
      *
      * @group integrationTest
@@ -209,7 +224,8 @@ class ResponseTest extends TestCase
   {
       $Response = new Response();
 
-      $Response->getFrontend()->set('enabled', null);
+      $Response->getPayment()->set('code', 'OT.PA');
+      $Response->getFrontend()->set('redirect_url', null);
       $this->expectException(PaymentFormUrlException::class);
       $Response->getPaymentFormUrl();
   }

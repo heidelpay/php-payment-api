@@ -167,7 +167,7 @@ class Request extends AbstractMethod
     {
         $client = new \Heidelpay\PhpApi\Adapter\CurlAdapter();
 
-        if (is_object($adapter)) {
+        if ($adapter !== null) {
             $client = new $adapter;
         }
 

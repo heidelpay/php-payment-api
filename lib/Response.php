@@ -220,25 +220,30 @@ class Response extends AbstractMethod
     public function getPaymentFormUrl()
     {
         /*
-         *
+         * PaymentFrameUrl for credit and debitcard
          */
-        if ($this->getFrontend()->getEnabled() == 'TRUE') {
-            /*
-                 * PaymentFrameUrl for credit and debitcard
-                 */
-            $code =  null;
-            $type = null;
-            list($code, $type) = explode('.', $this->getPayment()->getCode());
-            if (($code == 'CC' or $code == 'DC') and $this->getIdentification()->getReferenceId() === null and $this->getFrontend()->getPaymentFrameUrl() !== null) {
-                return $this->getFrontend()->getPaymentFrameUrl();
-            }
-            /*
-             * Redirect url
-             */
-            if ($this->getFrontend()->getRedirectUrl() !== null) {
-                return $this->getFrontend()->getRedirectUrl();
-            }
+        $code =  null;
+        $type = null;
+
+        if($this->getPayment()->getCode() === null) {
+            throw new PaymentFormUrlException('PaymentCode not set');
         }
+
+        list($code, $type) = explode('.', $this->getPayment()->getCode());
+
+        if (($code == 'CC' or $code == 'DC')
+            and $this->getIdentification()->getReferenceId() === null
+            and $this->getFrontend()->getPaymentFrameUrl() !== null) {
+            return $this->getFrontend()->getPaymentFrameUrl();
+        }
+
+         /*
+          * Redirect url
+          */
+
+         if ($this->getFrontend()->getRedirectUrl() !== null) {
+             return $this->getFrontend()->getRedirectUrl();
+         }
 
         throw new PaymentFormUrlException('PaymentFromUrl is unset!');
     }
