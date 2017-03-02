@@ -225,7 +225,7 @@ class Response extends AbstractMethod
         $code =  null;
         $type = null;
 
-        if($this->getPayment()->getCode() === null) {
+        if ($this->getPayment()->getCode() === null) {
             throw new PaymentFormUrlException('PaymentCode not set');
         }
 
