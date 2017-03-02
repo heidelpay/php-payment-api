@@ -214,17 +214,17 @@ class DirectDebitPaymentMethodTest extends TestCase
       
       $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
       $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-      
+
+      $this->paymentObject->_dryRun=false;
+
       $this->paymentObject->authorize();
       
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->convertToArray();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+      $this->assertTrue($this->paymentObject->getResponse()->isSuccess(), 'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
+      $this->assertFalse($this->paymentObject->getResponse()->isError(),
+          'authorize failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
       
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));
-      $this->assertFalse($response[1]->isError(), 'authorize failed : '.print_r($response[1]->getError(), 1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
+      return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
   }
 
     /**
