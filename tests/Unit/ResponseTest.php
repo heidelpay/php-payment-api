@@ -19,12 +19,27 @@ use Heidelpay\PhpApi\Response;
  * @subpackage PhpApi
  * @category UnitTest
  */
+use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
+use Heidelpay\PhpApi\Exceptions\HashVerificationException;
+
 class ResponseTest extends TestCase
 {
     /**
      * @var \Heidelpay\PhpApi\Response
      */
     protected $_resposneObject = null;
+
+    /**
+     * Secret
+     *
+     * The secret will be used to generate a hash using
+     * transaction id + secret. This hash can be used to
+     * verify the the payment response. Can be used for
+     * brute force protection.
+     *
+     * @var string secret
+     */
+    protected $secret = 'Heidelpay-PhpApi';
     
     /**
      * setUp sample response Object
@@ -79,7 +94,8 @@ class ResponseTest extends TestCase
             'PROCESSING_RETURN' => "Request successfully processed in 'Merchant in Connector Test Mode'",
             'TRANSACTION_CHANNEL' => '31HA07BC8142C5A171744F3D6D155865',
             'FRONTEND_LANGUAGE' => 'DE',
-            'PAYMENT_CODE' => 'CC.RG'
+            'PAYMENT_CODE' => 'CC.RG',
+            'BASKET_ID' => '31HA07BC8129FBB819367B2205CD6FB4'
             );
         
         $this->_resposneObject = new Response($responseSample);
@@ -182,11 +198,110 @@ class ResponseTest extends TestCase
       $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
       $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
   }
+
+    /**
+     * PaymentFormUrlPaymentCodeException test
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function getPaymentFormUrlPaymentCodeException()
+    {
+        $Response = new Response();
+
+        $Response->getFrontend()->set('redirect_url', null);
+        $this->expectException(PaymentFormUrlException::class);
+        $Response->getPaymentFormUrl();
+    }
+
+    /**
+     * PaymentFormUrlException test
+     *
+     * @group integrationTest
+     * @test
+     */
+  public function getPaymentFormUrlException()
+  {
+      $Response = new Response();
+
+      $Response->getPayment()->set('code', 'OT.PA');
+      $Response->getFrontend()->set('redirect_url', null);
+      $this->expectException(PaymentFormUrlException::class);
+      $Response->getPaymentFormUrl();
+  }
   
   /**
-   * function test for verifySecurityHash
+   * function test for verifySecurityHashUndefiledParameter
    *
    * @group integrationTest
    * @test
    */
+  public function verifySecurityHashUndefiledParameter()
+  {
+      $Response = new Response();
+      $this->expectException(HashVerificationException::class);
+      $Response->verifySecurityHash(null, null);
+  }
+
+    /**
+     * function test for verifySecurityHashEmptyResponse
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function verifySecurityHashEmptyResponse()
+    {
+        $Response = new Response();
+        $this->expectException(HashVerificationException::class);
+        $Response->verifySecurityHash($this->secret, 'Order 12345');
+    }
+
+    /**
+     * function test for verifySecurityHash empty
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function verifySecurityHashEmpty()
+    {
+        $Response = new Response();
+        $Response->getProcessing()->set('result', 'ACK');
+        $this->expectException(HashVerificationException::class);
+        $Response->verifySecurityHash($this->secret, 'Order 12345');
+    }
+
+    /**
+     * function test for verifySecurityHash valid
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function verifySecurityHashValid()
+    {
+        $Response = new Response();
+        $Response->getProcessing()->set('result', 'ACK');
+        $Response->getCriterion()->set('secret',
+            '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
+            .'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5');
+        $this->assertTrue($Response->verifySecurityHash($this->secret,
+            'InvoicePaymentMethodTest::Refund 2017-02-24 10:22:35'));
+    }
+
+    /**
+     * function test for verifySecurityHash invalid
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function verifySecurityHashInvalid()
+    {
+        $Response = new Response();
+        $Response->getProcessing()->set('result', 'ACK');
+        $this->expectException(HashVerificationException::class);
+        $Response->getCriterion()->set('secret',
+            '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
+            .'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5');
+        $Response->verifySecurityHash($this->secret,
+            'false');
+    }
 }

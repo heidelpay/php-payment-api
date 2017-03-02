@@ -21,8 +21,11 @@ class CriterionParameterGroupTest extends TestCase
 {
     /**
      * Security setter/getter test
+     *
+     * @test
+     *
      */
-    public function testSecret()
+    public function Secret()
     {
         $Criterion = new Criterion();
         
@@ -34,5 +37,21 @@ class CriterionParameterGroupTest extends TestCase
         $result = hash('sha512', $value.$secretHash);
         
         $this->assertEquals($result, $Criterion->getSecretHash());
+    }
+
+    /**
+     * PaymentMethod setter/getter test
+     *
+     * @test
+     *
+     */
+    public function PaymentMethod()
+    {
+        $Criterion = new Criterion();
+
+        $value = "CreditCard";
+        $Criterion->set('payment_method', $value);
+
+        $this->assertEquals($value, $Criterion->getPaymentMethod());
     }
 }

@@ -3,11 +3,12 @@ namespace Heidelpay\Tests\PhpApi\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\Request;
+use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
 
 /**
  *
- *  This unit test will cover an error in the connetcton and an simple post request to the sandbox payment system.
- *  Please note that conncection test can fail due to network issues and sheduled downtimes.
+ *  This unit test will cover an error in the connection and an simple post request to the sandbox payment system.
+ *  Please note that connection test can fail due to network issues and scheduled downtime.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -136,9 +137,10 @@ class RequestTest extends TestCase
    * @group integrationTest
    * @test
    */
-  public function PrepareRequest()
+  public function convertToArray()
   {
       $Request = new Request();
+      $Criterion = new CriterionParameterGroup();
       
       $shopIdentifier = '2843294932';
       $amount = 23.12;
@@ -156,10 +158,41 @@ class RequestTest extends TestCase
         'PRESENTATION.CURRENCY' => 'EUR',
         'REQUEST.VERSION' => '1.0',
         'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-        'CRITERION.SDK_NAME' => 'Heidelpay\PhpApi',
-        'CRITERION.SDK_VERSION' => '17.2.22'
+        'CRITERION.SDK_NAME' => $Criterion->getSdkName(),
+        'CRITERION.SDK_VERSION' => $Criterion->getSdkVersion()
        );
 
-      $this->assertEquals($referenceVars, $Request->prepareRequest());
+      $this->assertEquals($referenceVars, $Request->convertToArray());
   }
+
+    /**
+     * Basket parameter group getter test
+     *
+     * @test
+     */
+  public function getBasket()
+  {
+      $Request = new Request();
+
+      $Request->getBasket();
+      $value = "31HA07BC8129FBB819367B2205CD6FB4";
+      $Request->getBasket()->set('id', $value);
+      $this->assertEquals($value, $Request->getBasket()->getId());
+  }
+
+    /**
+     * Request parameter group getter test
+     *
+     * @test
+     */
+    public function getRequest()
+    {
+        $Request = new Request();
+
+        $Request->getRequest();
+        $value = '1.2';
+        $Request->getRequest()->set('version', $value);
+
+        $this->assertEquals($value, $Request->getRequest()->getVersion());
+    }
 }

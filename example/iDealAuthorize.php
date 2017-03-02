@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
- $iDeal = new \Heidelpay\PhpApi\PaymentMethodes\IDealPaymentMethod();
+ $iDeal = new \Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod();
  
  /**
   * Set up your authentification data for Heidepay api

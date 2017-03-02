@@ -134,7 +134,7 @@ class Request extends AbstractMethod
      *
      * @return array request
      */
-    public function prepareRequest()
+    public function convertToArray()
     {
         $array = array();
         $request = (array) get_object_vars($this);
@@ -155,21 +155,40 @@ class Request extends AbstractMethod
     }
     
     /**
+     * Send request to payment api
      *
      * @param string $uri  payment api url
      * @param array  $post heidelpay request parameter
      * @param \Heidelpay\PhpApi\Adapter\\$adapter
      *
-     * @return array|object response|\Heidelpay\PhpApi\Response
+     * @return array response|\Heidelpay\PhpApi\Response
      */
     public function send($uri=null, $post=null, $adapter=null)
     {
         $client = new \Heidelpay\PhpApi\Adapter\CurlAdapter();
 
-        if (is_object($adapter)) {
+        if ($adapter !== null) {
             $client = new $adapter;
         }
 
         return $client->sendPost($uri, $post);
+    }
+
+    /**
+     * Parameter used in case of b2c secured invoice or direct debit
+     *
+     * @param null $salutation customer salutation MR/MRS (Mandatory)
+     * @param null $birthdate  customer birth date YYYY-MM-DD (Mandatory)
+     * @param null $basketId   id of a given basket using heidelpay basket api (Optional)
+     *
+     * @return $this \Heidelpay\PhpApi\Request
+     */
+    public function b2cSecured($salutation=null, $birthdate=null, $basketId=null)
+    {
+        $this->getName()->set('salutation', $salutation);
+        $this->getName()->set('birthdate', $birthdate);
+        $this->getBasket()->set('id', $basketId);
+
+        return $this;
     }
 }

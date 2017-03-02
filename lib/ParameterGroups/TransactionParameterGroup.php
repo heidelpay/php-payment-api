@@ -2,8 +2,9 @@
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
- * You can change the transaction channel and mode by using this class
+ * Transaction parameter group
  *
+ * You can change the transaction channel and mode by using this class
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.

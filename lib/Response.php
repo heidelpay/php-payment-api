@@ -16,6 +16,9 @@ namespace Heidelpay\PhpApi;
  * @subpackage PhpApi
  * @category PhpApi
  */
+use Heidelpay\PhpApi\Exceptions\HashVerificationException;
+use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
+
 class Response extends AbstractMethod
 {
 
@@ -217,26 +220,32 @@ class Response extends AbstractMethod
     public function getPaymentFormUrl()
     {
         /*
-         *
+         * PaymentFrameUrl for credit and debitcard
          */
-        if ($this->getFrontend()->getEnabled() == 'TRUE') {
-            /*
-                 * PaymentFrameUrl for credit and debitcard
-                 */
-            $code = $type = null;
-            list($code, $type) = explode('.', $this->getPayment()->getCode());
-            if (($code == 'CC' or $code == 'DC') and $this->getIdentification()->getReferenceId() === null and $this->getFrontend()->getPaymentFrameUrl() !== null) {
-                return $this->getFrontend()->getPaymentFrameUrl();
-            }
-            /*
-             * Redirect url
-             */
-            if ($this->getFrontend()->getRedirectUrl() !== null) {
-                return $this->getFrontend()->getRedirectUrl();
-            }
+        $code =  null;
+        $type = null;
+
+        if ($this->getPayment()->getCode() === null) {
+            throw new PaymentFormUrlException('PaymentCode not set');
         }
 
-        throw new \Exception('PaymentFromUrl is unset!');
+        list($code, $type) = explode('.', $this->getPayment()->getCode());
+
+        if (($code == 'CC' or $code == 'DC')
+            and $this->getIdentification()->getReferenceId() === null
+            and $this->getFrontend()->getPaymentFrameUrl() !== null) {
+            return $this->getFrontend()->getPaymentFrameUrl();
+        }
+
+         /*
+          * Redirect url
+          */
+
+         if ($this->getFrontend()->getRedirectUrl() !== null) {
+             return $this->getFrontend()->getRedirectUrl();
+         }
+
+        throw new PaymentFormUrlException('PaymentFromUrl is unset!');
     }
 
     /**
@@ -257,15 +266,15 @@ class Response extends AbstractMethod
     public function verifySecurityHash($secret = null, $identificationTransactionId = null)
     {
         if ($secret === null or $identificationTransactionId === null) {
-            throw new \Exception('$secret or $identificationTransactionId undefined');
+            throw new HashVerificationException('$secret or $identificationTransactionId undefined');
         }
 
         if ($this->getProcessing()->getResult() === null) {
-            throw new \Exception('The response object seems to be empty or it is not a valid heidelpay response!');
+            throw new HashVerificationException('The response object seems to be empty or it is not a valid heidelpay response!');
         }
 
         if ($this->getCriterion()->getSecretHash() === null) {
-            throw new \Exception('Empty secret hash, this could be some kind of manipulation or misconfiguration!');
+            throw new HashVerificationException('Empty secret hash, this could be some kind of manipulation or misconfiguration!');
         }
 
         $referenceHash = hash('sha512', $identificationTransactionId . $secret);
@@ -274,6 +283,6 @@ class Response extends AbstractMethod
             return true;
         }
 
-        throw new \Exception('Hash does not match. This could be some kind of manipulation or misconfiguration!');
+        throw new HashVerificationException('Hash does not match. This could be some kind of manipulation or misconfiguration!');
     }
 }

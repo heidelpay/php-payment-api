@@ -1,6 +1,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/heidelpay/php-api.svg?style=flat-square)](https://packagist.org/packages/heidelpay/php-api)
-[![Coverage Status](https://coveralls.io/repos/github/heidelpay/php-api/badge.svg?branch=develop)](https://coveralls.io/github/heidelpay/php-api?branch=develop)
-[![Build Status](https://travis-ci.org/heidelpay/php-api.svg?branch=develop)](https://travis-ci.org/heidelpay/php-api)
+[![Coverage Status](https://coveralls.io/repos/github/heidelpay/php-api/badge.svg?branch=master)](https://coveralls.io/github/heidelpay/php-api?branch=master)
+[![Build Status](https://travis-ci.org/heidelpay/php-api.svg?branch=master)](https://travis-ci.org/heidelpay/php-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/b93a0799ab624527b3e32e7bf23bff8a)](https://www.codacy.com/app/heidelpay/php-api/dashboard)
 
 ![Logo](https://dev.heidelpay.de/devHeidelpay_400_180.jpg)
@@ -24,6 +24,10 @@ This is the php payment api for heidelpay. The library will help you to easily i
 * PostFinance Card
 * PostFinance EFinance
 * EPS
+* invoice
+* invoice secured b2c
+* direct debit secured b2c
+* Santander invoice
 
 ### SYSTEM REQUIREMENTS
 
