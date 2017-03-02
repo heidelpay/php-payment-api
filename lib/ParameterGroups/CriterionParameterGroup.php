@@ -108,6 +108,7 @@ class CriterionParameterGroup extends AbstractParameterGroup
 
     /**
      * getter for sdk_version
+     *
      * @return string sdk version
      */
     public function getSdkVersion()
@@ -117,11 +118,11 @@ class CriterionParameterGroup extends AbstractParameterGroup
 
     /**
      * getter for sdk_name
+     *
      * @return string sdk version
      */
     public function getSdkName()
     {
         return $this->sdk_name;
     }
-
 }

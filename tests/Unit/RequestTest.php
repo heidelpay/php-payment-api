@@ -4,6 +4,7 @@ namespace Heidelpay\Tests\PhpApi\Unit;
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\Request;
 use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
+
 /**
  *
  *  This unit test will cover an error in the connection and an simple post request to the sandbox payment system.
