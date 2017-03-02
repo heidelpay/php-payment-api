@@ -28,19 +28,12 @@ class SantanderInvoicePaymentMethodTest extends TestCase
 
     /**
      * @var array authentification parameter for heidelpay api
+     */
     protected $authentification = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
         '31HA07BC81856CAD6D8E07858ACD6CFB', //TransactionChannel
-        true //Sandbox mode
-    );
-     */
-    protected $authentification = array(
-        '31HA07BC8181E8CCFDAD64E8A4B3B766', //SecuritySender
-        '31ha07bc8181e8ccfdad73fd513d2a53', //UserLogin
-        '4B2D4BE3', //UserPassword
-        '31HA07BC8136BE8E04C9139C0CF5F115', //TransactionChannel
         true //Sandbox mode
     );
 
@@ -129,7 +122,7 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     public function Authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
-        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 123.12, $this->currency, $this->secret);
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
@@ -163,7 +156,7 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     public function Finalize($referenceId)
     {
         $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
-        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 82.12, $this->currency, $this->secret);
 
         $this->paymentObject->finalize($referenceId);
 
@@ -194,7 +187,7 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     {
         $referenceId = $this->Authorize();
         $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
-        $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */
 
@@ -226,7 +219,7 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     public function Refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
-        $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */
         $this->paymentObject->_dryRun = true;

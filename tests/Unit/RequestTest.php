@@ -3,7 +3,7 @@ namespace Heidelpay\Tests\PhpApi\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\Request;
-
+use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
 /**
  *
  *  This unit test will cover an error in the connection and an simple post request to the sandbox payment system.
@@ -139,6 +139,7 @@ class RequestTest extends TestCase
   public function convertToArray()
   {
       $Request = new Request();
+      $Criterion = new CriterionParameterGroup();
       
       $shopIdentifier = '2843294932';
       $amount = 23.12;
@@ -156,8 +157,8 @@ class RequestTest extends TestCase
         'PRESENTATION.CURRENCY' => 'EUR',
         'REQUEST.VERSION' => '1.0',
         'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-        'CRITERION.SDK_NAME' => 'Heidelpay\PhpApi',
-        'CRITERION.SDK_VERSION' => '17.2.22'
+        'CRITERION.SDK_NAME' => $Criterion->getSdkName(),
+        'CRITERION.SDK_VERSION' => $Criterion->getSdkVersion()
        );
 
       $this->assertEquals($referenceVars, $Request->convertToArray());
