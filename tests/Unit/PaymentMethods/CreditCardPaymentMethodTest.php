@@ -289,7 +289,7 @@ class CreditCardPaymentMerhodTest extends TestCase
       $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'debit on registration is pending');
       $this->assertFalse($this->paymentObject->getResponse()->isError(), 'debit on registration failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
       
-      return (string)$response[1]->getPaymentReferenceId();
+      return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
   }
 
   /**
