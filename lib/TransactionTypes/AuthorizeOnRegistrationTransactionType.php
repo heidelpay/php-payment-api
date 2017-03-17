@@ -35,6 +35,7 @@ trait AuthorizeOnRegistrationTransactionType
         $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".PA");
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
+        $this->prepareRequest();
 
         return $this;
     }

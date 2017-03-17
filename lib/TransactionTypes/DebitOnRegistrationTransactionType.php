@@ -37,6 +37,8 @@ trait DebitOnRegistrationTransactionType
         $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".DB");
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
+        $this->prepareRequest();
+
         return $this;
     }
 }

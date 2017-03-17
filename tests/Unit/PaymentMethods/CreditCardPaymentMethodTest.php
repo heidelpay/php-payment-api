@@ -245,7 +245,7 @@ class CreditCardPaymentMerhodTest extends TestCase
       $this->paymentObject->registration('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
       
 
-      /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
+      /* disable frontend (iframe) and submit the credit card information directly (only for testing) */
       $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
       $this->paymentObject->getRequest()->getAccount()->set('holder', $this->nameGiven.' '.$this->nameFamily);
       $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
@@ -279,16 +279,15 @@ class CreditCardPaymentMerhodTest extends TestCase
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      
+
+      $this->paymentObject->_dryRun=false;
+
       $this->paymentObject->debitOnRegistration((string)$referenceId);
+
       
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->convertToArray();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
-      $this->assertFalse($response[1]->isPending(), 'debit on registration is pending');
-      $this->assertFalse($response[1]->isError(), 'debit on registration failed : '.print_r($response[1]->getError(), 1));
+      $this->assertTrue($this->paymentObject->getResponse()->isSuccess(), 'Transaction failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+      $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'debit on registration is pending');
+      $this->assertFalse($this->paymentObject->getResponse()->isError(), 'debit on registration failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
       
       return (string)$response[1]->getPaymentReferenceId();
   }
@@ -308,18 +307,16 @@ class CreditCardPaymentMerhodTest extends TestCase
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+
+      $this->paymentObject->_dryRun=false;
       
       $this->paymentObject->authorizeOnRegistration((string)$referenceId);
-  
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->convertToArray();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+      $this->assertTrue($this->paymentObject->getResponse()->isSuccess(), 'Transaction failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+      $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize on registration is pending');
+      $this->assertFalse($this->paymentObject->getResponse()->isError(), 'authorizet on registration failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
       
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1]->getError(), 1));
-      $this->assertFalse($response[1]->isPending(), 'authorize on registration is pending');
-      $this->assertFalse($response[1]->isError(), 'authorizet on registration failed : '.print_r($response[1]->getError(), 1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
+      return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
   }
   
   /**
