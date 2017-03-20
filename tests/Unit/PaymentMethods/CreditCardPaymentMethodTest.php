@@ -62,6 +62,13 @@ class CreditCardPaymentMerhodTest extends TestCase
         'DE', //AddressCountry
         'development@heidelpay.de' //Costumer
     );
+
+    /**
+     *  Account holder
+     *
+     * @var string Account holder
+     */
+    protected $holder =   'Heidel Berger-Payment';
     
     /**
      * Transaction currency
@@ -180,7 +187,7 @@ class CreditCardPaymentMerhodTest extends TestCase
 
       /* disable frontend (iframe) and submit the credit card information directly (only for testing) */
       $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-      $this->paymentObject->getRequest()->getAccount()->set('holder', $this->nameGiven.' '.$this->nameFamily);
+      $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
       $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
       $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
       $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
@@ -324,7 +331,7 @@ class CreditCardPaymentMerhodTest extends TestCase
       
       /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
       $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-      $this->paymentObject->getRequest()->getAccount()->set('holder', $this->nameGiven.' '.$this->nameFamily);
+      $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
       $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
       $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
       $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
@@ -358,7 +365,7 @@ class CreditCardPaymentMerhodTest extends TestCase
       
       /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
       $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-      $this->paymentObject->getRequest()->getAccount()->set('holder', $this->nameGiven.' '.$this->nameFamily);
+      $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
       $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
       $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
       $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
