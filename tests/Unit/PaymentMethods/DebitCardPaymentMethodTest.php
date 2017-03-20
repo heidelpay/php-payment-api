@@ -34,102 +34,31 @@ use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as  DebitCard;
  */
 class DebitCardPaymentMerhodTest extends TestCase
 {
-    /**
-     * SecuritySender
+    protected $authentification = array(
+        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
+        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
+        '93167DE7', //UserPassword
+        '31HA07BC8142C5A171744F3D6D155865', //TransactionChannel
+        true //Sandbox mode
+    );
+
+    /** customer address
      *
-     * @var string SecuritySender
+     * @var array customer address
      */
-    protected $SecuritySender = '31HA07BC8142C5A171745D00AD63D182';
-    /**
-     * UserLogin
-     *
-     * @var string UserLogin
-     */
-    protected $UserLogin      = '31ha07bc8142c5a171744e5aef11ffd3';
-    /**
-     * UserPassword
-     *
-     * @var string UserPassword
-     */
-    protected $UserPassword   = '93167DE7';
-    /**
-     * TransactionChannel
-     *
-     * debit card without 3DSecure
-     *
-     * @var string TransactionChannel
-     */
-    protected $TransactionChannel = '31HA07BC8142C5A171744F3D6D155865';
-    /**
-     * SandboxRequest
-     *
-     * Request will be send to Heidelpay sandbox payment system.
-     *
-     * @var string
-     */
-    protected $SandboxRequest = true;
-    
-    /**
-     * Customer given name
-     *
-     * @var string nameGiven
-     */
-    protected $nameGiven = 'Heidel';
-    /**
-     * Customer family name
-     *
-     * @var string nameFamily
-     */
-    protected $nameFamily ='Berger-Payment';
-    /**
-     * Customer company name
-     *
-     * @var string nameCompany
-     */
-    protected $nameCompany = 'DevHeidelpay';
-    /**
-     * Customer id
-     *
-     * @var string shopperId
-     */
-    protected $shopperId = '12344';
-    /**
-     * customer billing address street
-     *
-     * @var string addressStreet
-     */
-    protected $addressStreet = 'Vagerowstr. 18';
-    /**
-     * customer billing address state
-     *
-     * @var string addressState
-     */
-    protected $addressState  = 'DE-BW';
-    /**
-     * customer billing address zip
-     *
-     * @var string addressZip
-     */
-    protected $addressZip    = '69115';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCity    = 'Heidelberg';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCountry = 'DE';
-    /**
-     * customer mail address
-     *
-     * @var string contactMail
-     */
-    protected $contactMail = "development@heidelpay.de";
-    
+    protected $customerDetails = array(
+        'Heidel', //NameGiven
+        'Berger-Payment', //NameFamily
+        null, //NameCompany
+        '1234', //IdentificationShopperId
+        'Vagerowstr. 18', //AddressStreet
+        'DE-BW', //AddressState
+        '69115', //AddressZip
+        'Heidelberg', //AddressCity
+        'DE', //AddressCountry
+        'development@heidelpay.de' //Costumer
+    );
+
     /**
      * Transaction currency
      *
@@ -208,9 +137,9 @@ class DebitCardPaymentMerhodTest extends TestCase
   {
       $DebitCard = new DebitCard();
     
-      $DebitCard->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
+      $DebitCard->getRequest()->authentification($this->authentification);
     
-      $DebitCard->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId, $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
+      $DebitCard->getRequest()->customerAddress($this->customerDetails);
     
     
       $DebitCard->_dryRun=true;
@@ -281,7 +210,9 @@ class DebitCardPaymentMerhodTest extends TestCase
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      
+
+      $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+
       $this->paymentObject->debitOnRegistration((string)$referenceId);
       
       /* prepare request and send it to payment api */
@@ -309,7 +240,9 @@ class DebitCardPaymentMerhodTest extends TestCase
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      
+
+      $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+
       $this->paymentObject->authorizeOnRegistration((string)$referenceId);
   
       /* prepare request and send it to payment api */

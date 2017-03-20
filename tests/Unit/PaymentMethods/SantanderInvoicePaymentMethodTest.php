@@ -26,7 +26,8 @@ use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod as Invoice;
 class SantanderInvoicePaymentMethodTest extends TestCase
 {
 
-    /**
+    /** authentification parameter for heidelpay api
+     *
      * @var array authentification parameter for heidelpay api
      */
     protected $authentification = array(
@@ -37,6 +38,10 @@ class SantanderInvoicePaymentMethodTest extends TestCase
         true //Sandbox mode
     );
 
+    /** customer address
+     *
+     * @var array customer address
+     */
     protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
