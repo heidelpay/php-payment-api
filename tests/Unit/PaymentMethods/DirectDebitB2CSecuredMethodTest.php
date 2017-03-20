@@ -348,7 +348,9 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
   {
       $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
       $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-  
+
+      $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+
       $this->paymentObject->authorizeOnRegistration((string)$referenceId);
   
       /* prepare request and send it to payment api */

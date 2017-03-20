@@ -91,7 +91,7 @@ class Request extends AbstractMethod
      *
      * @return \Heidelpay\PhpApi\Request
      */
-    public function customerAddress($nameGiven=null, $nameFamily=null, $nameCompany=null, $shopperId=null, $addressStreet=null, $addressState=null, $addressZip=null, $addressCity=null, $addressCountry=nuill, $contactMail=null)
+    public function customerAddress($nameGiven=null, $nameFamily=null, $nameCompany=null, $shopperId=null, $addressStreet=null, $addressState=null, $addressZip=null, $addressCity=null, $addressCountry=null, $contactMail=null)
     {
         $this->getName()->set('given', $nameGiven);
         $this->getName()->set('family', $nameFamily);
