@@ -144,9 +144,9 @@ class DebitCardPaymentMerhodTest extends TestCase
   {
       $DebitCard = new DebitCard();
     
-      $DebitCard->getRequest()->authentification($this->authentification);
+      $DebitCard->getRequest()->authentification(...$this->authentification);
     
-      $DebitCard->getRequest()->customerAddress($this->customerDetails);
+      $DebitCard->getRequest()->customerAddress(...$this->customerDetails);
     
     
       $DebitCard->_dryRun=true;
