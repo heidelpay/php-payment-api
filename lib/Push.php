@@ -31,16 +31,16 @@ use SimpleXMLElement;
  *
  * Parses heidelpay Push Responses to a PhpApi Response object.
  *
- * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @license    Use of this software requires acceptance of the License Agreement. See LICENSE file.
+ * @copyright  Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
- * @link https://dev.heidelpay.de/php-api
+ * @link       https://dev.heidelpay.de/php-api
  *
- * @author Stephano Vogel
+ * @author     Stephano Vogel
  *
- * @package heidelpay
+ * @package    heidelpay
  * @subpackage php-api
- * @category php-api
+ * @category   php-api
  */
 class Push
 {
@@ -158,6 +158,7 @@ class Push
      * return the class name of it.
      *
      * @param $parameterGroupInstance
+     *
      * @return string|null
      */
     private function getMappingClass($parameterGroupInstance)
@@ -171,6 +172,7 @@ class Push
      * Get the ParameterGroup Getters of the Response instance.
      *
      * @param Response $responseInstance
+     *
      * @return array
      */
     private function getResponseParameterGroups(Response $responseInstance)
@@ -190,6 +192,7 @@ class Push
      * Validates if the given getter is for a ParameterGroup.
      *
      * @param $methodName
+     *
      * @return bool
      */
     private function isParameterGroupGetter($methodName)

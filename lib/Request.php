@@ -7,16 +7,16 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
 /**
  * Heidelpay request object
  *
- * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @license    Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * @copyright  Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
- * @link  https://dev.heidelpay.de/PhpApi
+ * @link       https://dev.heidelpay.de/PhpApi
  *
- * @author  Jens Richter
+ * @author     Jens Richter
  *
- * @package  Heidelpay
+ * @package    Heidelpay
  * @subpackage PhpApi
- * @category PhpApi
+ * @category   PhpApi
  */
 class Request extends AbstractMethod
 {
@@ -176,9 +176,9 @@ class Request extends AbstractMethod
     /**
      * Send request to payment api
      *
-     * @param string $uri payment api url
-     * @param array  $post heidelpay request parameter
-     * @param \Heidelpay\PhpApi\Adapter\\$adapter
+     * @param string                                $uri  payment api url
+     * @param array                                 $post heidelpay request parameter
+     * @param \Heidelpay\PhpApi\Adapter\CurlAdapter $adapter
      *
      * @return array response|\Heidelpay\PhpApi\Response
      */
@@ -197,8 +197,8 @@ class Request extends AbstractMethod
      * Parameter used in case of b2c secured invoice or direct debit
      *
      * @param null $salutation customer salutation MR/MRS (Mandatory)
-     * @param null $birthdate customer birth date YYYY-MM-DD (Mandatory)
-     * @param null $basketId id of a given basket using heidelpay basket api (Optional)
+     * @param null $birthdate  customer birth date YYYY-MM-DD (Mandatory)
+     * @param null $basketId   id of a given basket using heidelpay basket api (Optional)
      *
      * @return $this \Heidelpay\PhpApi\Request
      */
