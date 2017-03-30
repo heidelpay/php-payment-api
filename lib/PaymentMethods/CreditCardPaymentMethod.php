@@ -71,12 +71,9 @@ class CreditCardPaymentMethod
      * Because of payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
-     * @param string $PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     * @param boolean $PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     * @param string $CssPath - css url to style the Heidelpay payment frame
-     * @param null|mixed $PaymentFrameOrigin
-     * @param mixed $PreventAsyncRedirect
-     * @param null|mixed $CssPath
+     * @param null|mixed $PaymentFrameOrigin uri of your application like https://dev.heidelpay.de
+     * @param mixed      $PreventAsyncRedirect - prevention of redirecting the customer
+     * @param null|mixed $CssPath css url to style the Heidelpay payment frame
      *
      * @return \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */
@@ -97,12 +94,9 @@ class CreditCardPaymentMethod
      * Because of payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
-     * @param string $PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     * @param boolean $PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     * @param string $CssPath - css url to style the Heidelpay payment frame
-     * @param null|mixed $PaymentFrameOrigin
-     * @param mixed $PreventAsyncRedirect
-     * @param null|mixed $CssPath
+     * @param null|mixed $PaymentFrameOrigin uri of your application like https://dev.heidelpay.de
+     * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
+     * @param null|mixed $CssPath css url to style the Heidelpay payment frame
      *
      * @return \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */
@@ -124,12 +118,9 @@ class CreditCardPaymentMethod
      * Because of the payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
-     * @param string $PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     * @param boolean $PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     * @param string $CssPath - css url to style the Heidelpay payment frame
-     * @param null|mixed $PaymentFrameOrigin
-     * @param mixed $PreventAsyncRedirect
-     * @param null|mixed $CssPath
+     * @param null|mixed $PaymentFrameOrigin uri of your application like https://dev.heidelpay.de
+     * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
+     * @param null|mixed $CssPath css url to style the Heidelpay payment frame
      *
      * @return \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */

@@ -28,6 +28,7 @@ trait RefundTransactionType
      * it back to the given account.
      *
      * @param mixed $PaymentReferenceId payment reference id ( uniqe id of the debit or capture)
+     *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function refund($PaymentReferenceId)

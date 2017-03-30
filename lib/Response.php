@@ -23,7 +23,6 @@ use Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup;
  */
 class Response extends AbstractMethod
 {
-
     /**
      * ConnectorParameterGroup
      *
@@ -260,7 +259,7 @@ class Response extends AbstractMethod
      * response to your system. Please verify the source of the response. If it
      * is a legal one, it can be some kind of misconfiguration.
      *
-     * @param string $secret of your application
+     * @param string $secret                      your application's secret hash
      * @param string $identificationTransactionId basket or order reference id
      *
      * @throws \Exception

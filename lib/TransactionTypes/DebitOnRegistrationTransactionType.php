@@ -28,6 +28,7 @@ trait DebitOnRegistrationTransactionType
      * related to a registration.
      *
      * @param string $PaymentReferenceId ( unique id of the registration
+     *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
      */
     public function debitOnRegistration($PaymentReferenceId)

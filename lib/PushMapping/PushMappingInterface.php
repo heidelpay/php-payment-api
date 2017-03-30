@@ -45,7 +45,8 @@ interface PushMappingInterface
      * Method to retrieve the mapped SimpleXMLElement tag content.
      *
      * @param SimpleXMLElement $xmlElement
-     * @param string $field
+     * @param string           $field
+     *
      * @return string|null
      */
     public function getXmlObjectField(SimpleXMLElement $xmlElement, $field);
@@ -54,7 +55,8 @@ interface PushMappingInterface
      * Method to retrieve a mapped SimpleXMLElement field attribute.
      *
      * @param SimpleXMLElement $xmlElement
-     * @param string $field
+     * @param string           $field
+     *
      * @return string|null
      */
     public function getXmlObjectFieldAttribute(SimpleXMLElement $xmlElement, $field);
@@ -63,7 +65,8 @@ interface PushMappingInterface
      * Method to retrieve the mapped SimpleXMLElement tag property.
      *
      * @param SimpleXMLElement $xmlElement
-     * @param string $property
+     * @param string           $property
+     *
      * @return string|null
      */
     public function getXmlObjectProperty(SimpleXMLElement $xmlElement, $property);

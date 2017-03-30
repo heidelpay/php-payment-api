@@ -209,8 +209,8 @@ class Push
      * the attributes from the Mapping class
      *
      * @param AbstractParameterGroup $parameterGroupInstance
-     * @param PushMappingInterface $mappingClassInstance
-     * @param SimpleXMLElement $xmlResponse
+     * @param PushMappingInterface   $mappingClassInstance
+     * @param SimpleXMLElement       $xmlResponse
      */
     private function setParameterGroupProperties(
         AbstractParameterGroup &$parameterGroupInstance,

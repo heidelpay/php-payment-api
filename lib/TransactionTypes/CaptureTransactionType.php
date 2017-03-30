@@ -26,6 +26,7 @@ trait CaptureTransactionType
      * You can charge a given authorisation by capturing the transaction.
      *
      * @param string $PaymentReferenceId ( unique id of the authorisation )
+     *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function capture($PaymentReferenceId)

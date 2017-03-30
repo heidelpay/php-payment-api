@@ -30,6 +30,7 @@ trait ReversalTransactionType
      * invoice for example.
      *
      * @param mixed $PaymentReferenceId payment reference id ( unique id of the authorisation)
+     *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function reversal($PaymentReferenceId)

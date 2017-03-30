@@ -26,6 +26,7 @@ trait AuthorizeOnRegistrationTransactionType
      * This payment type will be used to make an authorisation on a given registration.
      *
      * @param string $PaymentReferenceId (unique id of the registration)
+     *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function authorizeOnRegistration($PaymentReferenceId)

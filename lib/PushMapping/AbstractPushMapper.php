@@ -44,6 +44,7 @@ abstract class AbstractPushMapper implements PushMappingInterface
 
     /**
      * @param string $fieldName
+     *
      * @return string|null
      */
     public function getField($fieldName)
@@ -66,6 +67,7 @@ abstract class AbstractPushMapper implements PushMappingInterface
 
     /**
      * @param string $propertyName
+     *
      * @return array
      */
     public function getProperty($propertyName)

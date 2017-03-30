@@ -42,7 +42,8 @@ class Request extends AbstractMethod
      * @param string $UserLogin
      * @param string $UserPassword
      * @param string $TransactionChannel
-     * @param bool $SandboxRequest
+     * @param bool   $SandboxRequest
+     *
      * @return \Heidelpay\PhpApi\Request
      */
     public function authentification(
@@ -176,7 +177,7 @@ class Request extends AbstractMethod
      * Send request to payment api
      *
      * @param string $uri payment api url
-     * @param array $post heidelpay request parameter
+     * @param array  $post heidelpay request parameter
      * @param \Heidelpay\PhpApi\Adapter\\$adapter
      *
      * @return array response|\Heidelpay\PhpApi\Response
