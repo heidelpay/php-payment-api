@@ -1,15 +1,15 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use PHPUnit\Framework\TestCase;
-use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as  Invoice;
+use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as Invoice;
 
 /**
+ * Invoice Test
  *
- *  Invoice Test
- *
- *  Connection tests can fail due to network issues and scheduled downtime.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
+ * Connection tests can fail due to network issues and scheduled downtime.
+ * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -24,7 +24,6 @@ use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as  Invoice;
  */
 class InvoicePaymentMethodTest extends TestCase
 {
-
     /**
      * @var array authentification parameter for heidelpay api
      */
@@ -48,7 +47,7 @@ class InvoicePaymentMethodTest extends TestCase
         'DE', //AddressCountry
         'development@heidelpay.de' //Costumer
     );
-    
+
     /**
      * Transaction currency
      *
@@ -66,7 +65,7 @@ class InvoicePaymentMethodTest extends TestCase
      * @var string secret
      */
     protected $secret = 'Heidelpay-PhpApi';
-    
+
     /**
      * PaymentObject
      *
@@ -77,97 +76,97 @@ class InvoicePaymentMethodTest extends TestCase
     /**
      * Constructor used to set timezone to utc
      */
-  public function __construct()
-  {
-      date_default_timezone_set('UTC');
-      parent::__construct();
-  }
+    public function __construct()
+    {
+        date_default_timezone_set('UTC');
+        parent::__construct();
+    }
 
-  /**
-   * Set up function will create a invoice object for each testcase
-   *
-   * @see PHPUnit_Framework_TestCase::setUp()
-   */
-  public function setUp()
-  {
-      $Invoice = new Invoice();
-    
-      $Invoice->getRequest()->authentification(...$this->authentification);
-    
-      $Invoice->getRequest()->customerAddress(...$this->customerDetails);
+    /**
+     * Set up function will create a invoice object for each testcase
+     *
+     * @see PHPUnit_Framework_TestCase::setUp()
+     */
+    public function setUp()
+    {
+        $Invoice = new Invoice();
 
-      $this->paymentObject = $Invoice;
-  }
-  
-  /**
-   * Get current called method, without namespace
-   *
-   * @param string $method
-   *
-   * @return string class and method
-   */
-  public function getMethod($method)
-  {
-      return substr(strrchr($method, '\\'), 1);
-  }
-    
-  /**
-   * Test case for a single invoice authorisation
-   *
-   * @return string payment reference id for the invoice authorize transaction
-   * @group connectionTest
-   * @test
-   */
-  public function Authorize()
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-      
-      $this->paymentObject->authorize();
-      
-      /* verify response */
-      $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+        $Invoice->getRequest()->authentification(...$this->authentification);
 
-      /* transaction result */
-      $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-          'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
-      $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize is pending');
-      $this->assertFalse($this->paymentObject->getResponse()->isError(),
-          'authorize failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+        $Invoice->getRequest()->customerAddress(...$this->customerDetails);
 
-      return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
-  }
-  
-  /**
-   * Test case for a invoice reversal of a existing authorisation
-   *
-   * @param $referenceId string payment reference id of the invoice authorisation
-   *
-   * @return string payment reference id for the prepayment reversal transaction
-   * @depends Authorize
-   * @group connectionTest
-   * @test   *
-   */
-  public function Reversal($referenceId)
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
-  
-      $this->paymentObject->reversal($referenceId);
+        $this->paymentObject = $Invoice;
+    }
 
-      /* verify response */
-      $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+    /**
+     * Get current called method, without namespace
+     *
+     * @param string $method
+     *
+     * @return string class and method
+     */
+    public function getMethod($method)
+    {
+        return substr(strrchr($method, '\\'), 1);
+    }
 
-      /* transaction result */
-      $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-          'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
-      $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-      $this->assertFalse($this->paymentObject->getResponse()->isError(),
-          'reversal failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+    /**
+     * Test case for a single invoice authorisation
+     *
+     * @return string payment reference id for the invoice authorize transaction
+     * @group connectionTest
+     * @test
+     */
+    public function Authorize()
+    {
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
-      return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
-  }
+        $this->paymentObject->authorize();
+
+        /* verify response */
+        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+
+        /* transaction result */
+        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize is pending');
+        $this->assertFalse($this->paymentObject->getResponse()->isError(),
+            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+
+        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+    }
+
+    /**
+     * Test case for a invoice reversal of a existing authorisation
+     *
+     * @param $referenceId string payment reference id of the invoice authorisation
+     *
+     * @return string payment reference id for the prepayment reversal transaction
+     * @depends Authorize
+     * @group connectionTest
+     * @test   *
+     */
+    public function Reversal($referenceId)
+    {
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
+
+        $this->paymentObject->reversal($referenceId);
+
+        /* verify response */
+        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+
+        /* transaction result */
+        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
+        $this->assertFalse($this->paymentObject->getResponse()->isError(),
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+
+        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+    }
 
     /**
      * Test case for invoice refund
@@ -179,9 +178,9 @@ class InvoicePaymentMethodTest extends TestCase
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId=null)
+    public function Refund($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */

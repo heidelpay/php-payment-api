@@ -1,15 +1,15 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
 
 /**
+ * EPS Test
  *
- *  EPS Test
- *
- *  Connection tests can fail due to network issues and scheduled downtimes.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
+ * Connection tests can fail due to network issues and scheduled downtimes.
+ * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -35,13 +35,13 @@ class EPSPaymentMerhodTest extends TestCase
      *
      * @var string UserLogin
      */
-    protected $UserLogin      = '31ha07bc8124ad82a9e96d486d19edaa';
+    protected $UserLogin = '31ha07bc8124ad82a9e96d486d19edaa';
     /**
      * UserPassword
      *
      * @var string UserPassword
      */
-    protected $UserPassword   = 'password';
+    protected $UserPassword = 'password';
     /**
      * TransactionChannel
      *
@@ -88,7 +88,7 @@ class EPSPaymentMerhodTest extends TestCase
      * @var string secret
      */
     protected $secret = 'Heidelpay-PhpApi';
-    
+
     /**
      * PaymentObject
      *
@@ -99,62 +99,63 @@ class EPSPaymentMerhodTest extends TestCase
     /**
      * Constructor used to set timezone to utc
      */
-  public function __construct()
-  {
-      date_default_timezone_set('UTC');
-  }
+    public function __construct()
+    {
+        date_default_timezone_set('UTC');
+    }
 
-  /**
-   * Set up function will create a EPS object for each testcase
-   *
-   * @see PHPUnit_Framework_TestCase::setUp()
-   */
-  public function setUp()
-  {
-      $EPS = new EPS();
-    
-      $EPS->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
-    
-      $EPS->getRequest()->customerAddress(...$this->customerDetails);
-    
-      $EPS->_dryRun=true;
-    
-      $this->paymentObject = $EPS;
-  }
-  
-  /**
-   * Get current called method, without namespace
-   *
-   * @param string $method
-   *
-   * @return string class and method
-   */
-  public function getMethod($method)
-  {
-      return substr(strrchr($method, '\\'), 1);
-  }
-    
-  /**
-   * Test case for a single EPS authorize
-   *
-   * @return string payment reference id for the EPS authorize transaction
-   * @group connectionTest
-   */
-  public function testAuthorize()
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-      
-      $this->paymentObject->authorize();
+    /**
+     * Set up function will create a EPS object for each testcase
+     *
+     * @see PHPUnit_Framework_TestCase::setUp()
+     */
+    public function setUp()
+    {
+        $EPS = new EPS();
 
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->convertToArray();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));
-      $this->assertFalse($response[1]->isError(), 'authorize failed : '.print_r($response[1]->getError(), 1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
-  }
+        $EPS->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
+            $this->TransactionChannel, 'TRUE');
+
+        $EPS->getRequest()->customerAddress(...$this->customerDetails);
+
+        $EPS->_dryRun = true;
+
+        $this->paymentObject = $EPS;
+    }
+
+    /**
+     * Get current called method, without namespace
+     *
+     * @param string $method
+     *
+     * @return string class and method
+     */
+    public function getMethod($method)
+    {
+        return substr(strrchr($method, '\\'), 1);
+    }
+
+    /**
+     * Test case for a single EPS authorize
+     *
+     * @return string payment reference id for the EPS authorize transaction
+     * @group connectionTest
+     */
+    public function testAuthorize()
+    {
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+
+        $this->paymentObject->authorize();
+
+        /* prepare request and send it to payment api */
+        $request = $this->paymentObject->getRequest()->convertToArray();
+        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1], 1));
+        $this->assertFalse($response[1]->isError(), 'authorize failed : ' . print_r($response[1]->getError(), 1));
+
+        return (string)$response[1]->getPaymentReferenceId();
+    }
 }

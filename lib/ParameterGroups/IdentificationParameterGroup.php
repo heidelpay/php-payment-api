@@ -1,10 +1,9 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
  * This class provides every api parameter used to identify a transaction.
- *
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -19,14 +18,13 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class IdentificationParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * Creditor id
      *
      * @var string creditor id
      */
     public $creditor_id = null;
-    
+
     /**
      * IdentificationShopperId
      *
@@ -36,7 +34,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @var string customer identification number (optional)
      */
     public $shopperid = null;
-    
+
     /**
      * IdentificationShortId
      *
@@ -46,7 +44,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @var string heidelpay short identifier
      */
     public $shortid = null;
-    
+
     /**
      * IdentificatonTransactionId
      *
@@ -56,7 +54,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @var string order identification number (optional)
      */
     public $transactionid = null;
-    
+
     /**
      * IdentificationrefernceId
      *
@@ -68,7 +66,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @var string payment reference Id, for example the uniqe Id of the invoice autorisation
      */
     public $referenceid = null;
-    
+
     /**
      * IdentificationUniqeId
      *
@@ -78,7 +76,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @var string payment long identifier also know as uniqeId
      */
     public $uniqueid = null;
-    
+
     /**
      * IdentificationCreditorId getter
      *
@@ -88,7 +86,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     {
         return $this->creditor_id;
     }
-    
+
     /**
      * IdentificationShopperid getter
      *
@@ -98,7 +96,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     {
         return $this->shopperid;
     }
-    
+
     /**
      * IdentificationShortid getter
      *
@@ -118,7 +116,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     {
         return $this->transactionid;
     }
-    
+
     /**
      * IdentificationReferenceId getter
      *
@@ -128,7 +126,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     {
         return $this->referenceid;
     }
-    
+
     /**
      * IdentificationUniqueId getter
      *

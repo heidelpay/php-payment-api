@@ -1,11 +1,11 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
  * This class provides every api parameter of the "name" namespace
  *
  * It will be used for parameters like given name, but also for salutation etc.
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -20,7 +20,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class NameParameterGroup extends AbstractParameterGroup
 {
-
     /**
      * NameBirthdate
      *
@@ -38,7 +37,7 @@ class NameParameterGroup extends AbstractParameterGroup
      * @var string company name (optional)
      */
     public $company = null;
-    
+
     /**
      * NameGiven
      *
@@ -47,7 +46,7 @@ class NameParameterGroup extends AbstractParameterGroup
      * @var string given name of the customer (mandatory)
      */
     public $given = null;
-    
+
     /**
      * NameFamily
      *
@@ -96,7 +95,7 @@ class NameParameterGroup extends AbstractParameterGroup
     {
         return $this->company;
     }
-    
+
     /**
      * NameGiven getter
      *
@@ -106,7 +105,7 @@ class NameParameterGroup extends AbstractParameterGroup
     {
         return $this->given;
     }
-    
+
     /**
      * NameFamily getter
      *

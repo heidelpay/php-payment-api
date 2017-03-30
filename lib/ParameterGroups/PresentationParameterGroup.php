@@ -1,9 +1,9 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
  * This class provides the api parameter for amount and currency.
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -18,7 +18,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class PresentationParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * PresentationAmount
      *
@@ -27,7 +26,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * @var float amount (mandatory)
      */
     public $amount = null;
-    
+
     /**
      * PresentationCurrency
      *
@@ -59,7 +58,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
     {
         return $this->amount;
     }
-    
+
     /**
      * PresentationCurrency getter
      *

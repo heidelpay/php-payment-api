@@ -1,15 +1,15 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use PHPUnit\Framework\TestCase;
-use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod as  iDeal;
+use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod as iDeal;
 
 /**
+ * iDeal Test
  *
- *  iDeal Test
- *
- *  Connection tests can fail due to network issues and scheduled downtimes.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
+ * Connection tests can fail due to network issues and scheduled downtimes.
+ * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -35,13 +35,13 @@ class IdealPaymentMerhodTest extends TestCase
      *
      * @var string UserLogin
      */
-    protected $UserLogin      = '31ha07bc8142c5a171744e5aef11ffd3';
+    protected $UserLogin = '31ha07bc8142c5a171744e5aef11ffd3';
     /**
      * UserPassword
      *
      * @var string UserPassword
      */
-    protected $UserPassword   = '93167DE7';
+    protected $UserPassword = '93167DE7';
     /**
      * TransactionChannel
      *
@@ -56,7 +56,7 @@ class IdealPaymentMerhodTest extends TestCase
      * @var string
      */
     protected $SandboxRequest = true;
-    
+
     /**
      * Customer given name
      *
@@ -68,7 +68,7 @@ class IdealPaymentMerhodTest extends TestCase
      *
      * @var string nameFamily
      */
-    protected $nameFamily ='Berger-Payment';
+    protected $nameFamily = 'Berger-Payment';
     /**
      * Customer company name
      *
@@ -92,19 +92,19 @@ class IdealPaymentMerhodTest extends TestCase
      *
      * @var string addressState
      */
-    protected $addressState  = 'DE-BW';
+    protected $addressState = 'DE-BW';
     /**
      * customer billing address zip
      *
      * @var string addressZip
      */
-    protected $addressZip    = '69115';
+    protected $addressZip = '69115';
     /**
      * customer billing address city
      *
      * @var string addressCity
      */
-    protected $addressCity    = 'Heidelberg';
+    protected $addressCity = 'Heidelberg';
     /**
      * customer billing address city
      *
@@ -117,7 +117,7 @@ class IdealPaymentMerhodTest extends TestCase
      * @var string contactMail
      */
     protected $contactMail = "development@heidelpay.de";
-    
+
     /**
      * Transaction currency
      *
@@ -135,7 +135,7 @@ class IdealPaymentMerhodTest extends TestCase
      * @var string secret
      */
     protected $secret = 'Heidelpay-PhpApi';
-    
+
     /**
      * PaymentObject
      *
@@ -146,78 +146,80 @@ class IdealPaymentMerhodTest extends TestCase
     /**
      * Constructor used to set timezone to utc
      */
-  public function __construct()
-  {
-      date_default_timezone_set('UTC');
-  }
+    public function __construct()
+    {
+        date_default_timezone_set('UTC');
+    }
 
-  /**
-   * Set up function will create a sofort object for each testcase
-   *
-   * @see PHPUnit_Framework_TestCase::setUp()
-   */
-  public function setUp()
-  {
-      $iDeal = new iDeal();
-    
-      $iDeal->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword, $this->TransactionChannel, 'TRUE');
-    
-      $iDeal->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId, $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry, $this->contactMail);
-    
-    
-      $iDeal->_dryRun=true;
-    
-      $this->paymentObject = $iDeal;
-  }
-  
-  /**
-   * Get current called method, without namespace
-   *
-   * @param string $method
-   *
-   * @return string class and method
-   */
-  public function getMethod($method)
-  {
-      return substr(strrchr($method, '\\'), 1);
-  }
-    
-  /**
-   * Test case for a single iDeal authorize
-   *
-   * @return string payment reference id for the iDeal authorize transaction
-   * @group connectionTest
-   */
-  public function testAuthorize()
-  {
-      $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
-      $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-      $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-      
-      $this->paymentObject->authorize();
-      
-      /* prepare request and send it to payment api */
-      $request =  $this->paymentObject->getRequest()->convertToArray();
-      $response =  $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-      
-      /* test if config parameters exists */
-      $configBankCountry = array('NL' => 'Niederlande');
-      
-      $this->assertEquals($configBankCountry, $response[1]->getConfig()->getBankCountry());
-      
-      $configBrands = array(
+    /**
+     * Set up function will create a sofort object for each testcase
+     *
+     * @see PHPUnit_Framework_TestCase::setUp()
+     */
+    public function setUp()
+    {
+        $iDeal = new iDeal();
+
+        $iDeal->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
+            $this->TransactionChannel, 'TRUE');
+
+        $iDeal->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
+            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
+            $this->contactMail);
+
+
+        $iDeal->_dryRun = true;
+
+        $this->paymentObject = $iDeal;
+    }
+
+    /**
+     * Get current called method, without namespace
+     *
+     * @param string $method
+     *
+     * @return string class and method
+     */
+    public function getMethod($method)
+    {
+        return substr(strrchr($method, '\\'), 1);
+    }
+
+    /**
+     * Test case for a single iDeal authorize
+     *
+     * @return string payment reference id for the iDeal authorize transaction
+     * @group connectionTest
+     */
+    public function testAuthorize()
+    {
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+
+        $this->paymentObject->authorize();
+
+        /* prepare request and send it to payment api */
+        $request = $this->paymentObject->getRequest()->convertToArray();
+        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+        /* test if config parameters exists */
+        $configBankCountry = array('NL' => 'Niederlande');
+
+        $this->assertEquals($configBankCountry, $response[1]->getConfig()->getBankCountry());
+
+        $configBrands = array(
             'ING_TEST' => 'Test Bank',
             'INGBNL2A' => 'Issuer Simulation V3 - ING',
             'RABONL2U' => 'Issuer Simulation V3 - RABO'
-      );
-        
-      $this->assertEquals($configBrands, $response[1]->getConfig()->getBrands());
-      
-      
-      
-      $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : '.print_r($response[1], 1));
-      $this->assertFalse($response[1]->isError(), 'authorize failed : '.print_r($response[1]->getError(), 1));
-      
-      return (string)$response[1]->getPaymentReferenceId();
-  }
+        );
+
+        $this->assertEquals($configBrands, $response[1]->getConfig()->getBrands());
+
+
+        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1], 1));
+        $this->assertFalse($response[1]->isError(), 'authorize failed : ' . print_r($response[1]->getError(), 1));
+
+        return (string)$response[1]->getPaymentReferenceId();
+    }
 }

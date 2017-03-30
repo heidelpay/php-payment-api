@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -17,43 +18,42 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class FrontendParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      *  FrontendCssPath
      *
      * @var string url for a custom css to style the hpf. Only required for hpf
      */
     public $css_path = null;
-    
-    
+
+
     /**
      * FrontendEnabled
      *
      * @var boolean enable for async from submit or disable for sync  (mandatory)
      */
     public $enabled = 'TRUE';
-    
+
     /**
      * FrontendLanguage
      *
      * @var string language code ISO 639-1 (mandatory)
      */
     public $language = null;
-    
+
     /**
      * FrontendMode
      *
      * @var string always set to withelabel on ngw (mandatory)
      */
     public $mode = "WHITELABEL";
-    
+
     /**
      * FrontendPaymentFrameOrigin
      *
      * @var string origin of your website (like "http://dev.heidelpay.de/"). Only required for hpf
      */
     public $payment_frame_origin = null;
-    
+
     /**
      * FrontendPaymentFrameUrl
      *
@@ -71,21 +71,21 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @var boolean weather redirect is active or not
      */
     public $prevent_async_redirect = null;
-    
+
     /**
      * FrontendRedirectUrl
      *
      * @var string url for whitelabel payment from
      */
     public $redirect_url = null;
-    
+
     /**
      * FrontendResponseUrl
      *
      * @var string url of your system for async payment response (mandatory)
      */
     public $response_url = null;
-    
+
     /**
      * FrontendEnabled getter
      *
@@ -95,7 +95,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->enabled;
     }
-    
+
     /**
      * FrontendLanguage getter
      *
@@ -105,7 +105,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->language;
     }
-    
+
     /**
      * FrontendRedirectUrl getter
      *
@@ -115,7 +115,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->redirect_url;
     }
-    
+
     /**
      * FrontendResponseUrl getter
      *
@@ -125,7 +125,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->response_url;
     }
-    
+
     /**
      * FrontendPaymentFrameOrigin getter
      *
@@ -135,7 +135,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->payment_frame_origin;
     }
-    
+
     /**
      * FrontendPaymentFrameUrl getter
      *
@@ -145,7 +145,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->payment_frame_url;
     }
-    
+
     /**
      * FrontendCssPath getter
      *
@@ -155,7 +155,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         return $this->css_path;
     }
-    
+
     /**
      * FrontendReventAsyncRedirect
      *

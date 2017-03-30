@@ -6,11 +6,10 @@ use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod as Invoice;
 
 /**
- *,
- *  Invoice B2C secured Test
+ * Invoice B2C secured Test
  *
- *  Connection tests can fail due to network issues and scheduled downtime.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
+ * Connection tests can fail due to network issues and scheduled downtime.
+ * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -25,9 +24,7 @@ use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod as Invoice;
  */
 class SantanderInvoicePaymentMethodTest extends TestCase
 {
-
-    /** authentification parameter for heidelpay api
-     *
+    /**
      * @var array authentification parameter for heidelpay api
      */
     protected $authentification = array(
@@ -181,7 +178,6 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     /**
      * Test case for a invoice reversal of a existing authorisation
      *
-
      *
      * @return string payment reference id for the prepayment reversal transaction
      * @depends Finalize

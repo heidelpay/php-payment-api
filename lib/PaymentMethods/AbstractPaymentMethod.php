@@ -8,7 +8,6 @@ use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
 /**
  * This classe is the abstract payment method
  *
- *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
@@ -34,7 +33,7 @@ abstract class AbstractPaymentMethod
      * @var string payment code
      */
     protected $_paymentCode = null;
-    
+
     /**
      * Payment brand name for this payment method
      *
