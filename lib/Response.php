@@ -218,6 +218,7 @@ class Response extends AbstractMethod
      * be the iframe url.
      *
      * @return string PaymentFormUrl
+     *
      * @throws PaymentFormUrlException
      */
     public function getPaymentFormUrl()

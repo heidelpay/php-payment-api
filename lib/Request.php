@@ -176,8 +176,8 @@ class Request extends AbstractMethod
     /**
      * Send request to payment api
      *
-     * @param string                                $uri  payment api url
-     * @param array                                 $post heidelpay request parameter
+     * @param string                                $uri     payment api url
+     * @param array                                 $post    heidelpay request parameter
      * @param \Heidelpay\PhpApi\Adapter\CurlAdapter $adapter
      *
      * @return array response|\Heidelpay\PhpApi\Response

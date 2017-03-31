@@ -5,6 +5,7 @@ namespace Heidelpay\PhpApi;
 use Heidelpay\PhpApi\ParameterGroups\AbstractParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup;
+use Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup;
@@ -15,6 +16,7 @@ use Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup;
 use Heidelpay\PhpApi\PushMapping\Account;
 use Heidelpay\PhpApi\PushMapping\Address;
+use Heidelpay\PhpApi\PushMapping\Connector;
 use Heidelpay\PhpApi\PushMapping\Contact;
 use Heidelpay\PhpApi\PushMapping\Frontend;
 use Heidelpay\PhpApi\PushMapping\Identification;
@@ -67,6 +69,7 @@ class Push
     private $mapping = [
         AccountParameterGroup::class => Account::class,
         AddressParameterGroup::class => Address::class,
+        ConnectorParameterGroup::class => Connector::class,
         ContactParameterGroup::class => Contact::class,
         FrontendParameterGroup::class => Frontend::class,
         IdentificationParameterGroup::class => Identification::class,
