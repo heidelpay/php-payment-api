@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpApi;
 
+use Heidelpay\PhpApi\Exceptions\UndefinedXmlResponseException;
+use Heidelpay\PhpApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpApi\ParameterGroups\AbstractParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup;
@@ -109,7 +111,7 @@ class Push
      * If not set, parse the xml response and create the response.
      * Then return it.
      *
-     * @return Response
+     * @return Response|null
      */
     public function getResponse()
     {
@@ -130,6 +132,10 @@ class Push
         $this->response = new Response();
 
         try {
+            if ($this->xmlResponse === null) {
+                throw new UndefinedXmlResponseException('XML Response is not set.');
+            }
+
             // get a new SimpleXML objects from the raw response.
             $xml = new SimpleXMLElement($this->xmlResponse);
 
@@ -152,7 +158,11 @@ class Push
                 }
             }
         } catch (\Exception $e) {
-            throw new \Exception('Problem while parsing the raw xml response: ' . $e->getMessage());
+            if ($e instanceof UndefinedXmlResponseException) {
+                throw new XmlResponseParserException('Problem while parsing the raw xml response: ' . $e->getMessage());
+            }
+
+            throw new \Exception($e->getMessage());
         }
     }
 

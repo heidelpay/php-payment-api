@@ -30,10 +30,26 @@ class Account extends AbstractPushMapper
         'Number' => 'number',
     ];
 
+    public $fieldAttributes = [
+        'Expiry:year' => 'expiry_year',
+        'Expiry:month' => 'expiry_month',
+    ];
+
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
         if (isset($xmlElement->Transaction->Account->$field)) {
             return (string)$xmlElement->Transaction->Account->$field;
+        }
+
+        return null;
+    }
+
+    public function getXmlObjectFieldAttribute(\SimpleXMLElement $xmlElement, $fieldAttribute)
+    {
+        list($field, $attribute) = explode(':', $fieldAttribute);
+
+        if (isset($xmlElement->Transaction->Account->$field[$attribute])) {
+            return (string)$xmlElement->Transaction->Account->$field[$attribute];
         }
 
         return null;

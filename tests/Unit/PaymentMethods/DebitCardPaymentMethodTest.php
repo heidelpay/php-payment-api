@@ -426,7 +426,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      * @test
      * @group connectionTest
      */
-    public function Rebill($referenceId = hull)
+    public function Rebill($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
