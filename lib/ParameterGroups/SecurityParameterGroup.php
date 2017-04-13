@@ -1,9 +1,9 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
  * This class provides authentification parameters
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -18,7 +18,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class SecurityParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * SecuritySender
      *
@@ -27,7 +26,7 @@ class SecurityParameterGroup extends AbstractParameterGroup
      * @var string sender (mandatory)
      */
     public $sender = null;
-    
+
     /**
      * SecuritySender getter
      *

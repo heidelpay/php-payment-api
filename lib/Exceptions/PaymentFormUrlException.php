@@ -1,5 +1,8 @@
 <?php
+
 namespace Heidelpay\PhpApi\Exceptions;
+
+use Exception;
 
 /**
  *  This class is used for indicating a hash verification issue
@@ -15,8 +18,6 @@ namespace Heidelpay\PhpApi\Exceptions;
  * @subpackage PhpApi
  * @category PhpApi
  */
-use Exception;
-
 class PaymentFormUrlException extends Exception
 {
 }

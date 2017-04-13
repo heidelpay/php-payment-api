@@ -27,8 +27,7 @@ trait DebitOnRegistrationTransactionType
      * This payment type will charge the given account directly. The debit is
      * related to a registration.
      *
-     * @param string payment reference id ( unique id of the registration
-     * @param mixed $PaymentReferenceId
+     * @param string $PaymentReferenceId ( unique id of the registration
      *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
      */

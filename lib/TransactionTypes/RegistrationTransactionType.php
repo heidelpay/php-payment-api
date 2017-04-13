@@ -29,13 +29,13 @@ trait RegistrationTransactionType
      * system. You will get back a payment reference id. This gives you a way
      * to charge this account later or even to make a recurring payment.
      *
-     *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function registration()
     {
         $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RG");
         $this->prepareRequest();
+
         return $this;
     }
 }

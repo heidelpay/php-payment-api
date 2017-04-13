@@ -20,21 +20,20 @@ namespace Heidelpay\PhpApi\PaymentMethods;
  */
 class PostFinanceEFinancePaymentMethod extends AbstractPaymentMethod
 {
-    
     /**
      * Payment code for this payment method
      *
      * @var string payment code
      */
     protected $_paymentCode = 'OT';
-    
+
     /**
      * Weather this Payment method can authorise transactions or not
      *
      * @var boolean canAuthorise
      */
     protected $_canAuthorise = true;
-    
+
     /**
      * Weather this Payment method can refund transactions or not
      *

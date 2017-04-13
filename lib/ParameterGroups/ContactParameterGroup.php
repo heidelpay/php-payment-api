@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -17,7 +18,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class ContactParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * Contact EMail
      *
@@ -26,7 +26,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      * @var string email address of the customer (mandatory)
      */
     public $email = null;
-    
+
     /**
      * Customer Ip
      *
@@ -56,7 +56,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      * @var string phone of the customer (optional)
      */
     public $phone = null;
-        
+
     /**
      * ContactEmail getter
      *
@@ -66,7 +66,7 @@ class ContactParameterGroup extends AbstractParameterGroup
     {
         return $this->email;
     }
-    
+
     /**
      * ContactIp getter
      *

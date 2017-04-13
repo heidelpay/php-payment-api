@@ -26,13 +26,14 @@ class SofortPaymentMethod
     use BasicPaymentMethodTrait;
     use AuthorizeTransactionType;
     use RefundTransactionType;
+
     /**
      * Payment code for this payment method
      *
      * @var string payment code
      */
     protected $_paymentCode = 'OT';
-        
+
     /**
      * Payment brand name for this payment method
      *

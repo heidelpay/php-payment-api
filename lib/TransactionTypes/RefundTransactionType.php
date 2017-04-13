@@ -29,7 +29,7 @@ trait RefundTransactionType
      *
      * @param mixed $PaymentReferenceId payment reference id ( uniqe id of the debit or capture)
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function refund($PaymentReferenceId)
     {
@@ -37,6 +37,7 @@ trait RefundTransactionType
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
         $this->prepareRequest();
+
         return $this;
     }
 }

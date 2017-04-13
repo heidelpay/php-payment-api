@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -17,9 +18,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @subpackage PhpApi
  * @category PhpApi
  */
- class TransactionParameterGroup extends AbstractParameterGroup
- {
-    
+class TransactionParameterGroup extends AbstractParameterGroup
+{
     /**
      * TransactionChannel
      *
@@ -29,7 +29,7 @@ namespace Heidelpay\PhpApi\ParameterGroups;
      * @var string channel (mandatory)
      */
     public $channel = null;
-    
+
     /**
      * TransactionMode
      *
@@ -40,7 +40,7 @@ namespace Heidelpay\PhpApi\ParameterGroups;
      * @var string mode (mandatory)
      */
     public $mode = "CONNECTOR_TEST";
-    
+
     /**
      * TransactionChannel getter
      *
@@ -50,7 +50,7 @@ namespace Heidelpay\PhpApi\ParameterGroups;
     {
         return $this->channel;
     }
-    
+
     /**
      * TransactionMode getter
      *
@@ -60,4 +60,4 @@ namespace Heidelpay\PhpApi\ParameterGroups;
     {
         return $this->mode;
     }
- }
+}

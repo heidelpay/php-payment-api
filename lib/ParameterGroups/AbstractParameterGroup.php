@@ -1,21 +1,23 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 use Heidelpay\PhpApi\Exceptions\UndefinedPropertyException;
+use Heidelpay\PhpApi\Request;
 
 /**
  *  The AbstractParameterGroup provides functions for every parameter group which extends this class
  *
- * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @license    Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * @copyright  Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
- * @link  https://dev.heidelpay.de/PhpApi
+ * @link       https://dev.heidelpay.de/PhpApi
  *
- * @author  Jens Richter
+ * @author     Jens Richter
  *
- * @package  Heidelpay
+ * @package    Heidelpay
  * @subpackage PhpApi
- * @category PhpApi
+ * @category   PhpApi
  */
 abstract class AbstractParameterGroup
 {
@@ -28,7 +30,7 @@ abstract class AbstractParameterGroup
     {
         return get_called_class();
     }
-    
+
     /**
      * Magic setter
      *
@@ -42,11 +44,15 @@ abstract class AbstractParameterGroup
     public function set($key, $value)
     {
         $key = strtolower($key);
-        if (property_exists($this, $key)) {
-            $this->$key = $value;
-            return $this;
+
+        if (!property_exists($this, $key) && $this instanceof Request) {
+            throw new UndefinedPropertyException(
+                'Property does not exist: ' . $key . ' in ' . $this->getClassName(),
+                500
+            );
         }
 
-        throw new UndefinedPropertyException('Property does not exist: '.$key.' in '. $this->getClassName(), 500);
+        $this->$key = $value;
+        return $this;
     }
 }

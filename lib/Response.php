@@ -1,27 +1,28 @@
 <?php
+
 namespace Heidelpay\PhpApi;
+
+use Heidelpay\PhpApi\Exceptions\HashVerificationException;
+use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
+use Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup;
+use Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup;
 
 /**
  * Heidelpay response object
  *
+ * @license    Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * @copyright  Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
- * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @link       https://dev.heidelpay.de/PhpApi
  *
- * @link  https://dev.heidelpay.de/PhpApi
+ * @author     Jens Richter
  *
- * @author  Jens Richter
- *
- * @package  Heidelpay
+ * @package    Heidelpay
  * @subpackage PhpApi
- * @category PhpApi
+ * @category   PhpApi
  */
-use Heidelpay\PhpApi\Exceptions\HashVerificationException;
-use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
-
 class Response extends AbstractMethod
 {
-
     /**
      * ConnectorParameterGroup
      *
@@ -57,7 +58,7 @@ class Response extends AbstractMethod
     public function getProcessing()
     {
         if ($this->processing === null) {
-            return $this->processing = new \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup();
+            return $this->processing = new ProcessingParameterGroup();
         }
 
         return $this->processing;
@@ -71,7 +72,7 @@ class Response extends AbstractMethod
     public function getConnector()
     {
         if ($this->connector === null) {
-            return $this->connector = new \Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup();
+            return $this->connector = new ConnectorParameterGroup();
         }
 
         return $this->connector;
@@ -194,7 +195,8 @@ class Response extends AbstractMethod
      */
     public function getError()
     {
-        return array('code' => $this->getProcessing()->getReturnCode(),
+        return array(
+            'code' => $this->getProcessing()->getReturnCode(),
             'message' => $this->getProcessing()->getReturn()
         );
     }
@@ -215,14 +217,16 @@ class Response extends AbstractMethod
      * Used to create the payment form. In case of credit/debit card it will
      * be the iframe url.
      *
-     * @return string|boolean PaymentFormUrl
+     * @return string PaymentFormUrl
+     *
+     * @throws PaymentFormUrlException
      */
     public function getPaymentFormUrl()
     {
         /*
          * PaymentFrameUrl for credit and debitcard
          */
-        $code =  null;
+        $code = null;
         $type = null;
 
         if ($this->getPayment()->getCode() === null) {
@@ -233,17 +237,18 @@ class Response extends AbstractMethod
 
         if (($code == 'CC' or $code == 'DC')
             and $this->getIdentification()->getReferenceId() === null
-            and $this->getFrontend()->getPaymentFrameUrl() !== null) {
+            and $this->getFrontend()->getPaymentFrameUrl() !== null
+        ) {
             return $this->getFrontend()->getPaymentFrameUrl();
         }
 
-         /*
-          * Redirect url
-          */
+        /*
+         * Redirect url
+         */
 
-         if ($this->getFrontend()->getRedirectUrl() !== null) {
-             return $this->getFrontend()->getRedirectUrl();
-         }
+        if ($this->getFrontend()->getRedirectUrl() !== null) {
+            return $this->getFrontend()->getRedirectUrl();
+        }
 
         throw new PaymentFormUrlException('PaymentFromUrl is unset!');
     }
@@ -251,12 +256,11 @@ class Response extends AbstractMethod
     /**
      * Verify that the response secret hash matches the one given by initial request
      *
-     *  A mismatch can be a indication, that someone tries to send fake payment
-     *  response to your system. Please verify the source of the response. If it
-     *  is a legal one, it can be some kind of misconfiguration.
+     * A mismatch can be a indication, that someone tries to send fake payment
+     * response to your system. Please verify the source of the response. If it
+     * is a legal one, it can be some kind of misconfiguration.
      *
-     *
-     * @param string $secret                      of your application
+     * @param string $secret                      your application's secret hash
      * @param string $identificationTransactionId basket or order reference id
      *
      * @throws \Exception
@@ -270,11 +274,15 @@ class Response extends AbstractMethod
         }
 
         if ($this->getProcessing()->getResult() === null) {
-            throw new HashVerificationException('The response object seems to be empty or it is not a valid heidelpay response!');
+            throw new HashVerificationException(
+                'The response object seems to be empty or it is not a valid heidelpay response!'
+            );
         }
 
         if ($this->getCriterion()->getSecretHash() === null) {
-            throw new HashVerificationException('Empty secret hash, this could be some kind of manipulation or misconfiguration!');
+            throw new HashVerificationException(
+                'Empty secret hash, this could be some kind of manipulation or misconfiguration!'
+            );
         }
 
         $referenceHash = hash('sha512', $identificationTransactionId . $secret);
@@ -283,6 +291,8 @@ class Response extends AbstractMethod
             return true;
         }
 
-        throw new HashVerificationException('Hash does not match. This could be some kind of manipulation or misconfiguration!');
+        throw new HashVerificationException(
+            'Hash does not match. This could be some kind of manipulation or misconfiguration!'
+        );
     }
 }

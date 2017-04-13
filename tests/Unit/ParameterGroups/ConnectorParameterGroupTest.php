@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
 use PHPUnit\Framework\TestCase;
@@ -6,7 +7,6 @@ use Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup as Connector;
 
 /**
  * Unit test for ConnectorParameterGroup
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -27,10 +27,10 @@ class ConnectorParameterGroupTest extends TestCase
     public function AccountBank()
     {
         $Connector = new Connector();
-        
+
         $value = '37040044';
         $Connector->set('account_bank', $value);
-        
+
         $this->assertEquals($value, $Connector->getAccountBank());
     }
 
