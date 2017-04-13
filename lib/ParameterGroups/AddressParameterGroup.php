@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -20,29 +21,31 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class AddressParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * @var string city of the customers billingaddress (mandatory)
      */
     public $city = null;
-    
+
     /**
      * @var string county of the customers billingaddress in ISO 3166-1 2 digits (mandatory)
      */
     public $country = null;
+
     /**
      * @var string state of the customers billingaddress in ISO 3166-2 (optinal)
      */
     public $state = null;
+
     /**
      * @var string street of the customers billingaddress (mandatory)
      */
     public $street = null;
+
     /**
      * @var string zip code of the customers billingaddress (mandatory)
      */
     public $zip = null;
-    
+
     /**
      * AddressCity getter
      *
@@ -52,8 +55,8 @@ class AddressParameterGroup extends AbstractParameterGroup
     {
         return $this->city;
     }
-     
-     /**
+
+    /**
      * AddressCountry getter
      *
      * @return string country
@@ -62,7 +65,7 @@ class AddressParameterGroup extends AbstractParameterGroup
     {
         return $this->country;
     }
-    
+
     /**
      * AddressState getter
      *
@@ -72,7 +75,7 @@ class AddressParameterGroup extends AbstractParameterGroup
     {
         return $this->state;
     }
-    
+
     /**
      * AddressStreet getter
      *
@@ -82,7 +85,7 @@ class AddressParameterGroup extends AbstractParameterGroup
     {
         return $this->street;
     }
-    
+
     /**
      * AddressZip getter
      *

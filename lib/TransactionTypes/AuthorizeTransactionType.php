@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\TransactionTypes;
 
 /**
@@ -30,12 +31,13 @@ trait AuthorizeTransactionType
      * like Sofort and Giropay (so called online payments) this type will be
      * used just to get the redirect to their systems.
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function authorize()
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".PA");
+        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".PA");
         $this->prepareRequest();
+
         return $this;
     }
 }

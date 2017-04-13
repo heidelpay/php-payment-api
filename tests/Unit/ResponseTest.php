@@ -1,8 +1,11 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\Response;
+use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
+use Heidelpay\PhpApi\Exceptions\HashVerificationException;
 
 /**
  *
@@ -19,9 +22,6 @@ use Heidelpay\PhpApi\Response;
  * @subpackage PhpApi
  * @category UnitTest
  */
-use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
-use Heidelpay\PhpApi\Exceptions\HashVerificationException;
-
 class ResponseTest extends TestCase
 {
     /**
@@ -40,7 +40,7 @@ class ResponseTest extends TestCase
      * @var string secret
      */
     protected $secret = 'Heidelpay-PhpApi';
-    
+
     /**
      * setUp sample response Object
      *
@@ -96,108 +96,105 @@ class ResponseTest extends TestCase
             'FRONTEND_LANGUAGE' => 'DE',
             'PAYMENT_CODE' => 'CC.RG',
             'BASKET_ID' => '31HA07BC8129FBB819367B2205CD6FB4'
-            );
-        
+        );
+
         $this->_resposneObject = new Response($responseSample);
     }
-    
-   /**
-    * function test for isSuccess method
-    *
-    * @group integrationTest
-    * @test
-    */
-  public function IsSuccess()
-  {
-      $this->assertTrue($this->_resposneObject->isSuccess(), 'isSuccess should be true');
-      $this->_resposneObject->getProcessing()->set('result', 'NOK');
-      $this->assertFalse($this->_resposneObject->isSuccess(), 'isSuccess should be false.');
-  }
-  
-  /**
-   * function test for isPending method
-   *
-   * @group integrationTest
-   * @test
-   */
-  public function IsPending()
-  {
-      $this->assertFalse($this->_resposneObject->isPending(), 'isPending should be false');
-      $this->_resposneObject->getProcessing()->set('status_code', '80');
-      $this->assertTrue($this->_resposneObject->isPending(), 'isPending should be true');
-  }
-  
-  /**
-   * function test for isError method
-   *
-   * @group integrationTest
-   * @test
-   */
-  public function IsError()
-  {
-      $this->assertFalse($this->_resposneObject->isError(), 'isError should be false');
-      $this->_resposneObject->getProcessing()->set('result', 'NOK');
-      $this->assertTrue($this->_resposneObject->isError(), 'isError should be true');
-  }
-  
-  /**
-   * function test for getError method
-   *
-   * @group integrationTest
-   * @test
-   */
-  public function GetError()
-  {
-      $expectedError = array(
+
+    /**
+     * function test for isSuccess method
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function IsSuccess()
+    {
+        $this->assertTrue($this->_resposneObject->isSuccess(), 'isSuccess should be true');
+        $this->_resposneObject->getProcessing()->set('result', 'NOK');
+        $this->assertFalse($this->_resposneObject->isSuccess(), 'isSuccess should be false.');
+    }
+
+    /**
+     * function test for isPending method
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function IsPending()
+    {
+        $this->assertFalse($this->_resposneObject->isPending(), 'isPending should be false');
+        $this->_resposneObject->getProcessing()->set('status_code', '80');
+        $this->assertTrue($this->_resposneObject->isPending(), 'isPending should be true');
+    }
+
+    /**
+     * function test for isError method
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function IsError()
+    {
+        $this->assertFalse($this->_resposneObject->isError(), 'isError should be false');
+        $this->_resposneObject->getProcessing()->set('result', 'NOK');
+        $this->assertTrue($this->_resposneObject->isError(), 'isError should be true');
+    }
+
+    /**
+     * function test for getError method
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function GetError()
+    {
+        $expectedError = array(
             'code' => '000.100.112',
             'message' => "Request successfully processed in 'Merchant in Connector Test Mode'"
-       );
-  
-      $this->assertEquals($expectedError, $this->_resposneObject->getError());
-  }
-  
-  /**
-   * function test for getPaymentReferenceID method
-   *
-   * @group integrationTest
-   * @test
-   */
-  public function GetPaymentReferenceId()
-  {
-      $this->assertEquals('31HA07BC8108A9126F199F2784552637', $this->_resposneObject->getPaymentReferenceId());
-  }
-  
-  /**
-   * function test for getPaymentFormUrl method
-   *
-   * @group integrationTest
-   * @test
-   */
-  public function GetPaymentFormUrl()
-  {
-           
-      /** iframe url for credit and debit card*/
-      $expectedUrl = 'http://dev.heidelpay.de';
-      $this->_resposneObject->getFrontend()->set('payment_frame_url', $expectedUrl);
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
-      
-      
-      $expectedUrl = 'http://www.heidelpay.de';
-      $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
-      
-      /** url in case of credit and debit card refernce Transaction */
-      $this->_resposneObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
-      
-      /** unset reference id */
-      $this->_resposneObject->getIdentification()->set('referenceid', null);
-       
-      
-      /** url for non credit or debit card transactions */
-      $this->_resposneObject->getPayment()->set('code', 'OT.PA');
-      $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
-      $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
-  }
+        );
+
+        $this->assertEquals($expectedError, $this->_resposneObject->getError());
+    }
+
+    /**
+     * function test for getPaymentReferenceID method
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function GetPaymentReferenceId()
+    {
+        $this->assertEquals('31HA07BC8108A9126F199F2784552637', $this->_resposneObject->getPaymentReferenceId());
+    }
+
+    /**
+     * function test for getPaymentFormUrl method
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function GetPaymentFormUrl()
+    {
+        /** iframe url for credit and debit card*/
+        $expectedUrl = 'http://dev.heidelpay.de';
+        $this->_resposneObject->getFrontend()->set('payment_frame_url', $expectedUrl);
+        $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
+
+        $expectedUrl = 'http://www.heidelpay.de';
+        $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
+
+        /** url in case of credit and debit card refernce Transaction */
+        $this->_resposneObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
+        $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
+
+        /** unset reference id */
+        $this->_resposneObject->getIdentification()->set('referenceid', null);
+
+        /** url for non credit or debit card transactions */
+        $this->_resposneObject->getPayment()->set('code', 'OT.PA');
+        $this->_resposneObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->assertEquals($expectedUrl, $this->_resposneObject->getPaymentFormUrl());
+    }
 
     /**
      * PaymentFormUrlPaymentCodeException test
@@ -220,28 +217,28 @@ class ResponseTest extends TestCase
      * @group integrationTest
      * @test
      */
-  public function getPaymentFormUrlException()
-  {
-      $Response = new Response();
+    public function getPaymentFormUrlException()
+    {
+        $Response = new Response();
 
-      $Response->getPayment()->set('code', 'OT.PA');
-      $Response->getFrontend()->set('redirect_url', null);
-      $this->expectException(PaymentFormUrlException::class);
-      $Response->getPaymentFormUrl();
-  }
-  
-  /**
-   * function test for verifySecurityHashUndefiledParameter
-   *
-   * @group integrationTest
-   * @test
-   */
-  public function verifySecurityHashUndefiledParameter()
-  {
-      $Response = new Response();
-      $this->expectException(HashVerificationException::class);
-      $Response->verifySecurityHash(null, null);
-  }
+        $Response->getPayment()->set('code', 'OT.PA');
+        $Response->getFrontend()->set('redirect_url', null);
+        $this->expectException(PaymentFormUrlException::class);
+        $Response->getPaymentFormUrl();
+    }
+
+    /**
+     * function test for verifySecurityHashUndefiledParameter
+     *
+     * @group integrationTest
+     * @test
+     */
+    public function verifySecurityHashUndefiledParameter()
+    {
+        $Response = new Response();
+        $this->expectException(HashVerificationException::class);
+        $Response->verifySecurityHash(null, null);
+    }
 
     /**
      * function test for verifySecurityHashEmptyResponse
@@ -280,11 +277,17 @@ class ResponseTest extends TestCase
     {
         $Response = new Response();
         $Response->getProcessing()->set('result', 'ACK');
-        $Response->getCriterion()->set('secret',
+        $Response->getCriterion()->set(
+            'secret',
             '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
-            .'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5');
-        $this->assertTrue($Response->verifySecurityHash($this->secret,
-            'InvoicePaymentMethodTest::Refund 2017-02-24 10:22:35'));
+            . 'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5'
+        );
+        $this->assertTrue(
+            $Response->verifySecurityHash(
+                $this->secret,
+                'InvoicePaymentMethodTest::Refund 2017-02-24 10:22:35'
+            )
+        );
     }
 
     /**
@@ -298,10 +301,11 @@ class ResponseTest extends TestCase
         $Response = new Response();
         $Response->getProcessing()->set('result', 'ACK');
         $this->expectException(HashVerificationException::class);
-        $Response->getCriterion()->set('secret',
+        $Response->getCriterion()->set(
+            'secret',
             '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
-            .'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5');
-        $Response->verifySecurityHash($this->secret,
-            'false');
+            . 'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5'
+        );
+        $Response->verifySecurityHash($this->secret, 'false');
     }
 }

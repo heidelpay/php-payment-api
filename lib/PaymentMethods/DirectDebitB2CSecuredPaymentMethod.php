@@ -42,7 +42,7 @@ class DirectDebitB2CSecuredPaymentMethod
     use CaptureTransactionType;
     use RebillTransactionType;
     use FinalizeTransactionType;
-    
+
     /**
      * Payment code for this payment method
      *

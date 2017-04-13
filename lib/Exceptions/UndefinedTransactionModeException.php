@@ -1,5 +1,8 @@
 <?php
+
 namespace Heidelpay\PhpApi\Exceptions;
+
+use Exception;
 
 /**
  *  This class is used for indicating a use of an undefined transaction mode
@@ -15,8 +18,6 @@ namespace Heidelpay\PhpApi\Exceptions;
  * @subpackage PhpApi
  * @category PhpApi
  */
-use Exception;
-
 class UndefinedTransactionModeException extends Exception
 {
 }

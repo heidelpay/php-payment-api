@@ -1,15 +1,15 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use PHPUnit\Framework\TestCase;
-use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as  Prepayment;
+use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as Prepayment;
 
 /**
+ * Prepayment Test
  *
- *  Prepayment Test
- *
- *  Connection tests can fail due to network issues and scheduled downtimes.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
+ * Connection tests can fail due to network issues and scheduled downtimes.
+ * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -65,7 +65,7 @@ class PrepaymentPaymentMethodTest extends TestCase
      * @var string secret
      */
     protected $secret = 'Heidelpay-PhpApi';
-    
+
     /**
      * PaymentObject
      *
@@ -76,39 +76,39 @@ class PrepaymentPaymentMethodTest extends TestCase
     /**
      * Constructor used to set timezone to utc
      */
-  public function __construct()
-  {
-      date_default_timezone_set('UTC');
-      parent::__construct();
-  }
+    public function __construct()
+    {
+        date_default_timezone_set('UTC');
+        parent::__construct();
+    }
 
-  /**
-   * Set up function will create a prepaymet object for each testcase
-   *
-   * @see PHPUnit_Framework_TestCase::setUp()
-   */
-  public function setUp()
-  {
-      $Prepayment = new Prepayment();
-    
-      $Prepayment->getRequest()->authentification(...$this->authentification);
-    
-      $Prepayment->getRequest()->customerAddress(...$this->customerDetails);
-        
-      $this->paymentObject = $Prepayment;
-  }
-  
-  /**
-   * Get current called method, without namespace
-   *
-   * @param string $method
-   *
-   * @return string class and method
-   */
-  public function getMethod($method)
-  {
-      return substr(strrchr($method, '\\'), 1);
-  }
+    /**
+     * Set up function will create a prepaymet object for each testcase
+     *
+     * @see PHPUnit_Framework_TestCase::setUp()
+     */
+    public function setUp()
+    {
+        $Prepayment = new Prepayment();
+
+        $Prepayment->getRequest()->authentification(...$this->authentification);
+
+        $Prepayment->getRequest()->customerAddress(...$this->customerDetails);
+
+        $this->paymentObject = $Prepayment;
+    }
+
+    /**
+     * Get current called method, without namespace
+     *
+     * @param string $method
+     *
+     * @return string class and method
+     */
+    public function getMethod($method)
+    {
+        return substr(strrchr($method, '\\'), 1);
+    }
 
     /**
      * Test case for a single prepayment authorisation
@@ -119,7 +119,7 @@ class PrepaymentPaymentMethodTest extends TestCase
      */
     public function Authorize()
     {
-        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
@@ -130,10 +130,10 @@ class PrepaymentPaymentMethodTest extends TestCase
 
         /* transaction result */
         $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize is pending');
         $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'authorize failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -150,7 +150,7 @@ class PrepaymentPaymentMethodTest extends TestCase
      */
     public function Reversal($referenceId)
     {
-        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->reversal($referenceId);
@@ -160,10 +160,10 @@ class PrepaymentPaymentMethodTest extends TestCase
 
         /* transaction result */
         $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : '.print_r($this->paymentObject->getResponse(), 1));
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
         $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'reversal failed : '.print_r($this->paymentObject->getResponse()->getError(), 1));
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -178,9 +178,9 @@ class PrepaymentPaymentMethodTest extends TestCase
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId=null)
+    public function Refund($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__)." ".date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */

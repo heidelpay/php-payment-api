@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -90,7 +91,6 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      * @return string account bank
      *
      * @deprecated please use IBan and Bic instead
-
      */
     public function getAccountBank()
     {

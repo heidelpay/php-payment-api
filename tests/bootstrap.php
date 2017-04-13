@@ -1,7 +1,6 @@
 <?php
 
-require_once  __DIR__ . '/../vendor/autoload.php';
-
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Fix broken OpenSSL lib on Travis CI
 if (getenv('TRAVIS')) {

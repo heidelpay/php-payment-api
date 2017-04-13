@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -21,7 +22,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class BasketParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * Basket id
      *

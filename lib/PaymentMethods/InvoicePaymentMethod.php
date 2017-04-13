@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\PaymentMethods;
 
 use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
@@ -9,7 +10,6 @@ use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
  * Invoice Payment Class
  *
  * This payment method is the classic unsecured invoice.
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.

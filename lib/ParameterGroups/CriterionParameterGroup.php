@@ -22,35 +22,34 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class CriterionParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * Currently used payment methode
      *
-     * @var sting payment methode
+     * @var string payment methode
      */
     public $payment_method = null;
-    
+
     /**
      * hash to verify the response
      *
      * @var string hash to verify the response
      */
     public $secret = null;
-    
+
     /**
      * Sdk name
      *
      * @var string sdk name
      */
     public $sdk_name = "Heidelpay\PhpApi";
-    
+
     /**
      * Sdk version
      *
      * @var string version
      */
     public $sdk_version = "17.3.20";
-    
+
     /**
      * CriterionPaymentMethod getter
      *
@@ -60,7 +59,7 @@ class CriterionParameterGroup extends AbstractParameterGroup
     {
         return $this->payment_method;
     }
-    
+
     /**
      * CriterionSecret setter
      *
@@ -74,10 +73,10 @@ class CriterionParameterGroup extends AbstractParameterGroup
      */
     public function setSecret($value, $secret)
     {
-        $this->secret = hash('sha512', $value.$secret);
+        $this->secret = hash('sha512', $value . $secret);
         return $this;
     }
-    
+
     /**
      * CriterionSecret getter
      *
@@ -87,7 +86,7 @@ class CriterionParameterGroup extends AbstractParameterGroup
     {
         return $this->secret;
     }
-    
+
     /**
      * Magic setter without property exception
      *

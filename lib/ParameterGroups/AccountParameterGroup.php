@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -42,7 +43,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @var string brand of the given account
      */
     public $brand = null;
-    
+
     /**
      * Bic - Business identifier code used for non sepa direct debit
      *
@@ -56,28 +57,28 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @var string country of the given account
      */
     public $country = null;
-    
+
     /**
      * Expiry month used for credit and debit cards
      *
      * @var string expiry month of the given account
      */
     public $expiry_month = null;
-    
+
     /**
      * Expiry year used for credit and debit cards
      *
      * @var string expiry year of the given account
      */
     public $expiry_year = null;
-    
-   /**
-    * Owner of the given account data
-    *
+
+    /**
+     * Owner of the given account data
+     *
      * @var string holder of the given account
      */
     public $holder = null;
-    
+
     /**
      * International bank account number
      *
@@ -91,15 +92,15 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @var string sepa mandate id from the payment response
      */
     public $identification = null;
-    
+
     /**
      * Account number can be used for non sepa direct debit transactions
      *
      * @var string number of the given account
      */
     public $number = null;
-    
-    
+
+
     /**
      * @var string verification of the given account
      */
@@ -126,7 +127,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->bankname;
     }
-    
+
     /**
      *  AccountBrand getter
      *
@@ -156,7 +157,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->country;
     }
-    
+
     /**
      * AccountExpiryMonth getter
      *
@@ -166,7 +167,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->expiry_month;
     }
-    
+
     /**
      * AccountExpiryYear getter
      *
@@ -176,7 +177,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->expiry_year;
     }
-    
+
     /**
      * AccountHolder getter
      *
@@ -186,7 +187,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->holder;
     }
-    
+
     /**
      * AccountIban getter
      *
@@ -206,7 +207,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     {
         return $this->identification;
     }
-    
+
     /**
      * AccountNumber getter
      *

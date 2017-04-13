@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -20,7 +21,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class PaymentParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * PaymentCode
      *
@@ -34,7 +34,7 @@ class PaymentParameterGroup extends AbstractParameterGroup
      * @var string code (mandatory)
      */
     public $code = null;
-    
+
     /**
      * PamyentCode getter
      *
