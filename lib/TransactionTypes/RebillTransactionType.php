@@ -29,17 +29,17 @@ trait RebillTransactionType
      * example, in case of a higher shipping cost. Please make sure that you
      * have the permission of your customer to charge again.
      *
-     * @param string payment reference id ( unique id of the debit or capture )
-     * @param mixed $PaymentReferenceId
+     * @param string $PaymentReferenceId ( unique id of the debit or capture )
      *
      * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
      */
     public function rebill($PaymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RB");
+        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RB");
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
         $this->prepareRequest();
+
         return $this;
     }
 }

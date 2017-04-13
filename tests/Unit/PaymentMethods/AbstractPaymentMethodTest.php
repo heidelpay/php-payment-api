@@ -7,11 +7,10 @@ use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
 
 /**
+ * Sofort Test
  *
- *  Sofort Test
- *
- *  Connection tests can fail due to network issues and scheduled downtimes.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
+ * Connection tests can fail due to network issues and scheduled downtimes.
+ * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -26,7 +25,6 @@ use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
  */
 class AbstractPaymentMethodTest extends TestCase
 {
-
     /**
      * PaymentObject
      *

@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\TransactionTypes;
 
 /**
@@ -24,17 +25,17 @@ trait CaptureTransactionType
      *
      * You can charge a given authorisation by capturing the transaction.
      *
-     * @param string payment reference id ( unique id of the authorisation )
-     * @param mixed $PaymentReferenceId
+     * @param string $PaymentReferenceId ( unique id of the authorisation )
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function capture($PaymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".CP");
+        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".CP");
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
         $this->prepareRequest();
+
         return $this;
     }
 }

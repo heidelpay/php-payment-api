@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\TransactionTypes;
 
 /**
@@ -30,14 +31,15 @@ trait ReversalTransactionType
      *
      * @param mixed $PaymentReferenceId payment reference id ( unique id of the authorisation)
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function reversal($PaymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".RV");
+        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RV");
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
         $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
         $this->prepareRequest();
+
         return $this;
     }
 }

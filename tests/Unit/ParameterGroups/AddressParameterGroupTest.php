@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
 use PHPUnit\Framework\TestCase;
@@ -21,15 +22,14 @@ class AddressParameterGroupTest extends TestCase
 {
     /**
      * City getter/setter test
-     *
      */
     public function testCity()
     {
         $Address = new Address();
-        
+
         $city = "Heidelberg";
         $Address->set('city', $city);
-        
+
         $this->assertEquals($city, $Address->getCity());
     }
 
@@ -39,10 +39,10 @@ class AddressParameterGroupTest extends TestCase
     public function testCountry()
     {
         $Address = new Address();
-    
+
         $country = "DE";
         $Address->set('country', $country);
-    
+
         $this->assertEquals($country, $Address->getCountry());
     }
 
@@ -52,10 +52,10 @@ class AddressParameterGroupTest extends TestCase
     public function testState()
     {
         $Address = new Address();
-    
+
         $state = "DE-BW";
         $Address->set('state', $state);
-    
+
         $this->assertEquals($state, $Address->getState());
     }
 
@@ -65,10 +65,10 @@ class AddressParameterGroupTest extends TestCase
     public function testStreet()
     {
         $Address = new Address();
-    
+
         $street = "Märchenweg 123";
         $Address->set('street', $street);
-    
+
         $this->assertEquals($street, $Address->getStreet());
     }
 
@@ -78,10 +78,10 @@ class AddressParameterGroupTest extends TestCase
     public function testZip()
     {
         $Address = new Address();
-    
+
         $zip = "69115";
         $Address->set('zip', $zip);
-    
+
         $this->assertEquals($zip, $Address->getZip());
     }
 }

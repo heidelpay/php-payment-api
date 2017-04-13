@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\PaymentMethods;
 
 use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
@@ -23,7 +24,6 @@ use Heidelpay\PhpApi\Request as HeidelpayRequest;
  */
 trait BasicPaymentMethodTrait
 {
-
     /**
      * Payment Url of the live payment server
      *
@@ -31,7 +31,7 @@ trait BasicPaymentMethodTrait
      *
      * @var string url for heidelpay api connection real or live system
      */
-    protected $_liveUrl       = 'https://heidelpay.hpcgw.net/ngw/post';
+    protected $_liveUrl = 'https://heidelpay.hpcgw.net/ngw/post';
 
     /**
      * Payment Url of the sandbox payment server
@@ -40,7 +40,7 @@ trait BasicPaymentMethodTrait
      *
      * @var string url for heidelpay api connection sandbox system
      */
-    protected $_sandboxUrl     = 'https://test-heidelpay.hpcgw.net/ngw/post';
+    protected $_sandboxUrl = 'https://test-heidelpay.hpcgw.net/ngw/post';
 
     /**
      * HTTP Adapter for payment connection
@@ -118,7 +118,7 @@ trait BasicPaymentMethodTrait
             return $this->_request = new HeidelpayRequest();
         }
 
-        return  $this->_request;
+        return $this->_request;
     }
 
     /**
@@ -149,7 +149,7 @@ trait BasicPaymentMethodTrait
      */
     public function getAdapter()
     {
-        return  $this->_adapter;
+        return $this->_adapter;
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
 use PHPUnit\Framework\TestCase;
@@ -6,7 +7,6 @@ use Heidelpay\PhpApi\ParameterGroups\NameParameterGroup as Name;
 
 /**
  * Unit test for NameParameterGroup
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -40,10 +40,10 @@ class NameParameterGroupTest extends TestCase
     public function testCompany()
     {
         $Name = new Name();
-        
+
         $value = 'Heidelpay';
         $Name->set('company', $value);
-        
+
         $this->assertEquals($value, $Name->getCompany());
     }
 
@@ -53,10 +53,10 @@ class NameParameterGroupTest extends TestCase
     public function testGiven()
     {
         $Name = new Name();
-        
+
         $value = 'Heidel';
         $Name->set('given', $value);
-        
+
         $this->assertEquals($value, $Name->getGiven());
     }
 
@@ -66,10 +66,10 @@ class NameParameterGroupTest extends TestCase
     public function testFamily()
     {
         $Name = new Name();
-    
+
         $value = 'Berger-Payment';
         $Name->set('family', $value);
-    
+
         $this->assertEquals($value, $Name->getFamily());
     }
 

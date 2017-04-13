@@ -15,7 +15,6 @@ use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
 /**
  * PayPal Payment Class
  *
- *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
@@ -39,7 +38,7 @@ class PayPalPaymentMethod
     use ReversalTransactionType;
     use CaptureTransactionType;
     use RebillTransactionType;
-    
+
     /**
      * Payment code for this payment method
      *

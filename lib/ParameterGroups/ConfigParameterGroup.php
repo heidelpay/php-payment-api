@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
@@ -17,14 +18,13 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class ConfigParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * Supported bank countries for this payment method
      *
      * @var string bankcountry
      */
     public $bankcountry = null;
-    
+
     /**
      *  Supported brands countries for this payment method
      *
@@ -38,7 +38,7 @@ class ConfigParameterGroup extends AbstractParameterGroup
      * @var string optin text for santander invoice
      */
     public $optin_text = null;
-        
+
     /**
      * Config bankcountry getter
      *
@@ -48,7 +48,7 @@ class ConfigParameterGroup extends AbstractParameterGroup
     {
         return json_decode($this->bankcountry, true);
     }
-    
+
     /**
      * Config brands getter
      *

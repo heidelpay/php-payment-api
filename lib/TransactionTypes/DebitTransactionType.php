@@ -1,4 +1,5 @@
 <?php
+
 namespace Heidelpay\PhpApi\TransactionTypes;
 
 /**
@@ -24,12 +25,13 @@ trait DebitTransactionType
      *
      * This payment type will charge the given account directly.
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
      */
     public function debit()
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode.".DB");
+        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".DB");
         $this->prepareRequest();
+
         return $this;
     }
 }

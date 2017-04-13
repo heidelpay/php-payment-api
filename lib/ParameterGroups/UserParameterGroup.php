@@ -1,9 +1,9 @@
 <?php
+
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 /**
  * This classe provides authentification parameter for the payment api
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -18,7 +18,6 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  */
 class UserParameterGroup extends AbstractParameterGroup
 {
-    
     /**
      * UserLogin
      *
@@ -26,7 +25,7 @@ class UserParameterGroup extends AbstractParameterGroup
      * @var string login (mandatory)
      */
     public $login = null;
-    
+
     /**
      * UserPwd
      *
@@ -35,7 +34,7 @@ class UserParameterGroup extends AbstractParameterGroup
      * @var string pwd (mandatory)
      */
     public $pwd = null;
-    
+
     /**
      * user login getter
      *
@@ -45,7 +44,7 @@ class UserParameterGroup extends AbstractParameterGroup
     {
         return $this->login;
     }
-    
+
     /**
      *  user password getter
      *

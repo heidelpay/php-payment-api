@@ -40,7 +40,7 @@ class DirectDebitPaymentMethod
     use ReversalTransactionType;
     use CaptureTransactionType;
     use RebillTransactionType;
-    
+
     /**
      * Payment code for this payment method
      *
