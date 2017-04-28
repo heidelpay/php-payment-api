@@ -97,6 +97,8 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Account number can be used for non sepa direct debit transactions
      *
      * @var string number of the given account
+     *
+     * @deprecated please use IBan and Bic instead
      */
     public $number = null;
 
@@ -212,6 +214,8 @@ class AccountParameterGroup extends AbstractParameterGroup
      * AccountNumber getter
      *
      * @return string number
+     *
+     * @deprecated  please use IBan and Bic instead
      */
     public function getNumber()
     {

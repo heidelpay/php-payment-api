@@ -43,40 +43,23 @@ abstract class AbstractPushMapper implements PushMappingInterface
     public $properties = [];
 
     /**
-     * @param string $fieldName
-     *
-     * @return string|null
-     */
-    public function getField($fieldName)
-    {
-        return isset($this->fields[$fieldName]) ? $this->fields[$fieldName] : null;
-    }
-
-    /**
-     * @return array
+     * @inheritdoc
      */
     public function getFields()
     {
         return is_array($this->fields) ? $this->fields : [];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFieldAttributes()
     {
         return is_array($this->fieldAttributes) ? $this->fieldAttributes : [];
     }
 
     /**
-     * @param string $propertyName
-     *
-     * @return array
-     */
-    public function getProperty($propertyName)
-    {
-        return isset($this->properties[$propertyName]) ? $this->properties[$propertyName] : null;
-    }
-
-    /**
-     * @return array
+     * @inheritdoc
      */
     public function getProperties()
     {

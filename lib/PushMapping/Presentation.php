@@ -32,13 +32,4 @@ class Presentation extends AbstractPushMapper
 
         return null;
     }
-
-    public function getXmlObjectProperty(\SimpleXMLElement $xmlElement, $property)
-    {
-        if (isset($xmlElement->Transaction->Payment->Presentation[$property])) {
-            return (string)$xmlElement->Transaction->Payment->Presentation[$property];
-        }
-
-        return null;
-    }
 }
