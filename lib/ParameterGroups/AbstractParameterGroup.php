@@ -3,7 +3,6 @@
 namespace Heidelpay\PhpApi\ParameterGroups;
 
 use Heidelpay\PhpApi\Exceptions\UndefinedPropertyException;
-use Heidelpay\PhpApi\Request;
 
 /**
  *  The AbstractParameterGroup provides functions for every parameter group which extends this class
