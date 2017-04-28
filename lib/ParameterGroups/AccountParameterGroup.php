@@ -98,7 +98,6 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @var string number of the given account
      *
-     * @deprecated please use IBan and Bic instead
      */
     public $number = null;
 
@@ -215,7 +214,6 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @return string number
      *
-     * @deprecated  please use IBan and Bic instead
      */
     public function getNumber()
     {

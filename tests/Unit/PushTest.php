@@ -39,13 +39,24 @@ class PushTest extends TestCase
     protected $xmlCcRegResponse;
 
     /**
+     * Example Credit Card Debit (pending) Response (with 3DSecure)
+     *
+     * @var string
+     */
+    protected $xmlCcDbPendingResponse;
+
+    /**
      * Example Direct Debit Response
      *
      * @var string
      */
     protected $xmlDdDbResponse;
 
-
+    /**
+     * Example Invoice Receipt Response
+     *
+     * @var string
+     */
     protected $xmlIvRcResponse;
 
     /**
@@ -65,6 +76,7 @@ class PushTest extends TestCase
     public function setUp()
     {
         $this->setSampleCcRgResponse();
+        $this->setSampleCcDbPendingResponse();
         $this->setSampleDdDbResponse();
         $this->setSampleIvRcResponse();
         $this->setSamplePpPaResponse();
@@ -152,6 +164,62 @@ class PushTest extends TestCase
         $this->assertEquals(
             '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b3'
             . '18ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
+            $response->getCriterion()->getSecretHash()
+        );
+    }
+
+    /**
+     * This test validates all response values to be correct after the mapping process
+     * for a pending credit card debit response with 3d secure.
+     *
+     * @test
+     */
+    public function hasValidMappedCcDbPendingProperties()
+    {
+        $push = new Push($this->xmlCcDbPendingResponse);
+        $response = $push->getResponse();
+
+        $this->assertEquals('Heidel', $response->getName()->getGiven());
+        $this->assertEquals('Berger-Payment', $response->getName()->getFamily());
+
+        $this->assertEquals('Vangerowstr. 18', $response->getAddress()->getStreet());
+        $this->assertEquals('69115', $response->getAddress()->getZip());
+        $this->assertEquals('Heidelberg', $response->getAddress()->getCity());
+        $this->assertEquals('DE', $response->getAddress()->getCountry());
+
+        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+
+        $this->assertEquals('Heidel Berger-Payment', $response->getAccount()->getHolder());
+        $this->assertEquals('471110******0000', $response->getAccount()->getNumber());
+        $this->assertEquals('VISA', $response->getAccount()->getBrand());
+        $this->assertEquals('02', $response->getAccount()->getExpiryMonth());
+        $this->assertEquals('2019', $response->getAccount()->getExpiryYear());
+
+        $this->assertEquals('145000035', $response->getIdentification()->getTransactionId());
+        $this->assertEquals('31HA07BC81756B7E77990451F3B9C082', $response->getIdentification()->getUniqueId());
+        $this->assertEquals('3552.1735.8428', $response->getIdentification()->getShortId());
+        $this->assertEquals('140', $response->getIdentification()->getShopperId());
+
+        $this->assertEquals('000.200.000', $response->getProcessing()->getReturnCode());
+        $this->assertEquals('Transaction pending', $response->getProcessing()->getReturn());
+        $this->assertEquals('80', $response->getProcessing()->getStatusCode());
+        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+
+        $this->assertEquals('150.37', $response->getPresentation()->getAmount());
+        $this->assertNotEquals('15.37', $response->getPresentation()->getAmount());
+        $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
+
+        $this->assertEquals('CC.DB', $response->getPayment()->getCode());
+
+        $this->assertEquals('000.200.000', $response->getError()['code']);
+        $this->assertEquals('Transaction pending', $response->getError()['message']);
+
+        $this->assertTrue($response->isPending(), 'Response Status is not pending.');
+        $this->assertTrue($response->isSuccess(), 'Response Status is not success.');
+        $this->assertFalse($response->isError(), 'Response Status is error.');
+
+        $this->assertEquals(
+            'efe14520c747b753fb91c613c421f8b5ca0c51c4df0b35f3ca6d3204039bc283',
             $response->getCriterion()->getSecretHash()
         );
     }
@@ -382,6 +450,69 @@ class PushTest extends TestCase
         </Analysis>
         <RequestTimestamp>2016-09-16 12:14:31</RequestTimestamp>
     </Transaction>
+</Response>
+XML;
+    }
+
+    private function setSampleCcDbPendingResponse()
+    {
+        $this->xmlCcDbPendingResponse = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response version="1.0">
+	<Transaction mode="CONNECTOR_TEST" response="ASYNC" channel="31HA07BC8142C5A171749A60D979B6E4" source="WPF">
+		<Identification>
+			<TransactionID>145000035</TransactionID>
+			<UniqueID>31HA07BC81756B7E77990451F3B9C082</UniqueID>
+			<ShortID>3552.1735.8428</ShortID>
+			<ShopperID>140</ShopperID>
+			<Source>HPC</Source>
+		</Identification>
+		<Processing code="CC.DB.80.00">
+			<Timestamp>2017-04-04 07:29:18</Timestamp>
+			<Result>ACK</Result>
+			<Status code="80">WAITING</Status>
+			<Reason code="00">Transaction Pending</Reason>
+			<Return code="000.200.000">Transaction pending</Return>
+		</Processing>
+		<Payment code="CC.DB">
+			<Presentation>
+				<Amount>150.37</Amount>
+				<Currency>EUR</Currency>
+			</Presentation>
+		</Payment>
+		<Account>
+			<Number>471110******0000</Number>
+			<Holder>Heidel Berger-Payment</Holder>
+			<Expiry month="02" year="2019"/>
+			<Month>02</Month>
+			<Year>2019</Year>
+			<Brand>VISA</Brand>
+		</Account>
+		<Customer>
+			<Name>
+				<Given>Heidel</Given>
+                <Family>Berger-Payment</Family>
+			</Name>
+			<Address>
+				<Street>Vangerowstr. 18</Street>
+                <Zip>69115</Zip>
+                <City>Heidelberg</City>
+                <Country>DE</Country>
+			</Address>
+			<Contact>
+				<Email>development@heidelpay.de</Email>
+			</Contact>
+		</Customer>
+		<Frontend>
+			<ResponseUrl>http://dev.heidelpay.de/response.php</ResponseUrl>
+		</Frontend>
+		<Analysis>
+			<Criterion name="SECRET">efe14520c747b753fb91c613c421f8b5ca0c51c4df0b35f3ca6d3204039bc283</Criterion>
+			<Criterion name="PUSH_URL">http://dev.heidelpay.de/push.php</Criterion>
+			<Criterion name="GUEST">false</Criterion>
+		</Analysis>
+		<RequestTimestamp>2017-04-04 07:29:18</RequestTimestamp>
+	</Transaction>
 </Response>
 XML;
     }
