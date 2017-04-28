@@ -100,7 +100,7 @@ class Push
      *
      * @param string $response
      */
-    public function setRawResponse(string $response)
+    public function setRawResponse($response)
     {
         $this->xmlResponse = $response;
     }
