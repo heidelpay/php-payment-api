@@ -67,6 +67,13 @@ class PushTest extends TestCase
     protected $xmlPpPaResponse;
 
     /**
+     * Example invalid response that covers some null values
+     *
+     * @var string
+     */
+    protected $xmlInvalidResponse;
+
+    /**
      * setUp sample response Object
      *
      * @inheritdoc
@@ -80,6 +87,7 @@ class PushTest extends TestCase
         $this->setSampleDdDbResponse();
         $this->setSampleIvRcResponse();
         $this->setSamplePpPaResponse();
+        $this->setSampleInvalidResponse();
     }
 
     /**
@@ -117,7 +125,8 @@ class PushTest extends TestCase
      */
     public function hasValidMappedCcRgProperties()
     {
-        $push = new Push($this->xmlCcRegResponse);
+        $push = new Push();
+        $push->setRawResponse($this->xmlCcRegResponse);
         $response = $push->getResponse();
 
         $this->assertEquals('Heidel', $response->getName()->getGiven());
@@ -393,6 +402,22 @@ class PushTest extends TestCase
             . '59a9f8aff5e237c60ffcae600e1f11e7342f60dbdd43b1cdc1a17a323c3f753d',
             $response->getCriterion()->getSecretHash()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function hasExceptedValuesOnIncompleteResponse()
+    {
+        $push = new Push($this->xmlInvalidResponse);
+        $response = $push->getResponse();
+
+        $this->assertEquals(null, $response->getPayment()->getCode());
+        $this->assertEquals(null, $response->getProcessing()->getReturnCode());
+        $this->assertEquals(null, $response->getProcessing()->getStatusCode());
+        $this->assertEquals(null, $response->getProcessing()->code);
+        $this->assertEquals(null, $response->getTransaction()->getChannel());
+        $this->assertEquals('CONNECTOR_TEST', $response->getTransaction()->getMode());
     }
 
     private function setSampleCcRgResponse()
@@ -708,6 +733,24 @@ XML;
             <Criterion name="GUEST">false</Criterion>
         </Analysis>
         <RequestTimestamp>2017-04-03 14:12:36</RequestTimestamp>
+    </Transaction>
+</Response>
+XML;
+    }
+
+    private function setSampleInvalidResponse()
+    {
+        $this->xmlInvalidResponse = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response version="1.0">
+    <Transaction response="SYNC" source="WPF">
+        <Processing>
+            <Timestamp>2017-04-03 14:12:36</Timestamp>
+            <Result>ACK</Result>
+            <Status>NEW</Status>
+            <Reason>SUCCESSFULL</Reason>
+            <Return>Request successfully processed in 'Merchant in Connector Test Mode'</Return>
+        </Processing>
     </Transaction>
 </Response>
 XML;
