@@ -50,8 +50,10 @@ class Processing extends AbstractPushMapper
     {
         list($field, $attribute) = explode(':', $fieldAttribute);
 
-        if (isset($xmlElement->Transaction->Processing->$field[$attribute])) {
-            return (string)$xmlElement->Transaction->Processing->$field[$attribute];
+        if (isset($xmlElement->Transaction->Processing->$field)) {
+            if (isset($xmlElement->Transaction->Processing->$field->attributes()->$attribute)) {
+                return (string)$xmlElement->Transaction->Processing->$field->attributes()->$attribute;
+            }
         }
 
         return null;
@@ -60,15 +62,7 @@ class Processing extends AbstractPushMapper
     public function getXmlObjectProperty(\SimpleXMLElement $xmlElement, $property)
     {
         if (isset($xmlElement->Transaction->Processing[$property])) {
-            $result = (string)$xmlElement->Transaction->Processing[$property];
-
-            // temporary solution: code in xml response contents too much, we cut it here.
-            if ($property == 'code') {
-                $codeRaw = explode('.', $result);
-                $result = $codeRaw[0] . '.' . $codeRaw[1];
-            }
-
-            return $result;
+            return (string)$xmlElement->Transaction->Processing[$property];
         }
 
         return null;

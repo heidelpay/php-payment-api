@@ -48,8 +48,10 @@ class Account extends AbstractPushMapper
     {
         list($field, $attribute) = explode(':', $fieldAttribute);
 
-        if (isset($xmlElement->Transaction->Account->$field[$attribute])) {
-            return (string)$xmlElement->Transaction->Account->$field[$attribute];
+        if (isset($xmlElement->Transaction->Account->$field)) {
+            if (isset($xmlElement->Transaction->Account->$field->attributes()->$attribute)) {
+                return (string)$xmlElement->Transaction->Account->$field->attributes()->$attribute;
+            }
         }
 
         return null;
