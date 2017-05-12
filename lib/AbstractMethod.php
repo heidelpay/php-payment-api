@@ -17,6 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\UserParameterGroup;
+use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup;
 
 /**
  * Abstract request/response class
@@ -125,6 +126,13 @@ abstract class AbstractMethod
      * @var \Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup
      */
     protected $request = null;
+
+    /**
+     * RiskInformationParameterGroup
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    protected $riskinformation = null;
 
     /**
      * SecurityParameterGroup
@@ -315,6 +323,19 @@ abstract class AbstractMethod
             return $this->request = new RequestParameterGroup();
         }
         return $this->request;
+    }
+
+    /**
+     * RiskInformation getter
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    public function getRiskInformation()
+    {
+    	if ($this->riskinformation === null) {
+    		return $this->riskinformation = new RiskInformationParameterGroup();
+    	}
+    	return $this->riskinformation;
     }
 
     /**
