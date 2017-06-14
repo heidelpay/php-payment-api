@@ -18,7 +18,7 @@ use Heidelpay\PhpApi\Exceptions\UndefinedPropertyException;
  * @subpackage PhpApi
  * @category   PhpApi
  */
-abstract class AbstractParameterGroup
+abstract class AbstractParameterGroup implements ParameterGroupInterface
 {
     /**
      * Return the name of the used class
@@ -53,5 +53,28 @@ abstract class AbstractParameterGroup
 
         $this->$key = $value;
         return $this;
+    }
+
+    /**
+     * Returns an array for a json representation.
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        $return = [];
+        foreach (get_object_vars($this) as $field => $value) {
+            $return[$field] = $value;
+        }
+
+        return $return;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toJson()
+    {
+        return json_encode($this->jsonSerialize());
     }
 }

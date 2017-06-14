@@ -109,6 +109,8 @@ class ResponseTest extends TestCase
      */
     public function IsSuccess()
     {
+        print $this->_responseObject->toJson();
+
         $this->assertTrue($this->_responseObject->isSuccess(), 'isSuccess should be true');
         $this->_responseObject->getProcessing()->set('result', 'NOK');
         $this->assertFalse($this->_responseObject->isSuccess(), 'isSuccess should be false.');
