@@ -332,10 +332,10 @@ abstract class AbstractMethod implements MethodInterface
      */
     public function getRiskInformation()
     {
-    	if ($this->riskinformation === null) {
-    		return $this->riskinformation = new RiskInformationParameterGroup();
-    	}
-    	return $this->riskinformation;
+        if ($this->riskinformation === null) {
+            return $this->riskinformation = new RiskInformationParameterGroup();
+        }
+        return $this->riskinformation;
     }
 
     /**

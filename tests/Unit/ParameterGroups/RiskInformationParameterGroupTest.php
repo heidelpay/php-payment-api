@@ -8,7 +8,6 @@ use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup as RiskInform
 /**
  * Unit test for RiskInformationParameterGroup
  *
- *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
@@ -38,12 +37,12 @@ class RiskinformationParameterGroupTest extends TestCase
      */
     public function testSince()
     {
-    	$RiskInformation = new RiskInformation();
+        $RiskInformation = new RiskInformation();
 
-    	$since = "1984-05-23";
-    	$RiskInformation->set('since', $since);
+        $since = "1984-05-23";
+        $RiskInformation->set('since', $since);
 
-    	$this->assertEquals($since, $RiskInformation->getSince());
+        $this->assertEquals($since, $RiskInformation->getSince());
     }
 
     /**
@@ -51,11 +50,11 @@ class RiskinformationParameterGroupTest extends TestCase
      */
     public function testOrdercount()
     {
-    	$RiskInformation = new RiskInformation();
+        $RiskInformation = new RiskInformation();
 
-    	$ordercount = 5;
-    	$RiskInformation->set('ordercount', $ordercount);
+        $ordercount = 5;
+        $RiskInformation->set('ordercount', $ordercount);
 
-    	$this->assertEquals($ordercount, $RiskInformation->getOrdercount());
+        $this->assertEquals($ordercount, $RiskInformation->getOrdercount());
     }
 }
