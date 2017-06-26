@@ -21,7 +21,9 @@ interface MethodInterface extends JsonSerializable
     /**
      * Returns a json representation of itself.
      *
+     * @param int $options
+     *
      * @return string
      */
-    public function toJson();
+    public function toJson($options = 0);
 }

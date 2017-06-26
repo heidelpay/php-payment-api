@@ -380,9 +380,9 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * @inheritdoc
      */
-    public function toJson()
+    public function toJson($options = 0)
     {
-        return json_encode($this->jsonSerialize());
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**

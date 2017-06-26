@@ -42,6 +42,11 @@ class TransactionParameterGroup extends AbstractParameterGroup
     public $mode = "CONNECTOR_TEST";
 
     /**
+     * @var string
+     */
+    public $response;
+
+    /**
      * TransactionChannel getter
      *
      * @return string channel
@@ -59,5 +64,10 @@ class TransactionParameterGroup extends AbstractParameterGroup
     public function getMode()
     {
         return $this->mode;
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
     }
 }

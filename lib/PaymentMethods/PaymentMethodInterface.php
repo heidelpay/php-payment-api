@@ -1,11 +1,11 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpApi\PaymentMethods;
 
 use JsonSerializable;
 
 /**
- * Interface for Parameter Groups
+ * Interface for payment methods
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -16,7 +16,7 @@ use JsonSerializable;
  *
  * @package heidelpay/php-api
  */
-interface ParameterGroupInterface extends JsonSerializable
+interface PaymentMethodInterface extends JsonSerializable
 {
     /**
      * Returns a Json representation of itself.

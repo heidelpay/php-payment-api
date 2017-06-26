@@ -193,4 +193,27 @@ trait BasicPaymentMethodTrait
                 $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
         }
     }
+
+    /**
+     * Returns an array for a json representation.
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        $return = [];
+        foreach (get_object_vars($this) as $field => $value) {
+            $return[$field] = $value;
+        }
+
+        return $return;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->jsonSerialize(), $options);
+    }
 }

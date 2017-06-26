@@ -40,4 +40,6 @@ abstract class AbstractPaymentMethod
      * @var string brand name
      */
     protected $_brand = null;
+
+
 }

@@ -20,7 +20,7 @@ use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
  *
  * @package heidelpay/php-api/paymentmethods/easycredit
  */
-class EasyCreditPaymentMethod
+class EasyCreditPaymentMethod implements PaymentMethodInterface
 {
     use AuthorizeOnRegistrationTransactionType;
     use BasicPaymentMethodTrait;
