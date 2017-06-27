@@ -2,7 +2,7 @@
 
 namespace Heidelpay\PhpApi\PaymentMethods;
 
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
+use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType as AuthorizeOnInitialization;
 use Heidelpay\PhpApi\TransactionTypes\FinalizeTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\InitializeTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
@@ -18,11 +18,11 @@ use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay/php-api/paymentmethods/easycredit
+ * @package heidelpay\php-api\paymentmethods\easycredit
  */
 class EasyCreditPaymentMethod implements PaymentMethodInterface
 {
-    use AuthorizeOnRegistrationTransactionType;
+    use AuthorizeOnInitialization;
     use BasicPaymentMethodTrait;
     use InitializeTransactionType;
     use FinalizeTransactionType;
