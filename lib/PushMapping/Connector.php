@@ -25,6 +25,7 @@ class Connector extends AbstractPushMapper
         'Holder' => 'account_holder',
         'Iban' => 'account_iban',
         'Number' => 'account_number',
+        'Usage' => 'account_usage',
     ];
 
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
