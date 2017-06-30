@@ -26,14 +26,14 @@ class ConfigParameterGroup extends AbstractParameterGroup
     public $bankcountry = null;
 
     /**
-     *  Supported brands countries for this payment method
+     * Supported brands countries for this payment method
      *
      * @var string
      */
     public $brands = null;
 
     /**
-     * optin text for special payment methods like santander and easyCredit
+     * optin text for payment methods like santander and easyCredit
      *
      * @var string
      */
@@ -42,7 +42,7 @@ class ConfigParameterGroup extends AbstractParameterGroup
     /**
      * Config bankcountry getter
      *
-     * @return string email
+     * @return string
      */
     public function getBankCountry()
     {
@@ -52,7 +52,7 @@ class ConfigParameterGroup extends AbstractParameterGroup
     /**
      * Config brands getter
      *
-     * @return string brands
+     * @return string
      */
     public function getBrands()
     {
@@ -60,12 +60,18 @@ class ConfigParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Config Option  text getter
+     * Config Optin-text getter
      *
-     * @return array optin text
+     * @return array|string
      */
     public function getOptinText()
     {
-        return json_decode($this->optin_text, true);
+        $result = json_decode($this->optin_text, true);
+
+        if (empty($result)) {
+            return $this->optin_text;
+        }
+
+        return $result;
     }
 }

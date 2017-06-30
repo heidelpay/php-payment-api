@@ -93,7 +93,7 @@ class EasyCreditPaymentMethodTest extends TestCase
 
         $easyCredit->getRequest()->authentification(...$this->authentification);
         $easyCredit->getRequest()->customerAddress(...$this->customerDetails);
-        $easyCredit->getRequest()->b2cSecured('MR', '1970-01-01', '31HA07BC81261F72AB953550ADF0C5EA');
+        $easyCredit->getRequest()->b2cSecured('MR', '1970-01-01');
         $easyCredit->getRequest()->async('DE', 'https://dev.heidelpay.de');
 
         $easyCredit->getRequest()->getRiskInformation()->set('guestcheckout', false);
@@ -102,7 +102,7 @@ class EasyCreditPaymentMethodTest extends TestCase
 
         $easyCredit->getRequest()->basketData(
             'heidelpayEasyCreditTest',
-            1157.98,
+            500.98,
             $this->currency,
             $this->secret
         );
