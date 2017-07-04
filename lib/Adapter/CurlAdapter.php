@@ -63,7 +63,7 @@ class CurlAdapter
         curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($request, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+        curl_setopt($request, CURLOPT_SSLVERSION, 6);       // CURL_SSLVERSION_TLSv1_2
         curl_setopt($request, CURLOPT_USERAGENT, "PhpApi");
 
         $response = curl_exec($request);
