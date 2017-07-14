@@ -17,6 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup;
 use Heidelpay\PhpApi\ParameterGroups\UserParameterGroup;
+use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup;
 
 /**
  * Abstract request/response class
@@ -32,7 +33,7 @@ use Heidelpay\PhpApi\ParameterGroups\UserParameterGroup;
  * @subpackage PhpApi
  * @category PhpApi
  */
-abstract class AbstractMethod
+abstract class AbstractMethod implements MethodInterface
 {
     /**
      * AccountParameterGroup
@@ -125,6 +126,13 @@ abstract class AbstractMethod
      * @var \Heidelpay\PhpApi\ParameterGroups\RequestParameterGroup
      */
     protected $request = null;
+
+    /**
+     * RiskInformationParameterGroup
+     *
+     * @var \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    protected $riskinformation = null;
 
     /**
      * SecurityParameterGroup
@@ -318,6 +326,19 @@ abstract class AbstractMethod
     }
 
     /**
+     * RiskInformation getter
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    public function getRiskInformation()
+    {
+        if ($this->riskinformation === null) {
+            return $this->riskinformation = new RiskInformationParameterGroup();
+        }
+        return $this->riskinformation;
+    }
+
+    /**
      * Security getter
      *
      * @return \Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup
@@ -354,5 +375,26 @@ abstract class AbstractMethod
             return $this->user = new UserParameterGroup();
         }
         return $this->user;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function jsonSerialize()
+    {
+        $return = [];
+        foreach (get_object_vars($this) as $field => $value) {
+            $return[$field] = $value;
+        }
+
+        return $return;
     }
 }
