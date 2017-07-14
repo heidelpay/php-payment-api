@@ -19,7 +19,7 @@ namespace Heidelpay\PhpApi\ParameterGroups;
 class RiskInformationParameterGroup extends AbstractParameterGroup
 {
     /**
-     * @var state if guest checkout (true/false) (optional)
+     * @var bool if guest checkout (true/false) (optional)
      */
     public $guestcheckout = null;
 

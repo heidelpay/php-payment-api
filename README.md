@@ -2,6 +2,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/heidelpay/php-api/badge.svg?branch=master)](https://coveralls.io/github/heidelpay/php-api?branch=master)
 [![Build Status](https://travis-ci.org/heidelpay/php-api.svg?branch=master)](https://travis-ci.org/heidelpay/php-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/b93a0799ab624527b3e32e7bf23bff8a)](https://www.codacy.com/app/heidelpay/php-api/dashboard)
+[![PHP 5.6](https://img.shields.io/badge/php-5.6-blue.svg)](http://www.php.net)
+[![PHP 7.0](https://img.shields.io/badge/php-7.0-blue.svg)](http://www.php.net)
 
 ![Logo](https://dev.heidelpay.de/devHeidelpay_400_180.jpg)
 
@@ -28,6 +30,7 @@ This is the php payment api for heidelpay. The library will help you to easily i
 * invoice secured b2c
 * direct debit secured b2c
 * Santander invoice
+* easyCredit
 
 ### SYSTEM REQUIREMENTS
 

@@ -33,7 +33,7 @@ use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup;
  * @subpackage PhpApi
  * @category PhpApi
  */
-abstract class AbstractMethod
+abstract class AbstractMethod implements MethodInterface
 {
     /**
      * AccountParameterGroup
@@ -332,10 +332,10 @@ abstract class AbstractMethod
      */
     public function getRiskInformation()
     {
-    	if ($this->riskinformation === null) {
-    		return $this->riskinformation = new RiskInformationParameterGroup();
-    	}
-    	return $this->riskinformation;
+        if ($this->riskinformation === null) {
+            return $this->riskinformation = new RiskInformationParameterGroup();
+        }
+        return $this->riskinformation;
     }
 
     /**
@@ -375,5 +375,26 @@ abstract class AbstractMethod
             return $this->user = new UserParameterGroup();
         }
         return $this->user;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function jsonSerialize()
+    {
+        $return = [];
+        foreach (get_object_vars($this) as $field => $value) {
+            $return[$field] = $value;
+        }
+
+        return $return;
     }
 }

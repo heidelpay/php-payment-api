@@ -209,7 +209,6 @@ class IdealPaymentMerhodTest extends TestCase
         $this->assertEquals($configBankCountry, $response[1]->getConfig()->getBankCountry());
 
         $configBrands = array(
-            'ING_TEST' => 'Test Bank',
             'INGBNL2A' => 'Issuer Simulation V3 - ING',
             'RABONL2U' => 'Issuer Simulation V3 - RABO'
         );
