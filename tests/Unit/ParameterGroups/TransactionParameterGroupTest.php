@@ -27,7 +27,7 @@ class TransactionParameterGroupTest extends TestCase
         $Transaction = new Transaction();
 
         $value = '31HA07BC8142C5A171749A60D979B6E4';
-        $Transaction->set('channel', $value);
+        $Transaction->setChannel($value);
 
         $this->assertEquals($value, $Transaction->getChannel());
     }
@@ -40,7 +40,7 @@ class TransactionParameterGroupTest extends TestCase
         $Transaction = new Transaction();
 
         $value = 'LIVE';
-        $Transaction->set('mode', $value);
+        $Transaction->setMode($value);
 
         $this->assertEquals($value, $Transaction->getMode());
     }

@@ -133,7 +133,7 @@ if ($Invoice->getResponse()->isSuccess()) {
     </select>
         <br/>
         <br/>
-    <button type="submit">Kauf best&auml;tigen</button></td>
+    <button type="submit">Kauf best&auml;tigen</button>
 </form>
 </body>
 </html>

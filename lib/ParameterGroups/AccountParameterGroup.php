@@ -120,6 +120,19 @@ class AccountParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for the bank number of the account
+     *
+     * @param $bank
+     * @return $this
+     * @deprecated please use IBan and Bic instead
+     */
+    public function setBank($bank)
+    {
+        $this->bank = $bank;
+        return $this;
+    }
+
+    /**
      *  AccountBankname getter
      *
      * @return string bankname
@@ -127,6 +140,17 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getBankName()
     {
         return $this->bankname;
+    }
+
+    /**
+     * Setter for the bankname of the used account
+     * @param $bankName
+     * @return $this
+     */
+    public function setBankName($bankName)
+    {
+        $this->bankname = $bankName;
+        return $this;
     }
 
     /**
@@ -140,6 +164,18 @@ class AccountParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for the account brand name f.e. SOFORT or PAYPAL
+     *
+     * @param $brand string name of the used brand in upper case
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
+        return $this;
+    }
+
+    /**
      *  AccountBic getter
      *
      * @return string bic
@@ -150,6 +186,18 @@ class AccountParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for the sepa bank account identifier
+     *
+     * @param string $bic
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     */
+    public function setBic(string $bic)
+    {
+        $this->bic = $bic;
+        return $this;
+    }
+
+    /**
      *  AccountCountry getter
      *
      * @return string country
@@ -157,6 +205,18 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Setter for the country code of the used account
+     *
+     * @param string $country account country
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     */
+    public function setCountry(string $country)
+    {
+        $this->country = $country;
+        return $this;
     }
 
     /**
@@ -190,6 +250,18 @@ class AccountParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for the holders name of a given account
+     *
+     * @param string $holder account holder
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     */
+    public function setHolder(string $holder)
+    {
+        $this->holder = $holder;
+        return $this;
+    }
+
+    /**
      * AccountIban getter
      *
      * @return string iban
@@ -197,6 +269,17 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getIban()
     {
         return $this->iban;
+    }
+
+    /**
+     * Setter for the sepa iban of a given account
+     * @param $iban string iban of the account
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     */
+    public function setIban(string $iban)
+    {
+        $this->iban = $iban;
+        return $this;
     }
 
     /**
@@ -218,6 +301,21 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * Setter for the number of a given account
+     *
+     * Note: due to pci restrictions you are not allowed to use this setter for credit or debit
+     * card information.
+     *
+     * @param $number string number of the use account
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     */
+    public function setNumber(string $number)
+    {
+        $this->number = $number;
+        return $this;
     }
 
     /**

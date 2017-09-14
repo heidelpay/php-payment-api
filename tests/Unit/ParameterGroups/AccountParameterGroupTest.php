@@ -29,7 +29,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $value = "Heidelpay";
-        $Account->set("bank", $value);
+        $Account->setBank($value);
 
         $this->assertEquals($value, $Account->getBank());
     }
@@ -44,7 +44,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $value = "Sofort";
-        $Account->set("bankname", $value);
+        $Account->setBankName($value);
 
         $this->assertEquals($value, $Account->getBankName());
     }
@@ -57,7 +57,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $value = "Master";
-        $Account->set("brand", $value);
+        $Account->setBrand($value);
 
         $this->assertEquals($value, $Account->getBrand());
     }
@@ -72,7 +72,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $value = "COBADEFFXXX";
-        $Account->set("bic", $value);
+        $Account->setBic($value);
 
         $this->assertEquals($value, $Account->getBic());
     }
@@ -87,7 +87,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $value = "DE";
-        $Account->set("country", $value);
+        $Account->setCountry($value);
 
         $this->assertEquals($value, $Account->getCountry());
     }
@@ -100,7 +100,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $name = "Hans Meister";
-        $Account->set("holder", $name);
+        $Account->setHolder($name);
 
         $this->assertEquals($name, $Account->getHolder());
     }
@@ -113,7 +113,7 @@ class AccountParameterGroupTest extends TestCase
         $Account = new Account();
 
         $value = "DE89370400440532013000";
-        $Account->set("iban", $value);
+        $Account->setIban($value);
 
         $this->assertEquals($value, $Account->getIban());
     }

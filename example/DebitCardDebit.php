@@ -105,7 +105,7 @@ require_once __DIR__ . '/../../../autoload.php';
         echo '<pre>'. print_r($DebitCard->getResponse()->getError(), 1).'</pre>';
     }
  ?>
- <button type="submit">Submit data</button></td>
+ <button type="submit">Submit data</button>
  </form>
  <script type="text/javascript" src="./js/creditCardFrame.js"></script>
  </body>

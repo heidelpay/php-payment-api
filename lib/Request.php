@@ -38,11 +38,11 @@ class Request extends AbstractMethod
     /**
      * Set all necessary authentication parameters for this request
      *
-     * @param string $SecuritySender
-     * @param string $UserLogin
-     * @param string $UserPassword
-     * @param string $TransactionChannel
-     * @param bool   $SandboxRequest
+     * @param string $SecuritySender security sender parameter f.e 31HA07BC8142C5A171745D00AD63D182
+     * @param string $UserLogin user login parameter f.e. 31ha07bc8142c5a171744e5aef11ffd3
+     * @param string $UserPassword user password f.e. 93167DE7
+     * @param string $TransactionChannel channel id of the payment method f.e. 31HA07BC8142C5A171744F3D6D155865
+     * @param bool   $SandboxRequest choose between sandbox and productive payment system
      *
      * @return \Heidelpay\PhpApi\Request
      */
@@ -53,14 +53,14 @@ class Request extends AbstractMethod
         $TransactionChannel = null,
         $SandboxRequest = false
     ) {
-        $this->getSecurity()->set('sender', $SecuritySender);
-        $this->getUser()->set('login', $UserLogin);
-        $this->getUser()->set('pwd', $UserPassword);
-        $this->getTransaction()->set('channel', $TransactionChannel);
-        $this->getTransaction()->set('mode', "LIVE");
+        $this->getSecurity()->setSender($SecuritySender);
+        $this->getUser()->setLogin($UserLogin);
+        $this->getUser()->setPassword($UserPassword);
+        $this->getTransaction()->setChannel($TransactionChannel);
+        $this->getTransaction()->setMode("LIVE");
 
         if ($SandboxRequest) {
-            $this->getTransaction()->set('mode', "CONNECTOR_TEST");
+            $this->getTransaction()->setMode("CONNECTOR_TEST");
         }
         return $this;
     }
@@ -68,18 +68,18 @@ class Request extends AbstractMethod
     /**
      * Set all necessary parameter for a asynchronous request
      *
-     * @param string $LanguageCode
-     * @param string $ResponseUrl
+     * @param string $LanguageCode language code 2 letters for error messages and iframe f.e EN
+     * @param string $ResponseUrl response url of your application f.e https://www.url.com/response.php
      *
      * @return \Heidelpay\PhpApi\Request
      */
     public function async($LanguageCode = "EN", $ResponseUrl = null)
     {
-        $this->getFrontend()->set('language', $LanguageCode);
+        $this->getFrontend()->setLanguage($LanguageCode);
 
         if ($ResponseUrl !== null) {
-            $this->getFrontend()->set('response_url', $ResponseUrl);
-            $this->getFrontend()->set('enabled', 'TRUE');
+            $this->getFrontend()->setResponseUrl($ResponseUrl);
+            $this->getFrontend()->setEnabled('TRUE');
         }
         return $this;
     }
@@ -87,16 +87,16 @@ class Request extends AbstractMethod
     /**
      * Set all necessary customer parameter for a request
      *
-     * @param string $nameGiven
-     * @param string $nameFamily
-     * @param string $nameCompany
-     * @param string $shopperId
-     * @param string $addressStreet
-     * @param string $addressState
-     * @param string $addressZip
-     * @param string $addressCity
-     * @param string $addressCountry
-     * @param string $contactMail
+     * @param string $nameGiven customer given name f.e. John
+     * @param string $nameFamily customer family name f.e. Doe
+     * @param string $nameCompany company name f.e. Heidelpay
+     * @param string $shopperId customer id in your application f.e. 1249
+     * @param string $addressStreet address street of the customer f.e. Vagerowstr.
+     * @param string $addressState address state ot the customer f.e Bayern
+     * @param string $addressZip address zip code f.e. 69115
+     * @param string $addressCity address city f.e. Heidelberg
+     * @param string $addressCountry address country code 2 letters f.e. DE
+     * @param string $contactMail email adress of the customer f.e. ab@mail.de
      *
      * @return \Heidelpay\PhpApi\Request
      */
@@ -112,16 +112,16 @@ class Request extends AbstractMethod
         $addressCountry = null,
         $contactMail = null
     ) {
-        $this->getName()->set('given', $nameGiven);
-        $this->getName()->set('family', $nameFamily);
-        $this->getName()->set('company', $nameCompany);
-        $this->getIdentification()->set('shopperid', $shopperId);
-        $this->getAddress()->set('street', $addressStreet);
-        $this->getAddress()->set('state', $addressState);
-        $this->getAddress()->set('zip', $addressZip);
-        $this->getAddress()->set('city', $addressCity);
-        $this->getAddress()->set('country', $addressCountry);
-        $this->getContact()->set('email', $contactMail);
+        $this->getName()->setGiven($nameGiven);
+        $this->getName()->setFamily($nameFamily);
+        $this->getName()->setCompany($nameCompany);
+        $this->getIdentification()->setShopperid($shopperId);
+        $this->getAddress()->setStreet($addressStreet);
+        $this->getAddress()->setState($addressState);
+        $this->getAddress()->setZip($addressZip);
+        $this->getAddress()->setCity($addressCity);
+        $this->getAddress()->setCountry($addressCountry);
+        $this->getContact()->setEmail($contactMail);
 
         return $this;
     }
@@ -129,18 +129,18 @@ class Request extends AbstractMethod
     /**
      * Set all basket or order information
      *
-     * @param string $shopIdentifier
-     * @param string $amount
-     * @param string $currency
-     * @param string $secret
+     * @param string $shopIdentifier id of your application f.e. order-125454
+     * @param string $amount amount of the current basket f.e. 20.12
+     * @param string $currency currency code 3 letters f.e. USD
+     * @param string $secret a secret to prevent your application against fake responses
      *
      * @return \Heidelpay\PhpApi\Request
      */
     public function basketData($shopIdentifier = null, $amount = null, $currency = null, $secret = null)
     {
-        $this->getIdentification()->set('transactionid', $shopIdentifier);
-        $this->getPresentation()->set('amount', $amount);
-        $this->getPresentation()->set('currency', $currency);
+        $this->getIdentification()->setTransactionid($shopIdentifier);
+        $this->getPresentation()->setAmount($amount);
+        $this->getPresentation()->setCurrency( $currency);
         if ($secret !== null and $shopIdentifier !== null) {
             $this->getCriterion()->setSecret($shopIdentifier, $secret);
         }
@@ -204,9 +204,9 @@ class Request extends AbstractMethod
      */
     public function b2cSecured($salutation = null, $birthdate = null, $basketId = null)
     {
-        $this->getName()->set('salutation', $salutation);
-        $this->getName()->set('birthdate', $birthdate);
-        $this->getBasket()->set('id', $basketId);
+        $this->getName()->setSalutation($salutation);
+        $this->getName()->setBirthdate($birthdate);
+        $this->getBasket()->setId($basketId);
 
         return $this;
     }

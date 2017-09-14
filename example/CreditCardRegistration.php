@@ -108,7 +108,6 @@ $CreditCard->registration(
     }
     ?>
     <button type="submit">Submit data</button>
-    </td>
 </form>
 <script type="text/javascript" src="./js/creditCardFrame.js"></script>
 </body>

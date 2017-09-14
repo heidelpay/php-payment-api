@@ -40,7 +40,7 @@ class IdentificationParameterGroupTest extends TestCase
         $Identification = new Identification();
 
         $value = '200123';
-        $Identification->set('shopperid', $value);
+        $Identification->setShopperid($value);
 
         $this->assertEquals($value, $Identification->getShopperId());
     }
@@ -66,7 +66,7 @@ class IdentificationParameterGroupTest extends TestCase
         $Identification = new Identification();
 
         $value = '0860300156-ngw|php-conncetor';
-        $Identification->set('transactionid', $value);
+        $Identification->setTransactionid($value);
 
         $this->assertEquals($value, $Identification->getTransactionId());
     }
@@ -79,7 +79,7 @@ class IdentificationParameterGroupTest extends TestCase
         $Identification = new Identification();
 
         $value = '31HA07BC8142C5A171745D00AD233923';
-        $Identification->set('referenceid', $value);
+        $Identification->setReferenceid($value);
 
         $this->assertEquals($value, $Identification->getReferenceId());
     }

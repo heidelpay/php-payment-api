@@ -28,7 +28,7 @@ class AddressParameterGroupTest extends TestCase
         $Address = new Address();
 
         $city = "Heidelberg";
-        $Address->set('city', $city);
+        $Address->setCity($city);
 
         $this->assertEquals($city, $Address->getCity());
     }
@@ -41,7 +41,7 @@ class AddressParameterGroupTest extends TestCase
         $Address = new Address();
 
         $country = "DE";
-        $Address->set('country', $country);
+        $Address->setCountry($country);
 
         $this->assertEquals($country, $Address->getCountry());
     }
@@ -54,7 +54,7 @@ class AddressParameterGroupTest extends TestCase
         $Address = new Address();
 
         $state = "DE-BW";
-        $Address->set('state', $state);
+        $Address->setState($state);
 
         $this->assertEquals($state, $Address->getState());
     }
@@ -67,7 +67,7 @@ class AddressParameterGroupTest extends TestCase
         $Address = new Address();
 
         $street = "Märchenweg 123";
-        $Address->set('street', $street);
+        $Address->setStreet($street);
 
         $this->assertEquals($street, $Address->getStreet());
     }
@@ -80,7 +80,7 @@ class AddressParameterGroupTest extends TestCase
         $Address = new Address();
 
         $zip = "69115";
-        $Address->set('zip', $zip);
+        $Address->setZip($zip);
 
         $this->assertEquals($zip, $Address->getZip());
     }

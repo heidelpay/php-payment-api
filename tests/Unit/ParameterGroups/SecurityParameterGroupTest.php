@@ -27,7 +27,7 @@ class SecurityParameterGroupTest extends TestCase
         $Security = new Security();
 
         $value = '31HA07BC8142C5A171745D00AD63D182';
-        $Security->set('sender', $value);
+        $Security->setSender($value);
 
         $this->assertEquals($value, $Security->getSender());
     }

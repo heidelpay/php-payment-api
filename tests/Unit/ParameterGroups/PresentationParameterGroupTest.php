@@ -27,7 +27,7 @@ class PresentationParameterGroupTest extends TestCase
         $Presentation = new Presentation();
 
         $value = '20.11';
-        $Presentation->set('amount', $value);
+        $Presentation->setAmount($value);
 
         $this->assertEquals($value, $Presentation->getAmount());
     }
@@ -40,7 +40,7 @@ class PresentationParameterGroupTest extends TestCase
         $Presentation = new Presentation();
 
         $value = 'USD';
-        $Presentation->set('currency', $value);
+        $Presentation->setCurrency($value);
 
         $this->assertEquals($value, $Presentation->getCurrency());
     }
@@ -55,7 +55,7 @@ class PresentationParameterGroupTest extends TestCase
         $Presentation = new Presentation();
 
         $value = 'Heidelpay Invoice ID 12345';
-        $Presentation->set('usage', $value);
+        $Presentation->setUsage($value);
 
         $this->assertEquals($value, $Presentation->getUsage());
     }
