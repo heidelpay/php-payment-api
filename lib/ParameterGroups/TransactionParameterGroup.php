@@ -80,7 +80,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      * @param string $channel transaction channel id f.e. 31HA07BC8142C5A171749A60D979B6E4
      * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
      */
-    public function setChannel(string $channel)
+    public function setChannel($channel)
     {
         $this->channel = $channel;
         return $this;
@@ -91,7 +91,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      * @param string $mode f.e LIVE
      * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
      */
-    public function setMode(string $mode)
+    public function setMode($mode)
     {
         $this->mode = $mode;
         return $this;
