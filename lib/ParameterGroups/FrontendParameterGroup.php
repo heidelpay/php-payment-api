@@ -174,6 +174,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * for the allowed ccs parameter
      *
      * @param string $css_path url to a css file f.e https://dev.heidelpay.de/heidelpay_iframe.css
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function setCssPath($css_path)
@@ -190,6 +191,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * like debitOnRegistration (only not 3DSecure).
      *
      * @param string $enabled
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function setEnabled($enabled)
@@ -202,7 +204,9 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * Setter for the frontend language
      *
      * This setting only influence error messages and the heidelpay payment frame for credit and debit card..
+     *
      * @param string $language iso language code 2 letters
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function setLanguage($language)
@@ -215,6 +219,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * Setter for transaction mode
      *
      * @param string $mode
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function setMode($mode)
@@ -230,6 +235,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * post request. f.e. http://dev.heidelpay.com
      *
      * @param string $payment_frame_origin f.e. http://dev.heidelpay.com
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function setPaymentFrameOrigin($payment_frame_origin)
@@ -246,6 +252,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * for one step checkout or checkouts like the magento once.
      *
      * @param string $prevent_async_redirect
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
     public function setPreventAsyncRedirect($prevent_async_redirect)
@@ -265,6 +272,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * this the shortid of the transaction or the email address used for the request-
      *
      * @param string $response_url f.e https://dev.heidelpay.de/reponse.php
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      *
      */
@@ -273,5 +281,4 @@ class FrontendParameterGroup extends AbstractParameterGroup
         $this->response_url = $response_url;
         return $this;
     }
-
 }

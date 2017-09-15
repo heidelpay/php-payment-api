@@ -47,7 +47,9 @@ class PaymentParameterGroup extends AbstractParameterGroup
 
     /**
      * setter for the payment code
+     *
      * @param string $code
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup
      */
     public function setCode($code)
@@ -55,6 +57,4 @@ class PaymentParameterGroup extends AbstractParameterGroup
         $this->code = $code;
         return $this;
     }
-
-
 }

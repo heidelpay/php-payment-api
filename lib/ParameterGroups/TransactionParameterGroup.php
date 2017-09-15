@@ -78,6 +78,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      * Another reason for a different channel is that some payment methods share one channel.
      *
      * @param string $channel transaction channel id f.e. 31HA07BC8142C5A171749A60D979B6E4
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
      */
     public function setChannel($channel)
@@ -88,7 +89,9 @@ class TransactionParameterGroup extends AbstractParameterGroup
 
     /**
      * Setter for the transaction mode
+     *
      * @param string $mode f.e LIVE
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
      */
     public function setMode($mode)
@@ -96,5 +99,4 @@ class TransactionParameterGroup extends AbstractParameterGroup
         $this->mode = $mode;
         return $this;
     }
-
 }

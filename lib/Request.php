@@ -38,11 +38,11 @@ class Request extends AbstractMethod
     /**
      * Set all necessary authentication parameters for this request
      *
-     * @param string $SecuritySender security sender parameter f.e 31HA07BC8142C5A171745D00AD63D182
-     * @param string $UserLogin user login parameter f.e. 31ha07bc8142c5a171744e5aef11ffd3
-     * @param string $UserPassword user password f.e. 93167DE7
+     * @param string $SecuritySender     security sender parameter f.e 31HA07BC8142C5A171745D00AD63D182
+     * @param string $UserLogin          user login parameter f.e. 31ha07bc8142c5a171744e5aef11ffd3
+     * @param string $UserPassword       user password f.e. 93167DE7
      * @param string $TransactionChannel channel id of the payment method f.e. 31HA07BC8142C5A171744F3D6D155865
-     * @param bool   $SandboxRequest choose between sandbox and productive payment system
+     * @param bool   $SandboxRequest     choose between sandbox and productive payment system
      *
      * @return \Heidelpay\PhpApi\Request
      */
@@ -69,7 +69,7 @@ class Request extends AbstractMethod
      * Set all necessary parameter for a asynchronous request
      *
      * @param string $LanguageCode language code 2 letters for error messages and iframe f.e EN
-     * @param string $ResponseUrl response url of your application f.e https://www.url.com/response.php
+     * @param string $ResponseUrl  response url of your application f.e https://www.url.com/response.php
      *
      * @return \Heidelpay\PhpApi\Request
      */
@@ -87,16 +87,16 @@ class Request extends AbstractMethod
     /**
      * Set all necessary customer parameter for a request
      *
-     * @param string $nameGiven customer given name f.e. John
-     * @param string $nameFamily customer family name f.e. Doe
-     * @param string $nameCompany company name f.e. Heidelpay
-     * @param string $shopperId customer id in your application f.e. 1249
-     * @param string $addressStreet address street of the customer f.e. Vagerowstr.
-     * @param string $addressState address state ot the customer f.e Bayern
-     * @param string $addressZip address zip code f.e. 69115
-     * @param string $addressCity address city f.e. Heidelberg
+     * @param string $nameGiven      customer given name f.e. John
+     * @param string $nameFamily     customer family name f.e. Doe
+     * @param string $nameCompany    company name f.e. Heidelpay
+     * @param string $shopperId      customer id in your application f.e. 1249
+     * @param string $addressStreet  address street of the customer f.e. Vagerowstr.
+     * @param string $addressState   address state ot the customer f.e Bayern
+     * @param string $addressZip     address zip code f.e. 69115
+     * @param string $addressCity    address city f.e. Heidelberg
      * @param string $addressCountry address country code 2 letters f.e. DE
-     * @param string $contactMail email adress of the customer f.e. ab@mail.de
+     * @param string $contactMail    email adress of the customer f.e. ab@mail.de
      *
      * @return \Heidelpay\PhpApi\Request
      */
@@ -130,9 +130,9 @@ class Request extends AbstractMethod
      * Set all basket or order information
      *
      * @param string $shopIdentifier id of your application f.e. order-125454
-     * @param string $amount amount of the current basket f.e. 20.12
-     * @param string $currency currency code 3 letters f.e. USD
-     * @param string $secret a secret to prevent your application against fake responses
+     * @param string $amount         amount of the current basket f.e. 20.12
+     * @param string $currency       currency code 3 letters f.e. USD
+     * @param string $secret         a secret to prevent your application against fake responses
      *
      * @return \Heidelpay\PhpApi\Request
      */
@@ -140,7 +140,7 @@ class Request extends AbstractMethod
     {
         $this->getIdentification()->setTransactionid($shopIdentifier);
         $this->getPresentation()->setAmount($amount);
-        $this->getPresentation()->setCurrency( $currency);
+        $this->getPresentation()->setCurrency($currency);
         if ($secret !== null and $shopIdentifier !== null) {
             $this->getCriterion()->setSecret($shopIdentifier, $secret);
         }

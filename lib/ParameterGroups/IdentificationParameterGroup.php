@@ -141,6 +141,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * Setter for the customer id of your application
      *
      * @param string $shopperid customer id f.e. 12042
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
     public function setShopperid($shopperid)
@@ -156,7 +157,8 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * your system and the payment system. This can be f.e. an order id or invoice id.
      *
      * @param string $transactionid f.e. order-1109
-     * @return  \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
     public function setTransactionid($transactionid)
     {
@@ -178,5 +180,4 @@ class IdentificationParameterGroup extends AbstractParameterGroup
         $this->referenceid = $referenceid;
         return $this;
     }
-
 }

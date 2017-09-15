@@ -123,7 +123,9 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Setter for the bank number of the account
      *
      * @param $bank string
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     *
      * @deprecated please use IBan and Bic instead
      */
     public function setBank($bank)
@@ -144,7 +146,9 @@ class AccountParameterGroup extends AbstractParameterGroup
 
     /**
      * Setter for the bankname of the used account
+     *
      * @param $bankName string
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setBankName($bankName)
@@ -167,6 +171,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Setter for the account brand name f.e. SOFORT or PAYPAL
      *
      * @param $brand string name of the used brand in upper case
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setBrand($brand)
@@ -189,6 +194,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Setter for the sepa bank account identifier
      *
      * @param string $bic
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setBic($bic)
@@ -211,6 +217,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Setter for the country code of the used account
      *
      * @param string $country account country
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setCountry($country)
@@ -253,6 +260,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Setter for the holders name of a given account
      *
      * @param string $holder account holder
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setHolder($holder)
@@ -273,7 +281,9 @@ class AccountParameterGroup extends AbstractParameterGroup
 
     /**
      * Setter for the sepa iban of a given account
+     *
      * @param $iban string iban of the account
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setIban($iban)
@@ -310,6 +320,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * card information.
      *
      * @param $number string number of the use account
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
     public function setNumber($number)

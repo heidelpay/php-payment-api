@@ -83,6 +83,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * Setter for the basket amount
      *
      * @param float $amount f.e. 20.12
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
     public function setAmount($amount)
@@ -95,6 +96,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * Setter for the currency in iso code 3 letters
      *
      * @param string $currency f.e USD
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
     public function setCurrency($currency)
@@ -109,6 +111,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * The usage text on the customers account can be set for some payment methods
      *
      * @param string $usage f.e. "Order 1232. Thank you for choosing Heidelpay"
+     *
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
     public function setUsage($usage)
