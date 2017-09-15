@@ -122,11 +122,11 @@ class AccountParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the bank number of the account
      *
-     * @param $bank
-     * @return $this
+     * @param $bank string
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      * @deprecated please use IBan and Bic instead
      */
-    public function setBank($bank)
+    public function setBank(string $bank)
     {
         $this->bank = $bank;
         return $this;
@@ -144,10 +144,10 @@ class AccountParameterGroup extends AbstractParameterGroup
 
     /**
      * Setter for the bankname of the used account
-     * @param $bankName
-     * @return $this
+     * @param $bankName string
+     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setBankName($bankName)
+    public function setBankName(string $bankName)
     {
         $this->bankname = $bankName;
         return $this;
@@ -169,7 +169,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param $brand string name of the used brand in upper case
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setBrand($brand)
+    public function setBrand(string $brand)
     {
         $this->brand = $brand;
         return $this;
