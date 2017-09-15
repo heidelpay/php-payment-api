@@ -126,7 +126,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      * @deprecated please use IBan and Bic instead
      */
-    public function setBank(string $bank)
+    public function setBank($bank)
     {
         $this->bank = $bank;
         return $this;
