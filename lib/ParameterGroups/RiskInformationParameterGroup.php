@@ -62,4 +62,41 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     {
         return $this->ordercount;
     }
+
+    /**
+     * setter for is quest checkout
+     *
+     * @param string $guestcheckout
+     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    public function setGuestCheckout($guestcheckout)
+    {
+        $this->guestcheckout = $guestcheckout;
+        return $this;
+    }
+
+    /**
+     * setter for customer since
+     * @param string $since
+     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    public function setSince($since)
+    {
+        $this->since = $since;
+        return $this;
+    }
+
+    /**
+     * setter for order count
+     *
+     * @param int $ordercount
+     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    public function setOrderCount($ordercount)
+    {
+        $this->ordercount = $ordercount;
+        return $this;
+    }
+
+
 }

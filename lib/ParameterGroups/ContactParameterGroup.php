@@ -102,7 +102,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      * @param $email string customer email
      * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
-    public function setEmail(string $email)
+    public function setEmail($email)
     {
         $this->email = $email;
         return $this;
@@ -114,7 +114,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      * @param string $ip customer ip address
      * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
-    public function setIp(string $ip)
+    public function setIp($ip)
     {
         $this->ip = $ip;
         return $this;
@@ -126,7 +126,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      * @param string $mobile mobile phone number
      * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
-    public function setMobile(string $mobile)
+    public function setMobile($mobile)
     {
         $this->mobile = $mobile;
         return $this;
@@ -137,7 +137,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      * @param string $phone phone number
      * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
      */
-    public function setPhone(string $phone)
+    public function setPhone($phone)
     {
         $this->phone = $phone;
         return $this;

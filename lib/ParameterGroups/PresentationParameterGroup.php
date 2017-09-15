@@ -85,7 +85,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * @param float $amount f.e. 20.12
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
-    public function setAmount(float $amount)
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -97,7 +97,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * @param string $currency f.e USD
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
-    public function setCurrency(string $currency)
+    public function setCurrency($currency)
     {
         $this->currency = $currency;
         return $this;
@@ -111,7 +111,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      * @param string $usage f.e. "Order 1232. Thank you for choosing Heidelpay"
      * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
      */
-    public function setUsage(string $usage)
+    public function setUsage($usage)
     {
         $this->usage = $usage;
         return $this;

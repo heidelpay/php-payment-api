@@ -147,7 +147,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param $bankName string
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setBankName(string $bankName)
+    public function setBankName($bankName)
     {
         $this->bankname = $bankName;
         return $this;
@@ -169,7 +169,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param $brand string name of the used brand in upper case
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setBrand(string $brand)
+    public function setBrand($brand)
     {
         $this->brand = $brand;
         return $this;
@@ -191,7 +191,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param string $bic
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setBic(string $bic)
+    public function setBic($bic)
     {
         $this->bic = $bic;
         return $this;
@@ -213,7 +213,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param string $country account country
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setCountry(string $country)
+    public function setCountry($country)
     {
         $this->country = $country;
         return $this;
@@ -255,7 +255,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param string $holder account holder
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setHolder(string $holder)
+    public function setHolder($holder)
     {
         $this->holder = $holder;
         return $this;
@@ -276,7 +276,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param $iban string iban of the account
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setIban(string $iban)
+    public function setIban($iban)
     {
         $this->iban = $iban;
         return $this;
@@ -312,7 +312,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @param $number string number of the use account
      * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
      */
-    public function setNumber(string $number)
+    public function setNumber($number)
     {
         $this->number = $number;
         return $this;

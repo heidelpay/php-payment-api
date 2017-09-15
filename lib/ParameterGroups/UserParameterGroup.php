@@ -63,7 +63,7 @@ class UserParameterGroup extends AbstractParameterGroup
      * @param string $login user login f.e 31ha07bc8142c5a171744e5aef11ffd3
      * @return \Heidelpay\PhpApi\ParameterGroups\UserParameterGroup
      */
-    public function setLogin(string $login)
+    public function setLogin($login)
     {
         $this->login = $login;
         return $this;
@@ -77,7 +77,7 @@ class UserParameterGroup extends AbstractParameterGroup
      * @param string $pwd user password parameter f.e. DAJapaewa434
      * @return \Heidelpay\PhpApi\ParameterGroups\UserParameterGroup
      */
-    public function setPassword(string $pwd)
+    public function setPassword($pwd)
     {
         $this->pwd = $pwd;
         return $this;

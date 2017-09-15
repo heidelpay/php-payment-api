@@ -143,7 +143,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @param string $shopperid customer id f.e. 12042
      * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
-    public function setShopperid(string $shopperid)
+    public function setShopperid($shopperid)
     {
         $this->shopperid = $shopperid;
         return $this;
@@ -158,7 +158,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * @param string $transactionid f.e. order-1109
      * @return  \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
-    public function setTransactionid(string $transactionid)
+    public function setTransactionid($transactionid)
     {
         $this->transactionid = $transactionid;
         return $this;
@@ -173,7 +173,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @param string $referenceid f.e. 31HA07BC8142C5A171745D00AD63D182
      */
-    public function setReferenceid(string $referenceid)
+    public function setReferenceid($referenceid)
     {
         $this->referenceid = $referenceid;
         return $this;

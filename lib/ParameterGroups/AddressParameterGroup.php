@@ -103,7 +103,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      * @param string $city address city
      * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
-    public function setCity(string $city)
+    public function setCity($city)
     {
         $this->city = $city;
         return $this;
@@ -115,7 +115,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      * @param string $country iso country code
      * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
-    public function setCountry(string $country)
+    public function setCountry($country)
     {
         $this->country = $country;
         return $this;
@@ -127,7 +127,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      * @param $state string  iso address state code
      * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
-    public function setState(string $state)
+    public function setState($state)
     {
         $this->state = $state;
         return $this;
@@ -138,7 +138,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      * @param string $street address street including house number
      * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
-    public function setStreet(string $street)
+    public function setStreet($street)
     {
         $this->street = $street;
         return $this;
@@ -150,7 +150,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      * @param string $zip zip code
      * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
      */
-    public function setZip(string $zip)
+    public function setZip($zip)
     {
         $this->zip = $zip;
         return $this;

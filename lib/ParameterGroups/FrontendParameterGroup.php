@@ -176,7 +176,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @param string $css_path url to a css file f.e https://dev.heidelpay.de/heidelpay_iframe.css
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    public function setCssPath(string $css_path)
+    public function setCssPath($css_path)
     {
         $this->css_path = $css_path;
         return $this;
@@ -189,10 +189,10 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * for transaction that do not need user input. F. e. prepayment, invoice or transactions
      * like debitOnRegistration (only not 3DSecure).
      *
-     * @param bool $enabled
+     * @param string $enabled
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    public function setEnabled(bool $enabled)
+    public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
         return $this;
@@ -205,7 +205,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @param string $language iso language code 2 letters
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    public function setLanguage(string $language)
+    public function setLanguage($language)
     {
         $this->language = $language;
         return $this;
@@ -217,7 +217,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @param string $mode
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    public function setMode(string $mode)
+    public function setMode($mode)
     {
         $this->mode = $mode;
         return $this;
@@ -232,7 +232,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @param string $payment_frame_origin f.e. http://dev.heidelpay.com
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    public function setPaymentFrameOrigin(string $payment_frame_origin)
+    public function setPaymentFrameOrigin($payment_frame_origin)
     {
         $this->payment_frame_origin = $payment_frame_origin;
         return $this;
@@ -245,10 +245,10 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * Frame will give you javascript listen the result of the transaction. This can be used
      * for one step checkout or checkouts like the magento once.
      *
-     * @param bool $prevent_async_redirect
+     * @param string $prevent_async_redirect
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      */
-    public function setPreventAsyncRedirect(bool $prevent_async_redirect)
+    public function setPreventAsyncRedirect($prevent_async_redirect)
     {
         $this->prevent_async_redirect = $prevent_async_redirect;
         return $this;
@@ -268,7 +268,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
      *
      */
-    public function setResponseUrl(string $response_url)
+    public function setResponseUrl($response_url)
     {
         $this->response_url = $response_url;
         return $this;

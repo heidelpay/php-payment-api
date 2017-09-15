@@ -27,7 +27,7 @@ class RiskinformationParameterGroupTest extends TestCase
         $RiskInformation = new RiskInformation();
 
         $guestcheckout = false;
-        $RiskInformation->set('guestcheckout', $guestcheckout);
+        $RiskInformation->setGuestCheckout($guestcheckout);
 
         $this->assertFalse($RiskInformation->getGuestcheckout(), 'guestcheckout should be false');
     }
@@ -40,7 +40,7 @@ class RiskinformationParameterGroupTest extends TestCase
         $RiskInformation = new RiskInformation();
 
         $since = "1984-05-23";
-        $RiskInformation->set('since', $since);
+        $RiskInformation->setSince($since);
 
         $this->assertEquals($since, $RiskInformation->getSince());
     }
@@ -53,7 +53,7 @@ class RiskinformationParameterGroupTest extends TestCase
         $RiskInformation = new RiskInformation();
 
         $ordercount = 5;
-        $RiskInformation->set('ordercount', $ordercount);
+        $RiskInformation->setOrderCount($ordercount);
 
         $this->assertEquals($ordercount, $RiskInformation->getOrdercount());
     }

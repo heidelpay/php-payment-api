@@ -45,7 +45,7 @@ class SecurityParameterGroup extends AbstractParameterGroup
      * @param string $sender authentication parameter f.e. 31HA07BC8142C5A171745D00AD63D182
      * @return \Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup
      */
-    public function setSender(string $sender)
+    public function setSender($sender)
     {
         $this->sender = $sender;
         return $this;
