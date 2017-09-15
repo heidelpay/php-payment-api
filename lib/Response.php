@@ -41,12 +41,12 @@ class Response extends AbstractMethod
      * The constructor will take a given response in post format and convert
      * it to a response object
      *
-     * @param array $RawResponse
+     * @param array $rawResponse
      */
-    public function __construct($RawResponse = null)
+    public function __construct($rawResponse = null)
     {
-        if ($RawResponse !== null and is_array($RawResponse)) {
-            $this->splitArray($RawResponse);
+        if ($rawResponse !== null and is_array($rawResponse)) {
+            $this->splitArray($rawResponse);
         }
     }
 
@@ -81,67 +81,70 @@ class Response extends AbstractMethod
     /**
      * Splits post array parameters and converts it to a response object
      *
-     * @param array $RawResponse
+     * @param array $rawResponse
      *
      * @return \Heidelpay\PhpApi\Response
      */
-    public function splitArray($RawResponse)
+    public function splitArray($rawResponse)
     {
-        foreach ($RawResponse as $ArrayKey => $ArrayValue) {
-            $ResponseGroup = explode('_', strtolower($ArrayKey), 2);
+        foreach ($rawResponse as $arrayKey => $arrayValue) {
+            $responseGroup = explode('_', strtolower($arrayKey), 2);
 
-            if (is_array($ResponseGroup)) {
-                switch ($ResponseGroup[0]) {
+            if (is_array($responseGroup)) {
+                switch ($responseGroup[0]) {
                     case 'address':
-                        $this->getAddress()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getAddress()->set($responseGroup[1], $arrayValue);
                         break;
                     case 'account':
-                        $this->getAccount()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getAccount()->set($responseGroup[1], $arrayValue);
                         break;
                     case 'basket':
-                        $this->getBasket()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getBasket()->set($responseGroup[1], $arrayValue);
                         break;
                     case 'criterion':
-                        $this->getCriterion()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getCriterion()->set($responseGroup[1], $arrayValue);
                         break;
                     case 'config':
-                        $this->getConfig()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getConfig()->set($responseGroup[1], $arrayValue);
                         break;
                     case 'contact':
-                        $this->getContact()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getContact()->set($responseGroup[1], $arrayValue);
                         break;
                     case 'connector':
-                        $this->getConnector()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getConnector()->set($responseGroup[1], $arrayValue);
                         break;
                     case "frontend":
-                        $this->getFrontend()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getFrontend()->set($responseGroup[1], $arrayValue);
                         break;
                     case "identification":
-                        $this->getIdentification()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getIdentification()->set($responseGroup[1], $arrayValue);
                         break;
                     case "name":
-                        $this->getName()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getName()->set($responseGroup[1], $arrayValue);
                         break;
                     case "payment":
-                        $this->getPayment()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getPayment()->set($responseGroup[1], $arrayValue);
                         break;
                     case "presentation":
-                        $this->getPresentation()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getPresentation()->set($responseGroup[1], $arrayValue);
                         break;
                     case "processing":
-                        $this->getProcessing()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getProcessing()->set($responseGroup[1], $arrayValue);
                         break;
                     case "request":
-                        $this->getRequest()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getRequest()->set($responseGroup[1], $arrayValue);
+                        break;
+                    case "riskinformation":
+                        $this->getRequest()->set($responseGroup[1], $arrayValue);
                         break;
                     case "security":
-                        $this->getSecurity()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getSecurity()->set($responseGroup[1], $arrayValue);
                         break;
                     case "transaction":
-                        $this->getTransaction()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getTransaction()->set($responseGroup[1], $arrayValue);
                         break;
                     case "user":
-                        $this->getUser()->set($ResponseGroup[1], $ArrayValue);
+                        $this->getUser()->set($responseGroup[1], $arrayValue);
                         break;
                 }
             }
