@@ -102,12 +102,11 @@ class ResponseTest extends TestCase
     }
 
     /**
-     * function test for isSuccess method
      *
      * @group integrationTest
      * @test
      */
-    public function IsSuccess()
+    public function isSuccess()
     {
         $this->assertTrue($this->_responseObject->isSuccess(), 'isSuccess should be true');
         $this->_responseObject->getProcessing()->set('result', 'NOK');
@@ -120,7 +119,7 @@ class ResponseTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function IsPending()
+    public function isPending()
     {
         $this->assertFalse($this->_responseObject->isPending(), 'isPending should be false');
         $this->_responseObject->getProcessing()->set('status_code', '80');
@@ -133,7 +132,7 @@ class ResponseTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function IsError()
+    public function isError()
     {
         $this->assertFalse($this->_responseObject->isError(), 'isError should be false');
         $this->_responseObject->getProcessing()->set('result', 'NOK');
@@ -146,7 +145,7 @@ class ResponseTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function GetError()
+    public function getError()
     {
         $expectedError = array(
             'code' => '000.100.112',
@@ -162,7 +161,7 @@ class ResponseTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function GetPaymentReferenceId()
+    public function getPaymentReferenceId()
     {
         $this->assertEquals('31HA07BC8108A9126F199F2784552637', $this->_responseObject->getPaymentReferenceId());
     }
@@ -173,7 +172,7 @@ class ResponseTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function GetPaymentFormUrl()
+    public function getPaymentFormUrl()
     {
         /** iframe url for credit and debit card*/
         $expectedUrl = 'http://dev.heidelpay.de';
@@ -204,11 +203,11 @@ class ResponseTest extends TestCase
      */
     public function getPaymentFormUrlPaymentCodeException()
     {
-        $Response = new Response();
+        $response = new Response();
 
-        $Response->getFrontend()->set('redirect_url', null);
+        $response->getFrontend()->set('redirect_url', null);
         $this->expectException(PaymentFormUrlException::class);
-        $Response->getPaymentFormUrl();
+        $response->getPaymentFormUrl();
     }
 
     /**
@@ -219,12 +218,12 @@ class ResponseTest extends TestCase
      */
     public function getPaymentFormUrlException()
     {
-        $Response = new Response();
+        $response = new Response();
 
-        $Response->getPayment()->set('code', 'OT.PA');
-        $Response->getFrontend()->set('redirect_url', null);
+        $response->getPayment()->set('code', 'OT.PA');
+        $response->getFrontend()->set('redirect_url', null);
         $this->expectException(PaymentFormUrlException::class);
-        $Response->getPaymentFormUrl();
+        $response->getPaymentFormUrl();
     }
 
     /**
@@ -235,9 +234,9 @@ class ResponseTest extends TestCase
      */
     public function verifySecurityHashUndefiledParameter()
     {
-        $Response = new Response();
+        $response = new Response();
         $this->expectException(HashVerificationException::class);
-        $Response->verifySecurityHash(null, null);
+        $response->verifySecurityHash(null, null);
     }
 
     /**
@@ -248,9 +247,9 @@ class ResponseTest extends TestCase
      */
     public function verifySecurityHashEmptyResponse()
     {
-        $Response = new Response();
+        $response = new Response();
         $this->expectException(HashVerificationException::class);
-        $Response->verifySecurityHash($this->secret, 'Order 12345');
+        $response->verifySecurityHash($this->secret, 'Order 12345');
     }
 
     /**
@@ -261,10 +260,10 @@ class ResponseTest extends TestCase
      */
     public function verifySecurityHashEmpty()
     {
-        $Response = new Response();
-        $Response->getProcessing()->set('result', 'ACK');
+        $response = new Response();
+        $response->getProcessing()->set('result', 'ACK');
         $this->expectException(HashVerificationException::class);
-        $Response->verifySecurityHash($this->secret, 'Order 12345');
+        $response->verifySecurityHash($this->secret, 'Order 12345');
     }
 
     /**
@@ -275,15 +274,15 @@ class ResponseTest extends TestCase
      */
     public function verifySecurityHashValid()
     {
-        $Response = new Response();
-        $Response->getProcessing()->set('result', 'ACK');
-        $Response->getCriterion()->set(
+        $response = new Response();
+        $response->getProcessing()->set('result', 'ACK');
+        $response->getCriterion()->set(
             'secret',
             '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
             . 'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5'
         );
         $this->assertTrue(
-            $Response->verifySecurityHash(
+            $response->verifySecurityHash(
                 $this->secret,
                 'InvoicePaymentMethodTest::Refund 2017-02-24 10:22:35'
             )
@@ -298,14 +297,14 @@ class ResponseTest extends TestCase
      */
     public function verifySecurityHashInvalid()
     {
-        $Response = new Response();
-        $Response->getProcessing()->set('result', 'ACK');
+        $response = new Response();
+        $response->getProcessing()->set('result', 'ACK');
         $this->expectException(HashVerificationException::class);
-        $Response->getCriterion()->set(
+        $response->getCriterion()->set(
             'secret',
             '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
             . 'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5'
         );
-        $Response->verifySecurityHash($this->secret, 'false');
+        $response->verifySecurityHash($this->secret, 'false');
     }
 }

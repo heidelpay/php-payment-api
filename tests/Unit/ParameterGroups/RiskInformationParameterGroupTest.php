@@ -21,40 +21,46 @@ class RiskinformationParameterGroupTest extends TestCase
 {
     /**
      * Guestcheckout getter/setter test
+     *
+     * @test
      */
-    public function testGuestcheckout()
+    public function guestcheckout()
     {
-        $RiskInformation = new RiskInformation();
+        $riskInformation = new RiskInformation();
 
         $guestcheckout = false;
-        $RiskInformation->set('guestcheckout', $guestcheckout);
+        $riskInformation->setGuestCheckout($guestcheckout);
 
-        $this->assertFalse($RiskInformation->getGuestcheckout(), 'guestcheckout should be false');
+        $this->assertFalse($riskInformation->getGuestcheckout(), 'guestcheckout should be false');
     }
 
     /**
      * Since getter/setter test
+     *
+     * @test
      */
-    public function testSince()
+    public function since()
     {
-        $RiskInformation = new RiskInformation();
+        $riskInformation = new RiskInformation();
 
         $since = "1984-05-23";
-        $RiskInformation->set('since', $since);
+        $riskInformation->setSince($since);
 
-        $this->assertEquals($since, $RiskInformation->getSince());
+        $this->assertEquals($since, $riskInformation->getSince());
     }
 
     /**
      * Ordercount getter/setter test
+     *
+     * @test
      */
-    public function testOrdercount()
+    public function ordercount()
     {
-        $RiskInformation = new RiskInformation();
+        $riskInformation = new RiskInformation();
 
         $ordercount = 5;
-        $RiskInformation->set('ordercount', $ordercount);
+        $riskInformation->setOrderCount($ordercount);
 
-        $this->assertEquals($ordercount, $RiskInformation->getOrdercount());
+        $this->assertEquals($ordercount, $riskInformation->getOrdercount());
     }
 }

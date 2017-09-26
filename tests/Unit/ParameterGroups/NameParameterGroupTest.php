@@ -29,7 +29,7 @@ class NameParameterGroupTest extends TestCase
         $Name = new Name();
 
         $value = '1980-02-10';
-        $Name->set('birthdate', $value);
+        $Name->setBirthdate($value);
 
         $this->assertEquals($value, $Name->getBirthdate());
     }
@@ -42,7 +42,7 @@ class NameParameterGroupTest extends TestCase
         $Name = new Name();
 
         $value = 'Heidelpay';
-        $Name->set('company', $value);
+        $Name->setCompany($value);
 
         $this->assertEquals($value, $Name->getCompany());
     }
@@ -55,7 +55,7 @@ class NameParameterGroupTest extends TestCase
         $Name = new Name();
 
         $value = 'Heidel';
-        $Name->set('given', $value);
+        $Name->setGiven($value);
 
         $this->assertEquals($value, $Name->getGiven());
     }
@@ -68,7 +68,7 @@ class NameParameterGroupTest extends TestCase
         $Name = new Name();
 
         $value = 'Berger-Payment';
-        $Name->set('family', $value);
+        $Name->setFamily($value);
 
         $this->assertEquals($value, $Name->getFamily());
     }
@@ -83,7 +83,7 @@ class NameParameterGroupTest extends TestCase
         $Name = new Name();
 
         $value = 'MR';
-        $Name->set('salutation', $value);
+        $Name->setSalutation($value);
 
         $this->assertEquals($value, $Name->getSalutation());
     }
@@ -98,7 +98,7 @@ class NameParameterGroupTest extends TestCase
         $Name = new Name();
 
         $value = 'Doc.';
-        $Name->set('title', $value);
+        $Name->setTitle($value);
 
         $this->assertEquals($value, $Name->getTitle());
     }

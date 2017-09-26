@@ -41,4 +41,17 @@ class BasketParameterGroup extends AbstractParameterGroup
     {
         return $this->id;
     }
+
+    /**
+     * Setter for the basket id
+     *
+     * @param string $id
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 }

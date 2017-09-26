@@ -5,6 +5,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
 /**
  * This class provides every api parameters for the form configuration
  *
+ * configuration will be returned from the api and can not be set.
+ *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *

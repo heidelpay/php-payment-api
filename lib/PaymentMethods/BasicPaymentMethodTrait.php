@@ -182,7 +182,7 @@ trait BasicPaymentMethodTrait
     {
         $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
         if ($this->_brand !== null) {
-            $this->getRequest()->getAccount()->set('brand', $this->_brand);
+            $this->getRequest()->getAccount()->setBrand($this->_brand);
         }
 
         $uri = $this->getPaymentUrl();

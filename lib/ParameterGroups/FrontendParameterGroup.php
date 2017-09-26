@@ -107,6 +107,16 @@ class FrontendParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Getter for frontend mode
+     *
+     * @return string
+     */
+    public function getMode()
+    {
+        return $this->mode;
+    }
+
+    /**
      * FrontendRedirectUrl getter
      *
      * @return string redirect url
@@ -164,5 +174,121 @@ class FrontendParameterGroup extends AbstractParameterGroup
     public function getPreventAsyncRedirect()
     {
         return $this->prevent_async_redirect;
+    }
+
+    /**
+     * Setter used to set a url to a given css file
+     *
+     * This file can be used to style the heidelpay iframe for
+     * credit and debit card. Please have a look into our documentation
+     * for the allowed ccs parameter
+     *
+     * @param string $css_path url to a css file f.e https://dev.heidelpay.de/heidelpay_iframe.css
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     */
+    public function setCssPath($css_path)
+    {
+        $this->css_path = $css_path;
+        return $this;
+    }
+
+    /**
+     * Setter to disable the frontend
+     *
+     * This setting will force the payment to act in syn mode. This is only possible
+     * for transaction that do not need user input. F. e. prepayment, invoice or transactions
+     * like debitOnRegistration (only not 3DSecure).
+     *
+     * @param string $enabled
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * Setter for the frontend language
+     *
+     * This setting only influence error messages and the heidelpay payment frame for credit and debit card..
+     *
+     * @param string $language iso language code 2 letters
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * Setter for transaction mode
+     *
+     * @param string $mode
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     */
+    public function setMode($mode)
+    {
+        $this->mode = $mode;
+        return $this;
+    }
+
+    /**
+     * Setter for payment frame origin
+     *
+     * for the credit and debit card iframe you have to set the source of the javascipt
+     * post request. f.e. http://dev.heidelpay.com
+     *
+     * @param string $payment_frame_origin f.e. http://dev.heidelpay.com
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     */
+    public function setPaymentFrameOrigin($payment_frame_origin)
+    {
+        $this->payment_frame_origin = $payment_frame_origin;
+        return $this;
+    }
+
+    /**
+     * Setter to prevent the iframe to redirect to a give url
+     *
+     * With this setter you can prevent the payment frame to redirect to an given url. The
+     * Frame will give you javascript listen the result of the transaction. This can be used
+     * for one step checkout or checkouts like the magento once.
+     *
+     * @param string $prevent_async_redirect
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     */
+    public function setPreventAsyncRedirect($prevent_async_redirect)
+    {
+        $this->prevent_async_redirect = $prevent_async_redirect;
+        return $this;
+    }
+
+    /**
+     * Setter for the response url of your application
+     *
+     * The payment server will send the result of the transaction directly to
+     * this url in http post notation. Please make sure that this url is reachable
+     * form the internet. The response will be send server to server, if you see
+     * this url inside your browser, something went wrong. PLease check your php log
+     * first, if there is nothing you can identify please write to support@heidelpay.de
+     * this the shortid of the transaction or the email address used for the request-
+     *
+     * @param string $response_url f.e https://dev.heidelpay.de/reponse.php
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     *
+     */
+    public function setResponseUrl($response_url)
+    {
+        $this->response_url = $response_url;
+        return $this;
     }
 }

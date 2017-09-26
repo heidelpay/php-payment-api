@@ -32,7 +32,7 @@ class BasketParameterGroupTest extends TestCase
         $Basket = new Basket();
 
         $value = "31HA07BC8129FBB819367B2205CD6FB4";
-        $Basket->set('id', $value);
+        $Basket->setId($value);
 
         $this->assertEquals($value, $Basket->getId());
     }

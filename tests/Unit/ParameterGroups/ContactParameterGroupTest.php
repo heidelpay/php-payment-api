@@ -27,7 +27,7 @@ class ContactParameterGroupTest extends TestCase
         $Contact = new Conatct();
 
         $email = "development@heidelpay.de";
-        $Contact->set('email', $email);
+        $Contact->setEmail($email);
 
         $this->assertEquals($email, $Contact->getEmail());
     }
@@ -40,7 +40,7 @@ class ContactParameterGroupTest extends TestCase
         $Contact = new Conatct();
 
         $ip = "127.0.0.1";
-        $Contact->set('ip', $ip);
+        $Contact->setIp($ip);
 
         $this->assertEquals($ip, $Contact->getIp());
     }
@@ -55,7 +55,7 @@ class ContactParameterGroupTest extends TestCase
         $Contact = new Conatct();
 
         $value = "+49 555 22 1340";
-        $Contact->set('mobile', $value);
+        $Contact->setMobile($value);
 
         $this->assertEquals($value, $Contact->getMobile());
     }
@@ -70,7 +70,7 @@ class ContactParameterGroupTest extends TestCase
         $Contact = new Conatct();
 
         $value = "+49 6221 64 71 400";
-        $Contact->set('phone', $value);
+        $Contact->setPhone($value);
 
         $this->assertEquals($value, $Contact->getPhone());
     }
