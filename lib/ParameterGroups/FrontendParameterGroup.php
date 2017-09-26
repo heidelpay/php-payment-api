@@ -107,6 +107,16 @@ class FrontendParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Getter for frontend mode
+     *
+     * @return string
+     */
+    public function getMode()
+    {
+        return $this->mode;
+    }
+
+    /**
      * FrontendRedirectUrl getter
      *
      * @return string redirect url

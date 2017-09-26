@@ -21,8 +21,10 @@ class FrontendParameterGroupTest extends TestCase
 {
     /**
      * Enabled getter/setter test
+     *
+     * @test
      */
-    public function testEnabled()
+    public function enabled()
     {
         $frontend = new Frontend();
 
@@ -34,8 +36,10 @@ class FrontendParameterGroupTest extends TestCase
 
     /**
      * Language getter/setter test
+     *
+     * @test
      */
-    public function testLanguage()
+    public function language()
     {
         $frontend = new Frontend();
 
@@ -47,8 +51,10 @@ class FrontendParameterGroupTest extends TestCase
 
     /**
      * Redirect url getter/setter test
+     *
+     * @test
      */
-    public function testRedirectUrl()
+    public function redirectUrl()
     {
         $frontend = new Frontend();
 
@@ -60,8 +66,10 @@ class FrontendParameterGroupTest extends TestCase
 
     /**
      * Response url getter/setter test
+     *
+     * @test
      */
-    public function testResponseUrl()
+    public function responseUrl()
     {
         $frontend = new Frontend();
 
@@ -69,6 +77,21 @@ class FrontendParameterGroupTest extends TestCase
         $frontend->setResponseUrl($value);
 
         $this->assertEquals($value, $frontend->getResponseUrl());
+    }
+
+    /**
+     *Frontend mode getter/setter test
+     *
+     * @test
+     */
+    public function mode()
+    {
+        $frontend = new Frontend();
+
+        $value = 'CONNECTOR_TEST';
+        $frontend->setMode($value);
+
+        $this->assertEquals($value, $frontend->getMode());
     }
 
     /**

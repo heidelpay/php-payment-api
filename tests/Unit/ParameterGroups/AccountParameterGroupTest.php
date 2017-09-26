@@ -175,12 +175,12 @@ class AccountParameterGroupTest extends TestCase
      * @test
      *
      */
-    public function testNumber()
+    public function number()
     {
         $account = new Account();
 
         $value = "1234567890";
-        $account->set("number", $value);
+        $account->setNumber($value);
 
         $this->assertEquals($value, $account->getNumber());
     }

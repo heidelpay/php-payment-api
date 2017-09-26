@@ -24,14 +24,14 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function AccountBank()
+    public function accountBank()
     {
-        $Connector = new Connector();
+        $connector = new Connector();
 
         $value = '37040044';
-        $Connector->set('account_bank', $value);
+        $connector->set('account_bank', $value);
 
-        $this->assertEquals($value, $Connector->getAccountBank());
+        $this->assertEquals($value, $connector->getAccountBank());
     }
 
     /**
@@ -39,14 +39,14 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function AccountBic()
+    public function accountBic()
     {
-        $Connector = new Connector();
+        $connector = new Connector();
 
         $value = 'COBADEFFXXX';
-        $Connector->set('account_bic', $value);
+        $connector->set('account_bic', $value);
 
-        $this->assertEquals($value, $Connector->getAccountBic());
+        $this->assertEquals($value, $connector->getAccountBic());
     }
 
     /**
@@ -54,14 +54,14 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function AccountCountry()
+    public function accountCountry()
     {
-        $Connector = new Connector();
+        $connector = new Connector();
 
         $value = 'DE';
-        $Connector->set('account_country', $value);
+        $connector->set('account_country', $value);
 
-        $this->assertEquals($value, $Connector->getAccountCountry());
+        $this->assertEquals($value, $connector->getAccountCountry());
     }
 
     /**
@@ -69,14 +69,14 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function AccountHolder()
+    public function accountHolder()
     {
-        $Connector = new Connector();
+        $connector = new Connector();
 
         $value = 'Heidelberger Payment GmbH';
-        $Connector->set('account_holder', $value);
+        $connector->set('account_holder', $value);
 
-        $this->assertEquals($value, $Connector->getAccountHolder());
+        $this->assertEquals($value, $connector->getAccountHolder());
     }
 
     /**
@@ -84,14 +84,14 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function AccountIBan()
+    public function accountIBan()
     {
-        $Connector = new Connector();
+        $connector = new Connector();
 
         $value = 'DE89370400440532013000';
-        $Connector->set('account_iban', $value);
+        $connector->set('account_iban', $value);
 
-        $this->assertEquals($value, $Connector->getAccountIBan());
+        $this->assertEquals($value, $connector->getAccountIBan());
     }
 
     /**
@@ -99,13 +99,28 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function AccountNumber()
+    public function accountNumber()
     {
-        $Connector = new Connector();
+        $connector = new Connector();
 
         $value = '5320130';
-        $Connector->set('account_number', $value);
+        $connector->set('account_number', $value);
 
-        $this->assertEquals($value, $Connector->getAccountNumber());
+        $this->assertEquals($value, $connector->getAccountNumber());
+    }
+
+    /**
+     * account_usage getter/setter test
+     *
+     * @test
+     */
+    public function account_usage()
+    {
+        $connector = new Connector();
+
+        $value = '5320130';
+        $connector->set('account_usage', $value);
+
+        $this->assertEquals($value, $connector->getAccountUsage());
     }
 }

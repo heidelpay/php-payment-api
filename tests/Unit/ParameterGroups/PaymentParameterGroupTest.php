@@ -27,7 +27,7 @@ class PaymentParameterGroupTest extends TestCase
         $Payment = new Payment();
 
         $value = 'IV.PA';
-        $Payment->set('code', $value);
+        $Payment->setCode($value);
 
         $this->assertEquals($value, $Payment->getCode());
     }
