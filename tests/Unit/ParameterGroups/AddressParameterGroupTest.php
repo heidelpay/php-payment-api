@@ -25,12 +25,12 @@ class AddressParameterGroupTest extends TestCase
      */
     public function testCity()
     {
-        $Address = new Address();
+        $address = new Address();
 
         $city = "Heidelberg";
-        $Address->setCity($city);
+        $address->setCity($city);
 
-        $this->assertEquals($city, $Address->getCity());
+        $this->assertEquals($city, $address->getCity());
     }
 
     /**
@@ -38,12 +38,12 @@ class AddressParameterGroupTest extends TestCase
      */
     public function testCountry()
     {
-        $Address = new Address();
+        $address = new Address();
 
         $country = "DE";
-        $Address->setCountry($country);
+        $address->setCountry($country);
 
-        $this->assertEquals($country, $Address->getCountry());
+        $this->assertEquals($country, $address->getCountry());
     }
 
     /**
@@ -51,12 +51,12 @@ class AddressParameterGroupTest extends TestCase
      */
     public function testState()
     {
-        $Address = new Address();
+        $address = new Address();
 
         $state = "DE-BW";
-        $Address->setState($state);
+        $address->setState($state);
 
-        $this->assertEquals($state, $Address->getState());
+        $this->assertEquals($state, $address->getState());
     }
 
     /**
@@ -64,12 +64,12 @@ class AddressParameterGroupTest extends TestCase
      */
     public function testStreet()
     {
-        $Address = new Address();
+        $address = new Address();
 
         $street = "Märchenweg 123";
-        $Address->setStreet($street);
+        $address->setStreet($street);
 
-        $this->assertEquals($street, $Address->getStreet());
+        $this->assertEquals($street, $address->getStreet());
     }
 
     /**
@@ -77,11 +77,11 @@ class AddressParameterGroupTest extends TestCase
      */
     public function testZip()
     {
-        $Address = new Address();
+        $address = new Address();
 
         $zip = "69115";
         $Address->setZip($zip);
 
-        $this->assertEquals($zip, $Address->getZip());
+        $this->assertEquals($zip, $address->getZip());
     }
 }

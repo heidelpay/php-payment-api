@@ -21,28 +21,30 @@ class PresentationParameterGroupTest extends TestCase
 {
     /**
      * Amount getter/setter test
+     * @test
      */
-    public function testAmount()
+    public function amount()
     {
-        $Presentation = new Presentation();
+        $presentation = new Presentation();
 
         $value = '20.11';
-        $Presentation->setAmount($value);
+        $presentation->setAmount($value);
 
-        $this->assertEquals($value, $Presentation->getAmount());
+        $this->assertEquals($value, $presentation->getAmount());
     }
 
     /**
      * Currency getter/setter test
+     * @test
      */
-    public function testCurrency()
+    public function currency()
     {
-        $Presentation = new Presentation();
+        $presentation = new Presentation();
 
         $value = 'USD';
-        $Presentation->setCurrency($value);
+        $presentation->setCurrency($value);
 
-        $this->assertEquals($value, $Presentation->getCurrency());
+        $this->assertEquals($value, $presentation->getCurrency());
     }
 
     /**
@@ -50,13 +52,13 @@ class PresentationParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function PresentationUsage()
+    public function presentationUsage()
     {
-        $Presentation = new Presentation();
+        $presentation = new Presentation();
 
         $value = 'Heidelpay Invoice ID 12345';
-        $Presentation->setUsage($value);
+        $presentation->setUsage($value);
 
-        $this->assertEquals($value, $Presentation->getUsage());
+        $this->assertEquals($value, $presentation->getUsage());
     }
 }

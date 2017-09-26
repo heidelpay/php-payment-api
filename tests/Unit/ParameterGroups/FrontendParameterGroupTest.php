@@ -24,12 +24,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testEnabled()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'false';
-        $Frontend->setEnabled($value);
+        $frontend->setEnabled($value);
 
-        $this->assertEquals($value, $Frontend->getEnabled());
+        $this->assertEquals($value, $frontend->getEnabled());
     }
 
     /**
@@ -37,12 +37,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testLanguage()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'EN';
-        $Frontend->setLanguage($value);
+        $frontend->setLanguage($value);
 
-        $this->assertEquals($value, $Frontend->getLanguage());
+        $this->assertEquals($value, $frontend->getLanguage());
     }
 
     /**
@@ -50,12 +50,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testRedirectUrl()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'https://dev.heidelpay.de';
-        $Frontend->set('redirect_url', $value);
+        $frontend->set('redirect_url', $value);
 
-        $this->assertEquals($value, $Frontend->getRedirectUrl());
+        $this->assertEquals($value, $frontend->getRedirectUrl());
     }
 
     /**
@@ -63,12 +63,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testResponseUrl()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'https://dev.heidelpay.de';
-        $Frontend->setResponseUrl($value);
+        $frontend->setResponseUrl($value);
 
-        $this->assertEquals($value, $Frontend->getResponseUrl());
+        $this->assertEquals($value, $frontend->getResponseUrl());
     }
 
     /**
@@ -76,12 +76,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testPaymentFrameOrigin()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'https://dev.heidelpay.de';
-        $Frontend->setPaymentFrameOrigin($value);
+        $frontend->setPaymentFrameOrigin($value);
 
-        $this->assertEquals($value, $Frontend->getPaymentFrameOrigin());
+        $this->assertEquals($value, $frontend->getPaymentFrameOrigin());
     }
 
     /**
@@ -89,12 +89,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testPaymentFrameUrl()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'https://dev.heidelpay.de';
-        $Frontend->set('payment_frame_url', $value);
+        $frontend->set('payment_frame_url', $value);
 
-        $this->assertEquals($value, $Frontend->getPaymentFrameUrl());
+        $this->assertEquals($value, $frontend->getPaymentFrameUrl());
     }
 
     /**
@@ -102,12 +102,12 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testPaymentCssPath()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'https://dev.heidelpay.de';
-        $Frontend->setCssPath($value);
+        $frontend->setCssPath($value);
 
-        $this->assertEquals($value, $Frontend->getCssPath());
+        $this->assertEquals($value, $frontend->getCssPath());
     }
 
     /**
@@ -115,11 +115,11 @@ class FrontendParameterGroupTest extends TestCase
      */
     public function testPreventAsyncRedirect()
     {
-        $Frontend = new Frontend();
+        $frontend = new Frontend();
 
         $value = 'TRUE';
-        $Frontend->setPreventAsyncRedirect($value);
+        $frontend->setPreventAsyncRedirect($value);
 
-        $this->assertEquals($value, $Frontend->getPreventAsyncRedirect());
+        $this->assertEquals($value, $frontend->getPreventAsyncRedirect());
     }
 }

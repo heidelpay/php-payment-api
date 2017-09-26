@@ -38,28 +38,28 @@ class Request extends AbstractMethod
     /**
      * Set all necessary authentication parameters for this request
      *
-     * @param string $SecuritySender     security sender parameter f.e 31HA07BC8142C5A171745D00AD63D182
-     * @param string $UserLogin          user login parameter f.e. 31ha07bc8142c5a171744e5aef11ffd3
-     * @param string $UserPassword       user password f.e. 93167DE7
-     * @param string $TransactionChannel channel id of the payment method f.e. 31HA07BC8142C5A171744F3D6D155865
-     * @param bool   $SandboxRequest     choose between sandbox and productive payment system
+     * @param string $securitySender     security sender parameter f.e 31HA07BC8142C5A171745D00AD63D182
+     * @param string $userLogin          user login parameter f.e. 31ha07bc8142c5a171744e5aef11ffd3
+     * @param string $userPassword       user password f.e. 93167DE7
+     * @param string $transactionChannel channel id of the payment method f.e. 31HA07BC8142C5A171744F3D6D155865
+     * @param bool   $sandboxRequest     choose between sandbox and productive payment system
      *
      * @return \Heidelpay\PhpApi\Request
      */
     public function authentification(
-        $SecuritySender = null,
-        $UserLogin = null,
-        $UserPassword = null,
-        $TransactionChannel = null,
-        $SandboxRequest = false
+        $securitySender = null,
+        $userLogin = null,
+        $userPassword = null,
+        $transactionChannel = null,
+        $sandboxRequest = false
     ) {
-        $this->getSecurity()->setSender($SecuritySender);
-        $this->getUser()->setLogin($UserLogin);
-        $this->getUser()->setPassword($UserPassword);
-        $this->getTransaction()->setChannel($TransactionChannel);
+        $this->getSecurity()->setSender($securitySender);
+        $this->getUser()->setLogin($userLogin);
+        $this->getUser()->setPassword($userPassword);
+        $this->getTransaction()->setChannel($transactionChannel);
         $this->getTransaction()->setMode("LIVE");
 
-        if ($SandboxRequest) {
+        if ($sandboxRequest) {
             $this->getTransaction()->setMode("CONNECTOR_TEST");
         }
         return $this;
@@ -68,17 +68,17 @@ class Request extends AbstractMethod
     /**
      * Set all necessary parameter for a asynchronous request
      *
-     * @param string $LanguageCode language code 2 letters for error messages and iframe f.e EN
-     * @param string $ResponseUrl  response url of your application f.e https://www.url.com/response.php
+     * @param string $languageCode language code 2 letters for error messages and iframe f.e EN
+     * @param string $responseUrl  response url of your application f.e https://www.url.com/response.php
      *
      * @return \Heidelpay\PhpApi\Request
      */
-    public function async($LanguageCode = "EN", $ResponseUrl = null)
+    public function async($languageCode = "EN", $responseUrl = null)
     {
-        $this->getFrontend()->setLanguage($LanguageCode);
+        $this->getFrontend()->setLanguage($languageCode);
 
-        if ($ResponseUrl !== null) {
-            $this->getFrontend()->setResponseUrl($ResponseUrl);
+        if ($responseUrl !== null) {
+            $this->getFrontend()->setResponseUrl($responseUrl);
             $this->getFrontend()->setEnabled('TRUE');
         }
         return $this;
@@ -158,16 +158,16 @@ class Request extends AbstractMethod
         $array = array();
         $request = (array)get_object_vars($this);
 
-        foreach ($request as $ParameterFirstName => $ParmaterValues) {
-            if ($ParmaterValues === null) {
+        foreach ($request as $parameterFirstName => $parmaterValues) {
+            if ($parmaterValues === null) {
                 continue;
             }
 
-            foreach ((array)get_object_vars($ParmaterValues) as $ParameterLastName => $ParameterValue) {
-                if ($ParameterValue === null) {
+            foreach ((array)get_object_vars($parmaterValues) as $parameterLastName => $parameterValue) {
+                if ($parameterValue === null) {
                     continue;
                 }
-                $array[strtoupper($ParameterFirstName . '.' . $ParameterLastName)] = $ParameterValue;
+                $array[strtoupper($parameterFirstName . '.' . $parameterLastName)] = $parameterValue;
             }
         }
         return $array;

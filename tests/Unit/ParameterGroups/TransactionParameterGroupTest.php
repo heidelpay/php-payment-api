@@ -21,27 +21,29 @@ class TransactionParameterGroupTest extends TestCase
 {
     /**
      * Channel getter/setter test
+     * @test
      */
-    public function testChannel()
+    public function channel()
     {
-        $Transaction = new Transaction();
+        $transaction = new Transaction();
 
         $value = '31HA07BC8142C5A171749A60D979B6E4';
-        $Transaction->setChannel($value);
+        $transaction->setChannel($value);
 
-        $this->assertEquals($value, $Transaction->getChannel());
+        $this->assertEquals($value, $transaction->getChannel());
     }
 
     /*
      * Mode getter/setter test
+     * @ŧest
      */
-    public function testMode()
+    public function mode()
     {
-        $Transaction = new Transaction();
+        $transaction = new Transaction();
 
         $value = 'LIVE';
-        $Transaction->setMode($value);
+        $transaction->setMode($value);
 
-        $this->assertEquals($value, $Transaction->getMode());
+        $this->assertEquals($value, $transaction->getMode());
     }
 }
