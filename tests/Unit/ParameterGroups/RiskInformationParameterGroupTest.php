@@ -21,6 +21,7 @@ class RiskinformationParameterGroupTest extends TestCase
 {
     /**
      * Guestcheckout getter/setter test
+     *
      * @test
      */
     public function guestcheckout()
@@ -35,6 +36,7 @@ class RiskinformationParameterGroupTest extends TestCase
 
     /**
      * Since getter/setter test
+     *
      * @test
      */
     public function since()
@@ -49,6 +51,7 @@ class RiskinformationParameterGroupTest extends TestCase
 
     /**
      * Ordercount getter/setter test
+     *
      * @test
      */
     public function ordercount()

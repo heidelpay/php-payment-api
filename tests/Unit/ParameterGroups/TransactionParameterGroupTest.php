@@ -21,6 +21,7 @@ class TransactionParameterGroupTest extends TestCase
 {
     /**
      * Channel getter/setter test
+     *
      * @test
      */
     public function channel()

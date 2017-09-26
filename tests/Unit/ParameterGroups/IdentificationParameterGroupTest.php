@@ -21,6 +21,7 @@ class IdentificationParameterGroupTest extends TestCase
 {
     /**
      * Creditor id getter/setter test
+     *
      * @test
      */
     public function creditorId()
@@ -35,6 +36,7 @@ class IdentificationParameterGroupTest extends TestCase
 
     /**
      * Shopper id getter/setter test
+     *
      * @test
      */
     public function shopperId()
@@ -49,6 +51,7 @@ class IdentificationParameterGroupTest extends TestCase
 
     /**
      * Short id getter/setter test
+     *
      * @test
      */
     public function shortId()
@@ -63,6 +66,7 @@ class IdentificationParameterGroupTest extends TestCase
 
     /**
      * Transaction id getter/setter test
+     *
      * @test
      */
     public function transactionId()
@@ -77,6 +81,7 @@ class IdentificationParameterGroupTest extends TestCase
 
     /**
      * Reference id getter/setter test
+     *
      * @test
      */
     public function referenceId()
@@ -91,6 +96,7 @@ class IdentificationParameterGroupTest extends TestCase
 
     /**
      * Uniqe id getter/setter test
+     *
      * @test
      */
     public function uniqueId()

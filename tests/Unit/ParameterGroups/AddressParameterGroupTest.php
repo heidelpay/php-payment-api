@@ -80,7 +80,7 @@ class AddressParameterGroupTest extends TestCase
         $address = new Address();
 
         $zip = "69115";
-        $Address->setZip($zip);
+        $address->setZip($zip);
 
         $this->assertEquals($zip, $address->getZip());
     }

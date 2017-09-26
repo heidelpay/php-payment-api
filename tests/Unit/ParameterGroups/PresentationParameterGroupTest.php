@@ -21,6 +21,7 @@ class PresentationParameterGroupTest extends TestCase
 {
     /**
      * Amount getter/setter test
+     *
      * @test
      */
     public function amount()
@@ -35,6 +36,7 @@ class PresentationParameterGroupTest extends TestCase
 
     /**
      * Currency getter/setter test
+     *
      * @test
      */
     public function currency()

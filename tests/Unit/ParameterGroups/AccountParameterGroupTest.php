@@ -51,6 +51,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Brand getter/setter test
+     *
      * @test
      */
     public function brand()
@@ -95,6 +96,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Holder getter/setter test
+     *
      * @test
      */
     public function holder()
@@ -109,6 +111,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Iban getter/setter test
+     *
      * @test
      */
     public function iban()
@@ -138,6 +141,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Expiry month getter/setter test
+     *
      * @test
      */
     public function expiryMonth()
@@ -152,6 +156,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Expiry year getter/setter test
+     *
      * @test
      */
     public function expiryYear()
@@ -166,6 +171,7 @@ class AccountParameterGroupTest extends TestCase
 
     /**
      * Number getter/setter test
+     *
      * @test
      *
      */
