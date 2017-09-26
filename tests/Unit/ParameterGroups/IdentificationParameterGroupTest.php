@@ -21,79 +21,91 @@ class IdentificationParameterGroupTest extends TestCase
 {
     /**
      * Creditor id getter/setter test
+     *
+     * @test
      */
-    public function testCreditorId()
+    public function creditorId()
     {
-        $Identification = new Identification();
+        $identification = new Identification();
 
         $value = '200123';
-        $Identification->set('creditor_id', $value);
+        $identification->set('creditor_id', $value);
 
-        $this->assertEquals($value, $Identification->getCreditorId());
+        $this->assertEquals($value, $identification->getCreditorId());
     }
 
     /**
      * Shopper id getter/setter test
+     *
+     * @test
      */
-    public function testShopperId()
+    public function shopperId()
     {
-        $Identification = new Identification();
+        $identification = new Identification();
 
         $value = '200123';
-        $Identification->set('shopperid', $value);
+        $identification->setShopperid($value);
 
-        $this->assertEquals($value, $Identification->getShopperId());
+        $this->assertEquals($value, $identification->getShopperId());
     }
 
     /**
      * Short id getter/setter test
+     *
+     * @test
      */
-    public function testShortId()
+    public function shortId()
     {
-        $Identification = new Identification();
+        $identification = new Identification();
 
         $value = '200.500.210';
-        $Identification->set('shortid', $value);
+        $identification->set('shortid', $value);
 
-        $this->assertEquals($value, $Identification->getShortId());
+        $this->assertEquals($value, $identification->getShortId());
     }
 
     /**
      * Transaction id getter/setter test
+     *
+     * @test
      */
-    public function testTransactionId()
+    public function transactionId()
     {
-        $Identification = new Identification();
+        $identification = new Identification();
 
         $value = '0860300156-ngw|php-conncetor';
-        $Identification->set('transactionid', $value);
+        $identification->setTransactionid($value);
 
-        $this->assertEquals($value, $Identification->getTransactionId());
+        $this->assertEquals($value, $identification->getTransactionId());
     }
 
     /**
      * Reference id getter/setter test
+     *
+     * @test
      */
-    public function testReferenceId()
+    public function referenceId()
     {
-        $Identification = new Identification();
+        $identification = new Identification();
 
         $value = '31HA07BC8142C5A171745D00AD233923';
-        $Identification->set('referenceid', $value);
+        $identification->setReferenceid($value);
 
-        $this->assertEquals($value, $Identification->getReferenceId());
+        $this->assertEquals($value, $identification->getReferenceId());
     }
 
     /**
      * Uniqe id getter/setter test
+     *
+     * @test
      */
-    public function testUniqueId()
+    public function uniqueId()
     {
-        $Identification = new Identification();
+        $identification = new Identification();
 
         $value = '31HA07BC8142C5A171745D00AD233923';
-        $Identification->set('uniqueid', $value);
+        $identification->set('uniqueid', $value);
 
-        $this->assertEquals($value, $Identification->getUniqueId());
+        $this->assertEquals($value, $identification->getUniqueId());
     }
 }

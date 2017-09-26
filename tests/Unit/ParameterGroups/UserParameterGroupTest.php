@@ -27,7 +27,7 @@ class UserParameterGroupTest extends TestCase
         $User = new User();
 
         $value = '31ha07bc8142c5a171744e5aef11ffd3';
-        $User->set('login', $value);
+        $User->setLogin($value);
 
         $this->assertEquals($value, $User->getLogin());
     }
@@ -40,7 +40,7 @@ class UserParameterGroupTest extends TestCase
         $User = new User();
 
         $value = '93167DE7';
-        $User->set('pwd', $value);
+        $User->setPassword($value);
 
         $this->assertEquals($value, $User->getPassword());
     }

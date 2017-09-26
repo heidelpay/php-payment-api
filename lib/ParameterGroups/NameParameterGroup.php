@@ -135,4 +135,82 @@ class NameParameterGroup extends AbstractParameterGroup
     {
         return $this->title;
     }
+
+    /**
+     * Setter for the brithdate of the customer
+     *
+     * @param string $birthdate notation is YYYY-MM-DD
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+        return $this;
+    }
+
+    /**
+     * Setter for the company name
+     *
+     * @param string $company f.e. Heidelberger Payment GmbH
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * Setter for the given name of the customer
+     *
+     * @param string $given f.e. John
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     */
+    public function setGiven($given)
+    {
+        $this->given = $given;
+        return $this;
+    }
+
+    /**
+     * Setter for the family name of the customer
+     *
+     * @param string $family f.e. Doe
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     */
+    public function setFamily($family)
+    {
+        $this->family = $family;
+        return $this;
+    }
+
+    /**
+     * Setter for the salutation of the customer
+     *
+     * @param string $salutation f.e. MR
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     */
+    public function setSalutation($salutation)
+    {
+        $this->salutation = strtoupper($salutation);
+        return $this;
+    }
+
+    /**
+     * Setter for the title of the customer
+     *
+     * @param string $title f.e. Doc.
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
 }

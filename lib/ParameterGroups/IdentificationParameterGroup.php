@@ -136,4 +136,48 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     {
         return $this->uniqueid;
     }
+
+    /**
+     * Setter for the customer id of your application
+     *
+     * @param string $shopperid customer id f.e. 12042
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
+     */
+    public function setShopperid($shopperid)
+    {
+        $this->shopperid = $shopperid;
+        return $this;
+    }
+
+    /**
+     * Setter for the transaction id
+     *
+     * The transaction id is an identifier given by your application to allow matching between
+     * your system and the payment system. This can be f.e. an order id or invoice id.
+     *
+     * @param string $transactionid f.e. order-1109
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
+     */
+    public function setTransactionid($transactionid)
+    {
+        $this->transactionid = $transactionid;
+        return $this;
+    }
+
+    /**
+     * Setter for the payment reference id or unique id
+     *
+     * Some kinds of transactions needs to reference to another transaction. This can be done
+     * by setting this parameter with the unique id of the reference transaction. F.e. if you
+     * use debitOnRegistration you have to set the id of the registration.
+     *
+     * @param string $referenceid f.e. 31HA07BC8142C5A171745D00AD63D182
+     */
+    public function setReferenceid($referenceid)
+    {
+        $this->referenceid = $referenceid;
+        return $this;
+    }
 }

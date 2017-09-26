@@ -150,15 +150,15 @@ class RequestTest extends TestCase
      */
     public function convertToArray()
     {
-        $Request = new Request();
-        $Criterion = new CriterionParameterGroup();
+        $request = new Request();
+        $criterion = new CriterionParameterGroup();
 
         $shopIdentifier = '2843294932';
         $amount = 23.12;
         $currency = 'EUR';
         $secret = '39542395235ßfsokkspreipsr';
 
-        $Request->basketData($shopIdentifier, $amount, $currency, $secret);
+        $request->basketData($shopIdentifier, $amount, $currency, $secret);
 
         $referenceVars = array(
             'CRITERION.SECRET' => '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b318ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
@@ -169,11 +169,11 @@ class RequestTest extends TestCase
             'PRESENTATION.CURRENCY' => 'EUR',
             'REQUEST.VERSION' => '1.0',
             'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'CRITERION.SDK_NAME' => $Criterion->getSdkName(),
-            'CRITERION.SDK_VERSION' => $Criterion->getSdkVersion()
+            'CRITERION.SDK_NAME' => $criterion->getSdkName(),
+            'CRITERION.SDK_VERSION' => $criterion->getSdkVersion()
         );
 
-        $this->assertEquals($referenceVars, $Request->convertToArray());
+        $this->assertEquals($referenceVars, $request->convertToArray());
     }
 
     /**
@@ -183,12 +183,12 @@ class RequestTest extends TestCase
      */
     public function getBasket()
     {
-        $Request = new Request();
+        $request = new Request();
 
-        $Request->getBasket();
+        $request->getBasket();
         $value = "31HA07BC8129FBB819367B2205CD6FB4";
-        $Request->getBasket()->set('id', $value);
-        $this->assertEquals($value, $Request->getBasket()->getId());
+        $request->getBasket()->set('id', $value);
+        $this->assertEquals($value, $request->getBasket()->getId());
     }
 
     /**
@@ -198,12 +198,12 @@ class RequestTest extends TestCase
      */
     public function getRequest()
     {
-        $Request = new Request();
+        $request = new Request();
 
-        $Request->getRequest();
+        $request->getRequest();
         $value = '1.2';
-        $Request->getRequest()->set('version', $value);
+        $request->getRequest()->set('version', $value);
 
-        $this->assertEquals($value, $Request->getRequest()->getVersion());
+        $this->assertEquals($value, $request->getRequest()->getVersion());
     }
 }

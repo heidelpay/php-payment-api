@@ -119,7 +119,7 @@ require_once __DIR__ . '/../../../autoload.php';
  ?>
  </select><br/>
  Holder:<input type="text" name="ACCOUNT.HOLDER" value="" /><br/>
- <button type="submit">Submit data</button></td>
+ <button type="submit">Submit data</button>
  </form>
  </body>
  </html>

@@ -70,4 +70,33 @@ class TransactionParameterGroup extends AbstractParameterGroup
     {
         return $this->response;
     }
+
+    /**
+     * Setter for the transaction channel
+     *
+     * A channel can be used as a separater between to two sales channels like german and uk market.
+     * Another reason for a different channel is that some payment methods share one channel.
+     *
+     * @param string $channel transaction channel id f.e. 31HA07BC8142C5A171749A60D979B6E4
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
+     */
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
+        return $this;
+    }
+
+    /**
+     * Setter for the transaction mode
+     *
+     * @param string $mode f.e LIVE
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
+     */
+    public function setMode($mode)
+    {
+        $this->mode = $mode;
+        return $this;
+    }
 }

@@ -24,14 +24,14 @@ class AccountParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Bank()
+    public function bank()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "Heidelpay";
-        $Account->set("bank", $value);
+        $account->setBank($value);
 
-        $this->assertEquals($value, $Account->getBank());
+        $this->assertEquals($value, $account->getBank());
     }
 
     /**
@@ -39,27 +39,29 @@ class AccountParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function BankName()
+    public function bankName()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "Sofort";
-        $Account->set("bankname", $value);
+        $account->setBankName($value);
 
-        $this->assertEquals($value, $Account->getBankName());
+        $this->assertEquals($value, $account->getBankName());
     }
 
     /**
      * Brand getter/setter test
+     *
+     * @test
      */
-    public function testBrand()
+    public function brand()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "Master";
-        $Account->set("brand", $value);
+        $account->setBrand($value);
 
-        $this->assertEquals($value, $Account->getBrand());
+        $this->assertEquals($value, $account->getBrand());
     }
 
     /**
@@ -67,14 +69,14 @@ class AccountParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Bic()
+    public function bic()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "COBADEFFXXX";
-        $Account->set("bic", $value);
+        $account->setBic($value);
 
-        $this->assertEquals($value, $Account->getBic());
+        $this->assertEquals($value, $account->getBic());
     }
 
     /**
@@ -82,40 +84,44 @@ class AccountParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Country()
+    public function country()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "DE";
-        $Account->set("country", $value);
+        $account->setCountry($value);
 
-        $this->assertEquals($value, $Account->getCountry());
+        $this->assertEquals($value, $account->getCountry());
     }
 
     /**
      * Holder getter/setter test
+     *
+     * @test
      */
-    public function testHolder()
+    public function holder()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $name = "Hans Meister";
-        $Account->set("holder", $name);
+        $account->setHolder($name);
 
-        $this->assertEquals($name, $Account->getHolder());
+        $this->assertEquals($name, $account->getHolder());
     }
 
     /**
      * Iban getter/setter test
+     *
+     * @test
      */
-    public function testIban()
+    public function iban()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "DE89370400440532013000";
-        $Account->set("iban", $value);
+        $account->setIban($value);
 
-        $this->assertEquals($value, $Account->getIban());
+        $this->assertEquals($value, $account->getIban());
     }
 
     /**
@@ -123,53 +129,60 @@ class AccountParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Identification()
+    public function identification()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "3516.0799.6864";
-        $Account->set("identification", $value);
+        $account->set("identification", $value);
 
-        $this->assertEquals($value, $Account->getIdentification());
+        $this->assertEquals($value, $account->getIdentification());
     }
 
     /**
      * Expiry month getter/setter test
+     *
+     * @test
      */
-    public function testExpiryMonth()
+    public function expiryMonth()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "05";
-        $Account->set("expiry_month", $value);
+        $account->set("expiry_month", $value);
 
-        $this->assertEquals($value, $Account->getExpiryMonth());
+        $this->assertEquals($value, $account->getExpiryMonth());
     }
 
     /**
      * Expiry year getter/setter test
+     *
+     * @test
      */
-    public function testExpiryYear()
+    public function expiryYear()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "2080";
-        $Account->set("expiry_year", $value);
+        $account->set("expiry_year", $value);
 
-        $this->assertEquals($value, $Account->getExpiryYear());
+        $this->assertEquals($value, $account->getExpiryYear());
     }
 
     /**
      * Number getter/setter test
+     *
+     * @test
+     *
      */
-    public function testNumber()
+    public function number()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "1234567890";
-        $Account->set("number", $value);
+        $account->setNumber($value);
 
-        $this->assertEquals($value, $Account->getNumber());
+        $this->assertEquals($value, $account->getNumber());
     }
 
     /**
@@ -177,13 +190,13 @@ class AccountParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Verification()
+    public function verification()
     {
-        $Account = new Account();
+        $account = new Account();
 
         $value = "***";
-        $Account->set("verification", $value);
+        $account->set("verification", $value);
 
-        $this->assertEquals($value, $Account->getVerification());
+        $this->assertEquals($value, $account->getVerification());
     }
 }
