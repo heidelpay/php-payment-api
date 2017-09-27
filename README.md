@@ -48,7 +48,7 @@ You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 ## Documentation
 
-Please visit https://dev.heidelpay.de/PhpApi/ for the developer documentation.
+Please visit http://dev.heidelpay.com/heidelpay-php-api/ for the developer documentation.
 
 ### UnitTest
 
