@@ -14,7 +14,7 @@ use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
- * @link  https://dev.heidelpay.de/PhpApi
+ * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
  * @author  Ronja Wann
  *
