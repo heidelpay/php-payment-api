@@ -39,5 +39,5 @@ class SofortPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "SOFORT";
+    protected $_brand = 'SOFORT';
 }

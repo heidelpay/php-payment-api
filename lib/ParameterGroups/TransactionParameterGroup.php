@@ -28,7 +28,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      *
      * @var string channel (mandatory)
      */
-    public $channel = null;
+    public $channel;
 
     /**
      * TransactionMode
@@ -39,7 +39,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      *
      * @var string mode (mandatory)
      */
-    public $mode = "CONNECTOR_TEST";
+    public $mode = 'CONNECTOR_TEST';
 
     /**
      * @var string
@@ -66,6 +66,9 @@ class TransactionParameterGroup extends AbstractParameterGroup
         return $this->mode;
     }
 
+    /**
+     * @return string
+     */
     public function getResponse()
     {
         return $this->response;
@@ -97,6 +100,19 @@ class TransactionParameterGroup extends AbstractParameterGroup
     public function setMode($mode)
     {
         $this->mode = $mode;
+        return $this;
+    }
+
+    /**
+     * Setter for the response
+     *
+     * @param string $response e.g. 'SYNC'
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
         return $this;
     }
 }

@@ -34,7 +34,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      *
      * @deprecated please use IBan and Bic instead
      */
-    public $account_bank = null;
+    public $account_bank;
 
     /**
      * ConnectorAccountBic
@@ -44,7 +44,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      *
      * @var string account bic
      */
-    public $account_bic = null;
+    public $account_bic;
 
     /**
      * ConnectorAccountCountry
@@ -53,7 +53,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      *
      * @var string account country
      */
-    public $account_country = null;
+    public $account_country;
 
     /**
      * ConnectorAccountHolder
@@ -62,7 +62,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      *
      * @var string account holder
      */
-    public $account_holder = null;
+    public $account_holder;
 
     /**
      * ConnectorAccountIBan
@@ -72,7 +72,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      *
      * @var string account holder
      */
-    public $account_iban = null;
+    public $account_iban;
 
     /**
      * ConnectorAccountNumber
@@ -83,7 +83,7 @@ class ConnectorParameterGroup extends AbstractParameterGroup
      *
      * @deprecated please use IBan and Bic instead
      */
-    public $account_number = null;
+    public $account_number;
 
     /**
      * @var string account usage

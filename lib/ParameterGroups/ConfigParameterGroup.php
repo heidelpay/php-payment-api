@@ -25,21 +25,21 @@ class ConfigParameterGroup extends AbstractParameterGroup
      *
      * @var string
      */
-    public $bankcountry = null;
+    public $bankcountry;
 
     /**
      * Supported brands countries for this payment method
      *
      * @var string
      */
-    public $brands = null;
+    public $brands;
 
     /**
      * optin text for payment methods like santander and easyCredit
      *
      * @var string
      */
-    public $optin_text = null;
+    public $optin_text;
 
     /**
      * Config bankcountry getter

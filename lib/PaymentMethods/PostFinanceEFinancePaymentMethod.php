@@ -46,5 +46,5 @@ class PostFinanceEFinancePaymentMethod extends AbstractPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "PFEFINANCE";
+    protected $_brand = 'PFEFINANCE';
 }

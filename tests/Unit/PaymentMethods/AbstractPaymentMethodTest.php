@@ -102,4 +102,34 @@ class AbstractPaymentMethodTest extends TestCase
         $this->expectException(UndefinedTransactionModeException::class);
         $this->paymentObject->getPaymentUrl();
     }
+
+    /**
+     * Test if jsonSerialize returns elements.
+     *
+     * @test
+     */
+    public function jsonSerializeTest()
+    {
+        $this->assertNotEmpty($this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_paymentCode', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_brand', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_liveUrl', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_sandboxUrl', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_adapter', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_request', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_requestArray', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_response', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_responseArray', $this->paymentObject->jsonSerialize());
+        $this->assertArrayHasKey('_dryRun', $this->paymentObject->jsonSerialize());
+    }
+
+    /**
+     * Test to verify that toJson returns valid JSON.
+     *
+     * @test
+     */
+    public function toJsonTest()
+    {
+        $this->assertJson($this->paymentObject->toJson());
+    }
 }

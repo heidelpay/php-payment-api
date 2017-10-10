@@ -15,8 +15,8 @@
     </testsuite>
 
     <filter>
-        <whitelist>
-            <directory>./lib/</directory>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./lib</directory>
         </whitelist>
     </filter>
 

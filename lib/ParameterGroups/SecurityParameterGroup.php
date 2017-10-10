@@ -19,13 +19,9 @@ namespace Heidelpay\PhpApi\ParameterGroups;
 class SecurityParameterGroup extends AbstractParameterGroup
 {
     /**
-     * SecuritySender
-     *
-     * This parameter is the main authentification parameter
-     *
-     * @var string sender (mandatory)
+     * @var string sender (mandatory) This parameter is the main authentification parameter
      */
-    public $sender = null;
+    public $sender;
 
     /**
      * SecuritySender getter

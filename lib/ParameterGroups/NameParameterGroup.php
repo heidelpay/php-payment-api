@@ -27,7 +27,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @var string company name (optional)
      */
-    public $birthdate = null;
+    public $birthdate;
 
     /**
      * NameCompany
@@ -36,7 +36,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @var string company name (optional)
      */
-    public $company = null;
+    public $company;
 
     /**
      * NameGiven
@@ -45,7 +45,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @var string given name of the customer (mandatory)
      */
-    public $given = null;
+    public $given;
 
     /**
      * NameFamily
@@ -54,7 +54,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @var string family name of the customer (mandatory)
      */
-    public $family = null;
+    public $family;
 
 
     /**
@@ -64,7 +64,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @var string salutation of the customer (MR/MRS) (conditional mandatory)
      */
-    public $salutation = null;
+    public $salutation;
 
 
     /**
@@ -74,7 +74,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @var string tile of the customer (optional)
      */
-    public $title = null;
+    public $title;
 
     /**
      * NameBirthdate getter

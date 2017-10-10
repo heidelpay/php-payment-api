@@ -46,5 +46,5 @@ class GiropayPaymentMethod extends AbstractPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "GIROPAY";
+    protected $_brand = 'GIROPAY';
 }

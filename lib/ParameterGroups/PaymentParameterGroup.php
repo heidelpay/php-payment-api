@@ -33,7 +33,7 @@ class PaymentParameterGroup extends AbstractParameterGroup
      *
      * @var string code (mandatory)
      */
-    public $code = null;
+    public $code;
 
     /**
      * PamyentCode getter

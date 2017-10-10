@@ -30,7 +30,7 @@ class BasketParameterGroup extends AbstractParameterGroup
      *
      * @var string reference id of a transmitted basket (optional)
      */
-    public $id = null;
+    public $id;
 
     /**
      * BasketId getter

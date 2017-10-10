@@ -51,5 +51,5 @@ class PayPalPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "PAYPAL";
+    protected $_brand = 'PAYPAL';
 }

@@ -27,28 +27,28 @@ class CriterionParameterGroup extends AbstractParameterGroup
      *
      * @var string payment methode
      */
-    public $payment_method = null;
+    public $payment_method;
 
     /**
      * hash to verify the response
      *
      * @var string hash to verify the response
      */
-    public $secret = null;
+    public $secret;
 
     /**
      * Sdk name
      *
      * @var string sdk name
      */
-    public $sdk_name = "Heidelpay\PhpApi";
+    public $sdk_name = 'Heidelpay\PhpApi';
 
     /**
      * Sdk version
      *
      * @var string version
      */
-    public $sdk_version = "17.9.27";
+    public $sdk_version = '17.9.27';
 
     /**
      * CriterionPaymentMethod getter
@@ -66,7 +66,7 @@ class CriterionParameterGroup extends AbstractParameterGroup
      * @var string identificaton transaction id
      * @var string secret of your application
      *
-     * @return object instance of the CriterionParameterGroup
+     * @return \Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup
      *
      * @param mixed $value
      * @param mixed $secret
@@ -85,24 +85,6 @@ class CriterionParameterGroup extends AbstractParameterGroup
     public function getSecretHash()
     {
         return $this->secret;
-    }
-
-    /**
-     * Magic setter without property exception
-     *
-     *  This class has his own setter, because criterions can be used as key value store.
-     *  You can use any key and value which is a valid post parameter.
-     *
-     * @param string $key
-     * @param string $value
-     *
-     * @return \Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup
-     */
-    public function set($key, $value)
-    {
-        $key = strtolower($key);
-        $this->$key = $value;
-        return $this;
     }
 
     /**

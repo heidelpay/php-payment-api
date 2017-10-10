@@ -98,7 +98,8 @@ class PushTest extends TestCase
         $push = new Push($this->xmlCcRegResponse);
         $response = $push->getResponse();
 
-        $this->assertTrue($response instanceof Response, 'Mapped Response is no instance of Response.');
+        $this->assertInstanceOf(Response::class, $response);
+        //$this->assertTrue($response instanceof Response, 'Mapped Response is no instance of Response.');
         $this->assertEquals(Response::class, get_class($response), 'Mapped Response is no instance of Response.');
     }
 

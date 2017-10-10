@@ -24,7 +24,7 @@ class UserParameterGroup extends AbstractParameterGroup
      *
      * @var string login (mandatory)
      */
-    public $login = null;
+    public $login;
 
     /**
      * UserPwd
@@ -33,7 +33,7 @@ class UserParameterGroup extends AbstractParameterGroup
      *
      * @var string pwd (mandatory)
      */
-    public $pwd = null;
+    public $pwd;
 
     /**
      * user login getter

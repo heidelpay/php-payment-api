@@ -39,5 +39,5 @@ class IDealPaymentMethod extends AbstractPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "IDEAL";
+    protected $_brand = 'IDEAL';
 }

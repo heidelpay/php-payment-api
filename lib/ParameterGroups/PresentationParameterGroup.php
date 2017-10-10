@@ -25,7 +25,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      *
      * @var float amount (mandatory)
      */
-    public $amount = null;
+    public $amount;
 
     /**
      * PresentationCurrency
@@ -34,7 +34,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      *
      * @var string currency code ISO 4217 (mandatory)
      */
-    public $currency = null;
+    public $currency;
 
     /**
      * PresentationUsage
@@ -47,7 +47,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      *
      * @var string usage
      */
-    public $usage = null;
+    public $usage;
 
     /**
      * PresentationAmount getter

@@ -28,7 +28,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "Heidelpay";
+        $value = 'Heidelpay';
         $account->setBank($value);
 
         $this->assertEquals($value, $account->getBank());
@@ -43,7 +43,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "Sofort";
+        $value = 'Sofort';
         $account->setBankName($value);
 
         $this->assertEquals($value, $account->getBankName());
@@ -58,7 +58,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "Master";
+        $value = 'Master';
         $account->setBrand($value);
 
         $this->assertEquals($value, $account->getBrand());
@@ -73,7 +73,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "COBADEFFXXX";
+        $value = 'COBADEFFXXX';
         $account->setBic($value);
 
         $this->assertEquals($value, $account->getBic());
@@ -88,7 +88,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "DE";
+        $value = 'DE';
         $account->setCountry($value);
 
         $this->assertEquals($value, $account->getCountry());
@@ -103,7 +103,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $name = "Hans Meister";
+        $name = 'Hans Meister';
         $account->setHolder($name);
 
         $this->assertEquals($name, $account->getHolder());
@@ -118,7 +118,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "DE89370400440532013000";
+        $value = 'DE89370400440532013000';
         $account->setIban($value);
 
         $this->assertEquals($value, $account->getIban());
@@ -133,8 +133,8 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "3516.0799.6864";
-        $account->set("identification", $value);
+        $value = '3516.0799.6864';
+        $account->set('identification', $value);
 
         $this->assertEquals($value, $account->getIdentification());
     }
@@ -148,8 +148,8 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "05";
-        $account->set("expiry_month", $value);
+        $value = '05';
+        $account->set('expiry_month', $value);
 
         $this->assertEquals($value, $account->getExpiryMonth());
     }
@@ -163,8 +163,8 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "2080";
-        $account->set("expiry_year", $value);
+        $value = '2080';
+        $account->set('expiry_year', $value);
 
         $this->assertEquals($value, $account->getExpiryYear());
     }
@@ -179,7 +179,7 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "1234567890";
+        $value = '1234567890';
         $account->setNumber($value);
 
         $this->assertEquals($value, $account->getNumber());
@@ -194,9 +194,42 @@ class AccountParameterGroupTest extends TestCase
     {
         $account = new Account();
 
-        $value = "***";
-        $account->set("verification", $value);
+        $value = '***';
+        $account->set('verification', $value);
 
         $this->assertEquals($value, $account->getVerification());
+    }
+
+    /**
+     * @test
+     */
+    public function jsonSerializeTest()
+    {
+        $account = new Account();
+
+        $this->assertNotEmpty($account->jsonSerialize());
+        $this->assertArrayHasKey('bank', $account->jsonSerialize());
+        $this->assertArrayHasKey('bankname', $account->jsonSerialize());
+        $this->assertArrayHasKey('brand', $account->jsonSerialize());
+        $this->assertArrayHasKey('bic', $account->jsonSerialize());
+        $this->assertArrayHasKey('country', $account->jsonSerialize());
+        $this->assertArrayHasKey('expiry_month', $account->jsonSerialize());
+        $this->assertArrayHasKey('expiry_year', $account->jsonSerialize());
+        $this->assertArrayHasKey('holder', $account->jsonSerialize());
+        $this->assertArrayHasKey('iban', $account->jsonSerialize());
+        $this->assertArrayHasKey('identification', $account->jsonSerialize());
+        $this->assertArrayHasKey('number', $account->jsonSerialize());
+        $this->assertArrayHasKey('verification', $account->jsonSerialize());
+    }
+
+    /**
+     * Test to verify that toJson returns valid JSON.
+     *
+     * @test
+     */
+    public function toJsonTest()
+    {
+        $account = new Account();
+        $this->assertJson($account->toJson());
     }
 }

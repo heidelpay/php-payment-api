@@ -21,17 +21,17 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     /**
      * @var bool if guest checkout (true/false) (optional)
      */
-    public $guestcheckout = null;
+    public $guestcheckout;
 
     /**
      * @var string first date of customers relationship (YYYY-MM-DD) (optional)
      */
-    public $since = null;
+    public $since;
 
     /**
      * @var integer of customer's order count (optional)
      */
-    public $ordercount = null;
+    public $ordercount;
 
     /**
      * Guestcheckout getter

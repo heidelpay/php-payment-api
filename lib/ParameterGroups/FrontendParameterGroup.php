@@ -23,7 +23,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @var string url for a custom css to style the hpf. Only required for hpf
      */
-    public $css_path = null;
+    public $css_path;
 
 
     /**
@@ -38,28 +38,28 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @var string language code ISO 639-1 (mandatory)
      */
-    public $language = null;
+    public $language;
 
     /**
      * FrontendMode
      *
      * @var string always set to withelabel on ngw (mandatory)
      */
-    public $mode = "WHITELABEL";
+    public $mode = 'WHITELABEL';
 
     /**
      * FrontendPaymentFrameOrigin
      *
      * @var string origin of your website (like "http://dev.heidelpay.de/"). Only required for hpf
      */
-    public $payment_frame_origin = null;
+    public $payment_frame_origin;
 
     /**
      * FrontendPaymentFrameUrl
      *
      * @var string url of the payment iframe, only for credit card and debit card because of pci restrictions
      */
-    public $payment_frame_url = null;
+    public $payment_frame_url;
     /**
      * FrontendPreventAsyncRedirect
      *
@@ -70,21 +70,21 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @var boolean weather redirect is active or not
      */
-    public $prevent_async_redirect = null;
+    public $prevent_async_redirect;
 
     /**
      * FrontendRedirectUrl
      *
      * @var string url for whitelabel payment from
      */
-    public $redirect_url = null;
+    public $redirect_url;
 
     /**
      * FrontendResponseUrl
      *
      * @var string url of your system for async payment response (mandatory)
      */
-    public $response_url = null;
+    public $response_url;
 
     /**
      * FrontendEnabled getter

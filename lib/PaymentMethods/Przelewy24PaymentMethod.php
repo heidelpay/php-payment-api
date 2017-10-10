@@ -46,5 +46,5 @@ class Przelewy24PaymentMethod extends AbstractPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "PRZELEWY24";
+    protected $_brand = 'PRZELEWY24';
 }

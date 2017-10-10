@@ -39,5 +39,5 @@ class PrepaymentPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = null;
+    protected $_brand;
 }

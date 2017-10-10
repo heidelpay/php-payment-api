@@ -23,7 +23,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @var string creditor id
      */
-    public $creditor_id = null;
+    public $creditor_id;
 
     /**
      * IdentificationShopperId
@@ -33,7 +33,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @var string customer identification number (optional)
      */
-    public $shopperid = null;
+    public $shopperid;
 
     /**
      * IdentificationShortId
@@ -43,7 +43,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @var string heidelpay short identifier
      */
-    public $shortid = null;
+    public $shortid;
 
     /**
      * IdentificatonTransactionId
@@ -53,7 +53,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @var string order identification number (optional)
      */
-    public $transactionid = null;
+    public $transactionid;
 
     /**
      * IdentificationrefernceId
@@ -65,7 +65,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @var string payment reference Id, for example the uniqe Id of the invoice autorisation
      */
-    public $referenceid = null;
+    public $referenceid;
 
     /**
      * IdentificationUniqeId
@@ -75,7 +75,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @var string payment long identifier also know as uniqeId
      */
-    public $uniqueid = null;
+    public $uniqueid;
 
     /**
      * IdentificationCreditorId getter
@@ -174,6 +174,8 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * use debitOnRegistration you have to set the id of the registration.
      *
      * @param string $referenceid f.e. 31HA07BC8142C5A171745D00AD63D182
+     *
+     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
      */
     public function setReferenceid($referenceid)
     {

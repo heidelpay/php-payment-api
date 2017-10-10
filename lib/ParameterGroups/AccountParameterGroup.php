@@ -28,70 +28,70 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @deprecated please use IBan and Bic instead
      */
-    public $bank = null;
+    public $bank;
 
     /**
      * Bankname - Especially of interest for OnlineTransfer methods to determine which bank was chosen.
      *
      * @var string bankname of the given account
      */
-    public $bankname = null;
+    public $bankname;
 
     /**
      * Brand name of the given account data (for example iDeal)
      *
      * @var string brand of the given account
      */
-    public $brand = null;
+    public $brand;
 
     /**
      * Bic - Business identifier code used for non sepa direct debit
      *
      * @var string bic of the given accout
      */
-    public $bic = null;
+    public $bic;
 
     /**
      * Country - Bank or Account Country
      *
      * @var string country of the given account
      */
-    public $country = null;
+    public $country;
 
     /**
      * Expiry month used for credit and debit cards
      *
      * @var string expiry month of the given account
      */
-    public $expiry_month = null;
+    public $expiry_month;
 
     /**
      * Expiry year used for credit and debit cards
      *
      * @var string expiry year of the given account
      */
-    public $expiry_year = null;
+    public $expiry_year;
 
     /**
      * Owner of the given account data
      *
      * @var string holder of the given account
      */
-    public $holder = null;
+    public $holder;
 
     /**
      * International bank account number
      *
      * @var string iban of the given account
      */
-    public $iban = null;
+    public $iban;
 
     /**
      * Identification - Used for SEPA mandate ID
      *
      * @var string sepa mandate id from the payment response
      */
-    public $identification = null;
+    public $identification;
 
     /**
      * Account number can be used for non sepa direct debit transactions
@@ -99,16 +99,16 @@ class AccountParameterGroup extends AbstractParameterGroup
      * @var string number of the given account
      *
      */
-    public $number = null;
+    public $number;
 
 
     /**
      * @var string verification of the given account
      */
-    public $verification = null;
+    public $verification;
 
     /**
-     *  AccountBank getter
+     * AccountBank getter
      *
      * @return string bank
      *

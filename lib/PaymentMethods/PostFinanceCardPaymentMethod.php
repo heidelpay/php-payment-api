@@ -46,5 +46,5 @@ class PostFinanceCardPaymentMethod extends AbstractPaymentMethod
      *
      * @var string brand name
      */
-    protected $_brand = "PFCARD";
+    protected $_brand = 'PFCARD';
 }

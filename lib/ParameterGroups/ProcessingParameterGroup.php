@@ -19,92 +19,59 @@ namespace Heidelpay\PhpApi\ParameterGroups;
 class ProcessingParameterGroup extends AbstractParameterGroup
 {
     /**
-     * ProcessingCode
-     *
      * @var string code
      */
-    public $code = null;
+    public $code;
 
     /**
-     * ProcessingConfirmationStatus
-     *
      * @var string confirmation status
      */
-    public $confirmation_status = null;
+    public $confirmation_status;
 
     /**
-     * ProcessingRecoverable
-     *
      * @var string recoverable
      */
-    public $recoverable = null;
+    public $recoverable;
 
     /**
-     * ProcessingResult
-     *
      * @var string payment transaction result
      */
-    public $result = null;
+    public $result;
 
     /**
-     * ProcessingReasonCode
-     *
      * @var string reson_code transaction result
      */
-    public $reason_code = null;
+    public $reason_code;
 
     /**
-     * ProcessingReason
-     *
      * @var string reson transaction result
      */
-    public $reason = null;
+    public $reason;
 
     /**
-     * ProcessingReturn
-     *
      * @var string status message for the shop owner
      */
-    public $return = null;
+    public $return;
 
     /**
-     * ProcessingReturnCode
-     *
      * @var string status code for the shop owner
      */
-    public $return_code = null;
+    public $return_code;
 
-    public $timestamp = null;
+    /**
+     * @var string Timestamp of the processing date and time
+     */
+    public $timestamp;
 
     /**
      * @var string status message of the transaction
      */
-    public $status = null;
+    public $status;
 
     /**
-     * ProcessingStatusCode
-     *
      * @var string status code of the transaction (100.100.100)
      */
-    public $status_code = null;
-
-    /**
-     * Magic setter without property exception
-     *
-     *  This class has his own setter, because criterions can be used as key value store.
-     *  You can use any key and value which is a valid post parameter.
-     *
-     * @param string $key
-     * @param string $value
-     *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
-     */
-    public function set($key, $value)
-    {
-        $key = strtolower($key);
-        $this->$key = $value;
-        return $this;
-    }
+    public $status_code;
 
     /**
      * ProcessingResult getter

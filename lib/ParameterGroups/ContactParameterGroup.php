@@ -25,7 +25,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @var string email address of the customer (mandatory)
      */
-    public $email = null;
+    public $email;
 
     /**
      * Customer Ip
@@ -35,7 +35,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @var string ip address of the customer (mandatory)
      */
-    public $ip = null;
+    public $ip;
 
     /**
      * Contact Mobile
@@ -45,7 +45,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @var string mobile phone of the customer (optional)
      */
-    public $mobile = null;
+    public $mobile;
 
     /**
      * Contact Phone
@@ -55,7 +55,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @var string phone of the customer (optional)
      */
-    public $phone = null;
+    public $phone;
 
     /**
      * ContactEmail getter

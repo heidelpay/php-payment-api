@@ -24,27 +24,27 @@ class AddressParameterGroup extends AbstractParameterGroup
     /**
      * @var string city of the customers billingaddress (mandatory)
      */
-    public $city = null;
+    public $city;
 
     /**
      * @var string county of the customers billingaddress in ISO 3166-1 2 digits (mandatory)
      */
-    public $country = null;
+    public $country;
 
     /**
      * @var string state of the customers billingaddress in ISO 3166-2 (optinal)
      */
-    public $state = null;
+    public $state;
 
     /**
      * @var string street of the customers billingaddress (mandatory)
      */
-    public $street = null;
+    public $street;
 
     /**
      * @var string zip code of the customers billingaddress (mandatory)
      */
-    public $zip = null;
+    public $zip;
 
     /**
      * AddressCity getter

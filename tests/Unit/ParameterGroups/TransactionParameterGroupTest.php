@@ -47,4 +47,19 @@ class TransactionParameterGroupTest extends TestCase
 
         $this->assertEquals($value, $transaction->getMode());
     }
+
+    /**
+     * Test for response getter/setter.
+     *
+     * @test
+     */
+    public function responseTest()
+    {
+        $transaction = new Transaction();
+
+        $value = 'SYNC';
+        $transaction->setResponse($value);
+
+        $this->assertEquals($value, $transaction->getResponse());
+    }
 }

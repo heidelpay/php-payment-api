@@ -158,11 +158,7 @@ class Push
                 }
             }
         } catch (\Exception $e) {
-            if ($e instanceof UndefinedXmlResponseException) {
-                throw new XmlResponseParserException('Problem while parsing the raw xml response: ' . $e->getMessage());
-            }
-
-            throw new \Exception($e->getMessage());
+            throw new XmlResponseParserException('Problem while parsing the raw xml response: ' . $e->getMessage());
         }
     }
 
@@ -210,14 +206,9 @@ class Push
      */
     private function isParameterGroupGetter($methodName)
     {
-        if ((substr($methodName, 0, 3) == 'get')
-            && ($methodName != 'getPaymentFormUrl') && ($methodName != 'getPaymentReferenceId')
-            && ($methodName != 'getError')
-        ) {
-            return true;
-        }
-
-        return false;
+        return (0 === strpos($methodName, 'get'))
+            && ($methodName !== 'getPaymentFormUrl') && ($methodName !== 'getPaymentReferenceId')
+            && ($methodName !== 'getError');
     }
 
     /**

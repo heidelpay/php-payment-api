@@ -27,7 +27,7 @@ class ResponseTest extends TestCase
     /**
      * @var \Heidelpay\PhpApi\Response
      */
-    protected $_responseObject = null;
+    protected $responseObject;
 
     /**
      * Secret
@@ -95,10 +95,13 @@ class ResponseTest extends TestCase
             'TRANSACTION_CHANNEL' => '31HA07BC8142C5A171744F3D6D155865',
             'FRONTEND_LANGUAGE' => 'DE',
             'PAYMENT_CODE' => 'CC.RG',
-            'BASKET_ID' => '31HA07BC8129FBB819367B2205CD6FB4'
+            'BASKET_ID' => '31HA07BC8129FBB819367B2205CD6FB4',
+            'RISKINFORMATION_SINCE' => '2017-01-01',
+            'RISKINFORMATION_ORDERCOUNT' => '5',
+            'RISKINFORMATION_GUESTCHECKOUT' => 'FALSE',
         );
 
-        $this->_responseObject = new Response($responseSample);
+        $this->responseObject = new Response($responseSample);
     }
 
     /**
@@ -108,9 +111,9 @@ class ResponseTest extends TestCase
      */
     public function isSuccess()
     {
-        $this->assertTrue($this->_responseObject->isSuccess(), 'isSuccess should be true');
-        $this->_responseObject->getProcessing()->set('result', 'NOK');
-        $this->assertFalse($this->_responseObject->isSuccess(), 'isSuccess should be false.');
+        $this->assertTrue($this->responseObject->isSuccess(), 'isSuccess should be true');
+        $this->responseObject->getProcessing()->set('result', 'NOK');
+        $this->assertFalse($this->responseObject->isSuccess(), 'isSuccess should be false.');
     }
 
     /**
@@ -121,9 +124,9 @@ class ResponseTest extends TestCase
      */
     public function isPending()
     {
-        $this->assertFalse($this->_responseObject->isPending(), 'isPending should be false');
-        $this->_responseObject->getProcessing()->set('status_code', '80');
-        $this->assertTrue($this->_responseObject->isPending(), 'isPending should be true');
+        $this->assertFalse($this->responseObject->isPending(), 'isPending should be false');
+        $this->responseObject->getProcessing()->set('status_code', '80');
+        $this->assertTrue($this->responseObject->isPending(), 'isPending should be true');
     }
 
     /**
@@ -134,9 +137,9 @@ class ResponseTest extends TestCase
      */
     public function isError()
     {
-        $this->assertFalse($this->_responseObject->isError(), 'isError should be false');
-        $this->_responseObject->getProcessing()->set('result', 'NOK');
-        $this->assertTrue($this->_responseObject->isError(), 'isError should be true');
+        $this->assertFalse($this->responseObject->isError(), 'isError should be false');
+        $this->responseObject->getProcessing()->set('result', 'NOK');
+        $this->assertTrue($this->responseObject->isError(), 'isError should be true');
     }
 
     /**
@@ -152,7 +155,7 @@ class ResponseTest extends TestCase
             'message' => "Request successfully processed in 'Merchant in Connector Test Mode'"
         );
 
-        $this->assertEquals($expectedError, $this->_responseObject->getError());
+        $this->assertEquals($expectedError, $this->responseObject->getError());
     }
 
     /**
@@ -163,7 +166,7 @@ class ResponseTest extends TestCase
      */
     public function getPaymentReferenceId()
     {
-        $this->assertEquals('31HA07BC8108A9126F199F2784552637', $this->_responseObject->getPaymentReferenceId());
+        $this->assertEquals('31HA07BC8108A9126F199F2784552637', $this->responseObject->getPaymentReferenceId());
     }
 
     /**
@@ -176,23 +179,23 @@ class ResponseTest extends TestCase
     {
         /** iframe url for credit and debit card*/
         $expectedUrl = 'http://dev.heidelpay.de';
-        $this->_responseObject->getFrontend()->set('payment_frame_url', $expectedUrl);
-        $this->assertEquals($expectedUrl, $this->_responseObject->getPaymentFormUrl());
+        $this->responseObject->getFrontend()->set('payment_frame_url', $expectedUrl);
+        $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
 
         $expectedUrl = 'http://www.heidelpay.de';
-        $this->_responseObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
 
         /** url in case of credit and debit card refernce Transaction */
-        $this->_responseObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
-        $this->assertEquals($expectedUrl, $this->_responseObject->getPaymentFormUrl());
+        $this->responseObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
+        $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
 
         /** unset reference id */
-        $this->_responseObject->getIdentification()->set('referenceid', null);
+        $this->responseObject->getIdentification()->set('referenceid', null);
 
         /** url for non credit or debit card transactions */
-        $this->_responseObject->getPayment()->set('code', 'OT.PA');
-        $this->_responseObject->getFrontend()->set('redirect_url', $expectedUrl);
-        $this->assertEquals($expectedUrl, $this->_responseObject->getPaymentFormUrl());
+        $this->responseObject->getPayment()->set('code', 'OT.PA');
+        $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
     }
 
     /**
@@ -236,7 +239,7 @@ class ResponseTest extends TestCase
     {
         $response = new Response();
         $this->expectException(HashVerificationException::class);
-        $response->verifySecurityHash(null, null);
+        $response->verifySecurityHash();
     }
 
     /**
@@ -306,5 +309,41 @@ class ResponseTest extends TestCase
             . 'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5'
         );
         $response->verifySecurityHash($this->secret, 'false');
+    }
+
+    /**
+     * @test
+     */
+    public function jsonSerializeTest()
+    {
+        $this->assertNotEmpty($this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('account', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('address', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('basket', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('config', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('connector', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('contact', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('criterion', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('frontend', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('identification', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('name', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('payment', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('presentation', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('processing', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('request', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('riskinformation', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('security', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('transaction', $this->responseObject->jsonSerialize());
+        $this->assertArrayHasKey('user', $this->responseObject->jsonSerialize());
+    }
+
+    /**
+     * Test to verify that toJson returns valid JSON.
+     *
+     * @test
+     */
+    public function toJsonTest()
+    {
+        $this->assertJson($this->responseObject->toJson());
     }
 }
