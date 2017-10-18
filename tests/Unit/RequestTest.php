@@ -186,7 +186,7 @@ class RequestTest extends TestCase
         $request = new Request();
 
         $request->getBasket();
-        $value = "31HA07BC8129FBB819367B2205CD6FB4";
+        $value = '31HA07BC8129FBB819367B2205CD6FB4';
         $request->getBasket()->set('id', $value);
         $this->assertEquals($value, $request->getBasket()->getId());
     }
