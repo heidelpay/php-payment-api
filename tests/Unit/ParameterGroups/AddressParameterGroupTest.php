@@ -66,7 +66,7 @@ class AddressParameterGroupTest extends TestCase
     {
         $address = new Address();
 
-        $street = "Märchenweg 123";
+        $street = 'Märchenweg 123';
         $address->setStreet($street);
 
         $this->assertEquals($street, $address->getStreet());

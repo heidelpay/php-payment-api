@@ -2,6 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\Adapter;
 
+use Heidelpay\PhpApi\Response;
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 
@@ -32,21 +33,23 @@ class CurlAdapterTest extends TestCase
     {
         $curlAdapter = new CurlAdapter();
 
-        $result = $curlAdapter->sendPost('https://abc.heidelpay.de/');
+        /** @var array $result_array */
+        /** @var Response $response */
+        list($result_array, $response) = $curlAdapter->sendPost('https://abc.heidelpay.de/');
 
-        $this->assertTrue(is_array($result[0]), 'First result key should be an array.');
-        $this->assertTrue(is_object($result[1]), 'Second result key should be an object.');
+        $this->assertTrue(is_array($result_array), 'First result key should be an array.');
+        $this->assertTrue(is_object($response), 'Second result key should be an object.');
         $expected = array(
             'PROCESSING_RESULT' => 'NOK',
             'PROCESSING_RETURN_CODE' => 'CON.ERR.DEF'
         );
-        $this->assertEquals($expected['PROCESSING_RESULT'], $result[0]['PROCESSING_RESULT']);
-        $this->assertEquals($expected['PROCESSING_RETURN_CODE'], $result[0]['PROCESSING_RETURN_CODE']);
+        $this->assertEquals($expected['PROCESSING_RESULT'], $result_array['PROCESSING_RESULT']);
+        $this->assertEquals($expected['PROCESSING_RETURN_CODE'], $result_array['PROCESSING_RETURN_CODE']);
 
-        $this->assertTrue($result[1]->isError(), 'isError should return true');
-        $this->assertFalse($result[1]->isSuccess(), 'isSuccess should return false');
+        $this->assertTrue($response->isError(), 'isError should return true');
+        $this->assertFalse($response->isSuccess(), 'isSuccess should return false');
 
-        $error = $result[1]->getError();
+        $error = $response->getError();
 
         $this->assertEquals($expected['PROCESSING_RETURN_CODE'], $error['code']);
     }
@@ -74,15 +77,16 @@ class CurlAdapterTest extends TestCase
             'FRONTEND.RESPONSE_URL' => 'http://dev.heidelpay.de',
             'CONTACT.IP' => '127.0.0.1',
             'REQUEST.VERSION' => '1.0'
-
         );
 
-        $result = $curlAdapter->sendPost('https://test-heidelpay.hpcgw.net/ngw/post', $post);
+        /** @var array $result_array */
+        /** @var Response $response */
+        list($result_array, $response) = $curlAdapter->sendPost('https://test-heidelpay.hpcgw.net/ngw/post', $post);
 
-        $this->assertTrue(is_array($result[0]), 'First result key should be an array.');
-        $this->assertTrue(is_object($result[1]), 'Second result key should be an object.');
+        $this->assertTrue(is_array($result_array), 'First result key should be an array.');
+        $this->assertTrue(is_object($response), 'Second result key should be an object.');
 
-        $this->assertFalse($result[1]->isError(), 'isError should return false');
-        $this->assertTrue($result[1]->isSuccess(), 'isSuccess should return true');
+        $this->assertFalse($response->isError(), 'isError should return false');
+        $this->assertTrue($response->isSuccess(), 'isSuccess should return true');
     }
 }

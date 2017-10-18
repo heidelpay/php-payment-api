@@ -2,6 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
+use Heidelpay\PhpApi\Response;
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod as DirectDebitSecured;
 
@@ -156,12 +157,13 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1], 1));
-        $this->assertFalse($response[1]->isError(), 'authorize failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
+        $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -183,13 +185,14 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1]->getError(), 1));
-        $this->assertFalse($response[1]->isPending(), 'capture is pending');
-        $this->assertFalse($response[1]->isError(), 'capture failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'capture is pending');
+        $this->assertFalse($response->isError(), 'capture failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -213,12 +216,13 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1], 1));
-        $this->assertFalse($response[1]->isError(), 'authorize failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
+        $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -240,14 +244,15 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1]->getError(), 1));
-        $this->assertFalse($response[1]->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response[1]->isError(),
-            'authorizet on registration failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'authorize on registration is pending');
+        $this->assertFalse($response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -271,12 +276,13 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1], 1));
-        $this->assertFalse($response[1]->isError(), 'authorize failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
+        $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -298,13 +304,14 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1]->getError(), 1));
-        $this->assertFalse($response[1]->isPending(), 'reversal is pending');
-        $this->assertFalse($response[1]->isError(), 'reversal failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'reversal is pending');
+        $this->assertFalse($response->isError(), 'reversal failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -327,13 +334,14 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1]->getError(), 1));
-        $this->assertFalse($response[1]->isPending(), 'reversal is pending');
-        $this->assertFalse($response[1]->isError(), 'reversal failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'reversal is pending');
+        $this->assertFalse($response->isError(), 'reversal failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
@@ -357,14 +365,15 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
 
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
-        $response = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        /** @var Response $response */
+        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
-        $this->assertTrue($response[1]->isSuccess(), 'Transaction failed : ' . print_r($response[1]->getError(), 1));
-        $this->assertFalse($response[1]->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response[1]->isError(),
-            'authorizet on registration failed : ' . print_r($response[1]->getError(), 1));
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'authorize on registration is pending');
+        $this->assertFalse($response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1));
 
-        return (string)$response[1]->getPaymentReferenceId();
+        return (string)$response->getPaymentReferenceId();
     }
 
     /**
