@@ -8,7 +8,7 @@ use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
 /**
  * Przelewy24 Test
  *
- * Connection tests can fail due to network issues and scheduled downtimes.
+ * Connection tests can fail due to network issues and scheduled down times.
  * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class Przelewy24PaymentMerhodTest extends TestCase
+class Przelewy24PaymentMethodTest extends TestCase
 {
     /**
      * SecuritySender
@@ -116,7 +116,7 @@ class Przelewy24PaymentMerhodTest extends TestCase
      *
      * @var string contactMail
      */
-    protected $contactMail = "development@heidelpay.de";
+    protected $contactMail = 'development@heidelpay.de';
 
     /**
      * Transaction currency
@@ -139,9 +139,9 @@ class Przelewy24PaymentMerhodTest extends TestCase
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod
+     * @var Przelewy24
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -149,10 +149,12 @@ class Przelewy24PaymentMerhodTest extends TestCase
     public function __construct()
     {
         date_default_timezone_set('UTC');
+
+        parent::__construct();
     }
 
     /**
-     * Set up function will create a Przelewy24 object for each testcase
+     * Set up function will create a Przelewy24 object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -193,7 +195,7 @@ class Przelewy24PaymentMerhodTest extends TestCase
      */
     public function testAuthorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
 

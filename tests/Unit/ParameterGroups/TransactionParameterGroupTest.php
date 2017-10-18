@@ -34,9 +34,9 @@ class TransactionParameterGroupTest extends TestCase
         $this->assertEquals($value, $transaction->getChannel());
     }
 
-    /*
+    /**
      * Mode getter/setter test
-     * @ŧest
+     * @test
      */
     public function mode()
     {

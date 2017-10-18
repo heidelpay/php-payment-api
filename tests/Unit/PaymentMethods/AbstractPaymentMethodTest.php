@@ -2,6 +2,8 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
+use Heidelpay\PhpApi\Adapter\CurlAdapter;
+use Heidelpay\PhpApi\Request;
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
@@ -9,7 +11,7 @@ use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
 /**
  * Sofort Test
  *
- * Connection tests can fail due to network issues and scheduled downtimes.
+ * Connection tests can fail due to network issues and scheduled down times.
  * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -30,10 +32,10 @@ class AbstractPaymentMethodTest extends TestCase
      *
      * @var \Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
-     * Set up function will create a sofort object for each testcase
+     * Set up function will create a sofort object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -51,7 +53,7 @@ class AbstractPaymentMethodTest extends TestCase
      */
     public function Request()
     {
-        $Request = new \Heidelpay\PhpApi\Request;
+        $Request = new Request();
         $this->paymentObject->setRequest($Request);
 
         $this->assertEquals($Request, $this->paymentObject->getRequest());
@@ -68,13 +70,13 @@ class AbstractPaymentMethodTest extends TestCase
     }
 
     /**
-     * Adaptere setter/getter test
+     * Adapter setter/getter test
      *
      * @test
      */
     public function Adapter()
     {
-        $Adapter = new \Heidelpay\PhpApi\Adapter\CurlAdapter();
+        $Adapter = new CurlAdapter();
         $this->paymentObject->setAdapter($Adapter);
 
         $this->assertEquals($Adapter, $this->paymentObject->getAdapter());

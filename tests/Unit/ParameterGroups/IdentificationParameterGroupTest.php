@@ -73,7 +73,7 @@ class IdentificationParameterGroupTest extends TestCase
     {
         $identification = new Identification();
 
-        $value = '0860300156-ngw|php-conncetor';
+        $value = '0860300156-ngw|php-connector';
         $identification->setTransactionid($value);
 
         $this->assertEquals($value, $identification->getTransactionId());
@@ -95,7 +95,7 @@ class IdentificationParameterGroupTest extends TestCase
     }
 
     /**
-     * Uniqe id getter/setter test
+     * Unique id getter/setter test
      *
      * @test
      */

@@ -2,10 +2,8 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use Heidelpay\PhpApi\Request;
 use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup as Basket;
-use Heidelpay\PhpApi\Exceptions\UndefinedPropertyException;
 
 /**
  * Unit test for BasketParameterGroup
@@ -31,7 +29,7 @@ class BasketParameterGroupTest extends TestCase
     {
         $Basket = new Basket();
 
-        $value = "31HA07BC8129FBB819367B2205CD6FB4";
+        $value = '31HA07BC8129FBB819367B2205CD6FB4';
         $Basket->setId($value);
 
         $this->assertEquals($value, $Basket->getId());
@@ -46,14 +44,14 @@ class BasketParameterGroupTest extends TestCase
     {
         $Basket = new Basket();
 
-        $value = "Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup";
-        $this->assertEquals($value, $Basket->getClassName());
+        $value = Basket::class;
+        $this->assertEquals($value, get_class($Basket));
     }
 
     /**
      * Undefined property exception test
      *
-    public function undefinedPropertyExcetion()
+    public function undefinedPropertyException()
     {
         $this->expectException(UndefinedPropertyException::class);
 

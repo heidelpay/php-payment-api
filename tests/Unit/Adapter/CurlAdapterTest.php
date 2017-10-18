@@ -8,9 +8,9 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
 /**
  * Unit test for the curl adapter
  *
- * This unit test will cover an error in the connetcton and an simple post
- * request to the sandbox payment system. Please note stat conncection
- * test can false dute to network issues and sheduled downtimes.
+ * This unit test will cover an error in the connection and an simple post
+ * request to the sandbox payment system. Please note stat connection
+ * test can false due to network issues and scheduled down times.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -35,7 +35,7 @@ class CurlAdapterTest extends TestCase
         $result = $curlAdapter->sendPost('https://abc.heidelpay.de/');
 
         $this->assertTrue(is_array($result[0]), 'First result key should be an array.');
-        $this->assertTrue(is_object($result[1]), 'Secound result key should be an object.');
+        $this->assertTrue(is_object($result[1]), 'Second result key should be an object.');
         $expected = array(
             'PROCESSING_RESULT' => 'NOK',
             'PROCESSING_RETURN_CODE' => 'CON.ERR.DEF'
@@ -44,7 +44,7 @@ class CurlAdapterTest extends TestCase
         $this->assertEquals($expected['PROCESSING_RETURN_CODE'], $result[0]['PROCESSING_RETURN_CODE']);
 
         $this->assertTrue($result[1]->isError(), 'isError should return true');
-        $this->assertFALSE($result[1]->isSuccess(), 'isSuccess should return false');
+        $this->assertFalse($result[1]->isSuccess(), 'isSuccess should return false');
 
         $error = $result[1]->getError();
 
@@ -80,9 +80,9 @@ class CurlAdapterTest extends TestCase
         $result = $curlAdapter->sendPost('https://test-heidelpay.hpcgw.net/ngw/post', $post);
 
         $this->assertTrue(is_array($result[0]), 'First result key should be an array.');
-        $this->assertTrue(is_object($result[1]), 'Secound result key should be an object.');
+        $this->assertTrue(is_object($result[1]), 'Second result key should be an object.');
 
-        $this->assertFalse($result[1]->isError(), 'isError should return true');
-        $this->assertTrue($result[1]->isSuccess(), 'isSuccess should return false');
+        $this->assertFalse($result[1]->isError(), 'isError should return false');
+        $this->assertTrue($result[1]->isSuccess(), 'isSuccess should return true');
     }
 }

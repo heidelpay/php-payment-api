@@ -8,7 +8,7 @@ use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
 /**
  * EPS Test
  *
- * Connection tests can fail due to network issues and scheduled downtimes.
+ * Connection tests can fail due to network issues and scheduled down times.
  * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class EPSPaymentMerhodTest extends TestCase
+class EPSPaymentMethodTest extends TestCase
 {
     /**
      * SecuritySender
@@ -57,7 +57,7 @@ class EPSPaymentMerhodTest extends TestCase
      */
     protected $SandboxRequest = true;
 
-    protected $customerDetails = array(
+    static protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -94,7 +94,7 @@ class EPSPaymentMerhodTest extends TestCase
      *
      * @var \Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -102,10 +102,12 @@ class EPSPaymentMerhodTest extends TestCase
     public function __construct()
     {
         date_default_timezone_set('UTC');
+
+        parent::__construct();
     }
 
     /**
-     * Set up function will create a EPS object for each testcase
+     * Set up function will create a EPS object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -116,7 +118,7 @@ class EPSPaymentMerhodTest extends TestCase
         $EPS->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
             $this->TransactionChannel, 'TRUE');
 
-        $EPS->getRequest()->customerAddress(...$this->customerDetails);
+        $EPS->getRequest()->customerAddress(...static::$customerDetails);
 
         $EPS->_dryRun = true;
 
@@ -143,7 +145,7 @@ class EPSPaymentMerhodTest extends TestCase
      */
     public function testAuthorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
 

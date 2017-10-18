@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
-use Heidelpay\PhpApi\Response;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,9 +20,9 @@ use PHPUnit\Framework\TestCase;
 class EasyCreditPaymentMethodTest extends TestCase
 {
     /**
-     * @var array authentification parameter for heidelpay api
+     * @var array authentication parameter for heidelpay api
      */
-    protected $authentification = array(
+    static protected $authentication = array(
         '31HA07BC8181E8CCFDAD64E8A4B3B766', //SecuritySender
         '31ha07bc8181e8ccfdad73fd513d2a53', //UserLogin
         '4B2D4BE3', //UserPassword
@@ -34,7 +33,7 @@ class EasyCreditPaymentMethodTest extends TestCase
     /**
      * @var array customer address
      */
-    protected $customerDetails = array(
+    static protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -83,7 +82,7 @@ class EasyCreditPaymentMethodTest extends TestCase
     }
 
     /**
-     * Set up function will create a invoice object for each testcase
+     * Set up function will create a invoice object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -91,8 +90,8 @@ class EasyCreditPaymentMethodTest extends TestCase
     {
         $easyCredit = new EasyCreditPaymentMethod();
 
-        $easyCredit->getRequest()->authentification(...$this->authentification);
-        $easyCredit->getRequest()->customerAddress(...$this->customerDetails);
+        $easyCredit->getRequest()->authentification(...self::$authentication);
+        $easyCredit->getRequest()->customerAddress(...self::$customerDetails);
         $easyCredit->getRequest()->b2cSecured('MR', '1970-01-01');
         $easyCredit->getRequest()->async('DE', 'https://dev.heidelpay.de');
 
@@ -121,7 +120,7 @@ class EasyCreditPaymentMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Response is not successful.');
 
-        // following fields are essential for easycredit, so they must not be null.
+        // following fields are essential for easy credit, so they must not be null.
         $this->assertNotNull($response->getConfig()->optin_text, 'easyCredit Optin Text is null.');
         $this->assertNotNull($response->getFrontend()->getRedirectUrl(), 'RedirectUrl is null.');
     }

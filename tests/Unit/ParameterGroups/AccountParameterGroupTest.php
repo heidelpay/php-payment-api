@@ -29,8 +29,10 @@ class AccountParameterGroupTest extends TestCase
         $account = new Account();
 
         $value = 'Heidelpay';
+        /** @noinspection PhpDeprecationInspection */
         $account->setBank($value);
 
+        /** @noinspection PhpDeprecationInspection */
         $this->assertEquals($value, $account->getBank());
     }
 

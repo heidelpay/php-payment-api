@@ -1,6 +1,6 @@
 # Ignore composer related files during development
 composer.phar
 composer.lock
-/vendor/
-/docs/
-/.idea/
+docs/
+vendor/
+.idea/

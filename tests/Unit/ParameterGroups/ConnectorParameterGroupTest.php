@@ -31,6 +31,7 @@ class ConnectorParameterGroupTest extends TestCase
         $value = '37040044';
         $connector->set('account_bank', $value);
 
+        /** @noinspection PhpDeprecationInspection */
         $this->assertEquals($value, $connector->getAccountBank());
     }
 
@@ -106,6 +107,7 @@ class ConnectorParameterGroupTest extends TestCase
         $value = '5320130';
         $connector->set('account_number', $value);
 
+        /** @noinspection PhpDeprecationInspection */
         $this->assertEquals($value, $connector->getAccountNumber());
     }
 

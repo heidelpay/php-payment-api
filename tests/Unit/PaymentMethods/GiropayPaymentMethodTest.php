@@ -8,7 +8,7 @@ use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod as Giropay;
 /**
  * Giropay Test
  *
- * Connection tests can fail due to network issues and scheduled downtimes.
+ * Connection tests can fail due to network issues and scheduled down times.
  * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod as Giropay;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class GiropayPaymentMerhodTest extends TestCase
+class GiropayPaymentMethodTest extends TestCase
 {
     /**
      * SecuritySender
@@ -116,7 +116,7 @@ class GiropayPaymentMerhodTest extends TestCase
      *
      * @var string contactMail
      */
-    protected $contactMail = "development@heidelpay.de";
+    protected $contactMail = 'development@heidelpay.de';
 
     /**
      * Transaction currency
@@ -139,9 +139,9 @@ class GiropayPaymentMerhodTest extends TestCase
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod
+     * @var Giropay
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -149,28 +149,30 @@ class GiropayPaymentMerhodTest extends TestCase
     public function __construct()
     {
         date_default_timezone_set('UTC');
+
+        parent::__construct();
     }
 
     /**
-     * Set up function will create a Giropay object for each testcase
+     * Set up function will create a Giropay object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
     public function setUp()
     {
-        $Giropay = new Giropay();
+        $giropay = new Giropay();
 
-        $Giropay->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
+        $giropay->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
             $this->TransactionChannel, 'TRUE');
 
-        $Giropay->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
+        $giropay->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
             $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
             $this->contactMail);
 
 
-        $Giropay->_dryRun = true;
+        $giropay->_dryRun = true;
 
-        $this->paymentObject = $Giropay;
+        $this->paymentObject = $giropay;
     }
 
     /**
@@ -193,7 +195,7 @@ class GiropayPaymentMerhodTest extends TestCase
      */
     public function testAuthorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
 

@@ -8,7 +8,7 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 /**
  *  Credit card test
  *
- *  Connection tests can fail due to network issues and scheduled downtimes.
+ *  Connection tests can fail due to network issues and scheduled down times.
  *  This does not have to mean that your integration is broken. Please verify the given debug information
  *
  *  Warning:
@@ -32,13 +32,14 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class CreditCardPaymentMerhodTest extends TestCase
+class CreditCardPaymentMethodTest extends TestCase
 {
-    /** authentification parameter for heidelpay api
+    /**
+     * authentication parameter for heidelpay api
      *
-     * @var array authentification parameter for heidelpay api
+     * @var array authentication parameter for heidelpay api
      */
-    protected $authentification = array(
+    static protected $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
@@ -46,11 +47,12 @@ class CreditCardPaymentMerhodTest extends TestCase
         true //Sandbox mode
     );
 
-    /** customer address
+    /**
+     * customer address
      *
      * @var array customer address
      */
-    protected $customerDetails = array(
+    static protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -130,7 +132,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      *
      * @var \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -138,10 +140,12 @@ class CreditCardPaymentMerhodTest extends TestCase
     public function __construct()
     {
         date_default_timezone_set('UTC');
+
+        parent::__construct();
     }
 
     /**
-     * Set up function will create a credit card object for each testcase
+     * Set up function will create a credit card object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -149,9 +153,9 @@ class CreditCardPaymentMerhodTest extends TestCase
     {
         $CreditCard = new CreditCardPaymentMethod();
 
-        $CreditCard->getRequest()->authentification(...$this->authentification);
+        $CreditCard->getRequest()->authentification(...self::$authentication);
 
-        $CreditCard->getRequest()->customerAddress(...$this->customerDetails);
+        $CreditCard->getRequest()->customerAddress(...self::$customerDetails);
 
         $CreditCard->_dryRun = true;
 
@@ -171,7 +175,7 @@ class CreditCardPaymentMerhodTest extends TestCase
     }
 
     /**
-     * Test case for credit cart registration whitout payment frame
+     * Test case for credit cart registration without payment frame
      *
      * @return string payment reference id to the credit card registration
      * @group  connectionTest
@@ -179,7 +183,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function Registration()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData(
             $timestamp,
             23.12,
@@ -225,7 +229,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function DebitOnRegistration($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->_dryRun = false;
@@ -256,7 +260,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function AuthorizeOnRegistration($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->_dryRun = false;
@@ -269,7 +273,7 @@ class CreditCardPaymentMerhodTest extends TestCase
             'Transaction failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize on registration is pending');
         $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'authorizet on registration failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+            'authorized on registration failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -279,10 +283,11 @@ class CreditCardPaymentMerhodTest extends TestCase
      * @test
      *
      * @param mixed $referenceId
+     * @return string
      */
     public function Capture($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->capture((string)$referenceId);
@@ -310,7 +315,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function Refund($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->refund((string)$referenceId);
@@ -328,7 +333,7 @@ class CreditCardPaymentMerhodTest extends TestCase
     }
 
     /**
-     * Tast case for a single credit card debit transaction whithout payment frame
+     * Test case for a single credit card debit transaction without payment frame
      *
      * @return string payment reference id for the credit card debit transaction
      * @group connectionTest
@@ -336,7 +341,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function Debit()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->debit('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
@@ -362,7 +367,7 @@ class CreditCardPaymentMerhodTest extends TestCase
     }
 
     /**
-     * Tast case for a single credit card authorisation whithout payment frame
+     * Test case for a single credit card authorisation without payment frame
      *
      * @return string payment reference id for the credit card authorize transaction
      * @group connectionTest
@@ -370,7 +375,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function Authorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->authorize('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
@@ -409,7 +414,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function Reversal($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->reversal((string)$referenceId);
@@ -426,7 +431,7 @@ class CreditCardPaymentMerhodTest extends TestCase
     }
 
     /**
-     * Tast case for a credit card rebill of an existing debit or capture
+     * Test case for a credit card rebill of an existing debit or capture
      *
      * @var string payment reference id of the credit card debit or capture
      *
@@ -439,7 +444,7 @@ class CreditCardPaymentMerhodTest extends TestCase
      */
     public function Rebill($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->rebill((string)$referenceId);

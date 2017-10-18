@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
 use PHPUnit\Framework\TestCase;
-use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Conatct;
+use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Contact;
 
 /**
  * Unit test for ContactParameterGroup
@@ -24,9 +24,9 @@ class ContactParameterGroupTest extends TestCase
      */
     public function testEmail()
     {
-        $Contact = new Conatct();
+        $Contact = new Contact();
 
-        $email = "development@heidelpay.de";
+        $email = 'development@heidelpay.de';
         $Contact->setEmail($email);
 
         $this->assertEquals($email, $Contact->getEmail());
@@ -37,9 +37,9 @@ class ContactParameterGroupTest extends TestCase
      */
     public function testIp()
     {
-        $Contact = new Conatct();
+        $Contact = new Contact();
 
-        $ip = "127.0.0.1";
+        $ip = '127.0.0.1';
         $Contact->setIp($ip);
 
         $this->assertEquals($ip, $Contact->getIp());
@@ -52,9 +52,9 @@ class ContactParameterGroupTest extends TestCase
      */
     public function Mobile()
     {
-        $Contact = new Conatct();
+        $Contact = new Contact();
 
-        $value = "+49 555 22 1340";
+        $value = '+49 555 22 1340';
         $Contact->setMobile($value);
 
         $this->assertEquals($value, $Contact->getMobile());
@@ -67,9 +67,9 @@ class ContactParameterGroupTest extends TestCase
      */
     public function Phone()
     {
-        $Contact = new Conatct();
+        $Contact = new Contact();
 
-        $value = "+49 6221 64 71 400";
+        $value = '+49 6221 64 71 400';
         $Contact->setPhone($value);
 
         $this->assertEquals($value, $Contact->getPhone());

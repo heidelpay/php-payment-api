@@ -42,11 +42,8 @@ class ResponseTest extends TestCase
     protected $secret = 'Heidelpay-PhpApi';
 
     /**
-     * setUp sample response Object
-     *
-     * {@inheritDoc}
-     *
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
      */
     public function setUp()
     {
@@ -185,7 +182,7 @@ class ResponseTest extends TestCase
         $expectedUrl = 'http://www.heidelpay.de';
         $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
 
-        /** url in case of credit and debit card refernce Transaction */
+        /** url in case of credit and debit card reference Transaction */
         $this->responseObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
         $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
 

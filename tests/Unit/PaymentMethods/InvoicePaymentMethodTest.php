@@ -25,9 +25,9 @@ use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as Invoice;
 class InvoicePaymentMethodTest extends TestCase
 {
     /**
-     * @var array authentification parameter for heidelpay api
+     * @var array authentication parameter for heidelpay api
      */
-    protected $authentification = array(
+    static protected $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
@@ -35,7 +35,7 @@ class InvoicePaymentMethodTest extends TestCase
         true //Sandbox mode
     );
 
-    protected $customerDetails = array(
+    static protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -71,7 +71,7 @@ class InvoicePaymentMethodTest extends TestCase
      *
      * @var \Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -83,7 +83,7 @@ class InvoicePaymentMethodTest extends TestCase
     }
 
     /**
-     * Set up function will create a invoice object for each testcase
+     * Set up function will create a invoice object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -91,9 +91,9 @@ class InvoicePaymentMethodTest extends TestCase
     {
         $Invoice = new Invoice();
 
-        $Invoice->getRequest()->authentification(...$this->authentification);
+        $Invoice->getRequest()->authentification(...self::$authentication);
 
-        $Invoice->getRequest()->customerAddress(...$this->customerDetails);
+        $Invoice->getRequest()->customerAddress(...self::$customerDetails);
 
         $this->paymentObject = $Invoice;
     }
@@ -119,7 +119,7 @@ class InvoicePaymentMethodTest extends TestCase
      */
     public function Authorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
@@ -150,7 +150,7 @@ class InvoicePaymentMethodTest extends TestCase
      */
     public function Reversal($referenceId)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->reversal($referenceId);
@@ -180,7 +180,7 @@ class InvoicePaymentMethodTest extends TestCase
      */
     public function Refund($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */

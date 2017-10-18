@@ -29,8 +29,8 @@ class CriterionParameterGroupTest extends TestCase
     {
         $Criterion = new Criterion();
 
-        $value = "OrderId 12483423894";
-        $secretHash = "235894234023049afasrfew2";
+        $value = 'OrderId 12483423894';
+        $secretHash = '235894234023049afasrfew2';
 
         $Criterion->setSecret($value, $secretHash);
 
@@ -49,7 +49,7 @@ class CriterionParameterGroupTest extends TestCase
     {
         $Criterion = new Criterion();
 
-        $value = "CreditCard";
+        $value = 'CreditCard';
         $Criterion->set('payment_method', $value);
 
         $this->assertEquals($value, $Criterion->getPaymentMethod());

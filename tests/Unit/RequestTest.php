@@ -25,20 +25,20 @@ use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
 class RequestTest extends TestCase
 {
     /**
-     * Authentification test
+     * Authentication test
      *
-     * @desc This test will check if the authentification parameters are set.
+     * @desc This test will check if the authentication parameters are set.
      * @group integrationTest
      * @test
      */
-    public function PrepareAuthentificationData()
+    public function PrepareAuthenticationData()
     {
         $Request = new Request();
 
         $SecuritySender = '31HA07BC8142C5A171745D00AD63D182'; //SecuritySender
         $UserLogin = '31ha07bc8142c5a171744e5aef11ffd3'; // UserLogin
         $UserPassword = '93167DE7';                         // UserPassword
-        $TransactionChannel = '31HA07BC8142C5A171744F3D6D155865'; // TransactionChannel credit card without 3d scure
+        $TransactionChannel = '31HA07BC8142C5A171744F3D6D155865'; // TransactionChannel credit card without 3d secure
         $SandboxRequest = true;
 
         $Request->authentification($SecuritySender, $UserLogin, $UserPassword, $TransactionChannel, $SandboxRequest);
@@ -51,7 +51,7 @@ class RequestTest extends TestCase
     }
 
     /**
-     * Set parameter for no synchron response
+     * Set parameter for asynchronous response
      *
      * @desc This test will check if the request can be set to async
      * @group integrationTest
@@ -61,8 +61,8 @@ class RequestTest extends TestCase
     {
         $Request = new Request();
 
-        $LanguageCode = "DE";
-        $ResponseUrl = "https://dev.heidelpay.de/";
+        $LanguageCode = 'DE';
+        $ResponseUrl = 'https://dev.heidelpay.de/';
 
         $Request->async($LanguageCode, $ResponseUrl);
 
@@ -91,7 +91,7 @@ class RequestTest extends TestCase
         $addressZip = '69115';
         $addressCity = 'Heidelberg';
         $addressCountry = 'DE';
-        $contactMail = "development@heidelpay.de";
+        $contactMail = 'development@heidelpay.de';
 
         $Request->customerAddress(
             $nameGiven,
@@ -186,7 +186,7 @@ class RequestTest extends TestCase
         $request = new Request();
 
         $request->getBasket();
-        $value = "31HA07BC8129FBB819367B2205CD6FB4";
+        $value = '31HA07BC8129FBB819367B2205CD6FB4';
         $request->getBasket()->set('id', $value);
         $this->assertEquals($value, $request->getBasket()->getId());
     }

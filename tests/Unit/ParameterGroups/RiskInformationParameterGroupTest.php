@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup as RiskInform
  *
  * @category unittest
  */
-class RiskinformationParameterGroupTest extends TestCase
+class RiskInformationParameterGroupTest extends TestCase
 {
     /**
      * Guestcheckout getter/setter test
@@ -43,7 +43,7 @@ class RiskinformationParameterGroupTest extends TestCase
     {
         $riskInformation = new RiskInformation();
 
-        $since = "1984-05-23";
+        $since = '1984-05-23';
         $riskInformation->setSince($since);
 
         $this->assertEquals($since, $riskInformation->getSince());

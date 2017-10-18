@@ -8,7 +8,7 @@ use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
 /**
  * Debit card test
  *
- * Connection tests can fail due to network issues and scheduled downtimes.
+ * Connection tests can fail due to network issues and scheduled down times.
  * This does not have to mean that your integration is broken. Please verify the given debug information
  *
  *  Warning:
@@ -32,9 +32,9 @@ use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DebitCardPaymentMerhodTest extends TestCase
+class DebitCardPaymentMethodTest extends TestCase
 {
-    protected $authentification = array(
+    static protected $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
@@ -42,11 +42,12 @@ class DebitCardPaymentMerhodTest extends TestCase
         true //Sandbox mode
     );
 
-    /** customer address
+    /**
+     * customer address
      *
      * @var array customer address
      */
-    protected $customerDetails = array(
+    static protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -125,7 +126,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      *
      * @var \Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -133,10 +134,12 @@ class DebitCardPaymentMerhodTest extends TestCase
     public function __construct()
     {
         date_default_timezone_set('UTC');
+
+        parent::__construct();
     }
 
     /**
-     * Set up function will create a debit card object for each testcase
+     * Set up function will create a debit card object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -144,9 +147,9 @@ class DebitCardPaymentMerhodTest extends TestCase
     {
         $DebitCard = new DebitCard();
 
-        $DebitCard->getRequest()->authentification(...$this->authentification);
+        $DebitCard->getRequest()->authentification(...self::$authentication);
 
-        $DebitCard->getRequest()->customerAddress(...$this->customerDetails);
+        $DebitCard->getRequest()->customerAddress(...self::$customerDetails);
 
 
         $DebitCard->_dryRun = true;
@@ -167,7 +170,7 @@ class DebitCardPaymentMerhodTest extends TestCase
     }
 
     /**
-     * Test case for debit cart registration whitout payment frame
+     * Test case for debit cart registration without payment frame
      *
      * @return string payment reference id to the credit card registration
      * @group  connectionTest
@@ -175,7 +178,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Registration()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->registration('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
@@ -215,7 +218,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function DebitOnRegistration($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
@@ -246,7 +249,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function AuthorizeOnRegistration($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
@@ -275,7 +278,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Capture($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->capture((string)$referenceId);
@@ -303,7 +306,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Refund($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->refund((string)$referenceId);
@@ -329,7 +332,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Debit()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->debit('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
@@ -355,7 +358,7 @@ class DebitCardPaymentMerhodTest extends TestCase
     }
 
     /**
-     * Test case for a single debit card authorisation whithout payment frame
+     * Test case for a single debit card authorisation without payment frame
      *
      * @return string payment reference id for the debit card authorize transaction
      * @group connectionTest
@@ -363,7 +366,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Authorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->authorize('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
@@ -400,7 +403,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Reversal($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->reversal((string)$referenceId);
@@ -428,7 +431,7 @@ class DebitCardPaymentMerhodTest extends TestCase
      */
     public function Rebill($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->rebill((string)$referenceId);

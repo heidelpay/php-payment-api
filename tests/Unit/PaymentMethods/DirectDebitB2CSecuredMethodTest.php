@@ -25,9 +25,9 @@ use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod as Direct
 class DirectDebitB2CSecuredMethodTest extends TestCase
 {
     /**
-     * @var array authentification parameter for heidelpay api
+     * @var array authentication parameter for heidelpay api
      */
-    protected $authentification = array(
+    static protected $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
@@ -40,7 +40,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      *
      * @var array
      */
-    protected $customerDetails = array(
+    static protected $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -58,14 +58,14 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      *
      * @var string contactMail
      */
-    protected $iban = "DE89370400440532013000";
+    protected $iban = 'DE89370400440532013000';
 
     /**
      * customer mail address
      *
      * @var string contactMail
      */
-    protected $holder = "Heidel Berger-Payment";
+    protected $holder = 'Heidel Berger-Payment';
 
     /**
      * Transaction currency
@@ -88,9 +88,9 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod
+     * @var DirectDebitSecured
      */
-    protected $paymentObject = null;
+    protected $paymentObject;
 
     /**
      * Constructor used to set timezone to utc
@@ -98,10 +98,12 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
     public function __construct()
     {
         date_default_timezone_set('UTC');
+
+        parent::__construct();
     }
 
     /**
-     * Set up function will create a direct debit object for each testcase
+     * Set up function will create a direct debit object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -109,9 +111,9 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
     {
         $DirectDebitSecured = new DirectDebitSecured();
 
-        $DirectDebitSecured->getRequest()->authentification(...$this->authentification);
+        $DirectDebitSecured->getRequest()->authentification(...self::$authentication);
 
-        $DirectDebitSecured->getRequest()->customerAddress(...$this->customerDetails);
+        $DirectDebitSecured->getRequest()->customerAddress(...self::$customerDetails);
 
         $DirectDebitSecured->getRequest()->b2cSecured('MR', '1982-07-12');
 
@@ -142,7 +144,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Authorize()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
@@ -174,7 +176,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Capture($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.12, $this->currency, $this->secret);
 
         $this->paymentObject->capture((string)$referenceId);
@@ -199,7 +201,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Debit()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
@@ -231,7 +233,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Refund($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
 
         $this->paymentObject->refund((string)$referenceId);
@@ -257,7 +259,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Registration()
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
@@ -289,7 +291,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Reversal($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->reversal((string)$referenceId);
@@ -306,7 +308,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
     }
 
     /**
-     * Tast case for a direct debit rebill of an existing debit or capture
+     * Test case for a direct debit rebill of an existing debit or capture
      *
      * @param $referenceId string payment reference id of the direct debit debit or capture
      *
@@ -317,7 +319,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Rebill($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 12.12, $this->currency, $this->secret);
 
 
@@ -346,7 +348,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function AuthorizeOnRegistration($referenceId = null)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
@@ -377,7 +379,7 @@ class DirectDebitB2CSecuredMethodTest extends TestCase
      */
     public function Finalize($referenceId)
     {
-        $timestamp = $this->getMethod(__METHOD__) . " " . date("Y-m-d H:i:s");
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
 
         $this->paymentObject->_dryRun = false;
