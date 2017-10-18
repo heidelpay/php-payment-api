@@ -51,7 +51,7 @@ class AbstractPaymentMethodTest extends TestCase
      *
      * @test
      */
-    public function Request()
+    public function request()
     {
         $Request = new Request();
         $this->paymentObject->setRequest($Request);
@@ -64,7 +64,7 @@ class AbstractPaymentMethodTest extends TestCase
      *
      * @test
      */
-    public function Response()
+    public function response()
     {
         $this->assertEquals(null, $this->paymentObject->getResponse());
     }
@@ -74,7 +74,7 @@ class AbstractPaymentMethodTest extends TestCase
      *
      * @test
      */
-    public function Adapter()
+    public function adapter()
     {
         $Adapter = new CurlAdapter();
         $this->paymentObject->setAdapter($Adapter);

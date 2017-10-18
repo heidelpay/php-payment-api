@@ -25,7 +25,7 @@ class CriterionParameterGroupTest extends TestCase
      * @test
      *
      */
-    public function Secret()
+    public function secret()
     {
         $Criterion = new Criterion();
 
@@ -45,7 +45,7 @@ class CriterionParameterGroupTest extends TestCase
      * @test
      *
      */
-    public function PaymentMethod()
+    public function paymentMethod()
     {
         $Criterion = new Criterion();
 

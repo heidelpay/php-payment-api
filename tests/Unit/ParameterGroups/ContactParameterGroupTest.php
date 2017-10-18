@@ -50,7 +50,7 @@ class ContactParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Mobile()
+    public function mobile()
     {
         $Contact = new Contact();
 
@@ -65,7 +65,7 @@ class ContactParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Phone()
+    public function phone()
     {
         $Contact = new Contact();
 

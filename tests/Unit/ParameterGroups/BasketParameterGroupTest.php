@@ -25,7 +25,7 @@ class BasketParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function BasketId()
+    public function basketId()
     {
         $Basket = new Basket();
 

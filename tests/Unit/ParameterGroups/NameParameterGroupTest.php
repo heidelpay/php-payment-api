@@ -24,7 +24,7 @@ class NameParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Birthdate()
+    public function birthdate()
     {
         $Name = new Name();
 
@@ -78,7 +78,7 @@ class NameParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Salutation()
+    public function salutation()
     {
         $Name = new Name();
 
@@ -93,7 +93,7 @@ class NameParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function Title()
+    public function title()
     {
         $Name = new Name();
 

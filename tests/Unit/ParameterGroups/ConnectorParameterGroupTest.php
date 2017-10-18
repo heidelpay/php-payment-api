@@ -116,7 +116,7 @@ class ConnectorParameterGroupTest extends TestCase
      *
      * @test
      */
-    public function account_usage()
+    public function accountUsage()
     {
         $connector = new Connector();
 
