@@ -286,6 +286,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @test
      *
      * @param mixed $referenceId
+     *
      * @return string
      */
     public function Capture($referenceId = null)

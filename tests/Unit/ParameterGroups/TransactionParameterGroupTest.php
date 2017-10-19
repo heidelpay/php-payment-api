@@ -36,6 +36,7 @@ class TransactionParameterGroupTest extends TestCase
 
     /**
      * Mode getter/setter test
+     *
      * @test
      */
     public function mode()
