@@ -40,7 +40,7 @@ class CreditCardPaymentMethodTest extends TestCase
      *
      * @var array authentication parameter for heidelpay api
      */
-    static protected $authentication = array(
+    protected static $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
@@ -53,7 +53,7 @@ class CreditCardPaymentMethodTest extends TestCase
      *
      * @var array customer address
      */
-    static protected $customerDetails = array(
+    protected static $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany
@@ -299,7 +299,7 @@ class CreditCardPaymentMethodTest extends TestCase
         $request = $this->paymentObject->getRequest()->convertToArray();
 
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'capture is pending');
@@ -328,7 +328,7 @@ class CreditCardPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
@@ -364,7 +364,7 @@ class CreditCardPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'debit is pending');
@@ -399,7 +399,7 @@ class CreditCardPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize is pending');
@@ -420,7 +420,7 @@ class CreditCardPaymentMethodTest extends TestCase
      *
      * @param mixed $referenceId
      */
-    public function Reversal($referenceId = null)
+    public function reversal($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -430,7 +430,7 @@ class CreditCardPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'reversal is pending');
@@ -451,7 +451,7 @@ class CreditCardPaymentMethodTest extends TestCase
      *
      * @param mixed $referenceId
      */
-    public function Rebill($referenceId = null)
+    public function rebill($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -461,7 +461,7 @@ class CreditCardPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'reversal is pending');

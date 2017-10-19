@@ -255,7 +255,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'capture is pending');
@@ -286,7 +286,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
@@ -314,7 +314,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
@@ -346,7 +346,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
@@ -374,7 +374,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'reversal is pending');
@@ -403,7 +403,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'reversal is pending');
@@ -434,7 +434,7 @@ class DirectDebitMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');

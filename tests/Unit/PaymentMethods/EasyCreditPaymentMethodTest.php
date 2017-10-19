@@ -22,7 +22,7 @@ class EasyCreditPaymentMethodTest extends TestCase
     /**
      * @var array authentication parameter for heidelpay api
      */
-    static protected $authentication = array(
+    protected static $authentication = array(
         '31HA07BC8181E8CCFDAD64E8A4B3B766', //SecuritySender
         '31ha07bc8181e8ccfdad73fd513d2a53', //UserLogin
         '4B2D4BE3', //UserPassword
@@ -33,7 +33,7 @@ class EasyCreditPaymentMethodTest extends TestCase
     /**
      * @var array customer address
      */
-    static protected $customerDetails = array(
+    protected static $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany

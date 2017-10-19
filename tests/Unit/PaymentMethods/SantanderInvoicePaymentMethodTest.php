@@ -27,7 +27,7 @@ class SantanderInvoicePaymentMethodTest extends TestCase
     /**
      * @var array authentication parameter for heidelpay api
      */
-    static protected $authentication = array(
+    protected static $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
         '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
         '93167DE7', //UserPassword
@@ -35,11 +35,12 @@ class SantanderInvoicePaymentMethodTest extends TestCase
         true //Sandbox mode
     );
 
-    /** customer address
+    /**
+     * customer address
      *
      * @var array customer address
      */
-    static protected $customerDetails = array(
+    protected static $customerDetails = array(
         'Heidel', //NameGiven
         'Berger-Payment', //NameFamily
         null, //NameCompany

@@ -195,7 +195,7 @@ class SofortPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Authorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -206,7 +206,7 @@ class SofortPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
@@ -224,7 +224,7 @@ class SofortPaymentMethodTest extends TestCase
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId = null)
+    public function refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);

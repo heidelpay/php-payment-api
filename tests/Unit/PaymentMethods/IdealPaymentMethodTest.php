@@ -205,7 +205,7 @@ class IdealPaymentMethodTest extends TestCase
         /* prepare request and send it to payment api */
         $request = $this->paymentObject->getRequest()->convertToArray();
         /** @var Response $response */
-        list(,$response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         /* test if config parameters exists */
         $configBankCountry = array('NL' => 'Niederlande');
