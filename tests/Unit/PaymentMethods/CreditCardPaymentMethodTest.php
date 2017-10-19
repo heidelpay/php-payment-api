@@ -182,7 +182,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @group  connectionTest
      * @test
      */
-    public function Registration()
+    public function registration()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData(
@@ -230,7 +230,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @group  connectionTest
      * @test
      */
-    public function DebitOnRegistration($referenceId = null)
+    public function debitOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -241,11 +241,15 @@ class CreditCardPaymentMethodTest extends TestCase
 
         $this->paymentObject->debitOnRegistration((string)$referenceId);
 
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'debit on registration is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'debit on registration failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'debit on registration failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -261,7 +265,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @group  connectionTest
      * @test
      */
-    public function AuthorizeOnRegistration($referenceId = null)
+    public function authorizeOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -272,11 +276,15 @@ class CreditCardPaymentMethodTest extends TestCase
 
         $this->paymentObject->authorizeOnRegistration((string)$referenceId);
 
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'authorized on registration failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'authorized on registration failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -289,7 +297,7 @@ class CreditCardPaymentMethodTest extends TestCase
      *
      * @return string
      */
-    public function Capture($referenceId = null)
+    public function capture($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -319,7 +327,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Refund($referenceId = null)
+    public function refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -333,8 +341,10 @@ class CreditCardPaymentMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response->isError(),
-            'authorized on registration failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse(
+            $response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1)
+        );
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -346,7 +356,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Debit()
+    public function debit()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -381,7 +391,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Authorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);

@@ -163,12 +163,26 @@ class Przelewy24PaymentMethodTest extends TestCase
     {
         $Przelewy24 = new Przelewy24();
 
-        $Przelewy24->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $Przelewy24->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
-        $Przelewy24->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $Przelewy24->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $Przelewy24->_dryRun = true;

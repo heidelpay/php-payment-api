@@ -177,7 +177,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @group  connectionTest
      * @test
      */
-    public function Registration()
+    public function registration()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -217,7 +217,7 @@ class DebitCardPaymentMethodTest extends TestCase
      *
      * @param mixed $referenceId
      */
-    public function DebitOnRegistration($referenceId = null)
+    public function debitOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -234,8 +234,10 @@ class DebitCardPaymentMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'debit on registration is pending');
-        $this->assertFalse($response->isError(),
-            'debit on registration failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse(
+            $response->isError(),
+            'debit on registration failed : ' . print_r($response->getError(), 1)
+        );
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -250,7 +252,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @group  connectionTest
      * @test
      */
-    public function AuthorizeOnRegistration($referenceId = null)
+    public function authorizeOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -266,8 +268,10 @@ class DebitCardPaymentMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response->isError(),
-            'authorized on registration failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse(
+            $response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1)
+        );
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -280,7 +284,7 @@ class DebitCardPaymentMethodTest extends TestCase
      *
      * @return string
      */
-    public function Capture($referenceId = null)
+    public function capture($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -309,7 +313,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId = null)
+    public function refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -323,8 +327,10 @@ class DebitCardPaymentMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response->isError(),
-            'authorized on registration failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse(
+            $response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1)
+        );
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -336,7 +342,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Debit()
+    public function debit()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -371,7 +377,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Authorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -409,7 +415,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Reversal($referenceId = null)
+    public function reversal($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -438,7 +444,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @test
      * @group connectionTest
      */
-    public function Rebill($referenceId = null)
+    public function rebill($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);

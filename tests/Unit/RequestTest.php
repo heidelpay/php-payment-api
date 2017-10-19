@@ -31,7 +31,7 @@ class RequestTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function PrepareAuthenticationData()
+    public function prepareAuthenticationData()
     {
         $Request = new Request();
 
@@ -57,7 +57,7 @@ class RequestTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function Async()
+    public function async()
     {
         $Request = new Request();
 
@@ -78,7 +78,7 @@ class RequestTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function CustomerAddress()
+    public function customerAddress()
     {
         $Request = new Request();
 
@@ -124,7 +124,7 @@ class RequestTest extends TestCase
      * @group integrationTest
      * @test
      */
-    public function SetBasketData()
+    public function setBasketData()
     {
         $Request = new Request();
 

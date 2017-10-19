@@ -163,8 +163,13 @@ class GiropayPaymentMethodTest extends TestCase
     {
         $giropay = new Giropay();
 
-        $giropay->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $giropay->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
         $giropay->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
             $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,

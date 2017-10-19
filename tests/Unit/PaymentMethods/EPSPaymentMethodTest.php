@@ -116,8 +116,13 @@ class EPSPaymentMethodTest extends TestCase
     {
         $EPS = new EPS();
 
-        $EPS->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $EPS->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
         $EPS->getRequest()->customerAddress(...static::$customerDetails);
 

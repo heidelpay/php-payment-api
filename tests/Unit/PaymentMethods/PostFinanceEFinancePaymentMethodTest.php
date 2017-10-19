@@ -163,12 +163,26 @@ class PostFinanceEFinancePaymentMethodTest extends TestCase
     {
         $PostFinanceEFinance = new PostFinanceEFinance();
 
-        $PostFinanceEFinance->getRequest()->authentification($this->SecuritySender, $this->UserLogin,
-            $this->UserPassword, $this->TransactionChannel, 'TRUE');
+        $PostFinanceEFinance->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
-        $PostFinanceEFinance->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $PostFinanceEFinance->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $PostFinanceEFinance->_dryRun = true;
