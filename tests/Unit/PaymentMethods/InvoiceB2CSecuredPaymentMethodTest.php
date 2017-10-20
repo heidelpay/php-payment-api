@@ -24,6 +24,7 @@ use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
  */
 class InvoiceB2CSecuredPaymentMethodTest extends TestCase
 {
+    //<editor-fold desc="Init">
     /**
      * @var array authentication parameter for heidelpay api
      */
@@ -86,7 +87,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         date_default_timezone_set('UTC');
         parent::__construct();
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Setup">
     /**
      * Set up function will create a invoice object for each test case
      *
@@ -114,7 +117,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
     {
         return substr(strrchr($method, '\\'), 1);
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Tests">
     /**
      * Test case for a single invoice authorisation
      *
@@ -122,14 +127,13 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Authorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
-
 
         $this->paymentObject->authorize();
 
@@ -152,14 +156,14 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
      * @param $referenceId string payment reference id of the invoice authorisation
      *
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends Authorize
+     * @depends authorize
      * @group connectionTest
      * @test
      */
-    public function Finalize($referenceId)
+    public function finalize($referenceId)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->finalize($referenceId);
 
@@ -173,23 +177,22 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->assertFalse($this->paymentObject->getResponse()->isError(),
             'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
 
-        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+        return $referenceId;
     }
 
     /**
      * Test case for a invoice reversal of a existing authorisation
      *
-     *
+     * @param $referenceId
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends Finalize
+     * @depends authorize
      * @group connectionTest
      * @test
      */
-    public function Reversal()
+    public function reversal($referenceId)
     {
-        $referenceId = $this->Authorize();
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */
 
@@ -214,11 +217,11 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
      * @param string $referenceId reference id of the invoice to refund
      *
      * @return string payment reference id of the invoice refund transaction
-     * @depends Authorize
+     * @depends authorize
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId = null)
+    public function refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
@@ -231,4 +234,5 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->assertEquals('IV.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
         return true;
     }
+    //</editor-fold>
 }

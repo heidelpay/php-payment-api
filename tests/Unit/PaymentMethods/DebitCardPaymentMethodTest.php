@@ -211,7 +211,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @var string reference id of the debit card registration
      *
      * @return string payment reference id to the debit card debit transaction
-     * @depends Registration
+     * @depends registration
      * @group  connectionTest
      * @test
      *
@@ -248,7 +248,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @param $referenceId string reference id of the debit card registration
      *
      * @return string payment reference id of the debit card authorisation
-     * @depends Registration
+     * @depends registration
      * @group  connectionTest
      * @test
      */
@@ -277,7 +277,7 @@ class DebitCardPaymentMethodTest extends TestCase
     }
 
     /**
-     * @depends AuthorizeOnRegistration
+     * @depends authorizeOnRegistration
      * @test
      *
      * @param $referenceId string
@@ -309,7 +309,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @param $referenceId string reference id of the debit card debit/capture to refund
      *
      * @return string payment reference id of the debit card refund transaction
-     * @depends Capture
+     * @depends capture
      * @test
      * @group connectionTest
      */
@@ -411,7 +411,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @param $referenceId string payment reference id of the debit card authorisation
      *
      * @return string payment reference id for the debit card reversal transaction
-     * @depends Authorize
+     * @depends authorize
      * @group connectionTest
      * @test
      */
@@ -440,7 +440,7 @@ class DebitCardPaymentMethodTest extends TestCase
      * @param string $referenceId payment reference id of the debit card debit or capture
      *
      * @return string payment reference id for the debit card rebill transaction
-     * @depends Debit
+     * @depends debit
      * @test
      * @group connectionTest
      */

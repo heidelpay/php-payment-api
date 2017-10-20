@@ -220,7 +220,7 @@ class SofortPaymentMethodTest extends TestCase
      * @param string $referenceId reference id of the Sofort to refund
      *
      * @return string payment reference id of the Sofort refund transaction
-     * @depends Authorize
+     * @depends authorize
      * @test
      * @group connectionTest
      */

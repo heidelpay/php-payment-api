@@ -148,7 +148,7 @@ class InvoicePaymentMethodTest extends TestCase
      * @param $referenceId string payment reference id of the invoice authorisation
      *
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends Authorize
+     * @depends authorize
      * @group connectionTest
      * @test   *
      */
@@ -182,7 +182,7 @@ class InvoicePaymentMethodTest extends TestCase
      * @param string $referenceId reference id of the invoice to refund
      *
      * @return string payment reference id of the invoice refund transaction
-     * @depends Authorize
+     * @depends authorize
      * @test
      * @group connectionTest
      */

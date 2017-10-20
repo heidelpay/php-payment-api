@@ -35,6 +35,7 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
  */
 class CreditCardPaymentMethodTest extends TestCase
 {
+    //<editor-fold desc="Init">
     /**
      * authentication parameter for heidelpay api
      *
@@ -144,7 +145,9 @@ class CreditCardPaymentMethodTest extends TestCase
 
         parent::__construct();
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Init">
     /**
      * Set up function will create a credit card object for each test case
      *
@@ -162,7 +165,9 @@ class CreditCardPaymentMethodTest extends TestCase
 
         $this->paymentObject = $CreditCard;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Helper">
     /**
      * Get current called method, without namespace
      *
@@ -174,7 +179,9 @@ class CreditCardPaymentMethodTest extends TestCase
     {
         return substr(strrchr($method, '\\'), 1);
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Tests">
     /**
      * Test case for credit cart registration without payment frame
      *
@@ -226,7 +233,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @param $referenceId string reference id of the credit card registration
      *
      * @return string payment reference id to the credit card debit transaction
-     * @depends Registration
+     * @depends registration
      * @group  connectionTest
      * @test
      */
@@ -261,7 +268,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @param mixed $referenceId
      *
      * @return string payment reference id of the credit card authorisation
-     * @depends Registration
+     * @depends registration
      * @group  connectionTest
      * @test
      */
@@ -290,7 +297,7 @@ class CreditCardPaymentMethodTest extends TestCase
     }
 
     /**
-     * @depends AuthorizeOnRegistration
+     * @depends authorizeOnRegistration
      * @test
      *
      * @param mixed $referenceId
@@ -323,7 +330,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @param $referenceId string reference id of the credit card debit/capture to refund
      *
      * @return string payment reference id of the credit card refund transaction
-     * @depends Capture
+     * @depends capture
      * @group connectionTest
      * @test
      */
@@ -425,7 +432,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @var string payment reference id of the credit card authorisation
      *
      * @return string payment reference id for the credit card reversal transaction
-     * @depends Authorize
+     * @depends authorize
      * @group connectionTest
      * @test
      *
@@ -456,7 +463,7 @@ class CreditCardPaymentMethodTest extends TestCase
      * @var string payment reference id of the credit card debit or capture
      *
      * @return string payment reference id for the credit card rebill transaction
-     * @depends Debit
+     * @depends debit
      * @group connectionTest
      * @test
      *
@@ -480,4 +487,5 @@ class CreditCardPaymentMethodTest extends TestCase
 
         return (string)$response->getPaymentReferenceId();
     }
+    //</editor-fold>
 }
