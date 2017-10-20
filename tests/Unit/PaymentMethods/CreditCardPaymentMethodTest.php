@@ -36,6 +36,7 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 class CreditCardPaymentMethodTest extends TestCase
 {
     //<editor-fold desc="Init">
+
     /**
      * authentication parameter for heidelpay api
      *
@@ -145,9 +146,11 @@ class CreditCardPaymentMethodTest extends TestCase
 
         parent::__construct();
     }
+
     //</editor-fold>
 
-    //<editor-fold desc="Init">
+    //<editor-fold desc="Setup">
+
     /**
      * Set up function will create a credit card object for each test case
      *
@@ -165,9 +168,11 @@ class CreditCardPaymentMethodTest extends TestCase
 
         $this->paymentObject = $CreditCard;
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Helper">
+
     /**
      * Get current called method, without namespace
      *
@@ -179,9 +184,11 @@ class CreditCardPaymentMethodTest extends TestCase
     {
         return substr(strrchr($method, '\\'), 1);
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Tests">
+
     /**
      * Test case for credit cart registration without payment frame
      *
@@ -487,5 +494,6 @@ class CreditCardPaymentMethodTest extends TestCase
 
         return (string)$response->getPaymentReferenceId();
     }
+
     //</editor-fold>
 }

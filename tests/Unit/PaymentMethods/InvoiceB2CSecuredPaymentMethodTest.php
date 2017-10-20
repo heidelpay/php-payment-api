@@ -25,6 +25,7 @@ use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
 class InvoiceB2CSecuredPaymentMethodTest extends TestCase
 {
     //<editor-fold desc="Init">
+
     /**
      * @var array authentication parameter for heidelpay api
      */
@@ -87,9 +88,11 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         date_default_timezone_set('UTC');
         parent::__construct();
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Setup">
+
     /**
      * Set up function will create a invoice object for each test case
      *
@@ -106,6 +109,10 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->paymentObject = $Invoice;
     }
 
+    //</editor-fold>
+
+    //<editor-fold desc="Helper">
+
     /**
      * Get current called method, without namespace
      *
@@ -117,9 +124,11 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
     {
         return substr(strrchr($method, '\\'), 1);
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Tests">
+
     /**
      * Test case for a single invoice authorisation
      *
@@ -141,11 +150,15 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
 
         /* transaction result */
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return $this->authorizeReference = (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -171,11 +184,15 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
 
         /* transaction result */
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return $referenceId;
     }
@@ -184,6 +201,7 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
      * Test case for a invoice reversal of a existing authorisation
      *
      * @param $referenceId
+     *
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorize
      * @group connectionTest
@@ -202,11 +220,15 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
 
         /* transaction result */
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -234,5 +256,6 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
         $this->assertEquals('IV.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
         return true;
     }
+
     //</editor-fold>
 }
