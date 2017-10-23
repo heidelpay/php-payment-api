@@ -9,6 +9,6 @@ extensions:
     enabled:
         - Codeception\Extension\RunFailed
 coverage:
-    enabled: false
+    enabled: true
     include:
         - lib/*
