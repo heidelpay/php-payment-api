@@ -4,16 +4,16 @@ dist: trusty
 matrix:
   fast_finish: true
   include:
-    - php: 5.6
-      env: deps=no
-    - php: 7
-      env: deps=no
-    - php: 7
-      env: deps=high
+#    - php: 5.6
+#      env: deps=no
+#    - php: 7
+#      env: deps=no
+#    - php: 7
+#      env: deps=high
     - php: 7.1
       env: deps=no
-    - php: 7.1
-      env: deps=high
+#    - php: 7.1
+#      env: deps=high
 
 
 cache:
@@ -30,7 +30,7 @@ before_script:
 
 script:
   - ./vendor/bin/codecept build
-  - ./vendor/bin/codecept run unit --coverage --coverage-xml="build/logs/clover.xml"
+  - ./vendor/bin/codecept run unit --coverage --coverage-xml
   - travis_retry php vendor/bin/coveralls -v
 #  - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
