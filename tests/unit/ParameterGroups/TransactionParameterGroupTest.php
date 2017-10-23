@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup as Transaction;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup as Transaction;
  *
  * @category unittest
  */
-class TransactionParameterGroupTest extends TestCase
+class TransactionParameterGroupTest extends Test
 {
     /**
      * Channel getter/setter test

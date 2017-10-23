@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\Response;
 use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
 use Heidelpay\PhpApi\Exceptions\HashVerificationException;
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\Exceptions\HashVerificationException;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class ResponseTest extends TestCase
+class ResponseTest extends Test
 {
     /**
      * @var \Heidelpay\PhpApi\Response
@@ -45,8 +45,10 @@ class ResponseTest extends TestCase
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $responseSample = array(
             'NAME_FAMILY' => 'Berger-Payment',
             'IDENTIFICATION_TRANSACTIONID' => '2843294932',

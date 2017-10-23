@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod as DirectDebit;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 
@@ -24,7 +24,7 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DirectDebitMethodTest extends TestCase
+class DirectDebitMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -174,16 +174,32 @@ class DirectDebitMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $DirectDebit = new DirectDebit();
 
-        $DirectDebit->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $DirectDebit->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
-        $DirectDebit->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $DirectDebit->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $DirectDebit->_dryRun = true;
@@ -210,7 +226,7 @@ class DirectDebitMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Authorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -227,10 +243,14 @@ class DirectDebitMethodTest extends TestCase
         $this->paymentObject->authorize();
 
 
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -238,14 +258,14 @@ class DirectDebitMethodTest extends TestCase
     /**
      * Capture Test
      *
-     * @depends Authorize
+     * @depends authorize
      * @test
      *
      * @param $referenceId string
      *
      * @return string
      */
-    public function Capture($referenceId = null)
+    public function capture($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.12, $this->currency, $this->secret);
@@ -271,7 +291,7 @@ class DirectDebitMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Debit()
+    public function debit()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
@@ -300,11 +320,11 @@ class DirectDebitMethodTest extends TestCase
      * @param string $referenceId reference id of the direct debit to refund
      *
      * @return string payment reference id of the direct debit refund transaction
-     * @depends Debit
+     * @depends debit
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId = null)
+    public function refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
@@ -318,8 +338,10 @@ class DirectDebitMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response->isError(),
-            'authorized on registration failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse(
+            $response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1)
+        );
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -331,7 +353,7 @@ class DirectDebitMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Registration()
+    public function registration()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
@@ -360,11 +382,11 @@ class DirectDebitMethodTest extends TestCase
      * @param string $referenceId payment reference id of the direct debit authorisation
      *
      * @return string payment reference id for the credit card reversal transaction
-     * @depends Authorize
+     * @depends authorize
      * @test
      * @group connectionTest
      */
-    public function Reversal($referenceId = null)
+    public function reversal($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -389,11 +411,11 @@ class DirectDebitMethodTest extends TestCase
      * @param $referenceId string payment reference id of the direct debit debit or capture
      *
      * @return string payment reference id for the direct debit rebill transaction
-     * @depends Debit
+     * @depends debit
      * @test
      * @group connectionTest
      */
-    public function Rebill($referenceId = null)
+    public function rebill($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -418,11 +440,11 @@ class DirectDebitMethodTest extends TestCase
      * @param $referenceId string reference id of the direct debit registration
      *
      * @return string payment reference id of the direct debit authorisation
-     * @depends Registration
+     * @depends registration
      * @test
      * @group  connectionTest
      */
-    public function AuthorizeOnRegistration($referenceId = null)
+    public function authorizeOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -438,8 +460,10 @@ class DirectDebitMethodTest extends TestCase
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
-        $this->assertFalse($response->isError(),
-            'authorized on registration failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse(
+            $response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1)
+        );
 
         return (string)$response->getPaymentReferenceId();
     }

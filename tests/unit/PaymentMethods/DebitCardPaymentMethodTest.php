@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
 
 /**
@@ -33,7 +33,7 @@ use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DebitCardPaymentMethodTest extends TestCase
+class DebitCardPaymentMethodTest extends Test
 {
     protected static $authentication = array(
         '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
@@ -144,8 +144,10 @@ class DebitCardPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $DebitCard = new DebitCard();
 
         $DebitCard->getRequest()->authentification(...self::$authentication);

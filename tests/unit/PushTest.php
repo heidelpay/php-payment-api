@@ -5,7 +5,7 @@ namespace Heidelpay\Tests\PhpApi\Unit;
 use Heidelpay\PhpApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpApi\Push;
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 
 /**
  * Push Test
@@ -23,7 +23,7 @@ use PHPUnit\Framework\TestCase;
  * @subpackage php-api
  * @category php-api
  */
-class PushTest extends TestCase
+class PushTest extends Test
 {
     /**
      * @var Response|null
@@ -74,10 +74,11 @@ class PushTest extends TestCase
 
     /**
      * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $this->setSampleCcRgResponse();
         $this->setSampleCcDbPendingResponse();
         $this->setSampleDdDbResponse();

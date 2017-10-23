@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod as iDeal;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod as iDeal;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class IdealPaymentMethodTest extends TestCase
+class IdealPaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -159,16 +159,32 @@ class IdealPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $iDeal = new iDeal();
 
-        $iDeal->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $iDeal->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
-        $iDeal->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $iDeal->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $iDeal->_dryRun = true;

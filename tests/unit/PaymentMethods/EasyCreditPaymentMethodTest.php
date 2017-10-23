@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 
 /**
  * easyCredit Tests
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package heidelpay/php-api/tests/unit/paymentmethods/easycredit
  */
-class EasyCreditPaymentMethodTest extends TestCase
+class EasyCreditPaymentMethodTest extends Test
 {
     /**
      * @var array authentication parameter for heidelpay api
@@ -86,8 +86,10 @@ class EasyCreditPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $easyCredit = new EasyCreditPaymentMethod();
 
         $easyCredit->getRequest()->authentification(...self::$authentication);

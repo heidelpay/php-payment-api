@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as Invoice;
 
 /**
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as Invoice;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class InvoicePaymentMethodTest extends TestCase
+class InvoicePaymentMethodTest extends Test
 {
     /**
      * @var array authentication parameter for heidelpay api
@@ -87,8 +87,10 @@ class InvoicePaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $Invoice = new Invoice();
 
         $Invoice->getRequest()->authentification(...self::$authentication);

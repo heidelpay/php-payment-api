@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod as Giropay;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod as Giropay;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class GiropayPaymentMethodTest extends TestCase
+class GiropayPaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -159,8 +159,10 @@ class GiropayPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $giropay = new Giropay();
 
         $giropay->getRequest()->authentification(
@@ -171,9 +173,18 @@ class GiropayPaymentMethodTest extends TestCase
             'TRUE'
         );
 
-        $giropay->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $giropay->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $giropay->_dryRun = true;

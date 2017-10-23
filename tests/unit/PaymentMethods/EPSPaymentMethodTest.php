@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class EPSPaymentMethodTest extends TestCase
+class EPSPaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -112,8 +112,10 @@ class EPSPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $EPS = new EPS();
 
         $EPS->getRequest()->authentification(

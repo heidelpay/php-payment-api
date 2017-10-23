@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod as Sofort;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod as Sofort;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class SofortPaymentMethodTest extends TestCase
+class SofortPaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -159,16 +159,32 @@ class SofortPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $Sofort = new Sofort();
 
-        $Sofort->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $Sofort->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
-        $Sofort->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $Sofort->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $Sofort->_dryRun = true;

@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod as PayPal;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod as PayPal;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class PayPalPaymentMethodTest extends TestCase
+class PayPalPaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -159,16 +159,32 @@ class PayPalPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $PayPal = new PayPal();
 
-        $PayPal->getRequest()->authentification($this->SecuritySender, $this->UserLogin, $this->UserPassword,
-            $this->TransactionChannel, 'TRUE');
+        $PayPal->getRequest()->authentification(
+            $this->SecuritySender,
+            $this->UserLogin,
+            $this->UserPassword,
+            $this->TransactionChannel,
+            'TRUE'
+        );
 
-        $PayPal->getRequest()->customerAddress($this->nameGiven, $this->nameFamily, null, $this->shopperId,
-            $this->addressStreet, $this->addressState, $this->addressZip, $this->addressCity, $this->addressCountry,
-            $this->contactMail);
+        $PayPal->getRequest()->customerAddress(
+            $this->nameGiven,
+            $this->nameFamily,
+            null,
+            $this->shopperId,
+            $this->addressStreet,
+            $this->addressState,
+            $this->addressZip,
+            $this->addressCity,
+            $this->addressCountry,
+            $this->contactMail
+        );
 
 
         $PayPal->_dryRun = true;

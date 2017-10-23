@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup as Config;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup as Config;
  *
  * @category unittest
  */
-class ConfigParameterGroupTest extends TestCase
+class ConfigParameterGroupTest extends Test
 {
     /**
      * BankCountry getter/setter test

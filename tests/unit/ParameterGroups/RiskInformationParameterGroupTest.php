@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup as RiskInformation;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup as RiskInform
  *
  * @category unittest
  */
-class RiskInformationParameterGroupTest extends TestCase
+class RiskInformationParameterGroupTest extends Test
 {
     /**
      * Guestcheckout getter/setter test

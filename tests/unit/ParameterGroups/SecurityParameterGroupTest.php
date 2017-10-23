@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup as Security;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup as Security;
  *
  * @category unittest
  */
-class SecurityParameterGroupTest extends TestCase
+class SecurityParameterGroupTest extends Test
 {
     /**
      * Sender getter/setter test

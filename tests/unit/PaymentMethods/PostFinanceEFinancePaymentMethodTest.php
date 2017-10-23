@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\PostFinanceEFinancePaymentMethod as PostFinanceEFinance;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\PostFinanceEFinancePaymentMethod as PostFina
  * @subpackage PhpApi
  * @category UnitTest
  */
-class PostFinanceEFinancePaymentMethodTest extends TestCase
+class PostFinanceEFinancePaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -159,8 +159,10 @@ class PostFinanceEFinancePaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $PostFinanceEFinance = new PostFinanceEFinance();
 
         $PostFinanceEFinance->getRequest()->authentification(

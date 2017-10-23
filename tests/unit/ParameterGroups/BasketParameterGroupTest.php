@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup as Basket;
 
 /**
@@ -18,7 +18,7 @@ use Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup as Basket;
  *
  * @category unittest
  */
-class BasketParameterGroupTest extends TestCase
+class BasketParameterGroupTest extends Test
 {
     /**
      * BasketId getter/setter test

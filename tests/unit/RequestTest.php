@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\Request;
 use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
 
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class RequestTest extends TestCase
+class RequestTest extends Test
 {
     /**
      * Authentication test

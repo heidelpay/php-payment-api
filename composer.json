@@ -26,10 +26,9 @@
         "ext-SimpleXML": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.7",
-        "friendsofphp/php-cs-fixer": "^2.0",
         "satooshi/php-coveralls": "^1.0",
-        "heidelpay/phpdocumentor": "2.9.1"
+        "heidelpay/phpdocumentor": "2.9.1",
+        "codeception/codeception": "^2.3"
     },
     "suggest": {
         "heidelpay/php-customer-messages": "You can use this package to provide user-friendly messages instead of error codes."

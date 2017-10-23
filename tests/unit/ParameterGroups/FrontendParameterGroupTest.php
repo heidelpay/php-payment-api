@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup as Frontend;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup as Frontend;
  *
  * @category unittest
  */
-class FrontendParameterGroupTest extends TestCase
+class FrontendParameterGroupTest extends Test
 {
     /**
      * Enabled getter/setter test

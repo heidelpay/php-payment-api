@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
 
 /**
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class InvoiceB2CSecuredPaymentMethodTest extends TestCase
+class InvoiceB2CSecuredPaymentMethodTest extends Test
 {
     //<editor-fold desc="Init">
 
@@ -98,8 +98,10 @@ class InvoiceB2CSecuredPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $Invoice = new Invoice();
 
         $Invoice->getRequest()->authentification(...static::$authentication);

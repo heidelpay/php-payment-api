@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup as Presentation;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup as Presentation;
  *
  * @category unittest
  */
-class PresentationParameterGroupTest extends TestCase
+class PresentationParameterGroupTest extends Test
 {
     /**
      * Amount getter/setter test

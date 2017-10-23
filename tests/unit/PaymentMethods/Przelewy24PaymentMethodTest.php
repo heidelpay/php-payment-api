@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
 
 /**
@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class Przelewy24PaymentMethodTest extends TestCase
+class Przelewy24PaymentMethodTest extends Test
 {
     /**
      * SecuritySender
@@ -159,8 +159,10 @@ class Przelewy24PaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $Przelewy24 = new Przelewy24();
 
         $Przelewy24->getRequest()->authentification(

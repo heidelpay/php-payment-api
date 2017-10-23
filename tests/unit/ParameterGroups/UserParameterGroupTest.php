@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\UserParameterGroup as User;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\UserParameterGroup as User;
  *
  * @category unittest
  */
-class UserParameterGroupTest extends TestCase
+class UserParameterGroupTest extends Test
 {
     /**
      * Login getter/setter test

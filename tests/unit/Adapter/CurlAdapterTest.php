@@ -2,8 +2,8 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\Adapter;
 
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 
 /**
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
  *
  * @category unittest
  */
-class CurlAdapterTest extends TestCase
+class CurlAdapterTest extends Test
 {
     /**
      * This test will cover the error handling of the curl adapter

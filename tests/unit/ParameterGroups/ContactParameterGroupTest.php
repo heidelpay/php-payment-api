@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Contact;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Contact;
  *
  * @category unittest
  */
-class ContactParameterGroupTest extends TestCase
+class ContactParameterGroupTest extends Test
 {
     /**
      * Email getter/setter test

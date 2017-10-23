@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup as Identification;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup as Identificat
  *
  * @category unittest
  */
-class IdentificationParameterGroupTest extends TestCase
+class IdentificationParameterGroupTest extends Test
 {
     /**
      * Creditor id getter/setter test

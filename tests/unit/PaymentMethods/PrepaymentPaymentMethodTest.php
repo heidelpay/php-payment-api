@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as Prepayment;
 
 /**
@@ -22,7 +22,7 @@ use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as Prepayment;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class PrepaymentPaymentMethodTest extends TestCase
+class PrepaymentPaymentMethodTest extends Test
 {
     /**
      * @var array authentication parameter for heidelpay api
@@ -83,12 +83,14 @@ class PrepaymentPaymentMethodTest extends TestCase
     }
 
     /**
-     * Set up function will create a prepaymet object for each test case
+     * Set up function will create a prepayment object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $Prepayment = new Prepayment();
 
         $Prepayment->getRequest()->authentification(...self::$authentication);
@@ -117,7 +119,7 @@ class PrepaymentPaymentMethodTest extends TestCase
      * @group connectionTest
      * @test
      */
-    public function Authorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
@@ -129,11 +131,15 @@ class PrepaymentPaymentMethodTest extends TestCase
         $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
 
         /* transaction result */
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'authorize is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -144,11 +150,11 @@ class PrepaymentPaymentMethodTest extends TestCase
      * @param $referenceId string payment reference id of the prepayment authorisation
      *
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends Authorize
+     * @depends authorize
      * @group connectionTest
      * @test   *
      */
-    public function Reversal($referenceId)
+    public function reversal($referenceId)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
@@ -159,11 +165,15 @@ class PrepaymentPaymentMethodTest extends TestCase
         $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
 
         /* transaction result */
-        $this->assertTrue($this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1));
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
         $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse($this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1));
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -174,11 +184,11 @@ class PrepaymentPaymentMethodTest extends TestCase
      * @param string $referenceId reference id of the prepayment to refund
      *
      * @return string payment reference id of the prepayment refund transaction
-     * @depends Authorize
+     * @depends authorize
      * @test
      * @group connectionTest
      */
-    public function Refund($referenceId = null)
+    public function refund($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);

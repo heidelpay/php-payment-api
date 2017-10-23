@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup as Address;
 
 /**
@@ -18,7 +18,7 @@ use Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup as Address;
  *
  * @category unittest
  */
-class AddressParameterGroupTest extends TestCase
+class AddressParameterGroupTest extends Test
 {
     /**
      * City getter/setter test

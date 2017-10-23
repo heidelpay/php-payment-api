@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup as Payment;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup as Payment;
  *
  * @category unittest
  */
-class PaymentParameterGroupTest extends TestCase
+class PaymentParameterGroupTest extends Test
 {
     /**
      * Payment code setter/getter test

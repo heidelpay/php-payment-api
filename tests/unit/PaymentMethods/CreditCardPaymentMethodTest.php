@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 
 /**
@@ -33,7 +33,7 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class CreditCardPaymentMethodTest extends TestCase
+class CreditCardPaymentMethodTest extends Test
 {
     //<editor-fold desc="Init">
 
@@ -156,8 +156,10 @@ class CreditCardPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $CreditCard = new CreditCardPaymentMethod();
 
         $CreditCard->getRequest()->authentification(...self::$authentication);

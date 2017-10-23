@@ -4,7 +4,7 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 use Heidelpay\PhpApi\Request;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
 
@@ -25,7 +25,7 @@ use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class AbstractPaymentMethodTest extends TestCase
+class AbstractPaymentMethodTest extends Test
 {
     /**
      * PaymentObject
@@ -39,8 +39,10 @@ class AbstractPaymentMethodTest extends TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    // @codingStandardsIgnoreStart
+    public function _before()
     {
+        // @codingStandardsIgnoreEnd
         $Abstract = new SofortPaymentMethod();
 
         $this->paymentObject = $Abstract;

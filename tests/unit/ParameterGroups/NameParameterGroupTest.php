@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
 
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\ParameterGroups\NameParameterGroup as Name;
 
 /**
@@ -17,7 +17,7 @@ use Heidelpay\PhpApi\ParameterGroups\NameParameterGroup as Name;
  *
  * @category unittest
  */
-class NameParameterGroupTest extends TestCase
+class NameParameterGroupTest extends Test
 {
     /**
      * Birthdate getter/setter test
