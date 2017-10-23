@@ -30,7 +30,7 @@ before_script:
 
 script:
   - ./vendor/bin/codecept build
-  - ./vendor/bin/codecept run unit --coverage --coverage-xml='$HOME/build/logs/clover.xml'
+  - ./vendor/bin/codecept run unit --coverage --coverage-xml="$HOME/build/logs/clover.xml"
   - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
   - travis_retry php vendor/bin/coveralls -v
 
