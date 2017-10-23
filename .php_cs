@@ -2,7 +2,10 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__.'/lib')
-    ->in(__DIR__.'/tests');
+    ->in(__DIR__.'/tests')
+    ->notPath('/_support/');
+    ->notPath('/_data/');
+    ->notPath('/_output/');
 
 return PhpCsFixer\Config::create()
     ->setUsingCache(false)
