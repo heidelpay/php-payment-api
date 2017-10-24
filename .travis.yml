@@ -23,28 +23,20 @@ cache:
     - $HOME/.local
 
 before_script:
-    - php -i |grep xdebug.ini
-
-    - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    ## disable xdebug
     - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak
-    - echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-
-
-## disable xdebug
-#  - mkdir -p "$HOME/.php-cs-fixer"
-#  - mkdir -p build/logs
-#  - composer self-update
-#  - if [ "$deps" = "no" ]; then composer --prefer-dist install --dev; fi;
-#  - if [ "$deps" = "high" ]; then composer --prefer-source update --dev; fi;
+    - mkdir -p "$HOME/.php-cs-fixer"
+    - mkdir -p build/logs
+    - composer self-update
+    - if [ "$deps" = "no" ]; then composer --prefer-dist install --dev; fi;
+    - if [ "$deps" = "high" ]; then composer --prefer-source update --dev; fi;
 
 script:
-#  - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
-## enable xdebug
-#  - ./vendor/bin/codecept build
-#  - ./vendor/bin/codecept run unit --coverage --coverage-xml
-#  - travis_retry php ./vendor/bin/coveralls -v
+    - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+    ## enable xdebug
+    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - ./vendor/bin/codecept build
+    - ./vendor/bin/codecept run unit --coverage --coverage-xml
+    - travis_retry php ./vendor/bin/coveralls -v
 
 after_success:
