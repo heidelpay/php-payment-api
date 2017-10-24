@@ -23,7 +23,7 @@ use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod as Direct
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DirectDebitB2CSecuredMethodTest extends Test
+class DirectDebitB2CSecuredPaymentMethodTest extends Test
 {
     /**
      * @var array authentication parameter for heidelpay api

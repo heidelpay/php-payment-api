@@ -24,7 +24,7 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DirectDebitMethodTest extends Test
+class DirectDebitPaymentMethodTest extends Test
 {
     /**
      * @var array authentication parameter for heidelpay api
