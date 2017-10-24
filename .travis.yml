@@ -24,6 +24,7 @@ cache:
 
 before_script:
   - mkdir -p "$HOME/.php-cs-fixer"
+  - mkdir -p "$HOME/build/logs"
   - composer self-update
   - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
   - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
@@ -32,12 +33,7 @@ script:
   - ./vendor/bin/codecept -V
   - ./vendor/bin/codecept build
   - ./vendor/bin/codecept run unit Adapter/CurlAdapterTest.php --coverage --coverage-xml
-  - ls -la
-  - ls -la tests
-  - ls -la tests/_output
-  - ls -la build/
-  - ls -la build/log
-  - travis_retry php vendor/bin/coveralls -v
+  - travis_retry php ./vendor/bin/coveralls -v
 #  - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
 after_success:
