@@ -24,6 +24,7 @@ cache:
 
 before_script:
     - php -i
+    - php -i |grep debug
 
 ## disable xdebug
 #  - mkdir -p "$HOME/.php-cs-fixer"
