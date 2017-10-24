@@ -26,98 +26,31 @@ use Heidelpay\PhpApi\PaymentMethods\PostFinanceCardPaymentMethod as PostFinanceC
 class PostFinanceCardPaymentMethodTest extends Test
 {
     /**
-     * SecuritySender
-     *
-     * @var string SecuritySender
+     * @var array authentication parameter for heidelpay api
      */
-    protected $SecuritySender = '31HA07BC8142C5A171745D00AD63D182';
-    /**
-     * UserLogin
-     *
-     * @var string UserLogin
-     */
-    protected $UserLogin = '31ha07bc8142c5a171744e5aef11ffd3';
-    /**
-     * UserPassword
-     *
-     * @var string UserPassword
-     */
-    protected $UserPassword = '93167DE7';
-    /**
-     * TransactionChannel
-     *
-     * @var string TransactionChannel
-     */
-    protected $TransactionChannel = '31HA07BC817E5CF74624746925703A51';
-    /**
-     * SandboxRequest
-     *
-     * Request will be send to Heidelpay sandbox payment system.
-     *
-     * @var string
-     */
-    protected $SandboxRequest = true;
+    protected static $authentication = array(
+        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
+        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
+        '93167DE7',                         //UserPassword
+        '31HA07BC817E5CF74624746925703A51', //TransactionChannel
+        true                                //Sandbox mode
+    );
 
     /**
-     * Customer given name
-     *
-     * @var string nameGiven
+     * @var array customer address
      */
-    protected $nameGiven = 'Heidel';
-    /**
-     * Customer family name
-     *
-     * @var string nameFamily
-     */
-    protected $nameFamily = 'Berger-Payment';
-    /**
-     * Customer company name
-     *
-     * @var string nameCompany
-     */
-    protected $nameCompany = 'DevHeidelpay';
-    /**
-     * Customer id
-     *
-     * @var string shopperId
-     */
-    protected $shopperId = '12344';
-    /**
-     * customer billing address street
-     *
-     * @var string addressStreet
-     */
-    protected $addressStreet = 'Vagerowstr. 18';
-    /**
-     * customer billing address state
-     *
-     * @var string addressState
-     */
-    protected $addressState = 'DE-BW';
-    /**
-     * customer billing address zip
-     *
-     * @var string addressZip
-     */
-    protected $addressZip = '69115';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCity = 'Heidelberg';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCountry = 'CH';
-    /**
-     * customer mail address
-     *
-     * @var string contactMail
-     */
-    protected $contactMail = 'development@heidelpay.de';
+    protected static $customerDetails = array(
+        'Heidel',                   //NameGiven
+        'Berger-Payment',           //NameFamily
+        'DevHeidelpay',             //NameCompany
+        '1234',                     //IdentificationShopperId
+        'Vagerowstr. 18',           //AddressStreet
+        'DE-BW',                    //AddressState
+        '69115',                    //AddressZip
+        'Heidelberg',               //AddressCity
+        'CH',                       //AddressCountry
+        'development@heidelpay.de'  //Customer
+    );
 
     /**
      * Transaction currency
@@ -125,6 +58,7 @@ class PostFinanceCardPaymentMethodTest extends Test
      * @var string currency
      */
     protected $currency = 'CHF';
+
     /**
      * Secret
      *
@@ -164,29 +98,8 @@ class PostFinanceCardPaymentMethodTest extends Test
     {
         // @codingStandardsIgnoreEnd
         $PostFinanceCard = new PostFinanceCard();
-
-        $PostFinanceCard->getRequest()->authentification(
-            $this->SecuritySender,
-            $this->UserLogin,
-            $this->UserPassword,
-            $this->TransactionChannel,
-            'TRUE'
-        );
-
-        $PostFinanceCard->getRequest()->customerAddress(
-            $this->nameGiven,
-            $this->nameFamily,
-            null,
-            $this->shopperId,
-            $this->addressStreet,
-            $this->addressState,
-            $this->addressZip,
-            $this->addressCity,
-            $this->addressCountry,
-            $this->contactMail
-        );
-
-
+        $PostFinanceCard->getRequest()->authentification(...self::$authentication);
+        $PostFinanceCard->getRequest()->customerAddress(...self::$customerDetails);
         $PostFinanceCard->_dryRun = true;
 
         $this->paymentObject = $PostFinanceCard;
