@@ -24,7 +24,7 @@ cache:
 
 before_script:
   - mkdir -p "$HOME/.php-cs-fixer"
-  - mkdir -p "$HOME/build/logs"
+  - mkdir -p build/logs
   - composer self-update
   - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
   - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
