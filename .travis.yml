@@ -23,8 +23,10 @@ cache:
     - $HOME/.local
 
 before_script:
-    - php -i
-    - php -i |grep debug
+    - cat ~/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - echo > ~/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - cat ~/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+
 
 ## disable xdebug
 #  - mkdir -p "$HOME/.php-cs-fixer"
