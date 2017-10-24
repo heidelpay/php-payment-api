@@ -3,8 +3,8 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
+use Heidelpay\Tests\PhpApi\unit\Helper\Authentication;
 
 /**
  *  Credit card test
@@ -33,40 +33,16 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class CreditCardPaymentMethodTest extends Test
+class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 {
     //<editor-fold desc="Init">
 
     /**
-     * authentication parameter for heidelpay api
+     * Authentication data for heidelpay api
      *
-     * @var array authentication parameter for heidelpay api
+     * @var Authentication $authentication
      */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7', //UserPassword
-        '31HA07BC8142C5A171744F3D6D155865', //TransactionChannel
-        true //Sandbox mode
-    );
-
-    /**
-     * customer address
-     *
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
+    protected $authentication;
 
     /**
      *  Account holder
@@ -144,6 +120,9 @@ class CreditCardPaymentMethodTest extends Test
     {
         date_default_timezone_set('UTC');
 
+        $this->authentication = new Authentication();
+        $this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
+
         parent::__construct();
     }
 
@@ -161,11 +140,8 @@ class CreditCardPaymentMethodTest extends Test
     {
         // @codingStandardsIgnoreEnd
         $CreditCard = new CreditCardPaymentMethod();
-
-        $CreditCard->getRequest()->authentification(...self::$authentication);
-
+        $CreditCard->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
         $CreditCard->getRequest()->customerAddress(...self::$customerDetails);
-
         $CreditCard->_dryRun = true;
 
         $this->paymentObject = $CreditCard;
