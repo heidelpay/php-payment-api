@@ -27,110 +27,43 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
 class DirectDebitMethodTest extends Test
 {
     /**
-     * SecuritySender
-     *
-     * @var string SecuritySender
+     * @var array authentication parameter for heidelpay api
      */
-    protected $SecuritySender = '31HA07BC8142C5A171745D00AD63D182';
-    /**
-     * UserLogin
-     *
-     * @var string UserLogin
-     */
-    protected $UserLogin = '31ha07bc8142c5a171744e5aef11ffd3';
-    /**
-     * UserPassword
-     *
-     * @var string UserPassword
-     */
-    protected $UserPassword = '93167DE7';
-    /**
-     * TransactionChannel
-     *
-     * @var string TransactionChannel
-     */
-    protected $TransactionChannel = '31HA07BC8142C5A171749A60D979B6E4';
-    /**
-     * SandboxRequest
-     *
-     * Request will be send to Heidelpay sandbox payment system.
-     *
-     * @var string
-     */
-    protected $SandboxRequest = true;
+    protected static $authentication = array(
+        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
+        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
+        '93167DE7',                         //UserPassword
+        '31HA07BC8142C5A171749A60D979B6E4', //TransactionChannel
+        true                                //Sandbox mode
+    );
 
     /**
-     * Customer given name
-     *
-     * @var string nameGiven
+     * @var array customer address
      */
-    protected $nameGiven = 'Heidel';
-    /**
-     * Customer family name
-     *
-     * @var string nameFamily
-     */
-    protected $nameFamily = 'Berger-Payment';
-    /**
-     * Customer company name
-     *
-     * @var string nameCompany
-     */
-    protected $nameCompany = 'DevHeidelpay';
-    /**
-     * Customer id
-     *
-     * @var string shopperId
-     */
-    protected $shopperId = '12344';
-    /**
-     * customer billing address street
-     *
-     * @var string addressStreet
-     */
-    protected $addressStreet = 'Vagerowstr. 18';
-    /**
-     * customer billing address state
-     *
-     * @var string addressState
-     */
-    protected $addressState = 'DE-BW';
-    /**
-     * customer billing address zip
-     *
-     * @var string addressZip
-     */
-    protected $addressZip = '69115';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCity = 'Heidelberg';
-    /**
-     * customer billing address city
-     *
-     * @var string addressCity
-     */
-    protected $addressCountry = 'DE';
-    /**
-     * customer mail address
-     *
-     * @var string contactMail
-     */
-    protected $contactMail = 'development@heidelpay.de';
+    protected static $customerDetails = array(
+        'Heidel',                   //NameGiven
+        'Berger-Payment',           //NameFamily
+        'DevHeidelpay',             //NameCompany
+        '1234',                     //IdentificationShopperId
+        'Vagerowstr. 18',           //AddressStreet
+        'DE-BW',                    //AddressState
+        '69115',                    //AddressZip
+        'Heidelberg',               //AddressCity
+        'DE',                       //AddressCountry
+        'development@heidelpay.de'  //Customer
+    );
 
     /**
-     * customer mail address
+     * payment account iban
      *
-     * @var string contactMail
+     * @var string $iban
      */
     protected $iban = 'DE89370400440532013000';
 
     /**
-     * customer mail address
+     * payment account holder
      *
-     * @var string contactMail
+     * @var string $holder
      */
     protected $holder = 'Heidel Berger-Payment';
 
@@ -140,6 +73,7 @@ class DirectDebitMethodTest extends Test
      * @var string currency
      */
     protected $currency = 'EUR';
+
     /**
      * Secret
      *
@@ -179,29 +113,8 @@ class DirectDebitMethodTest extends Test
     {
         // @codingStandardsIgnoreEnd
         $DirectDebit = new DirectDebit();
-
-        $DirectDebit->getRequest()->authentification(
-            $this->SecuritySender,
-            $this->UserLogin,
-            $this->UserPassword,
-            $this->TransactionChannel,
-            'TRUE'
-        );
-
-        $DirectDebit->getRequest()->customerAddress(
-            $this->nameGiven,
-            $this->nameFamily,
-            null,
-            $this->shopperId,
-            $this->addressStreet,
-            $this->addressState,
-            $this->addressZip,
-            $this->addressCity,
-            $this->addressCountry,
-            $this->contactMail
-        );
-
-
+        $DirectDebit->getRequest()->authentification(...self::$authentication);
+        $DirectDebit->getRequest()->customerAddress(...self::$customerDetails);
         $DirectDebit->_dryRun = true;
 
         $this->paymentObject = $DirectDebit;
