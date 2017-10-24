@@ -125,56 +125,56 @@ class PushTest extends Test
         $push->setRawResponse($this->xmlCcRegResponse);
         $response = $push->getResponse();
 
-        if ($response instanceof Response) {
-            $this->assertEquals('Heidel', $response->getName()->getGiven());
-            $this->assertEquals('Berger-Payment', $response->getName()->getFamily());
-            $this->assertEquals('MR', $response->getName()->getSalutation());
-
-            $this->assertEquals('Vangerowstr. 18', $response->getAddress()->getStreet());
-            $this->assertEquals('69115', $response->getAddress()->getZip());
-            $this->assertEquals('Heidelberg', $response->getAddress()->getCity());
-            $this->assertEquals('DE', $response->getAddress()->getCountry());
-            $this->assertEquals('DE-BW', $response->getAddress()->getState());
-
-            $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
-
-            $this->assertEquals('2843294932', $response->getIdentification()->getTransactionId());
-            $this->assertEquals('31HA07BC8108A9126F199F2784552637', $response->getIdentification()->getUniqueId());
-            $this->assertEquals('3379.5447.1520', $response->getIdentification()->getShortId());
-            $this->assertEquals('12344', $response->getIdentification()->getShopperId());
-
-            $this->assertEquals('000.100.112', $response->getProcessing()->getReturnCode());
-            $this->assertEquals(
-                'Request successfully processed in \'Merchant in Connector Test Mode\'',
-                $response->getProcessing()->getReturn()
-            );
-            $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-            $this->assertEquals('ACK', $response->getProcessing()->getResult());
-
-            $this->assertEquals('23.12', $response->getPresentation()->getAmount());
-            $this->assertNotEquals('12.34', $response->getPresentation()->getAmount());
-            $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
-
-            $this->assertEquals('CC.RG', $response->getPayment()->getCode());
-
-            $this->assertEquals('000.100.112', $response->getError()['code']);
-            $this->assertEquals(
-                'Request successfully processed in \'Merchant in Connector Test Mode\'',
-                $response->getError()['message']
-            );
-
-            $this->assertTrue($response->isSuccess(), 'Response Status is not success.');
-            $this->assertFalse($response->isError(), 'Response Status is error.');
-            $this->assertFalse($response->isPending(), 'Response Status is pending.');
-
-            $this->assertEquals(
-                '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b3'
-                . '18ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
-                $response->getCriterion()->getSecretHash()
-            );
-        } else {
+        if (!($response instanceof Response)) {
             throw new \RuntimeException('Response is not set!');
         }
+
+        $this->assertEquals('Heidel', $response->getName()->getGiven());
+        $this->assertEquals('Berger-Payment', $response->getName()->getFamily());
+        $this->assertEquals('MR', $response->getName()->getSalutation());
+
+        $this->assertEquals('Vangerowstr. 18', $response->getAddress()->getStreet());
+        $this->assertEquals('69115', $response->getAddress()->getZip());
+        $this->assertEquals('Heidelberg', $response->getAddress()->getCity());
+        $this->assertEquals('DE', $response->getAddress()->getCountry());
+        $this->assertEquals('DE-BW', $response->getAddress()->getState());
+
+        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+
+        $this->assertEquals('2843294932', $response->getIdentification()->getTransactionId());
+        $this->assertEquals('31HA07BC8108A9126F199F2784552637', $response->getIdentification()->getUniqueId());
+        $this->assertEquals('3379.5447.1520', $response->getIdentification()->getShortId());
+        $this->assertEquals('12344', $response->getIdentification()->getShopperId());
+
+        $this->assertEquals('000.100.112', $response->getProcessing()->getReturnCode());
+        $this->assertEquals(
+            'Request successfully processed in \'Merchant in Connector Test Mode\'',
+            $response->getProcessing()->getReturn()
+        );
+        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
+        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+
+        $this->assertEquals('23.12', $response->getPresentation()->getAmount());
+        $this->assertNotEquals('12.34', $response->getPresentation()->getAmount());
+        $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
+
+        $this->assertEquals('CC.RG', $response->getPayment()->getCode());
+
+        $this->assertEquals('000.100.112', $response->getError()['code']);
+        $this->assertEquals(
+            'Request successfully processed in \'Merchant in Connector Test Mode\'',
+            $response->getError()['message']
+        );
+
+        $this->assertTrue($response->isSuccess(), 'Response Status is not success.');
+        $this->assertFalse($response->isError(), 'Response Status is error.');
+        $this->assertFalse($response->isPending(), 'Response Status is pending.');
+
+        $this->assertEquals(
+            '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b3'
+            . '18ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
+            $response->getCriterion()->getSecretHash()
+        );
     }
 
     /**
