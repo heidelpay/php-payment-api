@@ -23,9 +23,14 @@ cache:
     - $HOME/.local
 
 before_script:
-    - cat ~/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo > ~/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - cat ~/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - php -i |grep xdebug.ini
+
+    - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak
+    - echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 
 
 ## disable xdebug
