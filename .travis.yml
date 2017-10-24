@@ -6,14 +6,14 @@ matrix:
   include:
     - php: 5.6
       env: deps=no
-    - php: 7
-      env: deps=no
-    - php: 7
-      env: deps=high
-    - php: 7.1
-      env: deps=no
-    - php: 7.1
-      env: deps=high
+#    - php: 7
+#      env: deps=no
+#    - php: 7
+#      env: deps=high
+#    - php: 7.1
+#      env: deps=no
+#    - php: 7.1
+#      env: deps=high
 
 
 cache:
@@ -23,17 +23,20 @@ cache:
     - $HOME/.local
 
 before_script:
-  - mkdir -p "$HOME/.php-cs-fixer"
-  - mkdir -p build/logs
-  - composer self-update
-  - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
-  - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
+    - php -i
+
+## disable xdebug
+#  - mkdir -p "$HOME/.php-cs-fixer"
+#  - mkdir -p build/logs
+#  - composer self-update
+#  - if [ "$deps" = "no" ]; then composer --prefer-dist install --dev; fi;
+#  - if [ "$deps" = "high" ]; then composer --prefer-source update --dev; fi;
 
 script:
-  - ./vendor/bin/codecept -V
-  - ./vendor/bin/codecept build
-  - ./vendor/bin/codecept run unit --coverage --coverage-xml
-  - travis_retry php ./vendor/bin/coveralls -v
-  - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+#  - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+## enable xdebug
+#  - ./vendor/bin/codecept build
+#  - ./vendor/bin/codecept run unit --coverage --coverage-xml
+#  - travis_retry php ./vendor/bin/coveralls -v
 
 after_success:
