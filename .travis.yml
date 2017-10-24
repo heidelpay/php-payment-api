@@ -29,7 +29,7 @@ before_script:
   - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
 
 script:
-  - ./ventod/bin/codecept -V
+  - ./vendor/bin/codecept -V
   - ./vendor/bin/codecept build
   - ./vendor/bin/codecept run unit --coverage --coverage-xml
   - travis_retry php vendor/bin/coveralls -v
