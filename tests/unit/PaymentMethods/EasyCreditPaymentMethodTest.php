@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
+use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
  * easyCredit Tests

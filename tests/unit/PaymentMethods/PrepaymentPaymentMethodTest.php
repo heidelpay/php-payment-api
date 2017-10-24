@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as Prepayment;
+use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
  * Prepayment Test

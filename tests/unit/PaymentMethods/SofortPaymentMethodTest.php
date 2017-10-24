@@ -4,6 +4,7 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod as Sofort;
+use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
  * Sofort Test

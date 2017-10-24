@@ -41,7 +41,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Heidelpay\\Tests\\PhpApi\\": "tests"
+            "Heidelpay\\Tests\\PhpApi\\": "tests",
+            "Heidelpay\\Tests\\PhpApi\\Helper\\": "tests\\Helper"
         }
     },
     "support": {

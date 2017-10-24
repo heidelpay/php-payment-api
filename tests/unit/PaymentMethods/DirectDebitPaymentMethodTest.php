@@ -5,6 +5,7 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 use Heidelpay\PhpApi\Response;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod as DirectDebit;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
+use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
  * Direct debit Test

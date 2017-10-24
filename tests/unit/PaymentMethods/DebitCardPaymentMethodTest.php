@@ -4,6 +4,7 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
 use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
+use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
  * Debit card test

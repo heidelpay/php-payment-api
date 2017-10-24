@@ -6,6 +6,7 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
 use Heidelpay\PhpApi\Request;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
  * Sofort Test

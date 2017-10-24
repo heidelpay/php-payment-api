@@ -5,11 +5,9 @@
  * Date: 24.10.2017
  * Time: 12:19
  */
-namespace Heidelpay\Tests\PhpApi\unit\PaymentMethods;
+namespace Heidelpay\Tests\PhpApi\Helper;
 
 use Codeception\TestCase\Test;
-use Heidelpay\Tests\PhpApi\unit\Helper\Authentication;
-use Heidelpay\Tests\PhpApi\unit\Helper\Customer;
 
 class BasePaymentMethodTest extends Test
 {
