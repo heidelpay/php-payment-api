@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod as Sofort;
 
 /**
@@ -23,35 +22,8 @@ use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod as Sofort;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class SofortPaymentMethodTest extends Test
+class SofortPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7',                         //UserPassword
-        '31HA07BC8142C5A171749CDAA43365D2', //TransactionChannel
-        true                                //Sandbox mode
-    );
-
-    /**
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel',                   //NameGiven
-        'Berger-Payment',           //NameFamily
-        'DevHeidelpay',             //NameCompany
-        '1234',                     //IdentificationShopperId
-        'Vagerowstr. 18',           //AddressStreet
-        'DE-BW',                    //AddressState
-        '69115',                    //AddressZip
-        'Heidelberg',               //AddressCity
-        'DE',                       //AddressCountry
-        'development@heidelpay.de'  //Customer
-    );
-
     /**
      * Transaction currency
      *
@@ -97,9 +69,16 @@ class SofortPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC8142C5A171749CDAA43365D2')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData
+            ->setCompanyName('DevHeidelpay')
+            ->getCustomerDataArray();
+
         $Sofort = new Sofort();
-        $Sofort->getRequest()->authentification(...self::$authentication);
-        $Sofort->getRequest()->customerAddress(...self::$customerDetails);
+        $Sofort->getRequest()->authentification(...$authentication);
+        $Sofort->getRequest()->customerAddress(...$customerDetails);
         $Sofort->_dryRun = true;
 
         $this->paymentObject = $Sofort;

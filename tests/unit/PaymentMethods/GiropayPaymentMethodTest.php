@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod as Giropay;
 
 /**
@@ -23,35 +22,8 @@ use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod as Giropay;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class GiropayPaymentMethodTest extends Test
+class GiropayPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7',                         //UserPassword
-        '31HA07BC8142C5A171740166AF277E03', //TransactionChannel
-        true                                //Sandbox mode
-    );
-
-    /**
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel',                   //NameGiven
-        'Berger-Payment',           //NameFamily
-        'DevHeidelpay',             //NameCompany
-        '1234',                     //IdentificationShopperId
-        'Vagerowstr. 18',           //AddressStreet
-        'DE-BW',                    //AddressState
-        '69115',                    //AddressZip
-        'Heidelberg',               //AddressCity
-        'DE',                       //AddressCountry
-        'development@heidelpay.de'  //Customer
-    );
-
     /**
      * Transaction currency
      *
@@ -97,9 +69,14 @@ class GiropayPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC8142C5A171740166AF277E03')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
         $giropay = new Giropay();
-        $giropay->getRequest()->authentification(...self::$authentication);
-        $giropay->getRequest()->customerAddress(...self::$customerDetails);
+        $giropay->getRequest()->authentification(...$authentication);
+        $giropay->getRequest()->customerAddress(...$customerDetails);
         $giropay->_dryRun = true;
 
         $this->paymentObject = $giropay;

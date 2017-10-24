@@ -8,25 +8,33 @@
 namespace Heidelpay\Tests\PhpApi\unit\PaymentMethods;
 
 use Codeception\TestCase\Test;
+use Heidelpay\Tests\PhpApi\unit\Helper\Authentication;
+use Heidelpay\Tests\PhpApi\unit\Helper\Customer;
 
 class BasePaymentMethodTest extends Test
 {
+    /**
+     * Authentication data for heidelpay api
+     *
+     * @var Authentication $authentication
+     */
+    protected $authentication;
 
     /**
-     * customer address
+     * Customer data for heidelpay api
      *
-     * @var array customer address
+     * @var Customer $customerData
      */
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
+    protected $customerData;
+
+    /**
+     * BasePaymentMethodTest constructor.
+     */
+    public function __construct()
+    {
+        $this->authentication = new Authentication();
+        $this->customerData = new Customer();
+
+        parent::__construct();
+    }
 }

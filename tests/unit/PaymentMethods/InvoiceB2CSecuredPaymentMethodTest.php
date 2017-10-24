@@ -2,7 +2,6 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
 
 /**
@@ -22,33 +21,9 @@ use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class InvoiceB2CSecuredPaymentMethodTest extends Test
+class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
 {
     //<editor-fold desc="Init">
-
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7', //UserPassword
-        '31HA07BC81856CAD6D8E05CDDE7E2AC8', //TransactionChannel
-        true //Sandbox mode
-    );
-
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
 
     /**
      * Transaction currency
@@ -102,12 +77,14 @@ class InvoiceB2CSecuredPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC81856CAD6D8E05CDDE7E2AC8')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
         $Invoice = new Invoice();
-
-        $Invoice->getRequest()->authentification(...static::$authentication);
-
-        $Invoice->getRequest()->customerAddress(...static::$customerDetails);
-
+        $Invoice->getRequest()->authentification(...$authentication);
+        $Invoice->getRequest()->customerAddress(...$customerDetails);
         $this->paymentObject = $Invoice;
     }
 

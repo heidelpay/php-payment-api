@@ -51,10 +51,13 @@ class Authentication
 
     /**
      * @param string $securitySender
+     *
+     * @return Authentication
      */
     public function setSecuritySender($securitySender)
     {
         $this->securitySender = $securitySender;
+        return $this;
     }
 
     /**
@@ -67,10 +70,13 @@ class Authentication
 
     /**
      * @param string $userLogin
+     *
+     * @return Authentication
      */
     public function setUserLogin($userLogin)
     {
         $this->userLogin = $userLogin;
+        return $this;
     }
 
     /**
@@ -83,10 +89,13 @@ class Authentication
 
     /**
      * @param string $userPassword
+     *
+     * @return Authentication
      */
     public function setUserPassword($userPassword)
     {
         $this->userPassword = $userPassword;
+        return $this;
     }
 
     /**
@@ -99,10 +108,13 @@ class Authentication
 
     /**
      * @param string $transactionChannel
+     *
+     * @return Authentication
      */
     public function setTransactionChannel($transactionChannel)
     {
         $this->transactionChannel = $transactionChannel;
+        return $this;
     }
 
     //</editor-fold>

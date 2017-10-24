@@ -2,7 +2,6 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as Prepayment;
 
 /**
@@ -22,32 +21,8 @@ use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod as Prepayment;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class PrepaymentPaymentMethodTest extends Test
+class PrepaymentPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7', //UserPassword
-        '31HA07BC8142C5A171749A60D979B6E4', //TransactionChannel
-        true //Sandbox mode
-    );
-
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
-
     /**
      * Transaction currency
      *
@@ -91,11 +66,15 @@ class PrepaymentPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC8142C5A171749A60D979B6E4')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
+
         $Prepayment = new Prepayment();
-
-        $Prepayment->getRequest()->authentification(...self::$authentication);
-
-        $Prepayment->getRequest()->customerAddress(...self::$customerDetails);
+        $Prepayment->getRequest()->authentification(...$authentication);
+        $Prepayment->getRequest()->customerAddress(...$customerDetails);
 
         $this->paymentObject = $Prepayment;
     }

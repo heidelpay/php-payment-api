@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
 
 /**
@@ -33,34 +32,8 @@ use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DebitCardPaymentMethodTest extends Test
+class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 {
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7', //UserPassword
-        '31HA07BC8142C5A171744F3D6D155865', //TransactionChannel
-        true //Sandbox mode
-    );
-
-    /**
-     * customer address
-     *
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
-
     /**
      * Transaction currency
      *
@@ -148,13 +121,14 @@ class DebitCardPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
         $DebitCard = new DebitCard();
-
-        $DebitCard->getRequest()->authentification(...self::$authentication);
-
-        $DebitCard->getRequest()->customerAddress(...self::$customerDetails);
-
-
+        $DebitCard->getRequest()->authentification(...$authentication);
+        $DebitCard->getRequest()->customerAddress(...$customerDetails);
         $DebitCard->_dryRun = true;
 
         $this->paymentObject = $DebitCard;

@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
 
 /**
@@ -23,35 +22,8 @@ use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod as Przelewy24;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class Przelewy24PaymentMethodTest extends Test
+class Przelewy24PaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7',                         //UserPassword
-        '31HA07BC811BAF9BED1129D1160BF318', //TransactionChannel
-        true                                //Sandbox mode
-    );
-
-    /**
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel',                   //NameGiven
-        'Berger-Payment',           //NameFamily
-        'DevHeidelpay',             //NameCompany
-        '1234',                     //IdentificationShopperId
-        'Vagerowstr. 18',           //AddressStreet
-        'DE-BW',                    //AddressState
-        '69115',                    //AddressZip
-        'Heidelberg',               //AddressCity
-        'PL',                       //AddressCountry
-        'development@heidelpay.de'  //Customer
-    );
-
     /**
      * Transaction currency
      *
@@ -97,9 +69,17 @@ class Przelewy24PaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC811BAF9BED1129D1160BF318')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData
+            ->setCompanyName('DevHeidelpay')
+            ->setAddressCountry('PL')
+            ->getCustomerDataArray();
+
         $Przelewy24 = new Przelewy24();
-        $Przelewy24->getRequest()->authentification(...self::$authentication);
-        $Przelewy24->getRequest()->customerAddress(...self::$customerDetails);
+        $Przelewy24->getRequest()->authentification(...$authentication);
+        $Przelewy24->getRequest()->customerAddress(...$customerDetails);
         $Przelewy24->_dryRun = true;
 
         $this->paymentObject = $Przelewy24;

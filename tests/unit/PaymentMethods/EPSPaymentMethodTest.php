@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
 
 /**
@@ -23,55 +22,8 @@ use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class EPSPaymentMethodTest extends Test
+class EPSPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * SecuritySender
-     *
-     * @var string SecuritySender
-     */
-    protected $SecuritySender = '31HA07BC8124AD82A9E96D9A35FAFD2A';
-    /**
-     * UserLogin
-     *
-     * @var string UserLogin
-     */
-    protected $UserLogin = '31ha07bc8124ad82a9e96d486d19edaa';
-    /**
-     * UserPassword
-     *
-     * @var string UserPassword
-     */
-    protected $UserPassword = 'password';
-    /**
-     * TransactionChannel
-     *
-     * @var string TransactionChannel
-     */
-    protected $TransactionChannel = '31HA07BC812125981B4F52033DE486AB';
-    /**
-     * SandboxRequest
-     *
-     * Request will be send to Heidelpay sandbox payment system.
-     *
-     * @var string
-     */
-    protected $SandboxRequest = true;
-
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
-
-
     /**
      * Transaction currency
      *
@@ -116,18 +68,17 @@ class EPSPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setSecuritySender('31HA07BC8124AD82A9E96D9A35FAFD2A')
+            ->setUserLogin('31ha07bc8124ad82a9e96d486d19edaa')
+            ->setUserPassword('password')
+            ->setTransactionChannel('31HA07BC812125981B4F52033DE486AB')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
         $EPS = new EPS();
-
-        $EPS->getRequest()->authentification(
-            $this->SecuritySender,
-            $this->UserLogin,
-            $this->UserPassword,
-            $this->TransactionChannel,
-            'TRUE'
-        );
-
-        $EPS->getRequest()->customerAddress(...static::$customerDetails);
-
+        $EPS->getRequest()->authentification(...$authentication);
+        $EPS->getRequest()->customerAddress(...$customerDetails);
         $EPS->_dryRun = true;
 
         $this->paymentObject = $EPS;

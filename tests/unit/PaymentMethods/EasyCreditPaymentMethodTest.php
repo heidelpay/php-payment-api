@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
-use Codeception\TestCase\Test;
 
 /**
  * easyCredit Tests
@@ -17,35 +16,8 @@ use Codeception\TestCase\Test;
  *
  * @package heidelpay/php-api/tests/unit/paymentmethods/easycredit
  */
-class EasyCreditPaymentMethodTest extends Test
+class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8181E8CCFDAD64E8A4B3B766', //SecuritySender
-        '31ha07bc8181e8ccfdad73fd513d2a53', //UserLogin
-        '4B2D4BE3', //UserPassword
-        '31HA07BC8179C95F6B59366492FD253D', //TransactionChannel
-        true //Sandbox mode
-    );
-
-    /**
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
-
     /**
      * Transaction currency
      *
@@ -90,10 +62,19 @@ class EasyCreditPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setSecuritySender('31HA07BC8181E8CCFDAD64E8A4B3B766')
+            ->setUserLogin('31ha07bc8181e8ccfdad73fd513d2a53')
+            ->setUserPassword('4B2D4BE3')
+            ->setTransactionChannel('31HA07BC8179C95F6B59366492FD253D')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
+
         $easyCredit = new EasyCreditPaymentMethod();
 
-        $easyCredit->getRequest()->authentification(...self::$authentication);
-        $easyCredit->getRequest()->customerAddress(...self::$customerDetails);
+        $easyCredit->getRequest()->authentification(...$authentication);
+        $easyCredit->getRequest()->customerAddress(...$customerDetails);
         $easyCredit->getRequest()->b2cSecured('MR', '1970-01-01');
         $easyCredit->getRequest()->async('DE', 'https://dev.heidelpay.de');
 

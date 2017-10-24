@@ -4,7 +4,6 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
-use Heidelpay\Tests\PhpApi\unit\Helper\Authentication;
 
 /**
  *  Credit card test
@@ -36,13 +35,6 @@ use Heidelpay\Tests\PhpApi\unit\Helper\Authentication;
 class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 {
     //<editor-fold desc="Init">
-
-    /**
-     * Authentication data for heidelpay api
-     *
-     * @var Authentication $authentication
-     */
-    protected $authentication;
 
     /**
      *  Account holder
@@ -120,10 +112,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     {
         date_default_timezone_set('UTC');
 
-        $this->authentication = new Authentication();
-        $this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
-
-        parent::__construct();
+        parent::__construct(); // creates authentication and customer data objects as well
     }
 
     //</editor-fold>
@@ -139,9 +128,11 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
+
         $CreditCard = new CreditCardPaymentMethod();
         $CreditCard->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
-        $CreditCard->getRequest()->customerAddress(...self::$customerDetails);
+        $CreditCard->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
         $CreditCard->_dryRun = true;
 
         $this->paymentObject = $CreditCard;

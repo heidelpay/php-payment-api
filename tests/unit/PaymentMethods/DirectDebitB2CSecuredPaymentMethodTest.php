@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod as DirectDebitSecured;
 
 /**
@@ -23,37 +22,8 @@ use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod as Direct
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DirectDebitB2CSecuredPaymentMethodTest extends Test
+class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7', //UserPassword
-        '31HA07BC81856CAD6D8E0B3A3100FBA3', //TransactionChannel
-        true //Sandbox mode
-    );
-
-    /**
-     * customer details
-     *
-     * @var array
-     */
-    protected static $customerDetails = array(
-        'Heidel', //NameGiven
-        'Berger-Payment', //NameFamily
-        null, //NameCompany
-        '1234', //IdentificationShopperId
-        'Vagerowstr. 18', //AddressStreet
-        'DE-BW', //AddressState
-        '69115', //AddressZip
-        'Heidelberg', //AddressCity
-        'DE', //AddressCountry
-        'development@heidelpay.de' //Costumer
-    );
-
     /**
      * customer mail address
      *
@@ -112,15 +82,15 @@ class DirectDebitB2CSecuredPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC81856CAD6D8E0B3A3100FBA3')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData->getCustomerDataArray();
+
         $DirectDebitSecured = new DirectDebitSecured();
-
-        $DirectDebitSecured->getRequest()->authentification(...self::$authentication);
-
-        $DirectDebitSecured->getRequest()->customerAddress(...self::$customerDetails);
-
+        $DirectDebitSecured->getRequest()->authentification(...$authentication);
+        $DirectDebitSecured->getRequest()->customerAddress(...$customerDetails);
         $DirectDebitSecured->getRequest()->b2cSecured('MR', '1982-07-12');
-
-
         $DirectDebitSecured->_dryRun = true;
 
         $this->paymentObject = $DirectDebitSecured;

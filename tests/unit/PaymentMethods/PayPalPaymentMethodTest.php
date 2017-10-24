@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod as PayPal;
 
 /**
@@ -23,35 +22,8 @@ use Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod as PayPal;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class PayPalPaymentMethodTest extends Test
+class PayPalPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7',                         //UserPassword
-        '31HA07BC8142C5A171749A60D979B6E4', //TransactionChannel
-        true                                //Sandbox mode
-    );
-
-    /**
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel',                   //NameGiven
-        'Berger-Payment',           //NameFamily
-        'DevHeidelpay',             //NameCompany
-        '1234',                     //IdentificationShopperId
-        'Vagerowstr. 18',           //AddressStreet
-        'DE-BW',                    //AddressState
-        '69115',                    //AddressZip
-        'Heidelberg',               //AddressCity
-        'DE',                       //AddressCountry
-        'development@heidelpay.de'  //Customer
-    );
-
     /**
      * Transaction currency
      *
@@ -97,9 +69,16 @@ class PayPalPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC8142C5A171749A60D979B6E4')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData
+            ->setCompanyName('DevHeidelpay')
+            ->getCustomerDataArray();
+
         $PayPal = new PayPal();
-        $PayPal->getRequest()->authentification(...self::$authentication);
-        $PayPal->getRequest()->customerAddress(...self::$customerDetails);
+        $PayPal->getRequest()->authentification(...$authentication);
+        $PayPal->getRequest()->customerAddress(...$customerDetails);
         $PayPal->_dryRun = true;
 
         $this->paymentObject = $PayPal;

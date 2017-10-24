@@ -3,7 +3,6 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpApi\Response;
-use Codeception\TestCase\Test;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod as DirectDebit;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 
@@ -24,35 +23,8 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DirectDebitPaymentMethodTest extends Test
+class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * @var array authentication parameter for heidelpay api
-     */
-    protected static $authentication = array(
-        '31HA07BC8142C5A171745D00AD63D182', //SecuritySender
-        '31ha07bc8142c5a171744e5aef11ffd3', //UserLogin
-        '93167DE7',                         //UserPassword
-        '31HA07BC8142C5A171749A60D979B6E4', //TransactionChannel
-        true                                //Sandbox mode
-    );
-
-    /**
-     * @var array customer address
-     */
-    protected static $customerDetails = array(
-        'Heidel',                   //NameGiven
-        'Berger-Payment',           //NameFamily
-        'DevHeidelpay',             //NameCompany
-        '1234',                     //IdentificationShopperId
-        'Vagerowstr. 18',           //AddressStreet
-        'DE-BW',                    //AddressState
-        '69115',                    //AddressZip
-        'Heidelberg',               //AddressCity
-        'DE',                       //AddressCountry
-        'development@heidelpay.de'  //Customer
-    );
-
     /**
      * payment account iban
      *
@@ -112,9 +84,16 @@ class DirectDebitPaymentMethodTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
+        $authentication = $this->authentication
+            ->setTransactionChannel('31HA07BC8142C5A171749A60D979B6E4')
+            ->getAuthenticationArray();
+        $customerDetails = $this->customerData
+            ->setCompanyName('DevHeidelpay')
+            ->getCustomerDataArray();
+
         $DirectDebit = new DirectDebit();
-        $DirectDebit->getRequest()->authentification(...self::$authentication);
-        $DirectDebit->getRequest()->customerAddress(...self::$customerDetails);
+        $DirectDebit->getRequest()->authentification(...$authentication);
+        $DirectDebit->getRequest()->customerAddress(...$customerDetails);
         $DirectDebit->_dryRun = true;
 
         $this->paymentObject = $DirectDebit;
