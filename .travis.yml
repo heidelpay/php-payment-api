@@ -29,8 +29,8 @@ before_script:
     - mkdir -p "$HOME/.php-cs-fixer"
     - mkdir -p build/logs
     - composer self-update
-    - if [ "$deps" = "no" ]; then composer --prefer-dist install --dev; fi;
-    - if [ "$deps" = "high" ]; then composer --prefer-source update --dev; fi;
+    - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
+    - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
 
 script:
     - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
