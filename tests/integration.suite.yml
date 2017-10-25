@@ -1,0 +1,9 @@
+# Codeception Test Suite Configuration
+#
+# Suite for integration tests.
+
+actor: IntegrationTester
+modules:
+    enabled:
+        - Asserts
+        - \Helper\Integration
