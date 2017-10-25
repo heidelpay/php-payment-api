@@ -39,10 +39,10 @@ class ContactParameterGroupTest extends Test
     {
         $Contact = new Contact();
 
-        $ip = '127.0.0.1';
-        $Contact->setIp($ip);
+        $ipAddress = '127.0.0.1';
+        $Contact->setIp($ipAddress);
 
-        $this->assertEquals($ip, $Contact->getIp());
+        $this->assertEquals($ipAddress, $Contact->getIp());
     }
 
     /**
