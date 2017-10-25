@@ -27,6 +27,8 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class AbstractPaymentMethodTest extends BasePaymentMethodTest
 {
+    //<editor-fold desc="Init">
+
     /**
      * PaymentObject
      *
@@ -47,6 +49,10 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject = $Abstract;
     }
+
+    //</editor-fold>
+
+    //<editor-fold desc="Tests">
 
     /**
      * Request setter/getter test
@@ -81,7 +87,7 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
         $Adapter = new CurlAdapter();
         $this->paymentObject->setAdapter($Adapter);
 
-        $this->assertEquals($Adapter, $this->paymentObject->getAdapter());
+        $this->assertSame($Adapter, $this->paymentObject->getAdapter());
     }
 
     /**
@@ -92,7 +98,7 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
     public function getPaymentUrl()
     {
         $this->paymentObject->getRequest()->getTransaction()->set('mode', 'LIVE');
-        $this->assertEquals('https://heidelpay.hpcgw.net/ngw/post', $this->paymentObject->getPaymentUrl());
+        $this->assertSame('https://heidelpay.hpcgw.net/ngw/post', $this->paymentObject->getPaymentUrl());
     }
 
     /**
@@ -136,4 +142,6 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
     {
         $this->assertJson($this->paymentObject->toJson());
     }
+
+    //</editor-fold>
 }
