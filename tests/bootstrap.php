@@ -8,3 +8,10 @@ if (getenv('TRAVIS')) {
         define('CURL_SSLVERSION_TLSv1_2', 6);
     }
 }
+
+$kernel = \AspectMock\Kernel::getInstance();
+$kernel->init([
+    'debug' => true,
+    'includePaths' => [__DIR__.'/../lib'],
+    'excludePaths' => [__DIR__.'/../tests']
+]);
