@@ -91,22 +91,6 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 
-    //<editor-fold desc="Helper">
-
-    /**
-     * Get current called method, without namespace
-     *
-     * @param string $method
-     *
-     * @return string class and method
-     */
-    public function getMethod($method)
-    {
-        return substr(strrchr($method, '\\'), 1);
-    }
-
-    //</editor-fold>
-
     //<editor-fold desc="Tests">
 
     /**

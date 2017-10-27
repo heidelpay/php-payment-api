@@ -98,18 +98,6 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
-     * Get current called method, without namespace
-     *
-     * @param string $method
-     *
-     * @return string class and method
-     */
-    public function getMethod($method)
-    {
-        return substr(strrchr($method, '\\'), 1);
-    }
-
-    /**
      * Test case for a single direct debit authorize
      *
      * @return string payment reference id for the direct debit transaction

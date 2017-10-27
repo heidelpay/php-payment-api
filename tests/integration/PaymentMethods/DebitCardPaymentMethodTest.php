@@ -136,18 +136,6 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
-     * Get current called method, without namespace
-     *
-     * @param string $method
-     *
-     * @return string class and method
-     */
-    public function getMethod($method)
-    {
-        return substr(strrchr($method, '\\'), 1);
-    }
-
-    /**
      * Test case for debit cart registration without payment frame
      *
      * @return string payment reference id to the credit card registration

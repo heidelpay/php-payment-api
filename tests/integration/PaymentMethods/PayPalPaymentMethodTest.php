@@ -86,18 +86,6 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
-     * Get current called method, without namespace
-     *
-     * @param string $method
-     *
-     * @return string class and method
-     */
-    public function getMethod($method)
-    {
-        return substr(strrchr($method, '\\'), 1);
-    }
-
-    /**
      * Test case for a single PayPal authorisation
      *
      * @return string payment reference id for the PayPal authorize transaction
