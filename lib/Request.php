@@ -187,7 +187,7 @@ class Request extends AbstractMethod
         $client = new CurlAdapter();
 
         if ($adapter !== null) {
-            $client = new $adapter;
+            $client = $adapter;
         }
 
         return $client->sendPost($uri, $post);
