@@ -38,15 +38,19 @@ class BasePaymentMethodTest extends Test
 
     /**
      * BasePaymentMethodTest constructor.
+     *
+     * @param null   $name
+     * @param array  $data
+     * @param string $dataName
      */
-    public function __construct()
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         date_default_timezone_set('UTC');
 
         $this->authentication = new Authentication();
         $this->customerData = new Customer();
 
-        parent::__construct();
+        parent::__construct($name, $data, $dataName);
     }
 
     //<editor-fold desc="Helpers">
@@ -88,4 +92,17 @@ class BasePaymentMethodTest extends Test
     }
 
     //</editor-fold>
+
+    /**
+     * @param array $expected
+     * @param array $actual
+     */
+    protected function assertArraysMatch(array $expected, array $actual)
+    {
+        $this->assertCount(count($expected), $actual);
+        foreach ($expected as $key => $value) {
+            $this->assertArrayHasKey($key, $actual);
+            self::assertEquals($value, $actual[$key]);
+        }
+    }
 }
