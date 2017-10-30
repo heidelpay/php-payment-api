@@ -8,12 +8,15 @@
 namespace Heidelpay\Tests\PhpApi\Helper;
 
 use AspectMock\Proxy\InstanceProxy;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
-use AspectMock\Test as AspectMockTest;
+use AspectMock\Test as test;
 use Heidelpay\PhpApi\Response;
 
-class BasePaymentMethodTest extends Test
+/**
+ * Base test class for unit and integration tests.
+ */
+class BasePaymentMethodTest extends Unit
 {
     /**
      * Authentication data for heidelpay api
@@ -73,7 +76,7 @@ class BasePaymentMethodTest extends Test
     protected function mockCurlAdapter()
     {
         /** @var CurlAdapter|InstanceProxy $curlMock */
-        $curlMock =  AspectMockTest::double(
+        $curlMock =  test::double(
             new CurlAdapter,
             ['sendPost' => [[], new Response()]]
         );
