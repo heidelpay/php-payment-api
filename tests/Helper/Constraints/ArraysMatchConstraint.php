@@ -28,8 +28,8 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
 
     /**
      * @param array $value
-     * @param bool $count
-     * @param bool $strict
+     * @param bool  $count
+     * @param bool  $strict
      *
      * @throws \PHPUnit\Framework\Exception
      */
@@ -103,6 +103,12 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return 'validate if array matches expected once';
+        $ret_val = 'matches expected Array (';
+
+        foreach ($this->value as $key => $value) {
+            $ret_val .= "\n\t '" . $key . " => '" . $value . "'";
+        }
+
+        return  $ret_val . "\n]";
     }
 }
