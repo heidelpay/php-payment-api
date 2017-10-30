@@ -8,11 +8,13 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+        - Codeception\Extension\Logger: # enabled extension
+            max_files: 5 # logger configuration
 coverage:
     enabled: true
     include:
         - lib/*
 settings:
-    bootstrap: ../bootstrap.php
-    suite_class: \PHPUnit_Framework_TestSuite
+    bootstrap: ..\_bootstrap.php
     colors: true
+    log: true

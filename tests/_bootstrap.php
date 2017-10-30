@@ -11,7 +11,10 @@ if (getenv('TRAVIS')) {
 
 $kernel = \AspectMock\Kernel::getInstance();
 $kernel->init([
-    'debug' => true,
+    'debug' => false,
+    'cacheDir' => __DIR__.'/_data',
     'includePaths' => [__DIR__.'/../lib'],
-    'excludePaths' => [__DIR__.'/../tests']
+    'excludePaths' => [
+        __DIR__.'/../vendor'
+    ]
 ]);
