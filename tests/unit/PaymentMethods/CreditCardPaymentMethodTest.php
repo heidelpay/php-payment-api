@@ -3,11 +3,11 @@
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use AspectMock\Proxy\InstanceProxy;
-use AspectMock\Test as AspectMockTest;
+use AspectMock\Test as test;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
-use \PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\Constraint;
 
 /**
  *  Credit card test
@@ -139,7 +139,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $this->paymentObject = null;
-        AspectMockTest::clean();
+        test::clean();
     }
 
     //</editor-fold>
@@ -148,6 +148,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
     /**
      * @param $parameters
+     *
      * @return ArraysMatchConstraint|Constraint
      */
     private function arraysMatchExactly($parameters)
