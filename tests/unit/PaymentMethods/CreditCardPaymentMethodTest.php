@@ -6,6 +6,8 @@ use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as AspectMockTest;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
+use \PHPUnit\Framework\Constraint\Constraint;
 
 /**
  *  Credit card test
@@ -142,7 +144,20 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 
-    //<editor-fold desc="dataProvider">
+    //<editor-fold desc="Helpers">
+
+    /**
+     * @param $parameters
+     * @return ArraysMatchConstraint|Constraint
+     */
+    private function arraysMatchExactly($parameters)
+    {
+        return new ArraysMatchConstraint($parameters, true, true);
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="dataProviders">
 
     /**
      * @return array
@@ -286,7 +301,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
-        $parameters =
+        $expected =
             [
                 'ACCOUNT.BRAND' => $this->creditCardBrand,
                 'ACCOUNT.EXPIRY_MONTH' => $this->creditCardExpiryMonth,
@@ -325,7 +340,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'USER.PWD' => $userPassword,
             ];
 
-        $this->assertArraysMatch($parameters, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -404,7 +419,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -458,7 +473,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -532,7 +547,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -591,7 +606,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -647,7 +662,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -703,7 +718,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -759,7 +774,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertArraysMatch($expected, $this->paymentObject->getRequest()->convertToArray());
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
     //</editor-fold>
