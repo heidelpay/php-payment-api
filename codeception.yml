@@ -13,7 +13,6 @@ coverage:
     include:
         - lib/*
 settings:
-    bootstrap: ..\bootstrap.php
+    bootstrap: ../bootstrap.php
     suite_class: \PHPUnit_Framework_TestSuite
     colors: true
-    log: true
