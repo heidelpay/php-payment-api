@@ -92,17 +92,4 @@ class BasePaymentMethodTest extends Test
     }
 
     //</editor-fold>
-
-    /**
-     * @param array $expected
-     * @param array $actual
-     */
-    protected function assertArraysMatch(array $expected, array $actual)
-    {
-        $this->assertCount(count($expected), $actual);
-        foreach ($expected as $key => $value) {
-            $this->assertArrayHasKey($key, $actual);
-            self::assertEquals($value, $actual[$key]);
-        }
-    }
 }
