@@ -6,8 +6,6 @@ use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
-use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
-use PHPUnit\Framework\Constraint\Constraint;
 
 /**
  *  Credit card test
@@ -43,20 +41,21 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     const CSS_PATH = self::REFERENCE_ID;
     const TEST_AMOUNT = 23.12;
     const PAYMENT_METHOD = 'CreditCardPaymentMethod';
+    const PAYMENT_METHOD_SHORT = 'CC';
 
     //<editor-fold desc="Init">
 
     /**
      *  Account holder
      *
-     * @var string Account holder
+     * @var string $holder
      */
     protected $holder = 'Heidel Berger-Payment';
 
     /**
      * Transaction currency
      *
-     * @var string currency
+     * @var string $currency
      */
     protected $currency = 'EUR';
     /**
@@ -67,53 +66,61 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * verify the the payment response. Can be used for
      * brute force protection.
      *
-     * @var string secret
+     * @var string $secret
      */
     protected $secret = 'Heidelpay-PhpApi';
 
     /**
-     * Credit card number
-     * Do not use real credit card information for this test. For more details read the information
+     * Card number
+     * Do not use real card information for this test. For more details read the information
      * on top of this test class.
      *
-     * @var string credit card number
+     * @var string $cartNumber
      */
-    protected $creditCartNumber = '4711100000000000';
+    protected $cartNumber = '4711100000000000';
     /**
-     * Credit card brand
-     * Do not use real credit card information for this test. For more details read the information
+     * Card brand
+     * Do not use real card information for this test. For more details read the information
      * on top of this test class.
      *
-     * @var string credit card brand
+     * @var string $cardBrand
      */
-    protected $creditCardBrand = 'VISA';
+    protected $cardBrand = 'VISA';
     /**
-     * Credit card verification
-     * Do not use real credit card information for this test. For more details read the information
+     * Card verification
+     * Do not use real card information for this test. For more details read the information
      * on top of this test class.
      *
-     * @var string credit card verification
+     * @var string $cardVerification
      */
-    protected $creditCardVerification = '123';
+    protected $cardVerification = '123';
+
     /**
-     * Credit card expiry month
+     * Card expiry month
      *
-     * @var string credit card verification
+     * @var string $cardExpiryMonth
      */
-    protected $creditCardExpiryMonth = '04';
+    protected $cardExpiryMonth = '04';
     /**
-     * Credit card expiry year
+     * Card expiry year
      *
-     * @var string credit card year
+     * @var string $cardExpiryYear
      */
-    protected $creditCardExpiryYear = '2040';
+    protected $cardExpiryYear = '2040';
+
+    /**
+     * PaymentObject
+     *
+     * @var CreditCardPaymentMethod $paymentObject
+     */
+    protected $paymentObject;
 
     //</editor-fold>
 
     //<editor-fold desc="Setup">
 
     /**
-     * Set up function will create a credit card object for each test case
+     * Set up function will create a payment method object for each test case
      */
     // @codingStandardsIgnoreStart
     public function _before()
@@ -144,20 +151,6 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 
-    //<editor-fold desc="Helpers">
-
-    /**
-     * @param $parameters
-     *
-     * @return ArraysMatchConstraint|Constraint
-     */
-    private function arraysMatchExactly($parameters)
-    {
-        return new ArraysMatchConstraint($parameters, true, true);
-    }
-
-    //</editor-fold>
-
     //<editor-fold desc="dataProviders">
 
     /**
@@ -173,7 +166,8 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             ['debitOnRegistration', null,'DB'],
             ['refund', null,'RF'],
             ['reversal', null,'RV'],
-            ['rebill', null,'RB']
+            ['rebill', null,'RB'],
+            ['capture', null,'CP']
         ];
     }
 
@@ -205,8 +199,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         // verify the correct transaction code has been appended
         $payment_code = $paymentParameterGroup->getCode();
-        $this->assertCount(2, explode('.', $payment_code));
-        $this->assertEquals($transactionCode, explode('.', $payment_code)[1]);
+        $this->assertEquals(self::PAYMENT_METHOD_SHORT . '.' . $transactionCode, $payment_code);
     }
 
     /**
@@ -247,7 +240,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @test
      */
-    public function prepareRequestShouldSetCriterionPaymentMethodToCreditCard()
+    public function prepareRequestShouldSetCriterionPaymentMethod()
     {
         $criterionParameterGroup = $this->paymentObject->getRequest()->getCriterion();
 
@@ -257,7 +250,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->authorize();
 
         // verify the criterion values changed as expected
-        $this->assertEquals('CreditCardPaymentMethod', $criterionParameterGroup->getPaymentMethod());
+        $this->assertEquals(self::PAYMENT_METHOD, $criterionParameterGroup->getPaymentMethod());
     }
 
     //</editor-fold>
@@ -286,15 +279,15 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             $cssPath
         );
 
-        /* disable frontend (iframe) and submit the credit card information directly (only for testing) */
+        /* disable frontend (iframe) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
-        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
+        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -304,12 +297,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         $expected =
             [
-                'ACCOUNT.BRAND' => $this->creditCardBrand,
-                'ACCOUNT.EXPIRY_MONTH' => $this->creditCardExpiryMonth,
-                'ACCOUNT.EXPIRY_YEAR' => $this->creditCardExpiryYear,
+                'ACCOUNT.BRAND' => $this->cardBrand,
+                'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
+                'ACCOUNT.EXPIRY_YEAR' => $this->cardExpiryYear,
                 'ACCOUNT.HOLDER' => $this->holder,
-                'ACCOUNT.NUMBER' => $this->creditCartNumber,
-                'ACCOUNT.VERIFICATION' => $this->creditCardVerification,
+                'ACCOUNT.NUMBER' => $this->cartNumber,
+                'ACCOUNT.VERIFICATION' => $this->cardVerification,
                 'ADDRESS.CITY' => $city,
                 'ADDRESS.COUNTRY' => $country,
                 'ADDRESS.STATE' => $state,
@@ -330,7 +323,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'IDENTIFICATION.TRANSACTIONID' => $timestamp,
                 'NAME.GIVEN' => $firstName,
                 'NAME.FAMILY' => $lastName,
-                'PAYMENT.CODE' => 'CC.RG',
+                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RG',
                 'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
                 'PRESENTATION.CURRENCY' => $this->currency,
                 'REQUEST.VERSION' => '1.0',
@@ -366,15 +359,15 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             self::CSS_PATH
         );
 
-        /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
+        /* disable frontend (ifame) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
-        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
+        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -383,12 +376,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             $this->authentication->getAuthenticationArray();
         
         $expected = [
-            'ACCOUNT.BRAND' => $this->creditCardBrand,
-            'ACCOUNT.EXPIRY_MONTH' => $this->creditCardExpiryMonth,
-            'ACCOUNT.EXPIRY_YEAR' => $this->creditCardExpiryYear,
+            'ACCOUNT.BRAND' => $this->cardBrand,
+            'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
+            'ACCOUNT.EXPIRY_YEAR' => $this->cardExpiryYear,
             'ACCOUNT.HOLDER' => $this->holder,
-            'ACCOUNT.NUMBER' => $this->creditCartNumber,
-            'ACCOUNT.VERIFICATION' => $this->creditCardVerification,
+            'ACCOUNT.NUMBER' => $this->cartNumber,
+            'ACCOUNT.VERIFICATION' => $this->cardVerification,
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
             'ADDRESS.STATE' => $state,
@@ -409,7 +402,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.TRANSACTIONID' => $timestamp,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.PA',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.PA',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
@@ -463,7 +456,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.PA',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.PA',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
@@ -494,15 +487,15 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             self::CSS_PATH
         );
 
-        /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
+        /* disable frontend (ifame) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
-        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
+        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -511,12 +504,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             $this->authentication->getAuthenticationArray();
 
         $expected = [
-            'ACCOUNT.BRAND' => $this->creditCardBrand,
-            'ACCOUNT.EXPIRY_MONTH' => $this->creditCardExpiryMonth,
-            'ACCOUNT.EXPIRY_YEAR' => $this->creditCardExpiryYear,
+            'ACCOUNT.BRAND' => $this->cardBrand,
+            'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
+            'ACCOUNT.EXPIRY_YEAR' => $this->cardExpiryYear,
             'ACCOUNT.HOLDER' => $this->holder,
-            'ACCOUNT.NUMBER' => $this->creditCartNumber,
-            'ACCOUNT.VERIFICATION' => $this->creditCardVerification,
+            'ACCOUNT.NUMBER' => $this->cartNumber,
+            'ACCOUNT.VERIFICATION' => $this->cardVerification,
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
             'ADDRESS.STATE' => $state,
@@ -537,7 +530,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.TRANSACTIONID' => $timestamp,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.DB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
@@ -596,7 +589,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.DB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
@@ -652,7 +645,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.RF',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RF',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
@@ -708,7 +701,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.RV',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RV',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
@@ -764,7 +757,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => 'CC.RB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RB',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',

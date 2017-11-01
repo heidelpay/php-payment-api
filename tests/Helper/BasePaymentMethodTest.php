@@ -12,6 +12,8 @@ use Codeception\Test\Unit;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 use AspectMock\Test as test;
 use Heidelpay\PhpApi\Response;
+use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
+use PHPUnit\Framework\Constraint\Constraint;
 
 /**
  * Base test class for unit and integration tests.
@@ -31,13 +33,6 @@ class BasePaymentMethodTest extends Unit
      * @var Customer $customerData
      */
     protected $customerData;
-
-    /**
-     * PaymentObject
-     *
-     * @var \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod
-     */
-    protected $paymentObject;
 
     /**
      * BasePaymentMethodTest constructor.
@@ -92,6 +87,16 @@ class BasePaymentMethodTest extends Unit
     protected function getTimestampString()
     {
         return $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+    }
+
+    /**
+     * @param $parameters
+     *
+     * @return ArraysMatchConstraint|Constraint
+     */
+    protected function arraysMatchExactly($parameters)
+    {
+        return new ArraysMatchConstraint($parameters, true, true);
     }
 
     //</editor-fold>
