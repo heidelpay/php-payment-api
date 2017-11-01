@@ -133,6 +133,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $debitCard = new DebitCardPaymentMethod();
         $debitCard->getRequest()->authentification(...$authentication);
         $debitCard->getRequest()->customerAddress(...$customerDetails);
+        $debitCard->_dryRun = false;
 
         $this->paymentObject = $debitCard;
 
