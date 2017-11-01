@@ -114,7 +114,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
-        $this->paymentObject->setAdapter(CurlAdapter::class);
+        $this->paymentObject->setAdapter(new CurlAdapter());
 
         $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
         $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
