@@ -15,6 +15,6 @@ coverage:
     include:
         - lib/*
 settings:
-    bootstrap: ..\_bootstrap.php
+    bootstrap: ../_bootstrap.php
     colors: true
     log: true
