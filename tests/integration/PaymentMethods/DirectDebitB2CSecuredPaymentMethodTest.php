@@ -342,6 +342,40 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
+     * Test case for direct debit on a registration
+     *
+     * @param $referenceId string reference id of the direct debit registration
+     *
+     * @return string payment reference id of the direct debit registration
+     * @depends registration
+     * @test
+     * @group  connectionTest
+     */
+    public function debitOnRegistration($referenceId = null)
+    {
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+
+        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+
+        $this->paymentObject->debitOnRegistration((string)$referenceId);
+
+        /* prepare request and send it to payment api */
+        $request = $this->paymentObject->getRequest()->convertToArray();
+        /** @var Response $response */
+        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'authorize on registration is pending');
+        $this->assertFalse(
+            $response->isError(),
+            'authorized on registration failed : ' . print_r($response->getError(), 1)
+        );
+
+        return (string)$response->getPaymentReferenceId();
+    }
+
+    /**
      * Test case for a invoice finalize of a existing authorisation
      *
      * @param $referenceId string payment reference id of the invoice authorisation
