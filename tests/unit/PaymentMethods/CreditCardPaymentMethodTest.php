@@ -771,5 +771,61 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
+    /**
+     * Verify capture parameters generated as expected
+     *
+     * @test
+     */
+    public function captureParametersShouldBeSetUpAsExpected()
+    {
+        $timestamp = 'CreditCardPaymentMethodTest::capture 2017-10-27 15:33:01';
+        $this->paymentObject->getRequest()->basketData(
+            $timestamp,
+            self::TEST_AMOUNT,
+            $this->currency,
+            $this->secret
+        );
+
+        $this->paymentObject->capture(self::REFERENCE_ID);
+
+        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
+            $this->customerData->getCustomerDataArray();
+
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
+            $this->authentication->getAuthenticationArray();
+
+        $expected = [
+            'ADDRESS.CITY' => $city,
+            'ADDRESS.COUNTRY' => $country,
+            'ADDRESS.STATE' => $state,
+            'ADDRESS.STREET' => $street,
+            'ADDRESS.ZIP' => $zip,
+            'CONTACT.EMAIL' => $email,
+            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.SECRET' => '28aae5a160f6198e3756b7954609b799c9bc867815bb483d9b0c4a427bd190d9e4d02'.
+                '5b524da7e513fbf05e4b28f0bcfe245656d6706c17d0340788a98d25a60',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
+            'CRITERION.SDK_VERSION' => '17.9.27',
+            'FRONTEND.ENABLED' => 'FALSE',
+            'FRONTEND.MODE' => 'WHITELABEL',
+            'IDENTIFICATION.SHOPPERID' => $shopperId,
+            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
+            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
+            'NAME.GIVEN' => $firstName,
+            'NAME.FAMILY' => $lastName,
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.CP',
+            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
+            'PRESENTATION.CURRENCY' => $this->currency,
+            'REQUEST.VERSION' => '1.0',
+            'SECURITY.SENDER' => $securitySender,
+            'TRANSACTION.CHANNEL' => $transactionChannel,
+            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'USER.LOGIN' => $userLogin,
+            'USER.PWD' => $userPassword,
+        ];
+
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+    }
+
     //</editor-fold>
 }
