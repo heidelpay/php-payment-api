@@ -34,6 +34,8 @@ class BasePaymentMethodTest extends Unit
      */
     protected $customerData;
 
+    protected $paymentObject;
+
     /**
      * BasePaymentMethodTest constructor.
      *
