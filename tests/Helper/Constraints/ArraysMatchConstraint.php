@@ -26,6 +26,9 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
      */
     private $count;
 
+    /** @var string $failureMessage */
+    private $failureMessage;
+
     /**
      * @param array $value
      * @param bool  $count
@@ -70,26 +73,38 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
             return false;
         }
 
-        if ($this->count) {
-            if (count($this->value) !== count($other)) {
-                return false;
-            }
-        }
-
         foreach ($this->value as $key => $value) {
             if (!array_key_exists($key, $other)) {
+                $this->failureMessage = "Expected key: '" . $key . "' " . 'is missing';
                 return false;
             }
+
+            $keys_match = true;
 
             if ($this->strict) {
                 if ($other[$key] !== $value) {
-                    return false;
+                    $keys_match = false;
                 }
             } else {
                 /** @noinspection TypeUnsafeComparisonInspection */
                 if ($other[$key] != $value) {
-                    return false;
+                    $keys_match =  false;
                 }
+            }
+
+            if (!$keys_match) {
+                $this->failureMessage = "Key: '" . $key . "' => '" . $other[$key] . "' " .
+                    "does not match expected value: '" . $value . "'" ;
+                return false;
+            }
+        }
+
+        if ($this->count) {
+            $diff = array_diff_key($other, $this->value);
+            if (count($diff) > 0) {
+                $this->failureMessage = 'The array contians the following keys, which are not expected: '
+                    . implode(', ', array_keys($diff));
+                return false;
             }
         }
 
@@ -109,6 +124,12 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
             $ret_val .= "\n\t '" . $key . " => '" . $value . "'";
         }
 
-        return  $ret_val . "\n]";
+        $ret_val .= "\n]";
+
+        if (!empty($ret_val)) {
+            $ret_val .= "\n" . $this->failureMessage;
+        }
+
+        return  $ret_val;
     }
 }
