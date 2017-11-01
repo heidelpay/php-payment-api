@@ -94,7 +94,7 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
 
             if (!$keys_match) {
                 $this->failureMessage = "Key: '" . $key . "' => '" . $other[$key] . "' " .
-                    "does not match expected value: '" . $value . "'" ;
+                    "does not match expected value: '" . $value . "'";
                 return false;
             }
         }
