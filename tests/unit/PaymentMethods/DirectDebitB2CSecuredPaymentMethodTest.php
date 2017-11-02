@@ -4,7 +4,6 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
-use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
@@ -84,7 +83,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var CreditCardPaymentMethod $paymentObject
+     * @var DirectDebitB2CSecuredPaymentMethod $paymentObject
      */
     protected $paymentObject;
 
@@ -767,6 +766,64 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'NAME.FAMILY' => $lastName,
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
             'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.CP',
+            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
+            'PRESENTATION.CURRENCY' => $this->currency,
+            'REQUEST.VERSION' => '1.0',
+            'SECURITY.SENDER' => $securitySender,
+            'TRANSACTION.CHANNEL' => $transactionChannel,
+            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'USER.LOGIN' => $userLogin,
+            'USER.PWD' => $userPassword,
+        ];
+
+        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+    }
+
+    /**
+     * Verify finalize parameters generated as expected
+     *
+     * @test
+     */
+    public function finalizeParametersShouldBeSetUpAsExpected()
+    {
+        $timestamp = 'DirectDebitB2CSecuredPaymentMethodTest::finalize 2017-11-02 09:05:42';
+        $this->paymentObject->getRequest()->basketData(
+            $timestamp,
+            self::TEST_AMOUNT,
+            $this->currency,
+            $this->secret
+        );
+
+        $this->paymentObject->finalize(self::REFERENCE_ID);
+
+        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
+            $this->customerData->getCustomerDataArray();
+
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
+            $this->authentication->getAuthenticationArray();
+
+        $expected = [
+            'ADDRESS.CITY' => $city,
+            'ADDRESS.COUNTRY' => $country,
+            'ADDRESS.STATE' => $state,
+            'ADDRESS.STREET' => $street,
+            'ADDRESS.ZIP' => $zip,
+            'CONTACT.EMAIL' => $email,
+            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.SECRET' => 'bbb4ae4fbd965f3136363843066505178d2dff6609e97ff5a79b9d8fa55a4e7265ed'.
+                'beb9511d1f8e7b63e3ab7c16872b78b3dc75f5f0cb82cbe55af65a91985c',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
+            'CRITERION.SDK_VERSION' => '17.9.27',
+            'FRONTEND.ENABLED' => 'FALSE',
+            'FRONTEND.MODE' => 'WHITELABEL',
+            'IDENTIFICATION.SHOPPERID' => $shopperId,
+            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
+            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
+            'NAME.BIRTHDATE' => self::CUSTOMER_BIRTHDAY,
+            'NAME.GIVEN' => $firstName,
+            'NAME.FAMILY' => $lastName,
+            'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.FI',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
