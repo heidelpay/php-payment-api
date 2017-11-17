@@ -26,7 +26,6 @@ class PayolutionInvoicePaymentMethod
 {
     use BasicPaymentMethodTrait;
     use AuthorizeTransactionType;
-    use CaptureTransactionType;
     use FinalizeTransactionType;
     use RefundTransactionType;
     use ReversalTransactionType;
