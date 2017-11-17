@@ -3,7 +3,6 @@
 namespace Heidelpay\PhpApi\PaymentMethods;
 
 use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\CaptureTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\FinalizeTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
 use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
