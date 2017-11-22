@@ -21,9 +21,11 @@ use PHPUnit\Framework\Constraint\Constraint;
 class BasePaymentMethodTest extends Unit
 {
     const REFERENCE_ID = 'http://www.heidelpay.de';
+    const REDIRECT_URL = 'https://dev.heidelpay.de';
     const PAYMENT_FRAME_ORIGIN = self::REFERENCE_ID;
     const CSS_PATH = self::REFERENCE_ID;
     const TEST_AMOUNT = 23.12;
+    const NAME_COMPANY = 'DevHeidelpay';
 
     /**
      * Authentication data for heidelpay api

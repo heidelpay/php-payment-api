@@ -26,14 +26,8 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 {
-    const REFERENCE_ID = 'http://www.heidelpay.de';
-    const PAYMENT_FRAME_ORIGIN = self::REFERENCE_ID;
-    const REDIRECT_URL = 'https://dev.heidelpay.de';
-    const CSS_PATH = self::REFERENCE_ID;
-    const TEST_AMOUNT = 23.12;
     const PAYMENT_METHOD = 'EasyCreditPaymentMethod';
     const PAYMENT_METHOD_SHORT = 'HP';
-    const NAME_COMPANY = 'DevHeidelpay';
 
     //<editor-fold desc="Init">
 

@@ -23,14 +23,8 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class IdealPaymentMethodTest extends BasePaymentMethodTest
 {
-    const REFERENCE_ID = 'http://www.heidelpay.de';
-    const PAYMENT_FRAME_ORIGIN = self::REFERENCE_ID;
-    const REDIRECT_URL = 'https://dev.heidelpay.de';
-    const CSS_PATH = self::REFERENCE_ID;
-    const TEST_AMOUNT = 23.12;
     const PAYMENT_METHOD = 'IDealPaymentMethod';
     const PAYMENT_METHOD_SHORT = 'OT';
-    const NAME_COMPANY = 'DevHeidelpay';
 
     //<editor-fold desc="Init">
 

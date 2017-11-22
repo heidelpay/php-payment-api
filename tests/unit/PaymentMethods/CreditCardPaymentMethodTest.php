@@ -36,10 +36,6 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 {
-    const REFERENCE_ID = 'http://www.heidelpay.de';
-    const PAYMENT_FRAME_ORIGIN = self::REFERENCE_ID;
-    const CSS_PATH = self::REFERENCE_ID;
-    const TEST_AMOUNT = 23.12;
     const PAYMENT_METHOD = 'CreditCardPaymentMethod';
     const PAYMENT_METHOD_SHORT = 'CC';
 
