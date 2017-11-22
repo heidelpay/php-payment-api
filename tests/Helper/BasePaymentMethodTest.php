@@ -22,6 +22,7 @@ class BasePaymentMethodTest extends Unit
 {
     const REFERENCE_ID = 'http://www.heidelpay.de';
     const REDIRECT_URL = 'https://dev.heidelpay.de';
+    const RESPONSE_URL = self::REDIRECT_URL . '/response';
     const PAYMENT_FRAME_ORIGIN = self::REFERENCE_ID;
     const CSS_PATH = self::REFERENCE_ID;
     const TEST_AMOUNT = 23.12;
