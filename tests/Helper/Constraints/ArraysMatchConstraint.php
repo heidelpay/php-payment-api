@@ -102,7 +102,7 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
         if ($this->count) {
             $diff = array_diff_key($other, $this->value);
             if (count($diff) > 0) {
-                $this->failureMessage = 'The array contians the following keys, which are not expected: '
+                $this->failureMessage = 'The array contains the following key, which is not expected: '
                     . implode(', ', array_keys($diff));
                 return false;
             }
