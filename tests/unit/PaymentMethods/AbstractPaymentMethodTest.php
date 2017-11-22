@@ -32,7 +32,7 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod
+     * @var SofortPaymentMethod
      */
     protected $paymentObject;
 

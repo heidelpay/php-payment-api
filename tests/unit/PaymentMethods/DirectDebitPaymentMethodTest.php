@@ -4,7 +4,6 @@ namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
 use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
-use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
@@ -73,7 +72,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var CreditCardPaymentMethod $paymentObject
+     * @var DirectDebitPaymentMethod $paymentObject
      */
     protected $paymentObject;
 
