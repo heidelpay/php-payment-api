@@ -280,7 +280,7 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
      *
      * @test
      */
-    public function debitParametersShouldBeSetUpAsExpected()
+    public function refundParametersShouldBeSetUpAsExpected()
     {
         $timestamp = 'PayPalPaymentMethodTest::debitParametersShouldBeSetUpAsExpected 2017-11-22 14:37:28';
         $this->paymentObject->getRequest()->basketData(
@@ -510,63 +510,6 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
         $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
 
-    /**
-     * Verify parameters are generated as expected
-     *
-     * @test
-     */
-    public function refundParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'PayPalPaymentMethodTest::refundParametersShouldBeSetUpAsExpected 2017-11-22 14:59:19';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
-
-        $this->paymentObject->refund(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ACCOUNT.BRAND' => 'PAYPAL',
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => 'f679c5717d7027391e4f47767f525013d2c606ca5ea1ad2fe873125ff354f43bc0' .
-                'abc5bc1084f985c3ed9a129a53e67c90378c4a23c42f3e297a3c7adf53e9c0',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'FRONTEND.ENABLED' => 'FALSE',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.COMPANY' => self::NAME_COMPANY,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RF',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword,
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
 
     /**
      * Verify parameters are generated as expected
