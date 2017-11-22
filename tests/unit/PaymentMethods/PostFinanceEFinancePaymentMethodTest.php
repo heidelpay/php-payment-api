@@ -276,7 +276,8 @@ class PostFinanceEFinancePaymentMethodTest extends BasePaymentMethodTest
      */
     public function refundParametersShouldBeSetUpAsExpected()
     {
-        $timestamp = 'PostFinanceEFinancePaymentMethodTest::refundParametersShouldBeSetUpAsExpected 2017-11-22 15:29:40';
+        $timestamp = 'PostFinanceEFinancePaymentMethodTest::refundParametersShouldBeSetUpAsExpected' .
+            ' 2017-11-22 15:29:40';
         $this->paymentObject->getRequest()->basketData(
             $timestamp,
             self::TEST_AMOUNT,
