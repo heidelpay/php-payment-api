@@ -128,7 +128,7 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
      */
     public function verifyPaymentMethodPresentsAsExpected($paymentMethodClass, $paymentCode, $brand = null)
     {
-        $this->log('Testing payment method: ' . $paymentMethodClass . '...');
+        $this->log(' Testing payment method: ' . $paymentMethodClass . '...');
         $paymentMethodClassPath = $this->paymentMethodNamespace . $paymentMethodClass;
 
         $this->paymentObject = new $paymentMethodClassPath();
