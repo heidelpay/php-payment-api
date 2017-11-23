@@ -34,9 +34,8 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @subpackage PhpApi
  * @category UnitTest
  */
-class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
+class PaymentMethodTransactionTest extends BasePaymentMethodTest
 {
-    const PAYMENT_METHOD = 'DirectDebitB2CSecuredPaymentMethod';
     const PAYMENT_METHOD_SHORT = 'DD';
     const CUSTOMER_BIRTHDAY = '1982-07-12';
     const CUSTOMER_SALUTATION = 'MR';
@@ -156,31 +155,6 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @param $method
      * @param $parameters
-     * @param $transactionCode
-     */
-    public function verifyTransactionCodeIsBeingSetCorrectly($method, $parameters, $transactionCode)
-    {
-        $paymentParameterGroup = $this->paymentObject->getRequest()->getPayment();
-
-        // verify it has no transaction code before
-        $payment_code = $paymentParameterGroup->getCode();
-        $this->assertCount(1, explode('.', $payment_code));
-
-        call_user_func([$this->paymentObject, $method], $parameters);
-
-        // verify the correct transaction code has been appended
-        $payment_code = $paymentParameterGroup->getCode();
-        $this->assertEquals(self::PAYMENT_METHOD_SHORT . '.' . $transactionCode, $payment_code);
-    }
-
-    /**
-     * Verify transaction code is set depending on payment method.
-     *
-     * @dataProvider transactionCodeProvider
-     * @test
-     *
-     * @param $method
-     * @param $parameters
      */
     public function verifyTransactionReturnsThePaymentObject($method, $parameters)
     {
@@ -204,24 +178,6 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         /** @var InstanceProxy $adapter */
         $adapter = $this->paymentObject->getAdapter();
         $adapter->verifyInvokedOnce('sendPost');
-    }
-
-    /**
-     * Verify implicit prepareRequest call sets criterion payment method as expected
-     *
-     * @test
-     */
-    public function prepareRequestShouldSetCriterionPaymentMethod()
-    {
-        $criterionParameterGroup = $this->paymentObject->getRequest()->getCriterion();
-
-        // verify initial state
-        $this->assertNull($criterionParameterGroup->getPaymentMethod());
-
-        $this->paymentObject->authorize();
-
-        // verify the criterion values changed as expected
-        $this->assertEquals(self::PAYMENT_METHOD, $criterionParameterGroup->getPaymentMethod());
     }
 
     //</editor-fold>
@@ -256,6 +212,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected =
             [
                 'ACCOUNT.HOLDER' => $this->holder,
@@ -266,7 +225,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
                 'ADDRESS.STREET' => $street,
                 'ADDRESS.ZIP' => $zip,
                 'CONTACT.EMAIL' => $email,
-                'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+                'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
                 'CRITERION.SECRET' => 'f6f0b128c9975c5922a164f62b6e07016778e5d63e5cbec1c01472ba5942c'.
                     '89d81f821e89f9119e15e1b484c47e640e5922f359695e2f8afd4f7f242aae989a2',
                 'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -324,7 +283,10 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
 
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
-        
+
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected = [
             'ACCOUNT.IBAN' => $this->iban,
             'ACCOUNT.HOLDER' => $this->holder,
@@ -334,7 +296,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'a55370bff4f70b40507078c6d0d0d8006b097b9d1cdc01a67bb10e53e1104394b904c3117a6'.
                 '7c4d98d145f4ac2953b2d7f7800b3dede64ca57525f5b10c7df0c',
             'CRITERION.SDK_NAME' => 'Heidelpay\PhpApi',
@@ -384,6 +346,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -391,7 +356,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'aaef3d8af1f5b6d4e8f11f7d6575dd780ebe2631de3f604c702a8b3aeb2fc555511473809ce'.
                 '118fb5e55eece5777e5e19435af91b85ae753ecdaf5f4b3dbbc32',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -443,6 +408,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ACCOUNT.HOLDER' => $this->holder,
             'ACCOUNT.IBAN' => $this->iban,
@@ -452,7 +420,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'b71b58201a22b27f3cae62a523d9d44ac215fb64d8d7d5e20e88698638451e286'.
                 '5df8fe5bf939f32dc4723aa09db1f3976946ed7a32f38c1451cc12f6199d7e5',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -507,6 +475,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -514,7 +485,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => '6862982ca0b7e96c23f901ff8a5a0799bd5b2599f0035482bb48f3b36b45ffb574dd20f'.
                 'fd29cc81e5e1c5e6feabeb5157cb3b359db50c7cf93ffdaa7a46f0494',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -565,6 +536,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -572,7 +546,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => '429c40329f9534646f94d5eda42f98453575c214d06ef620557a5ce0edad5d22a60e902d92c9'.
                 '0327b19d2d28a8607ff494bbd6717a9919495e008bfa732c3ddd',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -623,6 +597,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -630,7 +607,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => '64c1c52f4fbf93a850ef1f879ce75dee9d389e024f0abda12d95a33903eb8461f17'.
                 '9b659c27396173aa3a8ee9abbc876bccdab1458a7d0d818bac1c692177ed0',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -681,6 +658,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -688,7 +668,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'b61d39bba1197ccb29bab8dcffe8a23b028964e33762217bb7c36d657599f6453a9f130ff4'.
                 'e82daa60165edc6ff98561428a7e02b1f5818bde2dd5b60d7f0283',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -739,6 +719,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -746,7 +729,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'f34097cf9533e06accac700ad6ad26a3438bf1b54af51280b8507b79f537e591dd282f'.
                 'b01c0be72ca5d17525d2c613a7989b283addb9f92e960ebdf18d6b7b74',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -797,6 +780,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+        
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -804,7 +790,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'bbb4ae4fbd965f3136363843066505178d2dff6609e97ff5a79b9d8fa55a4e7265ed'.
                 'beb9511d1f8e7b63e3ab7c16872b78b3dc75f5f0cb82cbe55af65a91985c',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
