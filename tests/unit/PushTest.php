@@ -4,8 +4,13 @@ namespace Heidelpay\Tests\PhpApi\Unit;
 
 use Heidelpay\PhpApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpApi\Push;
+use Heidelpay\PhpApi\PushMapping\Account;
+use Heidelpay\PhpApi\PushMapping\Connector;
+use Heidelpay\PhpApi\PushMapping\Payment;
+use Heidelpay\PhpApi\PushMapping\Processing;
 use Heidelpay\PhpApi\Response;
 use Codeception\TestCase\Test;
+use SimpleXMLElement;
 
 /**
  * Push Test
@@ -443,6 +448,90 @@ class PushTest extends Test
         $this->assertEquals(null, $response->getProcessing()->code);
         $this->assertEquals(null, $response->getTransaction()->getChannel());
         $this->assertEquals('CONNECTOR_TEST', $response->getTransaction()->getMode());
+    }
+
+    /**
+     * Verify abstract implementations of getXmlObjectField.
+     *
+     * @test
+     */
+    public function abstractGetXmlObjectFieldGetterImplementationShouldReturnNull()
+    {
+        $xmlElement = new SimpleXMLElement($this->setSampleDataForAbstractGetterTest());
+
+        // does not implement the tested method
+        $address = new Payment();
+        $this->assertEquals(null, $address->getXmlObjectField($xmlElement, 'Holder'));
+
+        // implements the tested method
+        $connector = new Connector();
+        $this->assertEquals('Heidelberger Payment GmbH', $connector->getXmlObjectField($xmlElement, 'Holder'));
+    }
+
+    /**
+     * Verify abstract implementations of getXmlObjectFieldAttribute.
+     *
+     * @test
+     */
+    public function abstractGetXmlObjectFieldAttributeGetterImplementationShouldReturnNull()
+    {
+        $xmlElement = new SimpleXMLElement($this->setSampleDataForAbstractGetterTest());
+
+        // does not implement the tested method
+        $address = new Payment();
+        $this->assertEquals(null, $address->getXmlObjectFieldAttribute($xmlElement, 'Status:code'));
+
+        // implements the tested method
+        $connector = new Processing();
+        $this->assertEquals(90, $connector->getXmlObjectFieldAttribute($xmlElement, 'Status:code'));
+    }
+
+    /**
+     * Verify abstract implementations of getXmlObjectFieldAttribute.
+     *
+     * @test
+     */
+    public function abstractGetXmlObjectPropertyGetterImplementationShouldReturnNull()
+    {
+        $xmlElement = new SimpleXMLElement($this->setSampleDataForAbstractGetterTest());
+
+        // does not implement the tested method
+        $connector = new Account();
+        $this->assertEquals(null, $connector->getXmlObjectProperty($xmlElement, 'code'));
+
+        // implements the tested method
+        $address = new Payment();
+        $this->assertEquals('CC.RG', $address->getXmlObjectProperty($xmlElement, 'code'));
+    }
+
+    /**
+     * XML data for abstractGetXmlObjectFieldGetterImplementationShouldReturnNull,
+     *
+     * @return string
+     */
+    private function setSampleDataForAbstractGetterTest()
+    {
+        $xml = <<<XML
+<?xml version="1.0" encoding="UTF-8" ?>
+<Response version="1.0">
+    <Transaction mode="CONNECTOR_TEST" response="SYNC" channel="31HA07BC8142C5A171744F3D6D155865" source="HIP">
+        <Processing>
+            <Status code="90" /> <!-- XmlObjectFieldAttribute -->
+        </Processing>
+        <Payment code="CC.RG"> <!-- XmlObjectProperty -->
+            <Status code="90" /> <!-- XmlObjectFieldAttribute -->
+            <Holder>Heidelberger Payment GmbH</Holder> <!-- XmlObjectField -->
+        </Payment>
+        <Connector>
+            <Account code="CC.RG"> <!-- XmlObjectProperty -->
+                <Holder>Heidelberger Payment GmbH</Holder> <!-- XmlObjectField -->
+            </Account>
+        </Connector>
+    </Transaction>
+</Response>
+XML;
+
+        return $xml;
     }
 
     private function setSampleCcRgResponse()
