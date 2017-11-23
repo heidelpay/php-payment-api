@@ -108,17 +108,15 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
     public function _before()
     {
         // @codingStandardsIgnoreEnd
-        $authentication = $this->authentication
-            ->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865')
-            ->getAuthenticationArray();
-        $customerDetails = $this->customerData->getCustomerDataArray();
+        $authentication = $this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
+        $customerDetails = $this->customerData;
 
-        $debitCard = new DebitCardPaymentMethod();
-        $debitCard->getRequest()->authentification(...$authentication);
-        $debitCard->getRequest()->customerAddress(...$customerDetails);
-        $debitCard->_dryRun = false;
+        $paymentObject = new DebitCardPaymentMethod();
+        $paymentObject->getRequest()->authentification(...$authentication->getAuthenticationArray());
+        $paymentObject->getRequest()->customerAddress(...$customerDetails->getCustomerDataArray());
+        $paymentObject->_dryRun = false;
 
-        $this->paymentObject = $debitCard;
+        $this->paymentObject = $paymentObject;
 
         $this->mockCurlAdapter();
     }

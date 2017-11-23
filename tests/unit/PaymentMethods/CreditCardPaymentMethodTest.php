@@ -115,12 +115,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         // @codingStandardsIgnoreEnd
         $this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
 
-        $creditCard = new CreditCardPaymentMethod();
-        $creditCard->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
-        $creditCard->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
-        $creditCard->_dryRun = false;
+        $paymentObject = new CreditCardPaymentMethod();
+        $paymentObject->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
+        $paymentObject->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
+        $paymentObject->_dryRun = false;
 
-        $this->paymentObject = $creditCard;
+        $this->paymentObject = $paymentObject;
 
         $this->mockCurlAdapter();
     }
