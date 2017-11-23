@@ -82,6 +82,37 @@ class CurlAdapterTest extends Unit
     }
 
     /**
+     * Verify that an error result is returned if curl extension is not loaded.
+     *
+     * @test
+     */
+    public function sendPostShouldReturnErrorCodeIfCurlInfoHttpCodeIsSet()
+    {
+        test::func(
+            'Heidelpay\PhpApi\Adapter',
+            'curl_getinfo',
+            ['CURLINFO_HTTP_CODE' => 'MY_TEST_ERROR_CODE']
+        );
+        test::func(
+            'Heidelpay\PhpApi\Adapter',
+            'curl_error',
+            'Test Error'
+        );
+
+        list($response_array, ) = $this->curlAdapter->sendPost('', '');
+
+        $expected = [
+            'PROCESSING_RESULT' => 'NOK',
+            'PROCESSING_RETURN' => 'Connection error http status Test Error' ,
+            'PROCESSING_RETURN_CODE' => 'CON.ERR.MY_TEST_ERROR_CODE'
+        ];
+
+        /** @var Constraint $arraysMatchConstraint */
+        $arraysMatchConstraint = new ArraysMatchConstraint($response_array, true, true);
+        $this->assertThat($expected, $arraysMatchConstraint);
+    }
+
+    /**
      * This test will cover the error handling of the curl adapter
      *
      * @group connectionTest
