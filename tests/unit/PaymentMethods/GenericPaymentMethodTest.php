@@ -24,7 +24,6 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class GenericPaymentMethodTest extends BasePaymentMethodTest
 {
-
     private $paymentMethodNamespace = "Heidelpay\\PhpApi\\PaymentMethods\\";
 
     //<editor-fold desc="Init">
@@ -122,6 +121,7 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
      *
      * @dataProvider paymentMethodProvider
      * @test
+     *
      * @param $paymentMethodClass
      * @param $paymentCode
      * @param null $brand
