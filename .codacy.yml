@@ -1,5 +1,5 @@
-exclude_patterns:
-  - "tests/"
-  - "example/"
-  - "**/vendor/"
-  - "build/"
+exclude_paths:
+- tests/**
+- example/**
+- **/vendor/**
+- build/**
