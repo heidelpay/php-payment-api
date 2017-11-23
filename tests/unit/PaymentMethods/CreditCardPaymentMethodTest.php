@@ -2,7 +2,6 @@
 
 namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
 
-use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
 use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
@@ -147,109 +146,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 
-    //<editor-fold desc="dataProviders">
-
-    /**
-     * @return array
-     */
-    public static function transactionCodeProvider()
-    {
-        return [
-            ['authorize', null, 'PA'],
-            ['debit', null,'DB'],
-            ['registration', null,'RG'],
-            ['authorizeOnRegistration', null,'PA'],
-            ['debitOnRegistration', null,'DB'],
-            ['refund', null,'RF'],
-            ['reversal', null,'RV'],
-            ['rebill', null,'RB'],
-            ['capture', null,'CP']
-        ];
-    }
-
-    //</editor-fold>
-
     //<editor-fold desc="Tests">
-
-    //<editor-fold desc="Common">
-
-    /**
-     * Verify transaction code is set depending on payment method.
-     *
-     * @dataProvider transactionCodeProvider
-     * @test
-     *
-     * @param $method
-     * @param $parameters
-     * @param $transactionCode
-     */
-    public function verifyTransactionCodeIsBeingSetCorrectly($method, $parameters, $transactionCode)
-    {
-        $paymentParameterGroup = $this->paymentObject->getRequest()->getPayment();
-
-        // verify it has no transaction code before
-        $payment_code = $paymentParameterGroup->getCode();
-        $this->assertCount(1, explode('.', $payment_code));
-
-        call_user_func([$this->paymentObject, $method], $parameters);
-
-        // verify the correct transaction code has been appended
-        $payment_code = $paymentParameterGroup->getCode();
-        $this->assertEquals(self::PAYMENT_METHOD_SHORT . '.' . $transactionCode, $payment_code);
-    }
-
-    /**
-     * Verify transaction code is set depending on payment method.
-     *
-     * @dataProvider transactionCodeProvider
-     * @test
-     *
-     * @param $method
-     * @param $parameters
-     */
-    public function verifyTransactionReturnsThePaymentObject($method, $parameters)
-    {
-        $object = call_user_func([$this->paymentObject, $method], $parameters);
-        $this->assertSame($this->paymentObject, $object);
-    }
-
-    /**
-     * Verify sendPost id called once in each payment method call.
-     *
-     * @dataProvider transactionCodeProvider
-     * @test
-     *
-     * @param $method
-     * @param $parameters
-     */
-    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
-    {
-        call_user_func([$this->paymentObject, $method], $parameters);
-
-        /** @var InstanceProxy $adapter */
-        $adapter = $this->paymentObject->getAdapter();
-        $adapter->verifyInvokedOnce('sendPost');
-    }
-
-    /**
-     * Verify implicit prepareRequest call sets criterion payment method as expected
-     *
-     * @test
-     */
-    public function prepareRequestShouldSetCriterionPaymentMethod()
-    {
-        $criterionParameterGroup = $this->paymentObject->getRequest()->getCriterion();
-
-        // verify initial state
-        $this->assertNull($criterionParameterGroup->getPaymentMethod());
-
-        $this->paymentObject->authorize();
-
-        // verify the criterion values changed as expected
-        $this->assertEquals(self::PAYMENT_METHOD, $criterionParameterGroup->getPaymentMethod());
-    }
-
-    //</editor-fold>
 
     /**
      * Verify registration parameters generated as expected
@@ -259,21 +156,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     public function registrationParametersShouldBeSetUpAsExpected()
     {
         $timestamp = 'CreditCardPaymentMethodTest::authorizeParameterJsonShouldBeSetUpAsExpected 2017-10-26 15:41:12';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
 
-        $paymentFrameOrigin = 'http://www.heidelpay.de';
-        $cssPath = 'http://www.heidelpay.de';
         $preventAsyncRedirect = 'FALSE';
-        $this->paymentObject->registration(
-            $paymentFrameOrigin,
-            $preventAsyncRedirect,
-            $cssPath
-        );
+        $this->paymentObject->registration(self::PAYMENT_FRAME_ORIGIN, $preventAsyncRedirect, self::CSS_PATH);
 
         /* disable frontend (iframe) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -310,10 +196,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                     '35a4c2e30708215d002c67e758ec2704c7bac411240790d71c6afd',
                 'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
                 'CRITERION.SDK_VERSION' => '17.9.27',
-                'FRONTEND.CSS_PATH' => $cssPath,
+                'FRONTEND.CSS_PATH' => self::CSS_PATH,
                 'FRONTEND.ENABLED' => 'FALSE',
                 'FRONTEND.MODE' => 'WHITELABEL',
-                'FRONTEND.PAYMENT_FRAME_ORIGIN' => $paymentFrameOrigin,
+                'FRONTEND.PAYMENT_FRAME_ORIGIN' => self::PAYMENT_FRAME_ORIGIN,
                 'FRONTEND.PREVENT_ASYNC_REDIRECT' => $preventAsyncRedirect,
                 'IDENTIFICATION.SHOPPERID' => $shopperId,
                 'IDENTIFICATION.TRANSACTIONID' => $timestamp,
@@ -341,19 +227,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     public function authorizeParametersShouldBeSetUpAsExpected()
     {
         $timestamp = 'CreditCardPaymentMethodTest::authorize 2017-10-27 13:10:40';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
 
         $preventAsyncRedirect = 'FALSE';
-        $this->paymentObject->authorize(
-            self::PAYMENT_FRAME_ORIGIN,
-            $preventAsyncRedirect,
-            self::CSS_PATH
-        );
+        $this->paymentObject->authorize(self::PAYMENT_FRAME_ORIGIN, $preventAsyncRedirect, self::CSS_PATH);
 
         /* disable frontend (ifame) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -413,60 +290,6 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
-     * Verify authorizeOnRegistration parameters generated as expected
-     *
-     * @test
-     */
-    public function authorizeOnRegistrationParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'CreditCardPaymentMethodTest::authorizeOnRegistration 2017-10-27 13:21:13';
-        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
-
-        $frontendEnabled = 'FALSE';
-        $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
-
-        $this->paymentObject->authorizeOnRegistration(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => '5d09d0dcb62c70d66c8b13f5dbe603c741be9ece2ed6737ee4d0f0ff2764113f744d835'.
-                '8cd423084225efafb4ea299bb3dd7c4d50757095a7f69b17d9146ff92',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.ENABLED' => $frontendEnabled,
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.PA',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword,
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
-
-    /**
      * Verify debit parameters generated as expected
      *
      * @test
@@ -477,11 +300,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
 
         $preventAsyncRedirect = 'FALSE';
-        $this->paymentObject->debit(
-            self::PAYMENT_FRAME_ORIGIN,
-            $preventAsyncRedirect,
-            self::CSS_PATH
-        );
+        $this->paymentObject->debit(self::PAYMENT_FRAME_ORIGIN, $preventAsyncRedirect, self::CSS_PATH);
 
         /* disable frontend (ifame) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -527,289 +346,6 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
             'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword,
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
-
-    /**
-     * Verify debitOnRegistration parameters generated as expected
-     *
-     * @test
-     */
-    public function debitOnRegistrationParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'CreditCardPaymentMethodTest::debitOnRegistration 2017-10-27 13:28:12';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
-
-        $frontendEnabled = 'FALSE';
-        $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
-
-        $this->paymentObject->debitOnRegistration(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => '7f9355256d488f609f50048ff675ee75db238b58ed7d7bbbfc572fa4669ce9c74e7a8b5'.
-                '940d80177f3761197b335c863bf42d44c82f0cfef04b482caee97bae0',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.ENABLED' => $frontendEnabled,
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword,
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
-
-    /**
-     * Verify refund parameters generated as expected
-     *
-     * @test
-     */
-    public function refundParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'CreditCardPaymentMethodTest::refund 2017-10-27 13:31:49';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
-
-        $this->paymentObject->refund(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => '29eadadb05e271a669bf9db86aa3065ac028ddd25a08156804459eb9afcbda80e99442a1'.
-                '6abea81287a9a19205471372a372962811f66fc62ea3b4c1c631f33a',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.ENABLED' => 'FALSE',
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RF',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword,
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
-
-    /**
-     * Verify reversal parameters generated as expected
-     *
-     * @test
-     */
-    public function reversalParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'CreditCardPaymentMethodTest::reversal 2017-10-27 15:12:11';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
-
-        $this->paymentObject->reversal(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => '6e34a4fcb0fc1e3559d1430eab421154813ade8309a9ec034b0fafc19ddd38ccc3d'.
-            'd58946b13bac3ec995489487b49ce6222c435c1c3538ba3fa6c70657b872f',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.ENABLED' => 'FALSE',
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RV',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
-
-    /**
-     * Verify rebill parameters generated as expected
-     *
-     * @test
-     */
-    public function rebillParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'CreditCardPaymentMethodTest::rebill 2017-10-27 15:33:01';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
-
-        $this->paymentObject->rebill(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => 'e9f6e4ec690dee9a0d5d2e08d42ecb95119500314dffba283907dde7b1d5333d6721e8'.
-                '2bdb089fc9ae7cbbb0f03b313724ca09ea0669698f2c1145b802106d9d',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.ENABLED' => 'FALSE',
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RB',
-            'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
-            'PRESENTATION.CURRENCY' => $this->currency,
-            'REQUEST.VERSION' => '1.0',
-            'SECURITY.SENDER' => $securitySender,
-            'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'USER.LOGIN' => $userLogin,
-            'USER.PWD' => $userPassword,
-        ];
-
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
-    }
-
-    /**
-     * Verify capture parameters generated as expected
-     *
-     * @test
-     */
-    public function captureParametersShouldBeSetUpAsExpected()
-    {
-        $timestamp = 'CreditCardPaymentMethodTest::capture 2017-10-27 15:33:01';
-        $this->paymentObject->getRequest()->basketData(
-            $timestamp,
-            self::TEST_AMOUNT,
-            $this->currency,
-            $this->secret
-        );
-
-        $this->paymentObject->capture(self::REFERENCE_ID);
-
-        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
-            $this->customerData->getCustomerDataArray();
-
-        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
-            $this->authentication->getAuthenticationArray();
-
-        $expected = [
-            'ADDRESS.CITY' => $city,
-            'ADDRESS.COUNTRY' => $country,
-            'ADDRESS.STATE' => $state,
-            'ADDRESS.STREET' => $street,
-            'ADDRESS.ZIP' => $zip,
-            'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
-            'CRITERION.SECRET' => '28aae5a160f6198e3756b7954609b799c9bc867815bb483d9b0c4a427bd190d9e4d02'.
-                '5b524da7e513fbf05e4b28f0bcfe245656d6706c17d0340788a98d25a60',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
-            'FRONTEND.ENABLED' => 'FALSE',
-            'FRONTEND.MODE' => 'WHITELABEL',
-            'IDENTIFICATION.SHOPPERID' => $shopperId,
-            'IDENTIFICATION.TRANSACTIONID' => $timestamp,
-            'IDENTIFICATION.REFERENCEID' => self::REFERENCE_ID,
-            'NAME.GIVEN' => $firstName,
-            'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.CP',
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
