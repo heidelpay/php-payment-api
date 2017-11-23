@@ -1,0 +1,5 @@
+exclude_patterns:
+  - "tests/"
+  - "example/"
+  - "**/vendor/"
+  - "build/"
