@@ -26,7 +26,6 @@
         "ext-SimpleXML": "*"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.0",
         "heidelpay/phpdocumentor": "2.9.1",
         "codeception/codeception": "^2.3",
