@@ -6,6 +6,7 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
 use Heidelpay\PhpApi\Request;
 use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\PhpApi\Response;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
@@ -139,6 +140,30 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
     public function toJsonTest()
     {
         $this->assertJson($this->paymentObject->toJson());
+    }
+
+    /**
+     * Test whether the config getter returns the same object in call 1 and call 2.
+     *
+     * @test
+     */
+    public function responseConfigGetterAlwaysReturnsTheSameObject()
+    {
+        $response = new Response();
+        $config = $response->getConfig();
+        $this->assertSame($config, $response->getConfig());
+    }
+
+    /**
+     * Test whether the config getter returns the same object in call 1 and call 2.
+     *
+     * @test
+     */
+    public function responseRiskInformationGetterAlwaysReturnsTheSameObject()
+    {
+        $response = new Response();
+        $config = $response->getRiskInformation();
+        $this->assertSame($config, $response->getRiskInformation());
     }
 
     //</editor-fold>
