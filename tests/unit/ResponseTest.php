@@ -80,7 +80,8 @@ class ResponseTest extends Test
             'PROCESSING_RESULT' => 'ACK',
             'FRONTEND_MODE' => 'WHITELABEL',
             'IDENTIFICATION_UNIQUEID' => '31HA07BC8108A9126F199F2784552637',
-            'CRITERION_SECRET' => '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b318ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
+            'CRITERION_SECRET' => '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b3' .
+                '18ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
             'ACCOUNT_EXPIRY_YEAR' => '2018',
             'PRESENTATION_CURRENCY' => 'EUR',
             'PROCESSING_REASON_CODE' => '00',
@@ -98,6 +99,7 @@ class ResponseTest extends Test
             'RISKINFORMATION_SINCE' => '2017-01-01',
             'RISKINFORMATION_ORDERCOUNT' => '5',
             'RISKINFORMATION_GUESTCHECKOUT' => 'FALSE',
+            'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
         );
 
         $this->responseObject = new Response($responseSample);
@@ -315,25 +317,26 @@ class ResponseTest extends Test
      */
     public function jsonSerializeTest()
     {
-        $this->assertNotEmpty($this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('account', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('address', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('basket', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('config', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('connector', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('contact', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('criterion', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('frontend', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('identification', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('name', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('payment', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('presentation', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('processing', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('request', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('riskinformation', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('security', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('transaction', $this->responseObject->jsonSerialize());
-        $this->assertArrayHasKey('user', $this->responseObject->jsonSerialize());
+        $objectAsJson = $this->responseObject->jsonSerialize();
+        $this->assertNotEmpty($objectAsJson);
+        $this->assertArrayHasKey('account', $objectAsJson);
+        $this->assertArrayHasKey('address', $objectAsJson);
+        $this->assertArrayHasKey('basket', $objectAsJson);
+        $this->assertArrayHasKey('config', $objectAsJson);
+        $this->assertArrayHasKey('connector', $objectAsJson);
+        $this->assertArrayHasKey('contact', $objectAsJson);
+        $this->assertArrayHasKey('criterion', $objectAsJson);
+        $this->assertArrayHasKey('frontend', $objectAsJson);
+        $this->assertArrayHasKey('identification', $objectAsJson);
+        $this->assertArrayHasKey('name', $objectAsJson);
+        $this->assertArrayHasKey('payment', $objectAsJson);
+        $this->assertArrayHasKey('presentation', $objectAsJson);
+        $this->assertArrayHasKey('processing', $objectAsJson);
+        $this->assertArrayHasKey('request', $objectAsJson);
+        $this->assertArrayHasKey('riskinformation', $objectAsJson);
+        $this->assertArrayHasKey('security', $objectAsJson);
+        $this->assertArrayHasKey('transaction', $objectAsJson);
+        $this->assertArrayHasKey('user', $objectAsJson);
     }
 
     /**
@@ -344,5 +347,17 @@ class ResponseTest extends Test
     public function toJsonTest()
     {
         $this->assertJson($this->responseObject->toJson());
+    }
+
+    /**
+     * Verify the response object contains connector account holder "Test account holder".
+     *
+     * @test
+     */
+    public function responseObjectShouldContainConnectorAccountHolder()
+    {
+        $holder = $this->responseObject->getConnector()->getAccountHolder();
+
+        $this->assertSame('Test Account Holder', $holder);
     }
 }
