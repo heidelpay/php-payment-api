@@ -8,9 +8,27 @@
 namespace Heidelpay\Tests\PhpApi\Helper;
 
 use AspectMock\Proxy\InstanceProxy;
+use Codeception\Lib\Console\Output;
 use Codeception\Test\Unit;
 use Heidelpay\PhpApi\Adapter\CurlAdapter;
 use AspectMock\Test as test;
+use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\PostFinanceCardPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\PostFinanceEFinancePaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod;
+use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpApi\Response;
 use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -42,7 +60,15 @@ class BasePaymentMethodTest extends Unit
      */
     protected $customerData;
 
+    /**
+     * @var CreditCardPaymentMethod|DebitCardPaymentMethod|DirectDebitB2CSecuredPaymentMethod|DirectDebitPaymentMethod|EasyCreditPaymentMethod|EPSPaymentMethod|GiropayPaymentMethod|IDealPaymentMethod|InvoiceB2CSecuredPaymentMethod|InvoicePaymentMethod|PayPalPaymentMethod|PostFinanceCardPaymentMethod|PostFinanceEFinancePaymentMethod|PrepaymentPaymentMethod|Przelewy24PaymentMethod|SantanderInvoicePaymentMethod|SofortPaymentMethod
+     */
     protected $paymentObject;
+
+    /**
+     * @var Output $logger
+     */
+    private $logger;
 
     /**
      * BasePaymentMethodTest constructor.
@@ -59,6 +85,18 @@ class BasePaymentMethodTest extends Unit
         $this->customerData = new Customer();
 
         parent::__construct($name, $data, $dataName);
+    }
+
+    /**
+     * @return Output
+     */
+    public function getLogger()
+    {
+        if (!($this->logger instanceof Output)) {
+            $this->logger = new Output([]);
+        }
+
+        return $this->logger;
     }
 
     //<editor-fold desc="Helpers">
@@ -107,6 +145,30 @@ class BasePaymentMethodTest extends Unit
     protected function arraysMatchExactly($parameters)
     {
         return new ArraysMatchConstraint($parameters, true, true);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getPaymentObject()
+    {
+        return $this->paymentObject;
+    }
+
+    /**
+     * Writes a message to the console.
+     *
+     * @param $message
+     */
+    protected function log($message)
+    {
+        $this->getLogger()->write($message);
+    }
+
+    protected function success()
+    {
+        $output = $this->getLogger();
+        $output->writeln('<ok> success</ok>');
     }
 
     //</editor-fold>
