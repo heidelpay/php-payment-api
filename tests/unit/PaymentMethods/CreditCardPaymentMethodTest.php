@@ -7,27 +7,16 @@ use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
- *  Credit card test
- *
- *  Connection tests can fail due to network issues and scheduled down times.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
- *
- *  Warning:
- *  - Use of the following code is only allowed with this sandbox credit card information.
- *
- *  - Using this code or even parts of it with real credit card information  is a violation
- *  of the payment card industry standard aka pci3.
- *
- *  - You are not allowed to save, store and/or process credit card information any time with your systems.
- *    Always use Heidelpay payment frame solution for a pci3 conform credit card integration.
- *
+ * This test class verifies the special functionality of the CreditCardPaymentMethod not covered in
+ * GenericPaymentMethodTest and PaymentMethodTransactionTest.
+ * There is no actual communication to the server since the curl adapter is being mocked.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author  Jens Richter
+ * @author  Simon Gabriel
  *
  * @package  Heidelpay
  * @subpackage PhpApi
@@ -35,7 +24,6 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 {
-    const PAYMENT_METHOD = 'CreditCardPaymentMethod';
     const PAYMENT_METHOD_SHORT = 'CC';
 
     //<editor-fold desc="Init">
@@ -53,6 +41,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @var string $currency
      */
     protected $currency = 'EUR';
+
     /**
      * Secret
      *
@@ -73,6 +62,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @var string $cartNumber
      */
     protected $cartNumber = '4711100000000000';
+
     /**
      * Card brand
      * Do not use real card information for this test. For more details read the information
@@ -81,6 +71,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @var string $cardBrand
      */
     protected $cardBrand = 'VISA';
+
     /**
      * Card verification
      * Do not use real card information for this test. For more details read the information
@@ -96,6 +87,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @var string $cardExpiryMonth
      */
     protected $cardExpiryMonth = '04';
+
     /**
      * Card expiry year
      *
@@ -177,6 +169,9 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected =
             [
                 'ACCOUNT.BRAND' => $this->cardBrand,
@@ -191,7 +186,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'ADDRESS.STREET' => $street,
                 'ADDRESS.ZIP' => $zip,
                 'CONTACT.EMAIL' => $email,
-                'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+                'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
                 'CRITERION.SECRET' => 'dfda66284b665952e16b7a29c6363dd0b76a291a6c760ca1591728a00dbdd88881632a61b9'.
                     '35a4c2e30708215d002c67e758ec2704c7bac411240790d71c6afd',
                 'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -247,7 +242,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
-        
+
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected = [
             'ACCOUNT.BRAND' => $this->cardBrand,
             'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
@@ -261,7 +259,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'ad9bd03e2d01a9ace6e57d5ca562303e36d1583f03def04fec7dd311c8a19675172f86cfcc0'.
                 'f1ace1a840639517bf957dc66a2cce6b61b9e79586a4e8de37eb0',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -318,6 +316,9 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected = [
             'ACCOUNT.BRAND' => $this->cardBrand,
             'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
@@ -331,7 +332,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => '5cf507a4837cb354cbd3f8fc45af8977d6bfc799ff2217eb0c58203dfade9ae933c'.
                 '5675988606f26cb247a7ac66ec8e798cdc2a72135100e0330ebecb6029e92',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',

@@ -6,17 +6,16 @@ use AspectMock\Test as test;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
- * General payment method test
- *
  * This test class performs tests to verify the general behaviour of each payment method thus verifies that certain
  * request parameters are set depending on the method.
+ * There is no actual communication to the server since the curl adapter is being mocked.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author  Jens Richter
+ * @author  Simon Gabriel
  *
  * @package  Heidelpay
  * @subpackage PhpApi
@@ -70,6 +69,7 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
     // @codingStandardsIgnoreStart
     public function _before()
     {
+        // nothing to do here since the object creation and mocking takes place in the test method.
     }
 
     /**

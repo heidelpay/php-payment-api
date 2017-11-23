@@ -9,10 +9,7 @@ use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
- * Sofort Test
- *
- * Connection tests can fail due to network issues and scheduled down times.
- * This does not have to mean that your integration is broken. Please verify the given debug information
+ * This test class contains tests focusing on the base trait.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -120,17 +117,18 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
      */
     public function jsonSerializeTest()
     {
-        $this->assertNotEmpty($this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_paymentCode', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_brand', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_liveUrl', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_sandboxUrl', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_adapter', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_request', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_requestArray', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_response', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_responseArray', $this->paymentObject->jsonSerialize());
-        $this->assertArrayHasKey('_dryRun', $this->paymentObject->jsonSerialize());
+        $objectAsJson = $this->paymentObject->jsonSerialize();
+        $this->assertNotEmpty($objectAsJson);
+        $this->assertArrayHasKey('_paymentCode', $objectAsJson);
+        $this->assertArrayHasKey('_brand', $objectAsJson);
+        $this->assertArrayHasKey('_liveUrl', $objectAsJson);
+        $this->assertArrayHasKey('_sandboxUrl', $objectAsJson);
+        $this->assertArrayHasKey('_adapter', $objectAsJson);
+        $this->assertArrayHasKey('_request', $objectAsJson);
+        $this->assertArrayHasKey('_requestArray', $objectAsJson);
+        $this->assertArrayHasKey('_response', $objectAsJson);
+        $this->assertArrayHasKey('_responseArray', $objectAsJson);
+        $this->assertArrayHasKey('_dryRun', $objectAsJson);
     }
 
     /**

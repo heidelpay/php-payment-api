@@ -8,27 +8,15 @@ use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
- *  Credit card test
- *
- *  Connection tests can fail due to network issues and scheduled down times.
- *  This does not have to mean that your integration is broken. Please verify the given debug information
- *
- *  Warning:
- *  - Use of the following code is only allowed with this sandbox credit card information.
- *
- *  - Using this code or even parts of it with real credit card information  is a violation
- *  of the payment card industry standard aka pci3.
- *
- *  - You are not allowed to save, store and/or process credit card information any time with your systems.
- *    Always use Heidelpay payment frame solution for a pci3 conform credit card integration.
- *
+ * This test class verifies the behaviour in all transaction represented by one payment method.
+ * There is no actual communication to the server since the curl adapter is being mocked.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author  Jens Richter
+ * @author  Simon Gabriel
  *
  * @package  Heidelpay
  * @subpackage PhpApi

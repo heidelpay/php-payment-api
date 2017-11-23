@@ -7,27 +7,16 @@ use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
- * Debit card test
- *
- * Connection tests can fail due to network issues and scheduled down times.
- * This does not have to mean that your integration is broken. Please verify the given debug information
- *
- *  Warning:
- *  - Use of the following code is only allowed with this sandbox debit card information.
- *
- *  - Using this code or even parts of it with real debit card information  is a violation
- *  of the payment card industry standard aka pci3.
- *
- *  - You are not allowed to save, store and/or process debit card information any time with your systems.
- *    Always use Heidelpay payment frame solution for a pci3 conform debit card integration.
- *
+ * This test class verifies the special functionality of the DebitCardPaymentMethod not covered in
+ * GenericPaymentMethodTest and PaymentMethodTransactionTest.
+ * There is no actual communication to the server since the curl adapter is being mocked.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author  Jens Richter
+ * @author  Simon Gabriel
  *
  * @package  Heidelpay
  * @subpackage PhpApi
@@ -35,7 +24,6 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  */
 class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 {
-    const PAYMENT_METHOD = 'DebitCardPaymentMethod';
     const PAYMENT_METHOD_SHORT = 'DC';
 
     //<editor-fold desc="Init">
@@ -190,6 +178,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected =
             [
                 'ACCOUNT.BRAND' => $this->cardBrand,
@@ -204,7 +195,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
                 'ADDRESS.STREET' => $street,
                 'ADDRESS.ZIP' => $zip,
                 'CONTACT.EMAIL' => $email,
-                'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+                'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
                 'CRITERION.SECRET' => '21f8883d53c7ebb7a00dda3a5c03930312c62bb27949a6438f233a20b456f70cee7aa8'.
                     '3d1e55150d3979ea13e875495f94865f9116491cb7b2f946559c038e52',
                 'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -269,7 +260,10 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
-        
+
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected = [
             'ACCOUNT.BRAND' => $this->cardBrand,
             'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
@@ -283,7 +277,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => 'a06894c08f73e18e37e14266c6adfdfb00c0febc93dfc9bc5d18fbce50d8fc6a29762ee3072'.
                 '650d4b7991ab0b255ac345d399d24b1bbefc4a7f8b1c70b5f84be',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
@@ -344,6 +338,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
+        // this is done to avoid syntax warnings
+        $object = $this->paymentObject;
+
         $expected = [
             'ACCOUNT.BRAND' => $this->cardBrand,
             'ACCOUNT.EXPIRY_MONTH' => $this->cardExpiryMonth,
@@ -357,7 +354,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.STREET' => $street,
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
-            'CRITERION.PAYMENT_METHOD' => self::PAYMENT_METHOD,
+            'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
             'CRITERION.SECRET' => '129bf5a2d2e0376b8a17254b2ca9084591718c0394c53f7b655e554e15b5bdcb2aad3'.
                 '69e2f29655535bc5d7a723646e5816fd5433700b9f5c1cc316a6f2a4a2b',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
