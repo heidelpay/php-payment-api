@@ -125,4 +125,16 @@ class ConnectorParameterGroupTest extends Test
 
         $this->assertEquals($value, $connector->getAccountUsage());
     }
+
+    /**
+     * Verify called class equals the connector class.
+     *
+     * @test
+     */
+    public function verifyCalledClassEqualsTheConnectorClass()
+    {
+        $connector = new Connector();
+        $calledClass = $connector::getClassName();
+        $this->assertEquals(get_class($connector), $calledClass);
+    }
 }
