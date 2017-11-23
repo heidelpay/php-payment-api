@@ -39,7 +39,6 @@ script:
     - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - ./vendor/bin/codecept build
     - ./vendor/bin/codecept run unit --coverage --coverage-xml
-    - travis_retry php ./vendor/bin/coveralls -v
 
 after_success:
     - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
