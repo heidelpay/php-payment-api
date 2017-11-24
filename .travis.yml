@@ -40,8 +40,8 @@ script:
 #    - ./vendor/bin/codecept build
 #    - ./vendor/bin/codecept run unit --coverage --coverage-xml
     - |
-      if ["$(phpenv version-name)" == "7"];
-        if ["$deps" == "no"];
+      if [ "$(phpenv version-name)" = "7" ];
+        if [ "$deps" = "no" ];
           then echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PHP VERSION 7 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
         fi;
       fi;
