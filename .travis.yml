@@ -23,22 +23,27 @@ cache:
     - $HOME/.local
 
 before_script:
-    ## backup and disable xdebug
-    - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak
-    - echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - phpenv rehash
-    - mkdir -p "$HOME/.php-cs-fixer"
-    - mkdir -p build/logs
-    - composer self-update
-    - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
-    - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
+    echo 'Php Version:' $(phpenv version-name)
+
+#    ## backup and disable xdebug
+#    - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak
+#    - echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+#    - phpenv rehash
+#    - mkdir -p "$HOME/.php-cs-fixer"
+#    - mkdir -p build/logs
+#    - composer self-update
+#    - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
+#    - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
 
 script:
-    - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
-    ## enable xdebug
-    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - ./vendor/bin/codecept build
-    - ./vendor/bin/codecept run unit --coverage --coverage-xml
+#    - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+#    ## enable xdebug
+#    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+#    - ./vendor/bin/codecept build
+#    - ./vendor/bin/codecept run unit --coverage --coverage-xml
+##    - if [ "$(phpenv version-name)" = "" ]; then
+##      	bundle exec rake test:integration
+##      fi
 
 after_success:
-    - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
+#    - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
