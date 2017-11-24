@@ -1,6 +1,8 @@
 engines:
+  coverage:
+    enabled: true
   exclude_paths:
-      - **/tests/**
-      - example/**
-      - **/vendor/**
-      - build/**
+    - **/tests/**
+    - example/**
+    - **/vendor/**
+    - build/**
