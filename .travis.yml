@@ -39,8 +39,12 @@ script:
 #    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 #    - ./vendor/bin/codecept build
 #    - ./vendor/bin/codecept run unit --coverage --coverage-xml
-    - if (["$(phpenv version-name)" = "7"] AND ["$deps" = "no"]); then echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PHP VERSION 7 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"; fi;
-    - echo "result $?"
+    - |
+      if ["$(phpenv version-name)" == "7"];
+        if ["$deps" == "no"];
+          then echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PHP VERSION 7 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        fi;
+      fi;
 
 after_success:
 #    - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
