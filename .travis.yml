@@ -40,6 +40,7 @@ script:
 #    - ./vendor/bin/codecept build
 #    - ./vendor/bin/codecept run unit --coverage --coverage-xml
     - if [ $(phpenv version-name) = "7" ]; then echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PHP VERSION 7 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" fi
+    - echo "result $?"
 
 after_success:
 #    - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
