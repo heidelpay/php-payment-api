@@ -1,5 +1,6 @@
-exclude_paths:
-    - tests/**
-    - example/**
-    - **/vendor/**
-    - build/**
+engines:
+  exclude_paths:
+      - **/tests/**
+      - example/**
+      - **/vendor/**
+      - build/**
