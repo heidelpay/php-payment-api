@@ -1,5 +1,5 @@
 exclude_paths:
-- tests/**
-- example/**
-- **/vendor/**
-- build/**
+    - tests/**
+    - example/**
+    - **/vendor/**
+    - build/**
