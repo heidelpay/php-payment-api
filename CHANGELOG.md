@@ -13,7 +13,7 @@ The following changes are planned for future releases.
 - Code style issues will be fixed using [PhpStorm](https://www.jetbrains.com/phpstorm/) Plugin [Php Inspections (EA Extended)](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-).
 
 
-## [1.0.0][1.0.0]
+## [v1.0.0][v1.0.0]
 ### Added
 - Added integration tests.
 - Added new unit tests.
@@ -32,5 +32,5 @@ The following changes are planned for future releases.
 - Changed repository. 
 - Changed namespaces to new repo name. 
 
-[unreleased]: https://github.com/heidelpay/php-payment-api/compare/1.0.0...HEAD
-[1.0.0]: https://github.com/heidelpay/php-payment-api/tree/1.0.0
+[unreleased]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/heidelpay/php-payment-api/tree/v1.0.0
