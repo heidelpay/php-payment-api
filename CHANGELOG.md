@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased][unreleased]
 The following changes are planned for future releases.
@@ -13,10 +13,11 @@ The following changes are planned for future releases.
 - Code style issues will be fixed using [PhpStorm](https://www.jetbrains.com/phpstorm/) Plugin [Php Inspections (EA Extended)](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-).
 
 
-## [v1.0.0][v1.0.0]
+## [1.0.0][1.0.0]
 ### Added
 - Added integration tests.
 - Added new unit tests.
+- Added payolution payment method.
 
 ### Fixed
 - Fixed several code style issues.
@@ -27,6 +28,9 @@ The following changes are planned for future releases.
 - Reorganized Travis CI script.
 - Introduced Codeception as unit test framework and replaced phpUnit.
 - Refactored existing unit tests.
+- Changed versioning to semantic versioning.
+- Changed repository. 
+- Changed namespaces to new repo name. 
 
-[unreleased]: https://github.com/heidelpay/php-api/compare/master...HEAD
-[v1.0.0]: https://github.com/heidelpay/php-api/compare/refactor_tests_to_codeception...HEAD
+[unreleased]: https://github.com/heidelpay/php-payment-api/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/heidelpay/php-payment-api/tree/1.0.0
