@@ -108,7 +108,8 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
             ['PrepaymentPaymentMethod', 'PP'],
             ['Przelewy24PaymentMethod', 'OT', 'PRZELEWY24'],
             ['SantanderInvoicePaymentMethod', 'IV', 'SANTANDER'],
-            ['SofortPaymentMethod', 'OT', 'SOFORT']
+            ['SofortPaymentMethod', 'OT', 'SOFORT'],
+            ['PayolutionInvoicePaymentMethod', 'IV', 'PAYOLUTION_DIRECT']
         ];
     }
 
@@ -135,7 +136,9 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
         $this->assertSame($paymentMethodClassPath, get_class($this->paymentObject));
         $this->mockCurlAdapter();
 
-        $this->paymentObject->refund('');
+        $returnObject = $this->paymentObject->refund('');
+        $this->assertSame($paymentMethodClassPath, get_class($returnObject));
+
         $requestArray = $this->paymentObject->getRequest()->convertToArray();
         $this->assertArrayHasKey('PAYMENT.CODE', $requestArray);
         $this->assertSame($paymentCode . '.RF', $requestArray['PAYMENT.CODE']);
