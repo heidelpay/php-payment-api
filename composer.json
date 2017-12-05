@@ -1,6 +1,6 @@
 {
-    "name": "heidelpay/php-api",
-    "description": "Client library for heidelpay payments.",
+    "name": "heidelpay/php-payment-api",
+    "description": "New client library for heidelpay payments.",
     "license": "Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.",
     "authors": [
         {
@@ -33,7 +33,8 @@
         "codacy/coverage": "^1.4"
     },
     "suggest": {
-        "heidelpay/php-customer-messages": "You can use this package to provide user-friendly messages instead of error codes."
+        "heidelpay/php-message-code-mapper": "You can use this package to provide user-friendly messages instead of error codes.",
+        "heidelpay/php-basket-api": "Use this package to transmit basket information."
     },
     "autoload": {
         "psr-4": {
