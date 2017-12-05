@@ -90,6 +90,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the invoice authorize transaction
      * @group connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function authorize()
@@ -129,6 +130,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @depends authorize
      * @group connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function finalize($referenceId)
@@ -165,6 +167,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @depends finalize
      * @group connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function reversal()
