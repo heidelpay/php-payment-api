@@ -17,10 +17,10 @@
  */
 
 /* Set to true if you want to enable the examples */
-define('HeidelpayPhpApiExamples', false);
+define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', false);
 
 /* Please set this to your url. It must be reachable over the net*/
-define('HeidelpayPhpApiURL', 'http://'.$_SERVER["HTTP_HOST"]);
+define('HEIDELPAY_PHP_PAYMENT_API_URL', 'http://'.$_SERVER["HTTP_HOST"]);
 
 /* Please enter the path from root directory to the example folder */
-define('HeidelpayPhpApiFolder', '/vendor/heidelpay/php-api/example/');
+define('HEIDELPAY_PHP_PAYMENT_API_FOLDER', '/vendor/heidelpay/php-payment-api/example/');

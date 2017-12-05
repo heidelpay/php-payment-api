@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup as Criterion;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup as Criterion;
 
 /**
  * Unit test for CriterionParameterGroup

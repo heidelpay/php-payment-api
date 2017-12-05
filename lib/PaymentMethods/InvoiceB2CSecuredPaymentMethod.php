@@ -1,11 +1,11 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\FinalizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\FinalizeTransactionType;
 
 /**
  * Invoice b2c secured Payment Class
@@ -20,8 +20,8 @@ use Heidelpay\PhpApi\TransactionTypes\FinalizeTransactionType;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class InvoiceB2CSecuredPaymentMethod
 {

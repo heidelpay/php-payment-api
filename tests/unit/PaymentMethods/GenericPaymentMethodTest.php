@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * This test class performs tests to verify the general behaviour of each payment method thus verifies that certain
@@ -18,12 +18,12 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Simon Gabriel
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class GenericPaymentMethodTest extends BasePaymentMethodTest
 {
-    private $paymentMethodNamespace = "Heidelpay\\PhpApi\\PaymentMethods\\";
+    private $paymentMethodNamespace = "Heidelpay\\PhpPaymentApi\\PaymentMethods\\";
 
     //<editor-fold desc="Init">
 
@@ -50,7 +50,7 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string $secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * Customers IBAN

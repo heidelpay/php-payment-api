@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\Response;
-use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod as iDeal;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\PhpPaymentApi\PaymentMethods\IDealPaymentMethod as iDeal;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * iDeal Test
@@ -20,7 +20,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class IdealPaymentMethodTest extends BasePaymentMethodTest
@@ -42,12 +42,12 @@ class IdealPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\SofortPaymentMethod
      */
     protected $paymentObject;
 

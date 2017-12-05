@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
-use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
-use Heidelpay\PhpApi\Request as HeidelpayRequest;
+use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
 
 /**
  * This classe is the basic payment method trait
@@ -19,8 +19,8 @@ use Heidelpay\PhpApi\Request as HeidelpayRequest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 trait BasicPaymentMethodTrait
 {
@@ -45,14 +45,14 @@ trait BasicPaymentMethodTrait
     /**
      * HTTP Adapter for payment connection
      *
-     * @var \Heidelpay\PhpApi\Adapter\CurlAdapter
+     * @var \Heidelpay\PhpPaymentApi\Adapter\CurlAdapter
      */
     protected $_adapter = null;
 
     /**
      * Heidelpay request object
      *
-     * @var \Heidelpay\PhpApi\Request
+     * @var \Heidelpay\PhpPaymentApi\Request
      */
     protected $_request = null;
 
@@ -66,7 +66,7 @@ trait BasicPaymentMethodTrait
     /**
      * Heidelpay response object
      *
-     * @var \Heidelpay\PhpApi\Response
+     * @var \Heidelpay\PhpPaymentApi\Response
      */
     protected $_response = null;
 
@@ -100,7 +100,7 @@ trait BasicPaymentMethodTrait
     /**
      * Set a new payment request object
      *
-     * @param \Heidelpay\PhpApi\Request $Request
+     * @param \Heidelpay\PhpPaymentApi\Request $Request
      */
     public function setRequest(HeidelpayRequest $Request)
     {
@@ -110,7 +110,7 @@ trait BasicPaymentMethodTrait
     /**
      * Get payment request object
      *
-     * @return \Heidelpay\PhpApi\Request
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function getRequest()
     {
@@ -124,7 +124,7 @@ trait BasicPaymentMethodTrait
     /**
      * Get response object
      *
-     * @return \Heidelpay\PhpApi\Response
+     * @return \Heidelpay\PhpPaymentApi\Response
      */
     public function getResponse()
     {
@@ -134,7 +134,7 @@ trait BasicPaymentMethodTrait
     /**
      * Set a HTTP Adapter for payment communication
      *
-     * @param \Heidelpay\PhpApi\Adapter\CurlAdapter
+     * @param \Heidelpay\PhpPaymentApi\Adapter\CurlAdapter
      * @param mixed $adapter
      */
     public function setAdapter($adapter)

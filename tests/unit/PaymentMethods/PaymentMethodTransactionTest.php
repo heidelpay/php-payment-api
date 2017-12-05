@@ -1,11 +1,11 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
-use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * This test class verifies the behaviour in all transaction represented by one payment method.
@@ -19,7 +19,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Simon Gabriel
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class PaymentMethodTransactionTest extends BasePaymentMethodTest
@@ -53,7 +53,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
      *
      * @var string $secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * Customers IBAN
@@ -214,10 +214,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
                 'ADDRESS.ZIP' => $zip,
                 'CONTACT.EMAIL' => $email,
                 'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-                'CRITERION.SECRET' => 'f6f0b128c9975c5922a164f62b6e07016778e5d63e5cbec1c01472ba5942c'.
-                    '89d81f821e89f9119e15e1b484c47e640e5922f359695e2f8afd4f7f242aae989a2',
-                'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-                'CRITERION.SDK_VERSION' => '17.9.27',
+                'CRITERION.SECRET' => '1ce9f65da579ce18dce622dd5dfeca2e87a379f52451202ef58ebdfac1e15b4' .
+                    '5e649b0cb7466e040011f3f76e056b2ce83561063815ef935cbb0c6b421cc3317',
+                'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+                'CRITERION.SDK_VERSION' => 'v1.0.0',
                 'FRONTEND.ENABLED' => 'FALSE',
                 'FRONTEND.MODE' => 'WHITELABEL',
                 'FRONTEND.LANGUAGE' => 'DE',
@@ -285,10 +285,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => 'a55370bff4f70b40507078c6d0d0d8006b097b9d1cdc01a67bb10e53e1104394b904c3117a6'.
-                '7c4d98d145f4ac2953b2d7f7800b3dede64ca57525f5b10c7df0c',
-            'CRITERION.SDK_NAME' => 'Heidelpay\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => 'e03d34e875cf7c5fd97e3a207cc5d54007509585475e0359cbcb0678c874bca9a1' .
+                '9e10c4cc11d5ee1e7bda3e46c85008bfc38955621301c25d00adcabd2d20a8',
+            'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.RESPONSE_URL' => self::REDIRECT_URL,
@@ -345,10 +345,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => 'aaef3d8af1f5b6d4e8f11f7d6575dd780ebe2631de3f604c702a8b3aeb2fc555511473809ce'.
-                '118fb5e55eece5777e5e19435af91b85ae753ecdaf5f4b3dbbc32',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '6a98064cd9fe2b1044c8e0ef339a3b6956d700854c5fd67165a1fcf9e9b845c9b2' .
+                '0a2f68a8dde6bd783d04350ca4d349eb10f4bbebb1ae37cb621b48aca67c59',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -409,10 +409,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => 'b71b58201a22b27f3cae62a523d9d44ac215fb64d8d7d5e20e88698638451e286'.
-                '5df8fe5bf939f32dc4723aa09db1f3976946ed7a32f38c1451cc12f6199d7e5',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '9cd425b6a0d82057f1cedbed87c2a6d9fdcc720a72192bc333bffe67965e503cd1b6' .
+                '004f7c5551ecf9f55615b372e8d775ce9aae85cb94ba480653a5c1f4c3ae',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.RESPONSE_URL' => self::REDIRECT_URL,
@@ -474,10 +474,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => '6862982ca0b7e96c23f901ff8a5a0799bd5b2599f0035482bb48f3b36b45ffb574dd20f'.
-                'fd29cc81e5e1c5e6feabeb5157cb3b359db50c7cf93ffdaa7a46f0494',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '40e583afeffc94547183c736e6219ceffbc1425a99695742f22d71cdd06475f34550cfb2' .
+                'a145a39e72ee818385ade0adb8d571da3c0fa6e094fd43c900192166',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -535,10 +535,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => '429c40329f9534646f94d5eda42f98453575c214d06ef620557a5ce0edad5d22a60e902d92c9'.
-                '0327b19d2d28a8607ff494bbd6717a9919495e008bfa732c3ddd',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => 'e2cf8f7086cad3dc71972f193d6a5a230d3dd00e13d20ad876ba2feae868bf6b79c4564' .
+                '0f88576ed39546dc68e15f87eaf7557618426d904245b745cdc65c881',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.ENABLED' => 'FALSE',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -596,10 +596,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => '64c1c52f4fbf93a850ef1f879ce75dee9d389e024f0abda12d95a33903eb8461f17'.
-                '9b659c27396173aa3a8ee9abbc876bccdab1458a7d0d818bac1c692177ed0',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '716703bf5cc18f83b3231474f773a69ad98e2f477c2abe0b5b904e02d232432b7ce90' .
+                '20da68fb0a77464b94fd26d71cceab58d36a0b378759054fabf8a65a7aa',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -657,10 +657,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => 'b61d39bba1197ccb29bab8dcffe8a23b028964e33762217bb7c36d657599f6453a9f130ff4'.
-                'e82daa60165edc6ff98561428a7e02b1f5818bde2dd5b60d7f0283',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '59718aa5021d53aa936ec7d516791a94cec0eaf799d854105b40fe97fbb5fc8f6ca40be4' .
+                '999f057d0eda9316c18d26ecbcca684ac143b134cf19135215ee0d73',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -718,10 +718,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => 'f34097cf9533e06accac700ad6ad26a3438bf1b54af51280b8507b79f537e591dd282f'.
-                'b01c0be72ca5d17525d2c613a7989b283addb9f92e960ebdf18d6b7b74',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '235f76675fb775e3a931608125c9ed4d404a8aa5f28b76019d7a1816cd533a3d47fc05ef1f' .
+                'f0f84cef09b3fc92374c64018a05e08827684c54fd0c309373ba2e',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -779,10 +779,10 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => 'bbb4ae4fbd965f3136363843066505178d2dff6609e97ff5a79b9d8fa55a4e7265ed'.
-                'beb9511d1f8e7b63e3ab7c16872b78b3dc75f5f0cb82cbe55af65a91985c',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '665cfc0c6452721445c66e6017566f303d0a557ff857348c8f65f6a73f042d1f2824470' .
+                'ef9ae56dabe050f0078c5abcebe2ca6d42612c400fa9c3f58ad219853',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,

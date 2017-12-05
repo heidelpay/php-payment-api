@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\Response;
-use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod as EPS;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod as EPS;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * EPS Test
@@ -20,7 +20,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Ronja Wann
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class EPSPaymentMethodTest extends BasePaymentMethodTest
@@ -41,12 +41,12 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod
      */
     protected $paymentObject;
 

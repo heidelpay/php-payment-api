@@ -1,8 +1,8 @@
 <?php
 
-namespace Heidelpay\PhpApi;
+namespace Heidelpay\PhpPaymentApi;
 
-use Heidelpay\PhpApi\Adapter\CurlAdapter;
+use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 
 /**
  * Heidelpay request object
@@ -15,8 +15,8 @@ use Heidelpay\PhpApi\Adapter\CurlAdapter;
  * @author     Jens Richter
  *
  * @package    Heidelpay
- * @subpackage PhpApi
- * @category   PhpApi
+ * @subpackage PhpPaymentApi
+ * @category   PhpPaymentApi
  */
 class Request extends AbstractMethod
 {
@@ -44,7 +44,7 @@ class Request extends AbstractMethod
      * @param string $transactionChannel channel id of the payment method f.e. 31HA07BC8142C5A171744F3D6D155865
      * @param bool   $sandboxRequest     choose between sandbox and productive payment system
      *
-     * @return \Heidelpay\PhpApi\Request
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function authentification(
         $securitySender = null,
@@ -71,7 +71,7 @@ class Request extends AbstractMethod
      * @param string $languageCode language code 2 letters for error messages and iframe f.e EN
      * @param string $responseUrl  response url of your application f.e https://www.url.com/response.php
      *
-     * @return \Heidelpay\PhpApi\Request
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function async($languageCode = "EN", $responseUrl = null)
     {
@@ -98,7 +98,7 @@ class Request extends AbstractMethod
      * @param string $addressCountry address country code 2 letters f.e. DE
      * @param string $contactMail    email adress of the customer f.e. ab@mail.de
      *
-     * @return \Heidelpay\PhpApi\Request
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function customerAddress(
         $nameGiven = null,
@@ -134,7 +134,7 @@ class Request extends AbstractMethod
      * @param string $currency       currency code 3 letters f.e. USD
      * @param string $secret         a secret to prevent your application against fake responses
      *
-     * @return \Heidelpay\PhpApi\Request
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function basketData($shopIdentifier = null, $amount = null, $currency = null, $secret = null)
     {
@@ -176,11 +176,11 @@ class Request extends AbstractMethod
     /**
      * Send request to payment api
      *
-     * @param string                                $uri     payment api url
-     * @param array                                 $post    heidelpay request parameter
-     * @param \Heidelpay\PhpApi\Adapter\CurlAdapter $adapter
+     * @param string      $uri     payment api url
+     * @param array       $post    heidelpay request parameter
+     * @param CurlAdapter $adapter
      *
-     * @return array response|\Heidelpay\PhpApi\Response
+     * @return array response|\Heidelpay\PhpPaymentApi\Response
      */
     public function send($uri = null, $post = null, $adapter = null)
     {
@@ -200,7 +200,7 @@ class Request extends AbstractMethod
      * @param null $birthdate  customer birth date YYYY-MM-DD (Mandatory)
      * @param null $basketId   id of a given basket using heidelpay basket api (Optional)
      *
-     * @return $this \Heidelpay\PhpApi\Request
+     * @return $this \Heidelpay\PhpPaymentApi\Request
      */
     public function b2cSecured($salutation = null, $birthdate = null, $basketId = null)
     {

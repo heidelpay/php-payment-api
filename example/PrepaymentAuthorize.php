@@ -1,5 +1,5 @@
 <?php
-namespace Heidelpay\Example\PhpApi;
+namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
  * Prepayment authorize example
@@ -21,8 +21,10 @@ namespace Heidelpay\Example\PhpApi;
 /**
  * For security reason all examples are disabled by default.
  */
+use Heidelpay\PhpPaymentApi\PaymentMethods\PrepaymentPaymentMethod;
+
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
 
@@ -35,7 +37,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
- $Prepayment = new \Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod();
+ $Prepayment = new PrepaymentPaymentMethod();
  
  /**
   * Set up your authentification data for Heidepay api
@@ -53,9 +55,11 @@ require_once __DIR__ . '/../../../autoload.php';
   * Set up asynchronous request parameters
   */
  $Prepayment->getRequest()->async(
-        'EN', // Languarge code for the Frame
-        HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
-     );
+     'EN', // Language code for the Frame
+     HEIDELPAY_PHP_PAYMENT_API_URL .
+     HEIDELPAY_PHP_PAYMENT_API_FOLDER .
+     'HeidelpayResponse.php'  // Response url from your application
+ );
  
  /**
   * Set up customer information required for risk checks

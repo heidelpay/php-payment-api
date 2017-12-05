@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup as Contact;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup as Contact;
 
 /**
  * Unit test for ContactParameterGroup

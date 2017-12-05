@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\Response;
-use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  *  Credit card test
@@ -30,7 +30,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class CreditCardPaymentMethodTest extends BasePaymentMethodTest
@@ -60,7 +60,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * Credit card number
@@ -102,7 +102,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
     protected $paymentObject;
 
@@ -225,7 +225,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     /**
      * Test case for credit card authorisation on a registration
      *
-     * @param referenceId string reference id of the credit card registration
+     * @param string referenceId reference id of the credit card registration
      * @param mixed $referenceId
      *
      * @return string payment reference id of the credit card authorisation

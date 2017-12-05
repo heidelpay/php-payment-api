@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi;
+namespace Heidelpay\PhpPaymentApi;
 
 use JsonSerializable;
 

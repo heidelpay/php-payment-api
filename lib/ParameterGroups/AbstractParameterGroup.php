@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * The AbstractParameterGroup provides functions for every parameter group which extends this class
@@ -13,8 +13,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author     Jens Richter
  *
  * @package    Heidelpay
- * @subpackage PhpApi
- * @category   PhpApi
+ * @subpackage PhpPaymentApi
+ * @category   PhpPaymentApi
  */
 abstract class AbstractParameterGroup implements ParameterGroupInterface
 {
@@ -36,7 +36,7 @@ abstract class AbstractParameterGroup implements ParameterGroupInterface
      *
      * @throws \Exception in case of unknown property
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AbstractParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AbstractParameterGroup
      */
     public function set($key, $value)
     {

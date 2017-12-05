@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\PaymentMethods\SantanderInvoicePaymentMethod;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * Invoice B2C secured Test
@@ -19,7 +19,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
@@ -40,7 +40,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * PaymentObject

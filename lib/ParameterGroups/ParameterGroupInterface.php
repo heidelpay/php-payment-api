@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 use JsonSerializable;
 

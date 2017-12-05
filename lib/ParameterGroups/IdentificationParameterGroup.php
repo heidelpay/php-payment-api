@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter used to identify a transaction.
@@ -13,8 +13,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class IdentificationParameterGroup extends AbstractParameterGroup
 {
@@ -142,7 +142,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @param string $shopperid customer id f.e. 12042
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */
     public function setShopperid($shopperid)
     {
@@ -158,7 +158,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @param string $transactionid f.e. order-1109
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */
     public function setTransactionid($transactionid)
     {
@@ -175,7 +175,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      *
      * @param string $referenceid f.e. 31HA07BC8142C5A171745D00AD63D182
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */
     public function setReferenceid($referenceid)
     {

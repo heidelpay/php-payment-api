@@ -1,11 +1,11 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\Response;
-use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
-use Heidelpay\PhpApi\Exceptions\HashVerificationException;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\PhpPaymentApi\Exceptions\PaymentFormUrlException;
+use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
 
 /**
  *
@@ -19,13 +19,13 @@ use Heidelpay\PhpApi\Exceptions\HashVerificationException;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class ResponseTest extends Test
 {
     /**
-     * @var \Heidelpay\PhpApi\Response
+     * @var \Heidelpay\PhpPaymentApi\Response
      */
     protected $responseObject;
 
@@ -39,7 +39,7 @@ class ResponseTest extends Test
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -282,8 +282,8 @@ class ResponseTest extends Test
         $response->getProcessing()->set('result', 'ACK');
         $response->getCriterion()->set(
             'secret',
-            '84c48ba8b3386a4e2f38ef5eeb3b3544788f675eef63c6e83c828049b706aa7e57ba69243902bfcd105'
-            . 'c1ed28b6519fb4277b3355b9807819dd4b0414722a3f5'
+            '3c02e798e22f278ccc8652a37da2c84c0a5b32021da2e1558956c55d422a8e585be4e774245a49afc939b0' .
+            'd7a5be046ad02067bac1de5cfec31745f297f0c272'
         );
         $this->assertTrue(
             $response->verifySecurityHash(

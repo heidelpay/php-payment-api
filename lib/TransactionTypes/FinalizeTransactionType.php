@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\TransactionTypes;
+namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
 /**
  * Transaction type finalize
@@ -16,8 +16,8 @@ namespace Heidelpay\PhpApi\TransactionTypes;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 trait FinalizeTransactionType
 {
@@ -29,7 +29,7 @@ trait FinalizeTransactionType
      *
      * @param mixed $PaymentReferenceId reference id ( uniqe id of the debit or capture)
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
      */
     public function finalize($PaymentReferenceId)
     {

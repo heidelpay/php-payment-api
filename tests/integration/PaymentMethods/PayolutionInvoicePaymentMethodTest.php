@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\PaymentMethods\PayolutionInvoicePaymentMethod;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\PaymentMethods\PayolutionInvoicePaymentMethod;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * Connection tests can fail due to network issues and scheduled downtime.
@@ -17,7 +17,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Simon Gabriel
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category IntegrationTest
  */
 class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
@@ -38,7 +38,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * PaymentObject

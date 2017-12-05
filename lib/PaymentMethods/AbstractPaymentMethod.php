@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 
 /**
  * This classe is the abstract payment method
@@ -16,8 +16,8 @@ use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  *
  * @deprecated will be remove if all payment methods are based on BasicPaymentMethodTrait
  */

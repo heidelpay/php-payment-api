@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\TransactionTypes;
+namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
 /**
  * Transaction type debit
@@ -15,8 +15,8 @@ namespace Heidelpay\PhpApi\TransactionTypes;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 trait DebitTransactionType
 {
@@ -25,7 +25,7 @@ trait DebitTransactionType
      *
      * This payment type will charge the given account directly.
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
      */
     public function debit()
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\SecurityParameterGroup as Security;
+use Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup as Security;
 
 /**
  * Unit test for SecurityParameterGroup

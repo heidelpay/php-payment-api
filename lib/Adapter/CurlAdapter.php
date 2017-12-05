@@ -1,8 +1,8 @@
 <?php
 
-namespace Heidelpay\PhpApi\Adapter;
+namespace Heidelpay\PhpPaymentApi\Adapter;
 
-use Heidelpay\PhpApi\Response;
+use Heidelpay\PhpPaymentApi\Response;
 
 /**
  * Standard curl adapter
@@ -20,8 +20,8 @@ use Heidelpay\PhpApi\Response;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class CurlAdapter
 {
@@ -64,7 +64,7 @@ class CurlAdapter
         curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($request, CURLOPT_SSLVERSION, 6);       // CURL_SSLVERSION_TLSv1_2
-        curl_setopt($request, CURLOPT_USERAGENT, "PhpApi");
+        curl_setopt($request, CURLOPT_USERAGENT, 'PhpPaymentApi');
 
         $response = curl_exec($request);
         $error = curl_error($request);

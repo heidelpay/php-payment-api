@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\ConfigParameterGroup as Config;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup as Config;
 
 /**
  * Unit test for ConfigParameterGroup

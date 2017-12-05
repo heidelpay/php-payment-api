@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\TransactionTypes;
+namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
 /**
  * Trait for the Initialize transaction type

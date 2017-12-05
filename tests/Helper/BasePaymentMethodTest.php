@@ -5,32 +5,32 @@
  * Date: 24.10.2017
  * Time: 12:19
  */
-namespace Heidelpay\Tests\PhpApi\Helper;
+namespace Heidelpay\Tests\PhpPaymentApi\Helper;
 
 use AspectMock\Proxy\InstanceProxy;
 use Codeception\Lib\Console\Output;
 use Codeception\Test\Unit;
-use Heidelpay\PhpApi\Adapter\CurlAdapter;
+use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 use AspectMock\Test as test;
-use Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\DirectDebitPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\EPSPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\IDealPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\PayPalPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\PostFinanceCardPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\PostFinanceEFinancePaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\PrepaymentPaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod;
-use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
-use Heidelpay\PhpApi\Response;
-use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
+use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\DirectDebitPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\GiropayPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\IDealPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\InvoicePaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\PayPalPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\PostFinanceCardPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\PostFinanceEFinancePaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\PrepaymentPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\Przelewy24PaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\SantanderInvoicePaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\SofortPaymentMethod;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Constraints\ArraysMatchConstraint;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**

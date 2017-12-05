@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter related to the customers risk factors
@@ -13,8 +13,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Daniel Kraut
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class RiskInformationParameterGroup extends AbstractParameterGroup
 {
@@ -68,7 +68,7 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @param string $guestcheckout
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
     public function setGuestCheckout($guestcheckout)
     {
@@ -81,7 +81,7 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @param string $since
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
     public function setSince($since)
     {
@@ -94,7 +94,7 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @param int $ordercount
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
     public function setOrderCount($ordercount)
     {

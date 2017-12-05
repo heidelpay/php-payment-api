@@ -1,5 +1,5 @@
 <?php
-namespace Heidelpay\Example\PhpApi;
+namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
  * Przelewy24 authorize example
@@ -21,8 +21,10 @@ namespace Heidelpay\Example\PhpApi;
 /**
  * For security reason all examples are disabled by default.
  */
+use Heidelpay\PhpPaymentApi\PaymentMethods\Przelewy24PaymentMethod;
+
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
 
@@ -35,7 +37,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$Przelewy24 = new \Heidelpay\PhpApi\PaymentMethods\Przelewy24PaymentMethod();
+$Przelewy24 = new Przelewy24PaymentMethod();
 
 $Przelewy24->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -61,11 +63,11 @@ $Przelewy24->getRequest()->customerAddress(
         );
 
 $Przelewy24->getRequest()->async(
-        
-        'EN', // Languarge code for the Frame
-        HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
-                
-   );
+    'EN', // Language code for the Frame
+    HEIDELPAY_PHP_PAYMENT_API_URL .
+    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
+    'HeidelpayResponse.php'  // Response url from your application
+);
 
 $Przelewy24->getRequest()->basketData(
         

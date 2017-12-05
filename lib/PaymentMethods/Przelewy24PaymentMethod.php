@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
 /**
  * Przelewy24 Payment Class
@@ -15,8 +15,8 @@ namespace Heidelpay\PhpApi\PaymentMethods;
  * @author  Ronja Wann
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class Przelewy24PaymentMethod extends AbstractPaymentMethod
 {

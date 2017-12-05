@@ -5,7 +5,7 @@
  * Date: 24.10.2017
  * Time: 14:00
  */
-namespace Heidelpay\Tests\PhpApi\Helper;
+namespace Heidelpay\Tests\PhpPaymentApi\Helper;
 
 class Customer
 {

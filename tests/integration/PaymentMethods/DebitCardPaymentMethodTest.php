@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\Response;
-use Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod as DebitCard;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * Debit card test
@@ -30,7 +30,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class DebitCardPaymentMethodTest extends BasePaymentMethodTest
@@ -51,7 +51,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      *  Account holder
@@ -99,7 +99,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\DebitCardPaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     protected $paymentObject;
 

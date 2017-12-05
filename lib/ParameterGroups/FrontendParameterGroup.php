@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter used for frontend settings like language etc.
@@ -13,8 +13,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class FrontendParameterGroup extends AbstractParameterGroup
 {
@@ -185,7 +185,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $css_path url to a css file f.e https://dev.heidelpay.de/heidelpay_iframe.css
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
     public function setCssPath($css_path)
     {
@@ -202,7 +202,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $enabled
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
     public function setEnabled($enabled)
     {
@@ -217,7 +217,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $language iso language code 2 letters
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
     public function setLanguage($language)
     {
@@ -230,7 +230,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $mode
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
     public function setMode($mode)
     {
@@ -246,7 +246,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $payment_frame_origin f.e. http://dev.heidelpay.com
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
     public function setPaymentFrameOrigin($payment_frame_origin)
     {
@@ -263,7 +263,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $prevent_async_redirect
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
     public function setPreventAsyncRedirect($prevent_async_redirect)
     {
@@ -283,7 +283,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $response_url f.e https://dev.heidelpay.de/reponse.php
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      *
      */
     public function setResponseUrl($response_url)

@@ -1,39 +1,39 @@
 <?php
 
-namespace Heidelpay\PhpApi;
+namespace Heidelpay\PhpPaymentApi;
 
-use Heidelpay\PhpApi\Exceptions\UndefinedXmlResponseException;
-use Heidelpay\PhpApi\Exceptions\XmlResponseParserException;
-use Heidelpay\PhpApi\ParameterGroups\AbstractParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\IdentificationParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\NameParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup;
-use Heidelpay\PhpApi\PushMapping\Account;
-use Heidelpay\PhpApi\PushMapping\Address;
-use Heidelpay\PhpApi\PushMapping\Connector;
-use Heidelpay\PhpApi\PushMapping\Contact;
-use Heidelpay\PhpApi\PushMapping\Frontend;
-use Heidelpay\PhpApi\PushMapping\Identification;
-use Heidelpay\PhpApi\PushMapping\Name;
-use Heidelpay\PhpApi\PushMapping\Payment;
-use Heidelpay\PhpApi\PushMapping\Presentation;
-use Heidelpay\PhpApi\PushMapping\Processing;
-use Heidelpay\PhpApi\PushMapping\PushMappingInterface;
-use Heidelpay\PhpApi\PushMapping\Transaction;
+use Heidelpay\PhpPaymentApi\Exceptions\UndefinedXmlResponseException;
+use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
+use Heidelpay\PhpPaymentApi\ParameterGroups\AbstractParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup;
+use Heidelpay\PhpPaymentApi\PushMapping\Account;
+use Heidelpay\PhpPaymentApi\PushMapping\Address;
+use Heidelpay\PhpPaymentApi\PushMapping\Connector;
+use Heidelpay\PhpPaymentApi\PushMapping\Contact;
+use Heidelpay\PhpPaymentApi\PushMapping\Frontend;
+use Heidelpay\PhpPaymentApi\PushMapping\Identification;
+use Heidelpay\PhpPaymentApi\PushMapping\Name;
+use Heidelpay\PhpPaymentApi\PushMapping\Payment;
+use Heidelpay\PhpPaymentApi\PushMapping\Presentation;
+use Heidelpay\PhpPaymentApi\PushMapping\Processing;
+use Heidelpay\PhpPaymentApi\PushMapping\PushMappingInterface;
+use Heidelpay\PhpPaymentApi\PushMapping\Transaction;
 use SimpleXMLElement;
 
 /**
  * Push XML Mapper
  *
- * Parses heidelpay Push Responses to a PhpApi Response object.
+ * Parses heidelpay Push Responses to a PhpPaymentApi Response object.
  *
  * @license    Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright  Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -56,7 +56,7 @@ class Push
     private $xmlResponse;
 
     /**
-     * The PhpApi Response object that will be the result
+     * The PhpPaymentApi Response object that will be the result
      *
      * @var Response
      */
@@ -124,11 +124,11 @@ class Push
 
     /**
      * Parses the raw XML response and maps the
-     * attributes to a PhpApi Response.
+     * attributes to a PhpPaymentApi Response.
      */
     private function parseXmlResponse()
     {
-        // initiate a new PhpApi Response.
+        // initiate a new PhpPaymentApi Response.
         $this->response = new Response();
 
         try {

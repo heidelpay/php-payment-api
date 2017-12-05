@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup as Basket;
+use Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup as Basket;
 
 /**
  * Unit test for BasketParameterGroup

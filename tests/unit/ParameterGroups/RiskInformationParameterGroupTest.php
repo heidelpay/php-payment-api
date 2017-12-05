@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\RiskInformationParameterGroup as RiskInformation;
+use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup as RiskInformation;
 
 /**
  * Unit test for RiskInformationParameterGroup

@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter related to the basket data
@@ -17,8 +17,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class BasketParameterGroup extends AbstractParameterGroup
 {
@@ -47,7 +47,7 @@ class BasketParameterGroup extends AbstractParameterGroup
      *
      * @param string $id
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\BasketParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
      */
     public function setId($id)
     {

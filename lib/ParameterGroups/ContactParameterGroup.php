@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter related to the customers contact data
@@ -13,8 +13,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class ContactParameterGroup extends AbstractParameterGroup
 {
@@ -102,7 +102,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @param $email string customer email
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
      */
     public function setEmail($email)
     {
@@ -115,7 +115,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @param string $ip customer ip address
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
      */
     public function setIp($ip)
     {
@@ -128,7 +128,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @param string $mobile mobile phone number
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
      */
     public function setMobile($mobile)
     {
@@ -141,7 +141,7 @@ class ContactParameterGroup extends AbstractParameterGroup
      *
      * @param string $phone phone number
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ContactParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
      */
     public function setPhone($phone)
     {

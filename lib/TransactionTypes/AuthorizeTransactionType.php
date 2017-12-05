@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\TransactionTypes;
+namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
 /**
  * Transaction type authorize
@@ -18,8 +18,8 @@ namespace Heidelpay\PhpApi\TransactionTypes;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 trait AuthorizeTransactionType
 {
@@ -31,7 +31,7 @@ trait AuthorizeTransactionType
      * like Sofort and Giropay (so called online payments) this type will be
      * used just to get the redirect to their systems.
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
      */
     public function authorize()
     {

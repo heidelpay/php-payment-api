@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\Exceptions;
+namespace Heidelpay\PhpPaymentApi\Exceptions;
 
 use Exception;
 

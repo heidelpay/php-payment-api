@@ -1,5 +1,5 @@
 <?php
-namespace Heidelpay\Example\PhpApi;
+namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
  * Credit card registration example
@@ -21,8 +21,10 @@ namespace Heidelpay\Example\PhpApi;
 /**
  * For security reason all examples are disabled by default.
  */
+use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
+
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
 
@@ -35,7 +37,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$CreditCard = new \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod();
+$CreditCard = new CreditCardPaymentMethod();
 
 /**
  * Set up your authentification data for Heidepay api
@@ -53,8 +55,10 @@ $CreditCard->getRequest()->authentification(
  * Set up asynchronous request parameters
  */
 $CreditCard->getRequest()->async(
-    'EN', // Languarge code for the Frame
-    HeidelpayPhpApiURL . HeidelpayPhpApiFolder . 'HeidelpayResponse.php'  // Response url from your application
+    'EN', // Language code for the Frame
+    HEIDELPAY_PHP_PAYMENT_API_URL .
+    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
+    'HeidelpayResponse.php'  // Response url from your application
 );
 
 /**
@@ -87,11 +91,13 @@ $CreditCard->getRequest()->basketData(
  * Set necessary parameters for Heidelpay payment Frame and send a registration request
  */
 $CreditCard->registration(
-    HeidelpayPhpApiURL,
+    HEIDELPAY_PHP_PAYMENT_API_URL,
     // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
     'FALSE',
     // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-    HeidelpayPhpApiURL . HeidelpayPhpApiFolder . 'style.css'   // CSSPath - css url to style the Heidelpay payment frame
+    HEIDELPAY_PHP_PAYMENT_API_URL .
+    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
+    'style.css'   // CSSPath - css url to style the Heidelpay payment frame
 );
 ?>
 <html>

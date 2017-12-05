@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup as Transaction;
+use Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup as Transaction;
 
 /**
  * Unit test for TransactionParameterGroup

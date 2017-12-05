@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * Transaction parameter group
@@ -15,8 +15,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class TransactionParameterGroup extends AbstractParameterGroup
 {
@@ -82,7 +82,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      *
      * @param string $channel transaction channel id f.e. 31HA07BC8142C5A171749A60D979B6E4
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
      */
     public function setChannel($channel)
     {
@@ -95,7 +95,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      *
      * @param string $mode f.e LIVE
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
      */
     public function setMode($mode)
     {
@@ -108,7 +108,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      *
      * @param string $response e.g. 'SYNC'
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\TransactionParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
      */
     public function setResponse($response)
     {

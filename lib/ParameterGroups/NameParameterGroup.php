@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter of the "name" namespace
@@ -15,8 +15,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class NameParameterGroup extends AbstractParameterGroup
 {
@@ -141,7 +141,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @param string $birthdate notation is YYYY-MM-DD
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
     public function setBirthdate($birthdate)
     {
@@ -154,7 +154,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @param string $company f.e. Heidelberger Payment GmbH
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
     public function setCompany($company)
     {
@@ -167,7 +167,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @param string $given f.e. John
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
     public function setGiven($given)
     {
@@ -180,7 +180,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @param string $family f.e. Doe
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
     public function setFamily($family)
     {
@@ -193,7 +193,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @param string $salutation f.e. MR
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
     public function setSalutation($salutation)
     {
@@ -206,7 +206,7 @@ class NameParameterGroup extends AbstractParameterGroup
      *
      * @param string $title f.e. Doc.
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\NameParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
     public function setTitle($title)
     {

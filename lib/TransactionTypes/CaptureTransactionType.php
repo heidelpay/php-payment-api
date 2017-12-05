@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\TransactionTypes;
+namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
 /**
  * Transaction type capture
@@ -15,8 +15,8 @@ namespace Heidelpay\PhpApi\TransactionTypes;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 trait CaptureTransactionType
 {
@@ -27,7 +27,7 @@ trait CaptureTransactionType
      *
      * @param string $PaymentReferenceId ( unique id of the authorisation )
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
      */
     public function capture($PaymentReferenceId)
     {

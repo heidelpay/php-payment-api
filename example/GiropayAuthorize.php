@@ -1,12 +1,11 @@
 <?php
-namespace Heidelpay\Example\PhpApi;
+namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
  * Sofort authorize example
  *
  * This is a coding example for Sofort authorize using the heidelpay php-api
  * extension.
- *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -21,11 +20,12 @@ namespace Heidelpay\Example\PhpApi;
 /**
  * For security reason all examples are disabled by default.
  */
+use Heidelpay\PhpPaymentApi\PaymentMethods\GiropayPaymentMethod;
+
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
-
 
 /**
  * Require the composer autoloader file
@@ -35,7 +35,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$Giropay = new \Heidelpay\PhpApi\PaymentMethods\GiropayPaymentMethod();
+$Giropay = new GiropayPaymentMethod();
 
 $Giropay->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -61,11 +61,11 @@ $Giropay->getRequest()->customerAddress(
         );
 
 $Giropay->getRequest()->async(
-        
-        'EN', // Languarge code for the Frame
-        HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
-                
-   );
+    'EN', // Language code for the Frame
+    HEIDELPAY_PHP_PAYMENT_API_URL .
+    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
+    'HeidelpayResponse.php'  // Response url from your application
+);
 
 $Giropay->getRequest()->basketData(
         

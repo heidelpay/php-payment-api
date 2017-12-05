@@ -1,5 +1,5 @@
 <?php
-namespace Heidelpay\Example\PhpApi;
+namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
  * PostFinanceCard authorize example
@@ -21,8 +21,10 @@ namespace Heidelpay\Example\PhpApi;
 /**
  * For security reason all examples are disabled by default.
  */
+use Heidelpay\PhpPaymentApi\PaymentMethods\PostFinanceCardPaymentMethod;
+
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
 
@@ -35,7 +37,7 @@ require_once __DIR__ . '/../../../autoload.php';
 /**
  * Load a new instance of the payment method
  */
-$PostFinanceCard = new \Heidelpay\PhpApi\PaymentMethods\PostFinanceCardPaymentMethod();
+$PostFinanceCard = new PostFinanceCardPaymentMethod();
 
 $PostFinanceCard->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -61,11 +63,11 @@ $PostFinanceCard->getRequest()->customerAddress(
         );
 
 $PostFinanceCard->getRequest()->async(
-        
-        'EN', // Languarge code for the Frame
-        HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayResponse.php'  // Response url from your application
-                
-   );
+    'EN', // Language code for the Frame
+    HEIDELPAY_PHP_PAYMENT_API_URL .
+    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
+    'HeidelpayResponse.php'  // Response url from your application
+);
 
 $PostFinanceCard->getRequest()->basketData(
         

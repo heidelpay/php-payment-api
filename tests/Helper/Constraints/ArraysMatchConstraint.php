@@ -5,7 +5,7 @@
  * Date: 30.10.2017
  * Time: 10:44
  */
-namespace Heidelpay\Tests\PhpApi\Helper\Constraints;
+namespace Heidelpay\Tests\PhpPaymentApi\Helper\Constraints;
 
 use PHPUnit\Util\InvalidArgumentHelper;
 

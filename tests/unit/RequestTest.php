@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\Request;
-use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
+use Heidelpay\PhpPaymentApi\Request;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 
 /**
  *
@@ -19,7 +19,7 @@ use Heidelpay\PhpApi\ParameterGroups\CriterionParameterGroup;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class RequestTest extends Test

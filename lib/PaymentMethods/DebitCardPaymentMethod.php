@@ -1,16 +1,16 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
-use Heidelpay\PhpApi\TransactionTypes\RegistrationTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\DebitTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\DebitOnRegistrationTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\CaptureTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RegistrationTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\DebitOnRegistrationTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
 
 /**
  * Debit Card Payment Class
@@ -25,8 +25,8 @@ use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
  * @author     Jens Richter
  *
  * @package    Heidelpay
- * @subpackage PhpApi
- * @category   PhpApi
+ * @subpackage PhpPaymentApi
+ * @category   PhpPaymentApi
  */
 class DebitCardPaymentMethod
 {
@@ -78,7 +78,7 @@ class DebitCardPaymentMethod
      *
      * @throws \Exception
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */
     public function authorize($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
     {
@@ -107,7 +107,7 @@ class DebitCardPaymentMethod
      *
      * @throws \Exception
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */
     public function debit($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
     {
@@ -137,7 +137,7 @@ class DebitCardPaymentMethod
      *
      * @throws \Exception
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */
     public function registration($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
     {

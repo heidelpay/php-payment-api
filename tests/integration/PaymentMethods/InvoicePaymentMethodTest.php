@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod as Invoice;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\PaymentMethods\InvoicePaymentMethod as Invoice;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * Invoice Test
@@ -19,7 +19,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class InvoicePaymentMethodTest extends BasePaymentMethodTest
@@ -40,12 +40,12 @@ class InvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\InvoicePaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\InvoicePaymentMethod
      */
     protected $paymentObject;
 

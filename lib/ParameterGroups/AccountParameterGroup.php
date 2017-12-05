@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter related to the customers account data
@@ -16,8 +16,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class AccountParameterGroup extends AbstractParameterGroup
 {
@@ -124,7 +124,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param $bank string
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      *
      * @deprecated please use IBan and Bic instead
      */
@@ -149,7 +149,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param $bankName string
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setBankName($bankName)
     {
@@ -172,7 +172,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param $brand string name of the used brand in upper case
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setBrand($brand)
     {
@@ -195,7 +195,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param string $bic
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setBic($bic)
     {
@@ -218,7 +218,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param string $country account country
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setCountry($country)
     {
@@ -261,7 +261,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param string $holder account holder
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setHolder($holder)
     {
@@ -284,7 +284,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param $iban string iban of the account
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setIban($iban)
     {
@@ -321,7 +321,7 @@ class AccountParameterGroup extends AbstractParameterGroup
      *
      * @param $number string number of the use account
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AccountParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
     public function setNumber($number)
     {

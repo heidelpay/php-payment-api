@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\FrontendParameterGroup as Frontend;
+use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup as Frontend;
 
 /**
  * Unit test for FrontendParameterGroup

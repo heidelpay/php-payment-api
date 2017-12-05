@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\TransactionTypes;
+namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
 /**
  * Transaction type rebill
@@ -17,8 +17,8 @@ namespace Heidelpay\PhpApi\TransactionTypes;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 trait RebillTransactionType
 {
@@ -31,7 +31,7 @@ trait RebillTransactionType
      *
      * @param string $PaymentReferenceId ( unique id of the debit or capture )
      *
-     * @return \Heidelpay\PhpApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod|boolean
      */
     public function rebill($PaymentReferenceId)
     {

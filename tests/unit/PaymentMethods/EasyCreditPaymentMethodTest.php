@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
-use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * This test class verifies the special functionality of the EasyCreditPaymentMethod not covered in
@@ -19,7 +19,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Simon Gabriel
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
@@ -52,7 +52,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string $secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * Card number
@@ -131,6 +131,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 
+    //<editor-fold desc="Tests">
     /**
      * Verify initialize parameters generated as expected
      *
@@ -161,10 +162,10 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS.ZIP' => $zip,
             'CONTACT.EMAIL' => $email,
             'CRITERION.PAYMENT_METHOD' => $object::getClassName(),
-            'CRITERION.SECRET' => '6aaf3daa2f2e50e9612d9c1b428a9673b1eb0b109080713aed12500766f8fb19168c' .
-                '68ff00ceed0fb15f7c4530f22eb441e1e8ae8db11a9035e90fb61bb7a59d',
-            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpApi',
-            'CRITERION.SDK_VERSION' => '17.9.27',
+            'CRITERION.SECRET' => '8263dc9e31b5754332aa23752b0044f4f6ab716ca9ec8d94a1b74ac19d2c5b822d3b' .
+                '1a0d8106c93cd02f2f5654d54c510444e310576e5559e3926fbdab0af02b',
+            'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.0.0',
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -184,6 +185,6 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
         $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
-
     //</editor-fold>
+
 }

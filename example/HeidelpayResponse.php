@@ -19,14 +19,14 @@
  * For security reason all examples are disabled by default.
  */
 require_once './_enableExamples.php';
-if (defined('HeidelpayPhpApiExamples') and HeidelpayPhpApiExamples !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
 
 /*Require the composer autoloader file */
 require_once __DIR__ . '/../../../autoload.php';
 
-$HeidelpayResponse = new  Heidelpay\PhpApi\Response($_POST);
+$HeidelpayResponse = new  Heidelpay\PhpPaymentApi\Response($_POST);
 
 $secretPass = "39542395235ßfsokkspreipsr";
 
@@ -47,11 +47,12 @@ if ($HeidelpayResponse->isSuccess()) {
         /* use this to set the order status to pending */
     }
     /* redirect customer to success page */
-    echo HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpaySuccess.php';
+    echo HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpaySuccess.php';
     
     /*save order */
 } elseif ($HeidelpayResponse->isError()) {
     $error = $HeidelpayResponse->getError();
     
-    echo HeidelpayPhpApiURL.HeidelpayPhpApiFolder.'HeidelpayError.php?errorMessage='.urlencode(htmlspecialchars($error['message']));
+    echo HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpayError.php?errorMessage=' .
+        urlencode(htmlspecialchars($error['message']));
 }

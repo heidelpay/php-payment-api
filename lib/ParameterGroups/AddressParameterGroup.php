@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides every api parameter related to the customers billingaddress data
@@ -16,8 +16,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class AddressParameterGroup extends AbstractParameterGroup
 {
@@ -101,7 +101,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      *
      * @param string $city address city
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
      */
     public function setCity($city)
     {
@@ -114,7 +114,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      *
      * @param string $country iso country code
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
      */
     public function setCountry($country)
     {
@@ -127,7 +127,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      *
      * @param $state string  iso address state code
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
      */
     public function setState($state)
     {
@@ -140,7 +140,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      *
      * @param string $street address street including house number
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
      */
     public function setStreet($street)
     {
@@ -153,7 +153,7 @@ class AddressParameterGroup extends AbstractParameterGroup
      *
      * @param string $zip zip code
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\AddressParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
      */
     public function setZip($zip)
     {

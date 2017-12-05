@@ -1,12 +1,12 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\Adapter;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\Adapter;
 
 use Codeception\Test\Unit;
-use Heidelpay\PhpApi\Response;
-use Heidelpay\PhpApi\Adapter\CurlAdapter;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 use AspectMock\Test as test;
-use Heidelpay\Tests\PhpApi\Helper\Constraints\ArraysMatchConstraint;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Constraints\ArraysMatchConstraint;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**
@@ -63,7 +63,7 @@ class CurlAdapterTest extends Unit
     public function sendPostShouldReturnNokResultIfCurlIsNotLoaded()
     {
         test::func(
-            'Heidelpay\PhpApi\Adapter',
+            'Heidelpay\PhpPaymentApi\Adapter',
             'extension_loaded',
             false
         );
@@ -89,12 +89,12 @@ class CurlAdapterTest extends Unit
     public function sendPostShouldReturnErrorCodeIfCurlInfoHttpCodeIsSet()
     {
         test::func(
-            'Heidelpay\PhpApi\Adapter',
+            'Heidelpay\PhpPaymentApi\Adapter',
             'curl_getinfo',
             ['CURLINFO_HTTP_CODE' => 'MY_TEST_ERROR_CODE']
         );
         test::func(
-            'Heidelpay\PhpApi\Adapter',
+            'Heidelpay\PhpPaymentApi\Adapter',
             'curl_error',
             'Test Error'
         );

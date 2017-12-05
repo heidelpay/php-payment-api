@@ -1,13 +1,13 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
-use Heidelpay\PhpApi\Adapter\CurlAdapter;
-use Heidelpay\PhpApi\Request;
-use Heidelpay\PhpApi\PaymentMethods\SofortPaymentMethod;
-use Heidelpay\PhpApi\Exceptions\UndefinedTransactionModeException;
-use Heidelpay\PhpApi\Response;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
+use Heidelpay\PhpPaymentApi\Request;
+use Heidelpay\PhpPaymentApi\PaymentMethods\SofortPaymentMethod;
+use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\PhpPaymentApi\Response;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * This test class contains tests focusing on the base trait.
@@ -20,7 +20,7 @@ use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
+ * @subpackage PhpPaymentApi
  * @category UnitTest
  */
 class AbstractPaymentMethodTest extends BasePaymentMethodTest

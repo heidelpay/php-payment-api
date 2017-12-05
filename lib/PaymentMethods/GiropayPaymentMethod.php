@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
 /**
  * Giropay Payment Class
@@ -15,8 +15,8 @@ namespace Heidelpay\PhpApi\PaymentMethods;
  * @author  Ronja Wann
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class GiropayPaymentMethod extends AbstractPaymentMethod
 {

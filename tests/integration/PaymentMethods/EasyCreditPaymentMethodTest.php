@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
+namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod;
-use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
  * easyCredit Tests
@@ -36,12 +36,12 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
      *
      * @var string secret
      */
-    protected $secret = 'Heidelpay-PhpApi';
+    protected $secret = 'Heidelpay-PhpPaymentApi';
 
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpApi\PaymentMethods\EasyCreditPaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod
      */
     protected $paymentObject;
 

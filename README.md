@@ -53,6 +53,9 @@ Please visit http://dev.heidelpay.com/heidelpay-php-api/ for the developer docum
 
 This library comes with a set of unit tests. Please be do not run the integration tests on each build.
 
+Run prior to tests:
+`codecept build`
+
 Run unit tests:
 `codecept run unit`
 
@@ -68,11 +71,11 @@ Integration examples can be found in the example folder. Just open the
 
 _enableExamples.php and change
 
-define('HeidelpayPhpApiExamples', FALSE);
+define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', FALSE);
 
 to
 
-define('HeidelpayPhpApiExamples', TRUE);
+define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', TRUE);
 
 Please make sure to switch it off again, after you launch your application.
 

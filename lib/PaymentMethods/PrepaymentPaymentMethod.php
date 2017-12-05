@@ -1,10 +1,10 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 
 /**
  * Prepayment Payment Class
@@ -17,8 +17,8 @@ use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class PrepaymentPaymentMethod
 {

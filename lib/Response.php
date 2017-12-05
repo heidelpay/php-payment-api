@@ -1,11 +1,11 @@
 <?php
 
-namespace Heidelpay\PhpApi;
+namespace Heidelpay\PhpPaymentApi;
 
-use Heidelpay\PhpApi\Exceptions\HashVerificationException;
-use Heidelpay\PhpApi\Exceptions\PaymentFormUrlException;
-use Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup;
-use Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup;
+use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
+use Heidelpay\PhpPaymentApi\Exceptions\PaymentFormUrlException;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
 
 /**
  * Heidelpay response object
@@ -18,22 +18,22 @@ use Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup;
  * @author     Jens Richter
  *
  * @package    Heidelpay
- * @subpackage PhpApi
- * @category   PhpApi
+ * @subpackage PhpPaymentApi
+ * @category   PhpPaymentApi
  */
 class Response extends AbstractMethod
 {
     /**
      * ConnectorParameterGroup
      *
-     * @var \Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup
+     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
      */
     protected $connector = null;
 
     /**
      * ProcessingParameterGroup
      *
-     * @var \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
+     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup
      */
     protected $processing = null;
 
@@ -53,7 +53,7 @@ class Response extends AbstractMethod
     /**
      * Processing getter
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ProcessingParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup
      */
     public function getProcessing()
     {
@@ -67,7 +67,7 @@ class Response extends AbstractMethod
     /**
      * Connector getter
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\ConnectorParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
      */
     public function getConnector()
     {
@@ -83,7 +83,7 @@ class Response extends AbstractMethod
      *
      * @param array $rawResponse
      *
-     * @return \Heidelpay\PhpApi\Response
+     * @return \Heidelpay\PhpPaymentApi\Response
      */
     public function splitArray($rawResponse)
     {

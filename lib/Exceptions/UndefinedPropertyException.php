@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\Exceptions;
+namespace Heidelpay\PhpPaymentApi\Exceptions;
 
 use Exception;
 
@@ -15,8 +15,8 @@ use Exception;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class UndefinedPropertyException extends Exception
 {

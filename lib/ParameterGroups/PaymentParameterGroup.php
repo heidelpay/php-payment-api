@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides the api parameter for payment code
@@ -16,8 +16,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class PaymentParameterGroup extends AbstractParameterGroup
 {
@@ -27,7 +27,7 @@ class PaymentParameterGroup extends AbstractParameterGroup
      * This prarameter will be used to set the payment method and type.
      * Notation is for example OT.PA. The first 2 digits are the payment
      * method, in this case online transfer  and the last are the type
-     * here preautorisation. Normally the PhpApi will set the right payment
+     * here preautorisation. Normally the PhpPaymentApi will set the right payment
      * code, but if you want to learn more about this, have a look in Heidelpay
      * whitelable documentation.
      *
@@ -50,7 +50,7 @@ class PaymentParameterGroup extends AbstractParameterGroup
      *
      * @param string $code
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\PaymentParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup
      */
     public function setCode($code)
     {

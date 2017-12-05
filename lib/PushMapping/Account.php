@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\PushMapping;
+namespace Heidelpay\PhpPaymentApi\PushMapping;
 
 /**
  * XML Push Mapping Class for Account Parameter Group

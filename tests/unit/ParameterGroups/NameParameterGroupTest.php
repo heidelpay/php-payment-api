@@ -1,9 +1,9 @@
 <?php
 
-namespace Heidelpay\Tests\PhpApi\Unit\ParameterGroup;
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
-use Heidelpay\PhpApi\ParameterGroups\NameParameterGroup as Name;
+use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup as Name;
 
 /**
  * Unit test for NameParameterGroup

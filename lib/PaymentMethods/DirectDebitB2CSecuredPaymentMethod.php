@@ -1,17 +1,17 @@
 <?php
 
-namespace Heidelpay\PhpApi\PaymentMethods;
+namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
-use Heidelpay\PhpApi\TransactionTypes\RegistrationTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\DebitTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\DebitOnRegistrationTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RefundTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\ReversalTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\CaptureTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\RebillTransactionType;
-use Heidelpay\PhpApi\TransactionTypes\FinalizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RegistrationTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\DebitOnRegistrationTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\FinalizeTransactionType;
 
 /**
  * Direct debit secured for b2c payment Class
@@ -26,8 +26,8 @@ use Heidelpay\PhpApi\TransactionTypes\FinalizeTransactionType;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class DirectDebitB2CSecuredPaymentMethod
 {

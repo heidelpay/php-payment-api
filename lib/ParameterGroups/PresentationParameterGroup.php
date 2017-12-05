@@ -1,6 +1,6 @@
 <?php
 
-namespace Heidelpay\PhpApi\ParameterGroups;
+namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
  * This class provides the api parameter for amount and currency.
@@ -13,8 +13,8 @@ namespace Heidelpay\PhpApi\ParameterGroups;
  * @author  Jens Richter
  *
  * @package  Heidelpay
- * @subpackage PhpApi
- * @category PhpApi
+ * @subpackage PhpPaymentApi
+ * @category PhpPaymentApi
  */
 class PresentationParameterGroup extends AbstractParameterGroup
 {
@@ -84,7 +84,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      *
      * @param float $amount f.e. 20.12
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
      */
     public function setAmount($amount)
     {
@@ -97,7 +97,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      *
      * @param string $currency f.e USD
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
      */
     public function setCurrency($currency)
     {
@@ -112,7 +112,7 @@ class PresentationParameterGroup extends AbstractParameterGroup
      *
      * @param string $usage f.e. "Order 1232. Thank you for choosing Heidelpay"
      *
-     * @return \Heidelpay\PhpApi\ParameterGroups\PresentationParameterGroup
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
      */
     public function setUsage($usage)
     {
