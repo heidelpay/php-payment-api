@@ -2,7 +2,7 @@
 
 namespace Heidelpay\Tests\PhpApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod as Invoice;
+use Heidelpay\PhpApi\PaymentMethods\SantanderInvoicePaymentMethod;
 use Heidelpay\Tests\PhpApi\Helper\BasePaymentMethodTest;
 
 /**
@@ -45,7 +45,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var Invoice
+     * @var SantanderInvoicePaymentMethod
      */
     protected $paymentObject;
 
@@ -77,10 +77,10 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
-        $Invoice = new Invoice();
-        $Invoice->getRequest()->authentification(...$authentication);
-        $Invoice->getRequest()->customerAddress(...$customerDetails);
-        $this->paymentObject = $Invoice;
+        $paymentMethod = new SantanderInvoicePaymentMethod();
+        $paymentMethod->getRequest()->authentification(...$authentication);
+        $paymentMethod->getRequest()->customerAddress(...$customerDetails);
+        $this->paymentObject = $paymentMethod;
     }
 
     /**
@@ -89,6 +89,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the invoice authorize transaction
      * @group connectionTest
      * @test
+     * @throws \Exception
      */
     public function authorize()
     {
@@ -127,6 +128,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @depends authorize
      * @group connectionTest
      * @test
+     * @throws \Exception
      */
     public function finalize($referenceId)
     {
@@ -160,6 +162,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @depends finalize
      * @group connectionTest
      * @test
+     * @throws \Exception
      */
     public function reversal()
     {
