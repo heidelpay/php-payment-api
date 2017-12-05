@@ -11,7 +11,6 @@
 
 This is the php payment api for heidelpay. The library will help you to easily integrate heidelpay into your application.
 
-
 ## Currently supported payment methods:
 
 * credit card
@@ -31,6 +30,7 @@ This is the php payment api for heidelpay. The library will help you to easily i
 * direct debit secured b2c
 * Santander invoice
 * easyCredit
+* Payolution invoice
 
 ### SYSTEM REQUIREMENTS
 
@@ -38,9 +38,8 @@ php-api requires PHP 5.6 or higher; we recommend using the
 latest stable PHP version whenever possible.
 
 ## SECURITY ADVICE
-If you want to store the output of this library into a database or something, please make sure that your
-application takes care of sql injection, cross-site-scripting (xss) and so on. There is no build in protection
-by now.
+If you want to store the output of this library e.g. into a database, please make sure that your
+application takes care of sql injection, cross-site-scripting (xss) and so on. There is currently no build-in protection.
 
 ## LICENSE
 
@@ -50,9 +49,18 @@ You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 Please visit http://dev.heidelpay.com/heidelpay-php-api/ for the developer documentation.
 
-### UnitTest
+### Unit- and Integration tests
 
-This library comes with a set of unit tests. Please be so kind and do not run all tests on any build.  
+This library comes with a set of unit tests. Please be do not run the integration tests on each build.
+
+Run unit tests:
+`codecept run unit`
+
+Run unit tests with code coverage report, for results see tests/_output/coverage/index.html:
+`codecept run unit --coverage --coverage-html`
+
+Run integration tests:
+`codecept run integration`
 
 ### Examples
 
@@ -66,5 +74,5 @@ to
 
 define('HeidelpayPhpApiExamples', TRUE);
 
-Please make sure to switch it off again, after you lunch your application.
+Please make sure to switch it off again, after you launch your application.
 
