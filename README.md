@@ -34,8 +34,7 @@ This is the php payment api for heidelpay. The library will help you to easily i
 
 ### SYSTEM REQUIREMENTS
 
-php-api requires PHP 5.6 or higher; we recommend using the
-latest stable PHP version whenever possible.
+php-api requires PHP 5.6 or higher; we recommend using the latest stable PHP version whenever possible.
 
 ## SECURITY ADVICE
 If you want to store the output of this library e.g. into a database, please make sure that your
@@ -59,11 +58,14 @@ Run prior to tests:
 Run unit tests:
 `codecept run unit`
 
-Run unit tests with code coverage report, for results see tests/_output/coverage/index.html:
-`codecept run unit --coverage --coverage-html`
-
 Run integration tests:
 `codecept run integration`
+
+Run unit tests with code coverage report:
+`codecept run unit --coverage --coverage-html`
+
+For coverage analysis results see:
+`./tests/_output/coverage/index.html`
 
 ### Examples
 
