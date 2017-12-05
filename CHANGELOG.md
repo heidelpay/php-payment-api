@@ -30,7 +30,10 @@ The following changes are planned for future releases.
 - Refactored existing unit tests.
 - Changed versioning to semantic versioning.
 - Changed repository. 
-- Changed namespaces to new repo name. 
+- Changed namespaces to new repo name.
+
+### Removed
+- Needless parameters from registration()-method call in class "DirectDebitRegistration".
 
 [unreleased]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...HEAD
 [v1.0.0]: https://github.com/heidelpay/php-payment-api/tree/v1.0.0
