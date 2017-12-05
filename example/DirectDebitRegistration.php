@@ -90,11 +90,7 @@ require_once __DIR__ . '/../../../autoload.php';
  /**
   * Set necessary parameters for Heidelpay payment Frame and send a registration request
   */
- $DirectDebit->registration(
-     'https://dev.heidelpay.de', // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
-     'FALSE',                    // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
-     'http://www.heidelpay.de'   // CSSPath - css url to style the Heidelpay payment frame
-     );
+ $DirectDebit->registration();
  ?>
 <html>
 <head>
