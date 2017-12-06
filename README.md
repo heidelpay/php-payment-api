@@ -1,5 +1,5 @@
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/heidelpay/php-payment-api.svg?style=flat-square)](https://packagist.org/packages/heidelpay/php-api)
-[![Build Status](https://travis-ci.org/heidelpay/php-payment-api.svg?branch=master)](https://travis-ci.org/heidelpay/php-api)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/heidelpay/php-payment-api.svg?style=flat-square)](https://packagist.org/packages/heidelpay/php-payment-api)
+[![Build Status](https://travis-ci.org/heidelpay/php-payment-api.svg?branch=master)](https://travis-ci.org/heidelpay/php-payment-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/b1678b370db5462781415cd8800d56f3)](https://www.codacy.com/app/heidelpay/php-payment-api?utm_source=github.com&utm_medium=referral&utm_content=heidelpay/php-payment-api&utm_campaign=Badge_Coverage)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1678b370db5462781415cd8800d56f3)](https://www.codacy.com/app/heidelpay/php-payment-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=heidelpay/php-payment-api&amp;utm_campaign=Badge_Grade)
 [![PHP 5.6](https://img.shields.io/badge/php-5.6-blue.svg)](http://www.php.net)
@@ -34,7 +34,7 @@ This is the php payment api for heidelpay. The library will help you to easily i
 
 ### SYSTEM REQUIREMENTS
 
-php-api requires PHP 5.6 or higher; we recommend using the latest stable PHP version whenever possible.
+php-payment-api requires PHP 5.6 or higher; we recommend using the latest stable PHP version whenever possible.
 
 ## SECURITY ADVICE
 If you want to store the output of this library e.g. into a database, please make sure that your
