@@ -145,6 +145,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Verify registration parameters generated as expected
      *
      * @test
+     *
      * @throws \Exception
      */
     public function registrationParametersShouldBeSetUpAsExpected()
@@ -220,6 +221,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Verify authorize parameters generated as expected
      *
      * @test
+     *
      * @throws \Exception
      */
     public function authorizeParametersShouldBeSetUpAsExpected()
@@ -294,6 +296,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Verify debit parameters generated as expected
      *
      * @test
+     *
      * @throws \Exception
      */
     public function debitParametersShouldBeSetUpAsExpected()
