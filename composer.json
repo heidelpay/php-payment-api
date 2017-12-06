@@ -28,7 +28,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
         "heidelpay/phpdocumentor": "2.9.1",
-        "phpunit/php-code-coverage": "5.2.*",
+        "phpunit/php-code-coverage": "<5.3.*",
         "codeception/codeception": "^2.3",
         "codeception/aspect-mock": "^2.1",
         "codacy/coverage": "^1.4"
