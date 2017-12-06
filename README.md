@@ -1,5 +1,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/heidelpay/php-payment-api.svg?style=flat-square)](https://packagist.org/packages/heidelpay/php-api)
 [![Build Status](https://travis-ci.org/heidelpay/php-payment-api.svg?branch=master)](https://travis-ci.org/heidelpay/php-api)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/b1678b370db5462781415cd8800d56f3)](https://www.codacy.com/app/heidelpay/php-payment-api?utm_source=github.com&utm_medium=referral&utm_content=heidelpay/php-payment-api&utm_campaign=Badge_Coverage)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1678b370db5462781415cd8800d56f3)](https://www.codacy.com/app/heidelpay/php-payment-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=heidelpay/php-payment-api&amp;utm_campaign=Badge_Grade)
 [![PHP 5.6](https://img.shields.io/badge/php-5.6-blue.svg)](http://www.php.net)
 [![PHP 7.0](https://img.shields.io/badge/php-7.0-blue.svg)](http://www.php.net)
