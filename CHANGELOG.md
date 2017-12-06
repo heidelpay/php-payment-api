@@ -13,6 +13,15 @@ The following changes are planned for future releases.
 - Code style issues will be fixed using [PhpStorm](https://www.jetbrains.com/phpstorm/) Plugin [Php Inspections (EA Extended)](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-).
 
 
+
+## [v1.1.0][v1.1.0]
+### Fixed
+- Code style issues.
+
+### Changed
+- Package description, replace, conflict and badges.
+- Replaced hard coded version with constant.
+
 ## [v1.0.0][v1.0.0]
 ### Added
 - Added integration tests.
@@ -35,5 +44,6 @@ The following changes are planned for future releases.
 ### Removed
 - Needless parameters from registration()-method call in class "DirectDebitRegistration".
 
-[unreleased]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/heidelpay/php-payment-api/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/heidelpay/php-payment-api/tree/v1.0.0

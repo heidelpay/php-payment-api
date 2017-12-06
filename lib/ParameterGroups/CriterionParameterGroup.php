@@ -22,6 +22,8 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  */
 class CriterionParameterGroup extends AbstractParameterGroup
 {
+    const SDK_VERSION = 'v1.1.0';
+
     /**
      * Currently used payment methode
      *
@@ -48,7 +50,7 @@ class CriterionParameterGroup extends AbstractParameterGroup
      *
      * @var string version
      */
-    public $sdk_version = 'v1.0.0';
+    public $sdk_version = self::SDK_VERSION;
 
     /**
      * CriterionPaymentMethod getter
@@ -62,9 +64,6 @@ class CriterionParameterGroup extends AbstractParameterGroup
 
     /**
      * CriterionSecret setter
-     *
-     * @var string identificaton transaction id
-     * @var string secret of your application
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup
      *

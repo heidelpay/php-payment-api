@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
@@ -144,6 +145,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Verify registration parameters generated as expected
      *
      * @test
+     * @throws \Exception
      */
     public function registrationParametersShouldBeSetUpAsExpected()
     {
@@ -190,7 +192,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'CRITERION.SECRET' => '73c237c4b5cb4aded8d87cbc85f2f1a5a83f9123d353d9ddb26e54fdfb00b7ac59b188f4' .
                     '44f85de486ee906862d0570ef7c5f4447343f370db0098c3f5867d92',
                 'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-                'CRITERION.SDK_VERSION' => 'v1.0.0',
+                'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
                 'FRONTEND.CSS_PATH' => self::CSS_PATH,
                 'FRONTEND.ENABLED' => 'FALSE',
                 'FRONTEND.MODE' => 'WHITELABEL',
@@ -218,6 +220,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Verify authorize parameters generated as expected
      *
      * @test
+     * @throws \Exception
      */
     public function authorizeParametersShouldBeSetUpAsExpected()
     {
@@ -263,7 +266,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '965e4267bc0d3e9313f07aaff8ac602681d9e1643677dc4c39853022c227ff23ef30ca' .
                 '1f92b955c2f2335becba777fe2c3ad4b036c62deb81d1b2800fb31e655',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => 'v1.0.0',
+            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
             'FRONTEND.CSS_PATH' => self::CSS_PATH,
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
@@ -291,6 +294,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Verify debit parameters generated as expected
      *
      * @test
+     * @throws \Exception
      */
     public function debitParametersShouldBeSetUpAsExpected()
     {
@@ -336,7 +340,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '3fcdb7e573521e40823f5875195f635f4cbdda39c6de0e8a10b816313ace6b4f1d77' .
                 'cfa6b38ea9a575e7b038530caa49966df3794014d8ded8bf5a5f79185e56',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => 'v1.0.0',
+            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
             'FRONTEND.CSS_PATH' => self::CSS_PATH,
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
