@@ -132,6 +132,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
     //</editor-fold>
 
     //<editor-fold desc="Tests">
+
     /**
      * Verify initialize parameters generated as expected
      *
@@ -185,6 +186,6 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
         $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
     }
-    //</editor-fold>
 
+    //</editor-fold>
 }
