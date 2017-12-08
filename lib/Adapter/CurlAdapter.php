@@ -23,7 +23,7 @@ use Heidelpay\PhpPaymentApi\Response;
  * @subpackage PhpPaymentApi
  * @category PhpPaymentApi
  */
-class CurlAdapter
+class CurlAdapter implements HttpAdapterInterface
 {
     /**
      * send post request to payment server

@@ -12,6 +12,7 @@ use Codeception\Lib\Console\Output;
 use Codeception\Test\Unit;
 use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 use AspectMock\Test as test;
+use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
 use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod;
 use Heidelpay\PhpPaymentApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
@@ -114,11 +115,13 @@ class BasePaymentMethodTest extends Unit
     }
 
     /**
-     * @return InstanceProxy|CurlAdapter
+     * @return InstanceProxy|HttpAdapterInterface
+     *
+     * @throws \Exception
      */
     protected function mockCurlAdapter()
     {
-        /** @var CurlAdapter|InstanceProxy $curlMock */
+        /** @var HttpAdapterInterface|InstanceProxy $curlMock */
         $curlMock =  test::double(
             new CurlAdapter,
             ['sendPost' => [[], new Response()]]

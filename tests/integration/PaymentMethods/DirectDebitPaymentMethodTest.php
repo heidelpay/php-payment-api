@@ -106,6 +106,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the direct debit transaction
      * @group connectionTest
      * @test
+     *
+     * @throws \Exception
      */
     public function authorize()
     {
@@ -145,6 +147,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string
      *
      * @return string
+     *
+     * @throws \Exception
      */
     public function capture($referenceId = null)
     {
@@ -171,6 +175,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the direct debit transaction
      * @group connectionTest
      * @test
+     *
+     * @throws \Exception
      */
     public function debit()
     {
@@ -204,6 +210,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @depends debit
      * @test
      * @group connectionTest
+     *
+     * @throws \Exception
      */
     public function refund($referenceId = null)
     {
@@ -233,6 +241,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the direct debit transaction
      * @group connectionTest
      * @test
+     *
+     * @throws \Exception
      */
     public function registration()
     {
@@ -266,6 +276,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @depends authorize
      * @test
      * @group connectionTest
+     *
+     * @throws \Exception
      */
     public function reversal($referenceId = null)
     {
@@ -295,6 +307,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @depends debit
      * @test
      * @group connectionTest
+     *
+     * @throws \Exception
      */
     public function rebill($referenceId = null)
     {
@@ -324,6 +338,8 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * @depends registration
      * @test
      * @group  connectionTest
+     *
+     * @throws \Exception
      */
     public function authorizeOnRegistration($referenceId = null)
     {

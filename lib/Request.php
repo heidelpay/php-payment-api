@@ -3,6 +3,7 @@
 namespace Heidelpay\PhpPaymentApi;
 
 use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
+use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
 
 /**
  * Heidelpay request object
@@ -176,9 +177,9 @@ class Request extends AbstractMethod
     /**
      * Send request to payment api
      *
-     * @param string      $uri     payment api url
-     * @param array       $post    heidelpay request parameter
-     * @param CurlAdapter $adapter
+     * @param string                    $uri     payment api url
+     * @param array                     $post    heidelpay request parameter
+     * @param HttpAdapterInterface|null $adapter
      *
      * @return array response|\Heidelpay\PhpPaymentApi\Response
      */

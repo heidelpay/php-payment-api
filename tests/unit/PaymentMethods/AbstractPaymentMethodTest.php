@@ -92,6 +92,8 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
      * getPaymentUrl test
      *
      * @test
+     *
+     * @throws \Exception
      */
     public function getPaymentUrl()
     {
@@ -103,6 +105,8 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
      * getPaymentUrl exception test
      *
      * @test
+     *
+     * @throws \Exception
      */
     public function getPaymentUrlException()
     {

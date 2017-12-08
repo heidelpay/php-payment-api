@@ -2,6 +2,7 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
 use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
 
@@ -45,7 +46,7 @@ trait BasicPaymentMethodTrait
     /**
      * HTTP Adapter for payment connection
      *
-     * @var \Heidelpay\PhpPaymentApi\Adapter\CurlAdapter
+     * @var HttpAdapterInterface
      */
     protected $_adapter = null;
 
@@ -134,8 +135,7 @@ trait BasicPaymentMethodTrait
     /**
      * Set a HTTP Adapter for payment communication
      *
-     * @param \Heidelpay\PhpPaymentApi\Adapter\CurlAdapter
-     * @param mixed $adapter
+     * @param HttpAdapterInterface $adapter
      */
     public function setAdapter($adapter)
     {
@@ -145,7 +145,7 @@ trait BasicPaymentMethodTrait
     /**
      * Get HTTP Adapter for payment communication
      *
-     * @return object
+     * @return HttpAdapterInterface
      */
     public function getAdapter()
     {
