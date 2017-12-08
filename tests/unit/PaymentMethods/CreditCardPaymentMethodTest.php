@@ -109,6 +109,8 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
     /**
      * Set up function will create a payment method object for each test case
+     *
+     * @throws \Exception
      */
     // @codingStandardsIgnoreStart
     public function _before()

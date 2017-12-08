@@ -76,6 +76,8 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
     /**
      * Set up function will create a payment method object for each test case
+     *
+     * @throws \Exception
      */
     // @codingStandardsIgnoreStart
     public function _before()
@@ -165,7 +167,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         call_user_func([$this->paymentObject, $method], $parameters);
 
         /** @var InstanceProxy $adapter */
-        $adapter = $this->paymentObject->getAdapter();
+        $adapter = $this->getAdapterMock();
         $adapter->verifyInvokedOnce('sendPost');
     }
 

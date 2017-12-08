@@ -72,6 +72,11 @@ class BasePaymentMethodTest extends Unit
     private $logger;
 
     /**
+     * @var InstanceProxy $adapterMock
+     */
+    private $adapterMock;
+
+    /**
      * BasePaymentMethodTest constructor.
      *
      * @param null   $name
@@ -86,6 +91,14 @@ class BasePaymentMethodTest extends Unit
         $this->customerData = new Customer();
 
         parent::__construct($name, $data, $dataName);
+    }
+
+    /**
+     * @return InstanceProxy
+     */
+    public function getAdapterMock()
+    {
+        return $this->adapterMock;
     }
 
     /**
@@ -127,7 +140,9 @@ class BasePaymentMethodTest extends Unit
             ['sendPost' => [[], new Response()]]
         );
 
-        $this->paymentObject->setAdapter($curlMock);
+        $this->paymentObject->setAdapter($curlMock->getObject());
+
+        $this->adapterMock = $curlMock;
 
         return $curlMock;
     }
