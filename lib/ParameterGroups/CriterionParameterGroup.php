@@ -105,4 +105,22 @@ class CriterionParameterGroup extends AbstractParameterGroup
     {
         return $this->sdk_name;
     }
+
+    /**
+     * Getter function for custom criterion fields.
+     *
+     * @param string $fieldName
+     *
+     * @return mixed
+     */
+    public function get($fieldName)
+    {
+        $field = strtolower($fieldName);
+
+        if (isset($this->$field)) {
+            return $this->$field;
+        }
+
+        return null;
+    }
 }

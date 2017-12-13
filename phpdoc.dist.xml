@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdocumentor>
-	<title>php-api</title>
+	<title>php-payment-api</title>
     <parser>
         <default-package-name>PHP Payment Api</default-package-name>
         <target>./docs/</target>

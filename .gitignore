@@ -4,4 +4,3 @@ composer.lock
 docs/
 vendor/
 .idea/
-tests/_support/*Tester.php

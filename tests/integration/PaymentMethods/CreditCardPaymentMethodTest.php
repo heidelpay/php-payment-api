@@ -134,6 +134,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $CreditCard = new CreditCardPaymentMethod();
         $CreditCard->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
         $CreditCard->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
+        $CreditCard->getRequest()->getCriterion()->set('TestValue', 'test');
         $CreditCard->_dryRun = true;
 
         $this->paymentObject = $CreditCard;
@@ -184,6 +185,8 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'registration is pending');
         $this->assertFalse($response->isError(), 'registration failed : ' . print_r($response->getError(), 1));
+
+        $this->assertEquals('test', $response->getCriterion()->get('TestValue'));
 
         return (string)$response->getPaymentReferenceId();
     }

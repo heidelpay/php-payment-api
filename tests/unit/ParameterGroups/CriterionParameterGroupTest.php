@@ -54,4 +54,26 @@ class CriterionParameterGroupTest extends Test
 
         $this->assertEquals($value, $Criterion->getPaymentMethod());
     }
+
+    /**
+     * Test method to check if custom parameters can be set and retrieved.
+     *
+     * @test
+     */
+    public function customCriterionSetterAndGetter()
+    {
+        $criterion = new Criterion();
+
+        $fieldName = 'testval';
+        $value = 'Test Value';
+
+        $criterion->set($fieldName, $value);
+        $this->assertEquals($value, $criterion->get($fieldName));
+
+        $fieldName2 = 'test_value_two';
+        $value2 = 'Test Value 2';
+
+        $criterion->set($fieldName2, $value2);
+        $this->assertEquals($value2, $criterion->get($fieldName2));
+    }
 }
