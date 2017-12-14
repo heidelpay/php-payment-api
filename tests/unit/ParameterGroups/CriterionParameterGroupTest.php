@@ -56,11 +56,12 @@ class CriterionParameterGroupTest extends Test
     }
 
     /**
-     * Test method to check if custom parameters can be set and retrieved.
+     * Test method to check if custom properties
+     * can be set and retrieved.
      *
      * @test
      */
-    public function customCriterionSetterAndGetter()
+    public function getterShouldReturnValuesSetByMagicSetterMethod()
     {
         $criterion = new Criterion();
 
@@ -75,5 +76,18 @@ class CriterionParameterGroupTest extends Test
 
         $criterion->set($fieldName2, $value2);
         $this->assertEquals($value2, $criterion->get($fieldName2));
+    }
+
+    /**
+     * Test that checks if the get() method returns null
+     * when accessing a non-existing property.
+     *
+     * @test
+     */
+    public function getterShouldReturnNullOnNonExistingProperty()
+    {
+        $criterion = new Criterion();
+
+        $this->assertNull($criterion->get('nonExistingProperty'));
     }
 }

@@ -206,4 +206,21 @@ class RequestTest extends Test
 
         $this->assertEquals($value, $request->getRequest()->getVersion());
     }
+
+    /**
+     * Test that checks if a set criterion property returns the expected value.
+     *
+     * @test
+     */
+    public function requestCriterionParameterGroupGetterShouldReturnSetValue()
+    {
+        $request = new Request();
+
+        $fieldName = 'test_val';
+        $value = 'Test Value';
+
+        $request->getCriterion()->set($fieldName, $value);
+
+        $this->assertEquals($value, $request->getCriterion()->get($fieldName));
+    }
 }

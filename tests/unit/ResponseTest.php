@@ -100,6 +100,7 @@ class ResponseTest extends Test
             'RISKINFORMATION_ORDERCOUNT' => '5',
             'RISKINFORMATION_GUESTCHECKOUT' => 'FALSE',
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
+            'CRITERION_TEST_VALUE' => 'Test Value',
         );
 
         $this->responseObject = new Response($responseSample);
@@ -359,5 +360,16 @@ class ResponseTest extends Test
         $holder = $this->responseObject->getConnector()->getAccountHolder();
 
         $this->assertSame('Test Account Holder', $holder);
+    }
+
+    /**
+     * Verify that the CriterionParameterGroup in the Response contains custom values.
+     *
+     * @test
+     */
+    public function responseCriterionShouldContainTestValueCustomProperty()
+    {
+        $this->assertSame('Test Value', $this->responseObject->getCriterion()->get('test_value'));
+        $this->assertSame('Test Value', $this->responseObject->getCriterion()->get('Test_Value'));
     }
 }

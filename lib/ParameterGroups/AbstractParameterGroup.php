@@ -34,8 +34,6 @@ abstract class AbstractParameterGroup implements ParameterGroupInterface
      * @param string $key
      * @param string $value
      *
-     * @throws \Exception in case of unknown property
-     *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AbstractParameterGroup
      */
     public function set($key, $value)
