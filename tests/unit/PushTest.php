@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
 use Heidelpay\PhpPaymentApi\Push;
 use Heidelpay\PhpPaymentApi\PushMapping\Account;
 use Heidelpay\PhpPaymentApi\PushMapping\Connector;
@@ -157,7 +158,7 @@ class PushTest extends Test
             $response->getProcessing()->getReturn()
         );
         $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('23.12', $response->getPresentation()->getAmount());
         $this->assertNotEquals('12.34', $response->getPresentation()->getAmount());
@@ -220,7 +221,7 @@ class PushTest extends Test
         $this->assertEquals('000.200.000', $response->getProcessing()->getReturnCode());
         $this->assertEquals('Transaction pending', $response->getProcessing()->getReturn());
         $this->assertEquals('80', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('150.37', $response->getPresentation()->getAmount());
         $this->assertNotEquals('15.37', $response->getPresentation()->getAmount());
@@ -286,7 +287,7 @@ class PushTest extends Test
             $response->getProcessing()->getReturn()
         );
         $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('51.00', $response->getPresentation()->getAmount());
         $this->assertNotEquals('510.00', $response->getPresentation()->getAmount());
@@ -334,7 +335,7 @@ class PushTest extends Test
             $response->getProcessing()->getReturn()
         );
         $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('56.99', $response->getPresentation()->getAmount());
         $this->assertNotEquals('57.00', $response->getPresentation()->getAmount());
@@ -405,7 +406,7 @@ class PushTest extends Test
             $response->getProcessing()->getReturn()
         );
         $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('107.00', $response->getPresentation()->getAmount());
         $this->assertNotEquals('106.99', $response->getPresentation()->getAmount());

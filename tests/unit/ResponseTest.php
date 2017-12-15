@@ -102,7 +102,8 @@ class ResponseTest extends Test
             'RISKINFORMATION_GUESTCHECKOUT' => 'FALSE',
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
             'CRITERION_TEST_VALUE' => 'Test Value',
-            'JUNK_HI' => 'Test',
+            'INVALID_PROP' => 'Invalid',
+            'INVALIDPROP' => '0',
         );
 
         $this->responseObject = new Response($responseSample);

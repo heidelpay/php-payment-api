@@ -39,4 +39,14 @@ interface MethodInterface extends JsonSerializable
      * @throws JsonParserException
      */
     public static function fromJson($json);
+
+    /**
+     * Takes an array, e.g. a POST response and returns
+     * a PHP object instance representation of it.
+     *
+     * @param array $post
+     *
+     * @return AbstractMethod
+     */
+    public static function fromPost(array $post);
 }

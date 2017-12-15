@@ -4,14 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## [v1.2.0][v1.2.0]
+## [v1.3.0][v1.3.0]
 ## Added
-- HttpAdapterInterface to allow injecting a custom http adapter.
-- Criterion get() method for custom properties
+- `fromJson()` and `fromPost()` static methods to instantiate Response and Request objects with a static call.
+- `RESULT_ACK` and `RESULT_NOK` constants inside of `ProcessingParameterGroup`
 
 ## Changed
-- Refactored Requests send method to only create a CurlAdapter object when needed.
-- Refactored unit tests to inject a CurlAdapter object instead of an InterfaceProxy object.
+- Declared `Response::splitArray()` as deprecated in favor of `fromPost()`.
+
+
+## [v1.2.0][v1.2.0]
+## Added
+- `HttpAdapterInterface` to allow injecting a custom http adapter.
+- Criterion `get()` method for custom properties
+
+## Changed
+- Refactored Requests send method to only create a `CurlAdapter` object when needed.
+- Refactored unit tests to inject a `CurlAdapter` object instead of an InterfaceProxy object.
 
 
 ## [v1.1.0][v1.1.0]
@@ -44,8 +53,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Changed namespaces to new repo name.
 
 ### Removed
-- Needless parameters from registration()-method call in class "DirectDebitRegistration".
+- Needless parameters from `registration()`-method call in class `DirectDebitRegistration`.
 
+[v1.3.0]: https://github.com/heidelpay/php-payment-api/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/heidelpay/php-payment-api/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/heidelpay/php-payment-api/tree/v1.0.0

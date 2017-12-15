@@ -7,7 +7,6 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup;
-use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
@@ -71,11 +70,6 @@ abstract class AbstractMethod implements MethodInterface
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
      */
     protected $contact;
-
-    /**
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
-     */
-    protected $connector;
 
     /**
      * CriterionParameterGroup
@@ -209,20 +203,6 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         return $this->config;
-    }
-
-    /**
-     * Connector getter
-     *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
-     */
-    public function getConnector()
-    {
-        if ($this->connector === null) {
-            return $this->connector = new ConnectorParameterGroup();
-        }
-
-        return $this->connector;
     }
 
     /**
@@ -426,13 +406,24 @@ abstract class AbstractMethod implements MethodInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public static function fromPost(array $post)
+    {
+        $instance = new static();
+        $instance->mapFromPost($post);
+
+        return $instance;
+    }
+
+    /**
      * Maps a JSON string into single ParameterGroup instances.
      *
      * @param string $json
      *
      * @throws JsonParserException
      */
-    private function mapFromJson($json)
+    protected function mapFromJson($json)
     {
         $mapClass = json_decode($json);
 
@@ -453,6 +444,27 @@ abstract class AbstractMethod implements MethodInterface
                 foreach ($parameterGroupObject as $property => $value) {
                     $this->{$parameterGroupGetterFunc}()->set($property, $value);
                 }
+            }
+        }
+    }
+
+    /**
+     * Maps a POST array into single ParameterGroup instances.
+     *
+     * @param array $post
+     */
+    protected function mapFromPost(array $post)
+    {
+        if (empty($post)) {
+            return;
+        }
+
+        foreach ($post as $paramGroupKey => $value) {
+            @list($paramGroupName, $paramGroupProp) = explode('_', strtolower($paramGroupKey), 2);
+
+            $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
+            if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {
+                $this->{$parameterGroupGetterFunc}()->set($paramGroupProp, $value);
             }
         }
     }

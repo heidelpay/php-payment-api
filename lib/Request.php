@@ -58,10 +58,10 @@ class Request extends AbstractMethod
         $this->getUser()->setLogin($userLogin);
         $this->getUser()->setPassword($userPassword);
         $this->getTransaction()->setChannel($transactionChannel);
-        $this->getTransaction()->setMode("LIVE");
+        $this->getTransaction()->setMode('LIVE');
 
         if ($sandboxRequest) {
-            $this->getTransaction()->setMode("CONNECTOR_TEST");
+            $this->getTransaction()->setMode('CONNECTOR_TEST');
         }
         return $this;
     }
@@ -74,7 +74,7 @@ class Request extends AbstractMethod
      *
      * @return \Heidelpay\PhpPaymentApi\Request
      */
-    public function async($languageCode = "EN", $responseUrl = null)
+    public function async($languageCode = 'EN', $responseUrl = null)
     {
         $this->getFrontend()->setLanguage($languageCode);
 
@@ -142,7 +142,7 @@ class Request extends AbstractMethod
         $this->getIdentification()->setTransactionid($shopIdentifier);
         $this->getPresentation()->setAmount($amount);
         $this->getPresentation()->setCurrency($currency);
-        if ($secret !== null and $shopIdentifier !== null) {
+        if ($secret !== null && $shopIdentifier !== null) {
             $this->getCriterion()->setSecret($shopIdentifier, $secret);
         }
 

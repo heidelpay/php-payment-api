@@ -22,7 +22,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  */
 class CriterionParameterGroup extends AbstractParameterGroup
 {
-    const SDK_VERSION = 'v1.1.0';
+    const SDK_VERSION = 'v1.3.0';
 
     /**
      * Currently used payment methode

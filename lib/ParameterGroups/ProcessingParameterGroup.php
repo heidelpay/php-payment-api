@@ -19,6 +19,16 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 class ProcessingParameterGroup extends AbstractParameterGroup
 {
     /**
+     * @var string result string for a 'acknowledged' transaction
+     */
+    const RESULT_ACK = 'ACK';
+
+    /**
+     * @var string result string for a 'not ok' transaction
+     */
+    const RESULT_NOK = 'NOK';
+
+    /**
      * @var string code
      */
     public $code;
