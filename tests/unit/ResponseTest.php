@@ -426,4 +426,15 @@ class ResponseTest extends Test
         $response = Response::fromJson($invalidJson);
         $response->getError();
     }
+
+    /**
+     * Test that checks if the static fromPost method returns an instance of Response.
+     *
+     * @test
+     */
+    public function staticFromPostMethodShouldReturnNewResponseInstanceOnEmptyArray()
+    {
+        $request = Response::fromPost([]);
+        $this->assertEquals(Response::class, get_class($request));
+    }
 }

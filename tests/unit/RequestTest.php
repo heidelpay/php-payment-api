@@ -226,24 +226,24 @@ class RequestTest extends Test
     }
 
     /**
-     * Test that checks if the static fromJson method returns an instance of Response.
+     * Test that checks if the static fromJson method returns an instance of Request.
      *
      * @test
      */
-    public function staticFromJsonMethodShouldReturnNewResponseInstanceOnEmptyJsonObject()
+    public function staticFromJsonMethodShouldReturnNewRequestInstanceOnEmptyJsonObject()
     {
-        $response = Request::fromJson('{}');
-        $this->assertEquals(Request::class, get_class($response));
+        $request = Request::fromJson('{}');
+        $this->assertEquals(Request::class, get_class($request));
     }
 
     /**
-     * Test that checks if an existing Response instance and an instance
+     * Test that checks if an existing Request instance and an instance
      * created by the fromJson mapper are matching ParameterGroup
      * instances and their respective properies and values.
      *
      * @test
      */
-    public function mappedJsonResponseAndToJsonRepresentationOfResponseObjectMustBeEqual()
+    public function mappedJsonRequestAndToJsonRepresentationOfRequestObjectMustBeEqual()
     {
         $request = new Request();
 
@@ -264,5 +264,16 @@ class RequestTest extends Test
         $this->expectException(JsonParserException::class);
         $request = Request::fromJson($invalidJson);
         $request->getBasket();
+    }
+
+    /**
+     * Test that checks if the static fromPost method returns an instance of Request.
+     *
+     * @test
+     */
+    public function staticFromPostMethodShouldReturnNewRequestInstanceOnEmptyArray()
+    {
+        $request = Request::fromPost([]);
+        $this->assertEquals(Request::class, get_class($request));
     }
 }

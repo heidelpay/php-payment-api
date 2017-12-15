@@ -434,10 +434,6 @@ abstract class AbstractMethod implements MethodInterface
             );
         }
 
-        /**
-         * @var string $parameterGroupName
-         * @var mixed $parameterGroupObject
-         */
         foreach ($mapClass as $parameterGroupName => $parameterGroupObject) {
             $parameterGroupGetterFunc = 'get' . ucfirst($parameterGroupName);
             if (!empty($parameterGroupObject) && is_callable([$this, $parameterGroupGetterFunc])) {
