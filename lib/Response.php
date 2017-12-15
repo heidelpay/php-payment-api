@@ -120,7 +120,7 @@ class Response extends AbstractMethod
      */
     public function isError()
     {
-        return $this->getProcessing()->getResult() === ProcessingParameterGroup::RESULT_NOK;
+        return $this->getProcessing()->getResult() !== ProcessingParameterGroup::RESULT_ACK;
     }
 
     /**
