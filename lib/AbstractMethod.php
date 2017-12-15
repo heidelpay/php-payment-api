@@ -2,10 +2,12 @@
 
 namespace Heidelpay\PhpPaymentApi;
 
+use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
@@ -40,77 +42,82 @@ abstract class AbstractMethod implements MethodInterface
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
      */
-    protected $account = null;
+    protected $account;
 
     /**
      * AddressParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
      */
-    protected $address = null;
+    protected $address;
 
     /**
      * BasketParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
      */
-    protected $basket = null;
+    protected $basket;
 
     /**
      * ConfigParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup
      */
-    protected $config = null;
+    protected $config;
 
     /**
      * ContactParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
      */
-    protected $contact = null;
+    protected $contact;
+
+    /**
+     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
+     */
+    protected $connector;
 
     /**
      * CriterionParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup
      */
-    protected $criterion = null;
+    protected $criterion;
 
     /**
      * FrontendParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
-    protected $frontend = null;
+    protected $frontend;
 
     /**
      * IdentificationParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */
-    protected $identification = null;
+    protected $identification;
 
     /**
      * NameParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
-    protected $name = null;
+    protected $name;
 
     /**
      * PaymentParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup
      */
-    protected $payment = null;
+    protected $payment;
 
     /**
      * PresentationParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
      */
-    protected $presentation = null;
+    protected $presentation;
 
 
     /**
@@ -118,35 +125,35 @@ abstract class AbstractMethod implements MethodInterface
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup
      */
-    protected $request = null;
+    protected $request;
 
     /**
      * RiskInformationParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
-    protected $riskinformation = null;
+    protected $riskinformation;
 
     /**
      * SecurityParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup
      */
-    protected $security = null;
+    protected $security;
 
     /**
      * TransactionParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
      */
-    protected $transaction = null;
+    protected $transaction;
 
     /**
      * UserParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup
      */
-    protected $user = null;
+    protected $user;
 
     /**
      * Account getter
@@ -158,6 +165,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->account === null) {
             return $this->account = new AccountParameterGroup();
         }
+
         return $this->account;
     }
 
@@ -171,6 +179,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->address === null) {
             return $this->address = new AddressParameterGroup();
         }
+
         return $this->address;
     }
 
@@ -184,6 +193,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->basket === null) {
             return $this->basket = new BasketParameterGroup();
         }
+
         return $this->basket;
     }
 
@@ -197,7 +207,22 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->config === null) {
             return $this->config = new ConfigParameterGroup();
         }
+
         return $this->config;
+    }
+
+    /**
+     * Connector getter
+     *
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
+     */
+    public function getConnector()
+    {
+        if ($this->connector === null) {
+            return $this->connector = new ConnectorParameterGroup();
+        }
+
+        return $this->connector;
     }
 
     /**
@@ -210,6 +235,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->contact === null) {
             return $this->contact = new ContactParameterGroup();
         }
+
         return $this->contact;
     }
 
@@ -223,6 +249,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->criterion === null) {
             return $this->criterion = new CriterionParameterGroup();
         }
+
         return $this->criterion;
     }
 
@@ -236,6 +263,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->frontend === null) {
             return $this->frontend = new FrontendParameterGroup();
         }
+
         return $this->frontend;
     }
 
@@ -249,6 +277,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->identification === null) {
             return $this->identification = new IdentificationParameterGroup();
         }
+
         return $this->identification;
     }
 
@@ -262,6 +291,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->name === null) {
             return $this->name = new NameParameterGroup();
         }
+
         return $this->name;
     }
 
@@ -275,6 +305,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->payment === null) {
             return $this->payment = new PaymentParameterGroup();
         }
+
         return $this->payment;
     }
 
@@ -288,6 +319,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->presentation === null) {
             return $this->presentation = new PresentationParameterGroup();
         }
+
         return $this->presentation;
     }
 
@@ -301,6 +333,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->request === null) {
             return $this->request = new RequestParameterGroup();
         }
+
         return $this->request;
     }
 
@@ -314,6 +347,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->riskinformation === null) {
             return $this->riskinformation = new RiskInformationParameterGroup();
         }
+
         return $this->riskinformation;
     }
 
@@ -327,6 +361,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->security === null) {
             return $this->security = new SecurityParameterGroup();
         }
+
         return $this->security;
     }
 
@@ -340,6 +375,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->transaction === null) {
             return $this->transaction = new TransactionParameterGroup();
         }
+
         return $this->transaction;
     }
 
@@ -353,6 +389,7 @@ abstract class AbstractMethod implements MethodInterface
         if ($this->user === null) {
             return $this->user = new UserParameterGroup();
         }
+
         return $this->user;
     }
 
@@ -375,5 +412,48 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         return $return;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function fromJson($json)
+    {
+        $instance = new static();
+        $instance->mapFromJson($json);
+
+        return $instance;
+    }
+
+    /**
+     * Maps a JSON string into single ParameterGroup instances.
+     *
+     * @param string $json
+     *
+     * @throws JsonParserException
+     */
+    private function mapFromJson($json)
+    {
+        $mapClass = json_decode($json);
+
+        if ($mapClass === null) {
+            throw new JsonParserException(
+                'Error during JSON parsing! Last JSON error message: ' . json_last_error_msg(),
+                json_last_error()
+            );
+        }
+
+        /**
+         * @var string $parameterGroupName
+         * @var mixed $parameterGroupObject
+         */
+        foreach ($mapClass as $parameterGroupName => $parameterGroupObject) {
+            $parameterGroupGetterFunc = 'get' . ucfirst($parameterGroupName);
+            if (!empty($parameterGroupObject) && is_callable([$this, $parameterGroupGetterFunc])) {
+                foreach ($parameterGroupObject as $property => $value) {
+                    $this->{$parameterGroupGetterFunc}()->set($property, $value);
+                }
+            }
+        }
     }
 }

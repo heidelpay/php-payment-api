@@ -2,6 +2,7 @@
 
 namespace Heidelpay\PhpPaymentApi;
 
+use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use JsonSerializable;
 
 /**
@@ -26,4 +27,16 @@ interface MethodInterface extends JsonSerializable
      * @return string
      */
     public function toJson($options = 0);
+
+    /**
+     * Takes a JSON representation of an instance and returns
+     * a PHP object instance representation of it.
+     *
+     * @param string $json
+     *
+     * @return AbstractMethod
+     *
+     * @throws JsonParserException
+     */
+    public static function fromJson($json);
 }

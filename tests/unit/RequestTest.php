@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 
@@ -222,5 +223,46 @@ class RequestTest extends Test
         $request->getCriterion()->set($fieldName, $value);
 
         $this->assertEquals($value, $request->getCriterion()->get($fieldName));
+    }
+
+    /**
+     * Test that checks if the static fromJson method returns an instance of Response.
+     *
+     * @test
+     */
+    public function staticFromJsonMethodShouldReturnNewResponseInstanceOnEmptyJsonObject()
+    {
+        $response = Request::fromJson('{}');
+        $this->assertEquals(Request::class, get_class($response));
+    }
+
+    /**
+     * Test that checks if an existing Response instance and an instance
+     * created by the fromJson mapper are matching ParameterGroup
+     * instances and their respective properies and values.
+     *
+     * @test
+     */
+    public function mappedJsonResponseAndToJsonRepresentationOfResponseObjectMustBeEqual()
+    {
+        $request = new Request();
+
+        $mappedRequest = Request::fromJson($request->toJson());
+        $this->assertEquals($request, $mappedRequest);
+    }
+
+    /**
+     * Test that checks if a JsonParserException will be thrown when an
+     * invalid JSON string is being provided to the fromJson method.
+     *
+     * @test
+     */
+    public function fromJsonMapperShouldThrowExceptionOnInvalidJson()
+    {
+        $invalidJson = '{"test: 0}';
+
+        $this->expectException(JsonParserException::class);
+        $request = Request::fromJson($invalidJson);
+        $request->getBasket();
     }
 }
