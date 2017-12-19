@@ -18,15 +18,28 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  */
 class ProcessingParameterGroup extends AbstractParameterGroup
 {
-    /**
-     * @var string result string for a 'acknowledged' transaction
-     */
     const RESULT_ACK = 'ACK';
-
-    /**
-     * @var string result string for a 'not ok' transaction
-     */
     const RESULT_NOK = 'NOK';
+
+    const STATUS_CODE_SUCCESS = '00';
+    const STATUS_CODE_NEUTRAL = '40';
+    const STATUS_CODE_WAITING_BANK = '59';
+    const STATUS_CODE_REJECTED_BANK = '60';
+    const STATUS_CODE_REJECTED_RISK = '65';
+    const STATUS_CODE_REJECTED_VALIDATION = '70';
+    const STATUS_CODE_WAITING = '80';
+    const STATUS_CODE_NEW = '90';
+
+    const REASON_CODE_REFERENCE_ERROR = '30';
+    const REASON_CODE_ACCOUNT_VALIDATION = '40';
+    const REASON_CODE_CC_ACCOUNT_VALIDATION = self::REASON_CODE_ACCOUNT_VALIDATION;
+    const REASON_CODE_BLACKLIST_VALIDATION = '50';
+    const REASON_CODE_ADDRESS_ERROR = '60';
+    const REASON_CODE_COMMUNICATION_ERROR = '70';
+    const REASON_CODE_EXTERNAL_RISK_ERROR = '78';
+    const REASON_CODE_3DSECURE_ERROR = '85';
+    const REASON_CODE_ASYNC_ERROR = '90';
+    const REASON_CODE_AUTHORIZATION_VALIDATION = '95';
 
     /**
      * @var string code

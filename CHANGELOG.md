@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## Changed
 - Declared `Response::splitArray()` as deprecated in favor of `fromPost()`.
+- Clearified the exception message in `verifySecurityHash()` (Response script/page should only be called by heidelpay)
 
 
 ## [v1.2.0][v1.2.0]

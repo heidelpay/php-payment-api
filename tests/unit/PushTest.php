@@ -157,7 +157,7 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingParameterGroup::STATUS_CODE_NEW, $response->getProcessing()->getStatusCode());
         $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('23.12', $response->getPresentation()->getAmount());
@@ -220,7 +220,7 @@ class PushTest extends Test
 
         $this->assertEquals('000.200.000', $response->getProcessing()->getReturnCode());
         $this->assertEquals('Transaction pending', $response->getProcessing()->getReturn());
-        $this->assertEquals('80', $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingParameterGroup::STATUS_CODE_WAITING, $response->getProcessing()->getStatusCode());
         $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('150.37', $response->getPresentation()->getAmount());
@@ -286,7 +286,7 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingParameterGroup::STATUS_CODE_NEW, $response->getProcessing()->getStatusCode());
         $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('51.00', $response->getPresentation()->getAmount());
@@ -334,7 +334,7 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingParameterGroup::STATUS_CODE_NEW, $response->getProcessing()->getStatusCode());
         $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('56.99', $response->getPresentation()->getAmount());
@@ -405,7 +405,7 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingParameterGroup::STATUS_CODE_NEW, $response->getProcessing()->getStatusCode());
         $this->assertEquals(ProcessingParameterGroup::RESULT_ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('107.00', $response->getPresentation()->getAmount());
@@ -484,7 +484,10 @@ class PushTest extends Test
 
         // implements the tested method
         $connector = new Processing();
-        $this->assertEquals(90, $connector->getXmlObjectFieldAttribute($xmlElement, 'Status:code'));
+        $this->assertEquals(
+            ProcessingParameterGroup::STATUS_CODE_NEW,
+            $connector->getXmlObjectFieldAttribute($xmlElement, 'Status:code')
+        );
     }
 
     /**

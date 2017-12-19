@@ -110,7 +110,7 @@ class Response extends AbstractMethod
      */
     public function isPending()
     {
-        return $this->getProcessing()->getStatusCode() === '80';
+        return $this->getProcessing()->getStatusCode() === ProcessingParameterGroup::STATUS_CODE_WAITING;
     }
 
     /**
