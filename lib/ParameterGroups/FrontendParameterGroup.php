@@ -183,7 +183,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * credit and debit card. Please have a look into our documentation
      * for the allowed ccs parameter
      *
-     * @param string $css_path url to a css file f.e https://dev.heidelpay.de/heidelpay_iframe.css
+     * @param string $css_path url to a css file, e.g. https://dev.heidelpay.de/heidelpay_iframe.css
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
@@ -242,9 +242,9 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * Setter for payment frame origin
      *
      * for the credit and debit card iframe you have to set the source of the javascipt
-     * post request. f.e. http://dev.heidelpay.com
+     * post request., e.g. http://dev.heidelpay.com
      *
-     * @param string $payment_frame_origin f.e. http://dev.heidelpay.com
+     * @param string $payment_frame_origin, e.g. http://dev.heidelpay.com
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
@@ -281,7 +281,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * first, if there is nothing you can identify please write to support@heidelpay.de
      * this the shortid of the transaction or the email address used for the request-
      *
-     * @param string $response_url f.e https://dev.heidelpay.de/reponse.php
+     * @param string $response_url, e.g. https://dev.heidelpay.de/reponse.php
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      *

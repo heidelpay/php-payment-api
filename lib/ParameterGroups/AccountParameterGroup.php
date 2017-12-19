@@ -168,7 +168,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Setter for the account brand name f.e. SOFORT or PAYPAL
+     * Setter for the account brand name, e.g. SOFORT or PAYPAL
      *
      * @param $brand string name of the used brand in upper case
      *

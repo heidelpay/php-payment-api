@@ -152,7 +152,7 @@ class NameParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the company name
      *
-     * @param string $company f.e. Heidelberger Payment GmbH
+     * @param string $company, e.g. Heidelberger Payment GmbH
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
@@ -165,7 +165,7 @@ class NameParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the given name of the customer
      *
-     * @param string $given f.e. John
+     * @param string $given, e.g. John
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
@@ -178,7 +178,7 @@ class NameParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the family name of the customer
      *
-     * @param string $family f.e. Doe
+     * @param string $family, e.g. Doe
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
@@ -191,7 +191,7 @@ class NameParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the salutation of the customer
      *
-     * @param string $salutation f.e. MR
+     * @param string $salutation, e.g. MR
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */
@@ -204,7 +204,7 @@ class NameParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the title of the customer
      *
-     * @param string $title f.e. Doc.
+     * @param string $title, e.g. Doc.
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
      */

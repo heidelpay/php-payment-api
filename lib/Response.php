@@ -198,14 +198,17 @@ class Response extends AbstractMethod
      * @param string $secret                      your application's secret hash
      * @param string $identificationTransactionId basket or order reference id
      *
-     * @throws \Exception
+     * @throws HashVerificationException
      *
      * @return boolean
      */
     public function verifySecurityHash($secret = null, $identificationTransactionId = null)
     {
         if ($secret === null || $identificationTransactionId === null) {
-            throw new HashVerificationException('$secret or $identificationTransactionId undefined');
+            throw new HashVerificationException(
+                'verifySecurityHash() - $secret or $identificationTransactionId undefined. '
+                . 'Do not call the Response script directly, it is meant to be called by the heidelpay system.'
+            );
         }
 
         if ($this->getProcessing()->getResult() === null) {
@@ -222,12 +225,12 @@ class Response extends AbstractMethod
 
         $referenceHash = hash('sha512', $identificationTransactionId . $secret);
 
-        if ($referenceHash === (string)$this->getCriterion()->getSecretHash()) {
+        if ($referenceHash === $this->getCriterion()->getSecretHash()) {
             return true;
         }
 
         throw new HashVerificationException(
-            'Hash does not match. This could be some kind of manipulation or misconfiguration!'
+            'Hashes do not match. This could be some kind of manipulation or misconfiguration!'
         );
     }
 }
