@@ -3,9 +3,7 @@
 namespace Heidelpay\PhpPaymentApi\PushMapping;
 
 /**
- * Summary
- *
- * Desc
+ * XML Push Mapping Class for the Contact Parameter Group
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
