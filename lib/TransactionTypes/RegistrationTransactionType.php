@@ -34,7 +34,7 @@ trait RegistrationTransactionType
      */
     public function registration()
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::REGISTRATION);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REGISTRATION);
         $this->prepareRequest();
 
         return $this;

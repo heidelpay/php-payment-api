@@ -31,7 +31,7 @@ trait DebitTransactionType
      */
     public function debit()
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::DEBIT);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::DEBIT);
         $this->prepareRequest();
 
         return $this;

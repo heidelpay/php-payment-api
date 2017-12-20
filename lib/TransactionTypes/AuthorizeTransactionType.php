@@ -37,7 +37,7 @@ trait AuthorizeTransactionType
      */
     public function authorize()
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::RESERVATION);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::RESERVATION);
         $this->prepareRequest();
 
         return $this;

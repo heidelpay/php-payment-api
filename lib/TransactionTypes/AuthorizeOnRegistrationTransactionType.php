@@ -32,8 +32,8 @@ trait AuthorizeOnRegistrationTransactionType
      */
     public function authorizeOnRegistration($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::RESERVATION);
-        $this->getRequest()->getIdentification()->set('referenceId', $paymentReferenceId);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::RESERVATION);
+        $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

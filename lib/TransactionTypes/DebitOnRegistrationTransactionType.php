@@ -35,8 +35,8 @@ trait DebitOnRegistrationTransactionType
      */
     public function debitOnRegistration($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::DEBIT);
-        $this->getRequest()->getIdentification()->set('referenceId', $paymentReferenceId);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::DEBIT);
+        $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

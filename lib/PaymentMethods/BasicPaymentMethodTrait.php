@@ -26,16 +26,6 @@ use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
 trait BasicPaymentMethodTrait
 {
     /**
-     * @var string Payment code for the corresponding payment method
-     */
-    protected $paymentCode;
-
-    /**
-     * @var string Brand for the corresponding payment method
-     */
-    protected $brand;
-
-    /**
      * HTTP Adapter for payment connection
      *
      * @var HttpAdapterInterface
@@ -87,6 +77,10 @@ trait BasicPaymentMethodTrait
      */
     public function getPaymentCode()
     {
+        if (!property_exists($this, 'paymentCode')) {
+            return null;
+        }
+
         return $this->paymentCode;
     }
 
@@ -97,6 +91,10 @@ trait BasicPaymentMethodTrait
      */
     public function getBrand()
     {
+        if (!property_exists($this, 'brand')) {
+            return null;
+        }
+
         return $this->brand;
     }
 
@@ -113,11 +111,11 @@ trait BasicPaymentMethodTrait
     /**
      * Set a new payment request object
      *
-     * @param \Heidelpay\PhpPaymentApi\Request $Request
+     * @param \Heidelpay\PhpPaymentApi\Request $request
      */
-    public function setRequest(HeidelpayRequest $Request)
+    public function setRequest(HeidelpayRequest $request)
     {
-        $this->request = $Request;
+        $this->request = $request;
     }
 
     /**
@@ -197,7 +195,7 @@ trait BasicPaymentMethodTrait
     public function prepareRequest()
     {
         $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
-        if ($this->brand !== null) {
+        if ($this->getBrand() !== null) {
             $this->getRequest()->getAccount()->setBrand($this->brand);
         }
 

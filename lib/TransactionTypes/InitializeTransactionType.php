@@ -30,7 +30,7 @@ trait InitializeTransactionType
      */
     public function initialize()
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::INITIALIZE);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::INITIALIZE);
         $this->prepareRequest();
 
         return $this;

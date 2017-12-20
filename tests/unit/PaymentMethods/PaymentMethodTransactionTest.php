@@ -4,7 +4,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
-use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
@@ -218,7 +218,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
                 'CRITERION.SECRET' => '1ce9f65da579ce18dce622dd5dfeca2e87a379f52451202ef58ebdfac1e15b4' .
                     '5e649b0cb7466e040011f3f76e056b2ce83561063815ef935cbb0c6b421cc3317',
                 'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-                'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+                'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
                 'FRONTEND.ENABLED' => 'FALSE',
                 'FRONTEND.MODE' => 'WHITELABEL',
                 'FRONTEND.LANGUAGE' => 'DE',
@@ -289,7 +289,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => 'e03d34e875cf7c5fd97e3a207cc5d54007509585475e0359cbcb0678c874bca9a1' .
                 '9e10c4cc11d5ee1e7bda3e46c85008bfc38955621301c25d00adcabd2d20a8',
             'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.RESPONSE_URL' => self::REDIRECT_URL,
@@ -349,7 +349,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '6a98064cd9fe2b1044c8e0ef339a3b6956d700854c5fd67165a1fcf9e9b845c9b2' .
                 '0a2f68a8dde6bd783d04350ca4d349eb10f4bbebb1ae37cb621b48aca67c59',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -413,7 +413,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '9cd425b6a0d82057f1cedbed87c2a6d9fdcc720a72192bc333bffe67965e503cd1b6' .
                 '004f7c5551ecf9f55615b372e8d775ce9aae85cb94ba480653a5c1f4c3ae',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.RESPONSE_URL' => self::REDIRECT_URL,
@@ -478,7 +478,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '40e583afeffc94547183c736e6219ceffbc1425a99695742f22d71cdd06475f34550cfb2' .
                 'a145a39e72ee818385ade0adb8d571da3c0fa6e094fd43c900192166',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => $frontendEnabled,
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -539,7 +539,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => 'e2cf8f7086cad3dc71972f193d6a5a230d3dd00e13d20ad876ba2feae868bf6b79c4564' .
                 '0f88576ed39546dc68e15f87eaf7557618426d904245b745cdc65c881',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.ENABLED' => 'FALSE',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -600,7 +600,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '716703bf5cc18f83b3231474f773a69ad98e2f477c2abe0b5b904e02d232432b7ce90' .
                 '20da68fb0a77464b94fd26d71cceab58d36a0b378759054fabf8a65a7aa',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -661,7 +661,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '59718aa5021d53aa936ec7d516791a94cec0eaf799d854105b40fe97fbb5fc8f6ca40be4' .
                 '999f057d0eda9316c18d26ecbcca684ac143b134cf19135215ee0d73',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -722,7 +722,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '235f76675fb775e3a931608125c9ed4d404a8aa5f28b76019d7a1816cd533a3d47fc05ef1f' .
                 'f0f84cef09b3fc92374c64018a05e08827684c54fd0c309373ba2e',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,
@@ -783,7 +783,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '665cfc0c6452721445c66e6017566f303d0a557ff857348c8f65f6a73f042d1f2824470' .
                 'ef9ae56dabe050f0078c5abcebe2ca6d42612c400fa9c3f58ad219853',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'FALSE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,

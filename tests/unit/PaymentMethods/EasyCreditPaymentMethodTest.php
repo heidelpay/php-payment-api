@@ -3,7 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
-use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
@@ -165,7 +165,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
             'CRITERION.SECRET' => '8263dc9e31b5754332aa23752b0044f4f6ab716ca9ec8d94a1b74ac19d2c5b822d3b' .
                 '1a0d8106c93cd02f2f5654d54c510444e310576e5559e3926fbdab0af02b',
             'CRITERION.SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => CriterionParameterGroup::SDK_VERSION,
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.SHOPPERID' => $shopperId,

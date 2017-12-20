@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\PaymentMethods\SofortPaymentMethod;
 use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
@@ -96,7 +97,7 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
     public function getPaymentUrl()
     {
         $this->paymentObject->getRequest()->getTransaction()->set('mode', 'LIVE');
-        $this->assertSame('https://heidelpay.hpcgw.net/ngw/post', $this->paymentObject->getPaymentUrl());
+        $this->assertSame(ApiConfig::LIVE_URL, $this->paymentObject->getPaymentUrl());
     }
 
     /**
@@ -124,12 +125,12 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
         $this->assertNotEmpty($objectAsJson);
         $this->assertArrayHasKey('paymentCode', $objectAsJson);
         $this->assertArrayHasKey('brand', $objectAsJson);
-        $this->assertArrayHasKey('_adapter', $objectAsJson);
-        $this->assertArrayHasKey('_request', $objectAsJson);
-        $this->assertArrayHasKey('_requestArray', $objectAsJson);
-        $this->assertArrayHasKey('_response', $objectAsJson);
-        $this->assertArrayHasKey('_responseArray', $objectAsJson);
-        $this->assertArrayHasKey('_dryRun', $objectAsJson);
+        $this->assertArrayHasKey('adapter', $objectAsJson);
+        $this->assertArrayHasKey('request', $objectAsJson);
+        $this->assertArrayHasKey('requestArray', $objectAsJson);
+        $this->assertArrayHasKey('response', $objectAsJson);
+        $this->assertArrayHasKey('responseArray', $objectAsJson);
+        $this->assertArrayHasKey('dryRun', $objectAsJson);
     }
 
     /**

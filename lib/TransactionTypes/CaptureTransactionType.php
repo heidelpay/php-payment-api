@@ -33,9 +33,9 @@ trait CaptureTransactionType
      */
     public function capture($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::CAPTURE);
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::CAPTURE);
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->getRequest()->getIdentification()->set('referenceId', $paymentReferenceId);
+        $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

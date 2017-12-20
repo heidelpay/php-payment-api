@@ -2,6 +2,9 @@
 
 namespace Heidelpay\PhpPaymentApi;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
+use Heidelpay\PhpPaymentApi\Constants\StatusCode;
 use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
 use Heidelpay\PhpPaymentApi\Exceptions\PaymentFormUrlException;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
@@ -100,7 +103,7 @@ class Response extends AbstractMethod
      */
     public function isSuccess()
     {
-        return $this->getProcessing()->getResult() === ProcessingParameterGroup::RESULT_ACK;
+        return $this->getProcessing()->getResult() === ProcessingResult::ACK;
     }
 
     /**
@@ -110,7 +113,7 @@ class Response extends AbstractMethod
      */
     public function isPending()
     {
-        return $this->getProcessing()->getStatusCode() === ProcessingParameterGroup::STATUS_CODE_WAITING;
+        return $this->getProcessing()->getStatusCode() === StatusCode::WAITING;
     }
 
     /**
@@ -120,7 +123,7 @@ class Response extends AbstractMethod
      */
     public function isError()
     {
-        return $this->getProcessing()->getResult() !== ProcessingParameterGroup::RESULT_ACK;
+        return $this->getProcessing()->getResult() !== ProcessingResult::ACK;
     }
 
     /**
@@ -165,12 +168,12 @@ class Response extends AbstractMethod
         $type = null;
 
         if ($this->getPayment()->getCode() === null) {
-            throw new PaymentFormUrlException('PaymentCode not set');
+            throw new PaymentFormUrlException('The PaymentCode is not set.');
         }
 
         list($code, $type) = explode('.', $this->getPayment()->getCode());
 
-        if (($code === 'CC' || $code === 'DC')
+        if (($code === PaymentMethod::CREDIT_CARD || $code === PaymentMethod::DEBIT_CARD)
             && $this->getIdentification()->getReferenceId() === null
             && $this->getFrontend()->getPaymentFrameUrl() !== null
         ) {

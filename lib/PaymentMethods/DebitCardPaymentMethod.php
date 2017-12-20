@@ -46,11 +46,6 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
     use CaptureTransactionType;
     use RebillTransactionType;
 
-    /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
-     */
     protected $paymentCode = PaymentMethod::DEBIT_CARD;
 
     /**
