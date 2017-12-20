@@ -5,7 +5,6 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
 use Heidelpay\PhpPaymentApi\Constants\StatusCode;
 use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
-use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
 use Heidelpay\PhpPaymentApi\Push;
 use Heidelpay\PhpPaymentApi\PushMapping\Account;
 use Heidelpay\PhpPaymentApi\PushMapping\Connector;

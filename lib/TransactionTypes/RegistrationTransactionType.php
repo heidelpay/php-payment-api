@@ -1,6 +1,7 @@
 <?php
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
+
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 
 /**
