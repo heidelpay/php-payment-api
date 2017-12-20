@@ -15,9 +15,7 @@ use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
  *
  * @author     Jens Richter
  *
- * @package    Heidelpay
- * @subpackage PhpPaymentApi
- * @category   PhpPaymentApi
+ * @package heidelpay\php-payment-api
  */
 class Request extends AbstractMethod
 {

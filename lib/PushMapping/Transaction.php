@@ -3,7 +3,7 @@
 namespace Heidelpay\PhpPaymentApi\PushMapping;
 
 /**
- * XML Push Mapping Class for Transaction Parameter Group
+ * XML Push Mapping Class for the Transaction Parameter Group
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -12,17 +12,21 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 class Transaction extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $properties = [
         'channel' => 'channel',
         'mode' => 'mode',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectProperty(\SimpleXMLElement $xmlElement, $property)
     {
         if (isset($xmlElement->Transaction[$property])) {

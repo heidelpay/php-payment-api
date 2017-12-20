@@ -42,5 +42,8 @@ class DirectDebitB2CSecuredPaymentMethod implements PaymentMethodInterface
     use RebillTransactionType;
     use FinalizeTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::DIRECT_DEBIT;
 }

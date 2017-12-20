@@ -68,7 +68,7 @@ class ConfigParameterGroup extends AbstractParameterGroup
     {
         $result = json_decode($this->optin_text, true);
 
-        if (empty($result)) {
+        if ($result === null) {
             return $this->optin_text;
         }
 

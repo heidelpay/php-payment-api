@@ -12,12 +12,13 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 class Name extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $fields = [
         'Birthdate' => 'birthdate',
         'Company' => 'company',
@@ -27,9 +28,12 @@ class Name extends AbstractPushMapper
         'Title' => 'title',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset($xmlElement->Transaction->Customer->Name->$field)) {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Customer->Name->$field)) {
             return (string)$xmlElement->Transaction->Customer->Name->$field;
         }
 

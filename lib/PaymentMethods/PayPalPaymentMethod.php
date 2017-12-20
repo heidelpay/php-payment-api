@@ -39,6 +39,13 @@ class PayPalPaymentMethod implements PaymentMethodInterface
     use CaptureTransactionType;
     use RebillTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::VIRTUAL_ACCOUNT;
+
+    /**
+     * @var string Brand Code for this payment method
+     */
     protected $brand = Brand::PAYPAL;
 }

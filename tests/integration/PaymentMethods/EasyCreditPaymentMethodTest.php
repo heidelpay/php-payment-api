@@ -104,6 +104,8 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
         $this->assertTrue($response->isSuccess(), 'Response is not successful.');
 
+        print_r($response->getConfig()->getOptinText());
+
         // following fields are essential for easy credit, so they must not be null.
         $this->assertNotNull($response->getConfig()->optin_text, 'easyCredit Optin Text is null.');
         $this->assertNotNull($response->getFrontend()->getRedirectUrl(), 'RedirectUrl is null.');

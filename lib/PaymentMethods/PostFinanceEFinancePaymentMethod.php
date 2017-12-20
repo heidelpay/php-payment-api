@@ -27,6 +27,13 @@ class PostFinanceEFinancePaymentMethod implements PaymentMethodInterface
     use AuthorizeTransactionType;
     use RefundTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::ONLINE_TRANSFER;
+
+    /**
+     * @var string Brand Code for this payment method
+     */
     protected $brand = Brand::POSTFINANCE_EFINANCE;
 }

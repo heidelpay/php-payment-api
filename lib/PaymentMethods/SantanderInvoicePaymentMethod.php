@@ -31,6 +31,13 @@ class SantanderInvoicePaymentMethod implements PaymentMethodInterface
     use RefundTransactionType;
     use FinalizeTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::INVOICE;
+
+    /**
+     * @var string Brand Code for this payment method
+     */
     protected $brand = Brand::SANTANDER;
 }

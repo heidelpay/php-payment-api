@@ -12,12 +12,13 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  *
  * @author     Stephano Vogel
  *
- * @package    heidelpay
- * @subpackage php-api
- * @category   php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 class Connector extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $fields = [
         'Bank' => 'account_bank',
         'Bic' => 'account_bic',
@@ -28,9 +29,12 @@ class Connector extends AbstractPushMapper
         'Usage' => 'account_usage',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset($xmlElement->Transaction->Connector->Account->$field)) {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Connector->Account->$field)) {
             return (string) $xmlElement->Transaction->Connector->Account->$field;
         }
 

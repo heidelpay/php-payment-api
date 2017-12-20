@@ -3,9 +3,7 @@
 namespace Heidelpay\PhpPaymentApi\PushMapping;
 
 /**
- * Summary
- *
- * Desc
+ * XML Push Mapping Class for the Address Parameter Group
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -14,12 +12,13 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 class Address extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $fields = [
         'City' => 'city',
         'Country' => 'country',
@@ -28,9 +27,12 @@ class Address extends AbstractPushMapper
         'Zip' => 'zip',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset($xmlElement->Transaction->Customer->Address->$field)) {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Customer->Address->$field)) {
             return (string) $xmlElement->Transaction->Customer->Address->$field;
         }
 

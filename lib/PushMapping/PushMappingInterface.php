@@ -14,9 +14,7 @@ use SimpleXMLElement;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 interface PushMappingInterface
 {

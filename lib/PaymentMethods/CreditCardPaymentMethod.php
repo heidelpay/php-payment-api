@@ -46,6 +46,9 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
     use CaptureTransactionType;
     use RebillTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::CREDIT_CARD;
 
     /**

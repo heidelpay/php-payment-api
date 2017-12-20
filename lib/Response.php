@@ -20,9 +20,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
  *
  * @author     Jens Richter
  *
- * @package    Heidelpay
- * @subpackage PhpPaymentApi
- * @category   PhpPaymentApi
+ * @package heidelpay\php-payment-api
  */
 class Response extends AbstractMethod
 {

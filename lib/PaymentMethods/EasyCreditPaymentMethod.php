@@ -31,6 +31,13 @@ class EasyCreditPaymentMethod implements PaymentMethodInterface
     use RefundTransactionType;
     use ReversalTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::HIRE_PURCHASE;
+
+    /**
+     * @var string Brand Code for this payment method
+     */
     protected $brand = Brand::EASYCREDIT;
 }

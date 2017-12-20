@@ -26,5 +26,8 @@ class PrepaymentPaymentMethod implements PaymentMethodInterface
     use ReversalTransactionType;
     use RefundTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::PREPAYMENT;
 }

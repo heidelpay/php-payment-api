@@ -30,5 +30,8 @@ class InvoiceB2CSecuredPaymentMethod implements PaymentMethodInterface
     use RefundTransactionType;
     use FinalizeTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::INVOICE;
 }

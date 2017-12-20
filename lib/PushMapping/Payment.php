@@ -3,7 +3,7 @@
 namespace Heidelpay\PhpPaymentApi\PushMapping;
 
 /**
- * Summary
+ * XML Push Mapping Class for the Payment Parameter Group
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
@@ -12,19 +12,23 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 class Payment extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $properties = [
         'code' => 'code',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectProperty(\SimpleXMLElement $xmlElement, $property)
     {
-        if (isset($xmlElement->Transaction->Payment[$property])) {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Payment[$property])) {
             return (string)$xmlElement->Transaction->Payment[$property];
         }
 

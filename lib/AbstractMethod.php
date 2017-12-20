@@ -30,9 +30,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api
  */
 abstract class AbstractMethod implements MethodInterface
 {

@@ -21,7 +21,7 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
  *
  * @author Stephano Vogel <development@heidelpay.de>
  *
- * @package heidelpay\php-api\paymentmethods
+ * @package heidelpay\php-payment-api\paymentmethods
  */
 class PayolutionInvoicePaymentMethod
 {
@@ -31,6 +31,13 @@ class PayolutionInvoicePaymentMethod
     use RefundTransactionType;
     use ReversalTransactionType;
 
+    /**
+     * @var string Payment Code for this payment method
+     */
     protected $paymentCode = PaymentMethod::INVOICE;
+
+    /**
+     * @var string Brand Code for this payment method
+     */
     protected $brand = Brand::PAYOLUTION_DIRECT;
 }
