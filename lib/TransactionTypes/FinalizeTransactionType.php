@@ -1,6 +1,7 @@
 <?php
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 
 /**
  * Transaction type finalize
@@ -15,9 +16,7 @@ namespace Heidelpay\PhpPaymentApi\TransactionTypes;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait FinalizeTransactionType
 {
@@ -27,15 +26,17 @@ trait FinalizeTransactionType
      * This payment type will be used to inform heidelpay about goods ship out.
      * Necessary for secured direct debit,secured invoice and Santander.
      *
-     * @param mixed $PaymentReferenceId reference id ( uniqe id of the debit or capture)
+     * @param string $paymentReferenceId reference id (uniqe id of the debit or capture)
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
+     * @return $this
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
-    public function finalize($PaymentReferenceId)
+    public function finalize($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".FI");
+        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::FINALIZE);
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
+        $this->getRequest()->getIdentification()->set('referenceId', $paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

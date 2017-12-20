@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup as Security;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class SecurityParameterGroupTest extends Test
 {

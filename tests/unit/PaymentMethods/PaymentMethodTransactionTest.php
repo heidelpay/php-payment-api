@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Simon Gabriel
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class PaymentMethodTransactionTest extends BasePaymentMethodTest
 {
@@ -92,7 +90,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         $directDebitSecured->getRequest()->authentification(...$authentication);
         $directDebitSecured->getRequest()->customerAddress(...$customerDetails);
         $directDebitSecured->getRequest()->b2cSecured(self::CUSTOMER_SALUTATION, self::CUSTOMER_BIRTHDAY);
-        $directDebitSecured->_dryRun = false;
+        $directDebitSecured->dryRun = false;
 
         $this->paymentObject = $directDebitSecured;
 

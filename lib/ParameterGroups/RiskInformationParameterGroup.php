@@ -12,9 +12,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Daniel Kraut
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class RiskInformationParameterGroup extends AbstractParameterGroup
 {

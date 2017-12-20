@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
+
 /**
  * Transaction parameter group
  *
@@ -14,9 +16,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class TransactionParameterGroup extends AbstractParameterGroup
 {
@@ -39,7 +39,7 @@ class TransactionParameterGroup extends AbstractParameterGroup
      *
      * @var string mode (mandatory)
      */
-    public $mode = 'CONNECTOR_TEST';
+    public $mode = TransactionMode::CONNECTOR_TEST;
 
     /**
      * @var string

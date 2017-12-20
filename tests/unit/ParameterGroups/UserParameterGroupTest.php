@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup as User;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class UserParameterGroupTest extends Test
 {

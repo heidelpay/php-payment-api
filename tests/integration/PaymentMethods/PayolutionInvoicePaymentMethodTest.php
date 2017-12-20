@@ -16,9 +16,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Simon Gabriel
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category IntegrationTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
 {
@@ -213,7 +211,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->basketData($timestamp, 23.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */
-        $this->paymentObject->_dryRun = true;
+        $this->paymentObject->dryRun = true;
 
         $this->paymentObject->refund((string)$referenceId);
 

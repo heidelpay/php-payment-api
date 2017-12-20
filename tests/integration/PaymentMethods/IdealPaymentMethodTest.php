@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class IdealPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -78,7 +76,7 @@ class IdealPaymentMethodTest extends BasePaymentMethodTest
         $iDeal = new iDeal();
         $iDeal->getRequest()->authentification(...$authentication);
         $iDeal->getRequest()->customerAddress(...$customerDetails);
-        $iDeal->_dryRun = true;
+        $iDeal->dryRun = true;
 
         $this->paymentObject = $iDeal;
     }

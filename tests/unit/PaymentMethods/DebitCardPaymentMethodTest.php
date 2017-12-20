@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Simon Gabriel
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -115,7 +113,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $paymentObject = new DebitCardPaymentMethod();
         $paymentObject->getRequest()->authentification(...$authentication->getAuthenticationArray());
         $paymentObject->getRequest()->customerAddress(...$customerDetails->getCustomerDataArray());
-        $paymentObject->_dryRun = false;
+        $paymentObject->dryRun = false;
 
         $this->paymentObject = $paymentObject;
 

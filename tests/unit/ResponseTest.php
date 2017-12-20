@@ -19,9 +19,7 @@ use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class ResponseTest extends Test
 {

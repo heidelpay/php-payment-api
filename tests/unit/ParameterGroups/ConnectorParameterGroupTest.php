@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup as Connector
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class ConnectorParameterGroupTest extends Test
 {

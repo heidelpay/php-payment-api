@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
@@ -19,9 +20,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class RequestTest extends Test
 {
@@ -48,7 +47,7 @@ class RequestTest extends Test
         $this->assertEquals($UserLogin, $Request->getUser()->getLogin());
         $this->assertEquals($UserPassword, $Request->getUser()->getPassword());
         $this->assertEquals($TransactionChannel, $Request->getTransaction()->getChannel());
-        $this->assertEquals('CONNECTOR_TEST', $Request->getTransaction()->getMode());
+        $this->assertEquals(TransactionMode::CONNECTOR_TEST, $Request->getTransaction()->getMode());
     }
 
     /**

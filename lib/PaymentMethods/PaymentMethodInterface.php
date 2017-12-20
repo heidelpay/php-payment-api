@@ -19,6 +19,20 @@ use JsonSerializable;
 interface PaymentMethodInterface extends JsonSerializable
 {
     /**
+     * Returns the payment code for the payment request.
+     *
+     * @return string
+     */
+    public function getPaymentCode();
+
+    /**
+     * Returns the brand for the payment method.
+     *
+     * @return string
+     */
+    public function getBrand();
+
+    /**
      * Returns a Json representation of itself.
      *
      * @param int $options

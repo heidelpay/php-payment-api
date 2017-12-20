@@ -15,7 +15,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay/php-api/tests/unit/paymentmethods/easycredit
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 {

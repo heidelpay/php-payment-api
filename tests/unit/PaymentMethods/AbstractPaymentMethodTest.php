@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class AbstractPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -124,10 +122,8 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
     {
         $objectAsJson = $this->paymentObject->jsonSerialize();
         $this->assertNotEmpty($objectAsJson);
-        $this->assertArrayHasKey('_paymentCode', $objectAsJson);
-        $this->assertArrayHasKey('_brand', $objectAsJson);
-        $this->assertArrayHasKey('_liveUrl', $objectAsJson);
-        $this->assertArrayHasKey('_sandboxUrl', $objectAsJson);
+        $this->assertArrayHasKey('paymentCode', $objectAsJson);
+        $this->assertArrayHasKey('brand', $objectAsJson);
         $this->assertArrayHasKey('_adapter', $objectAsJson);
         $this->assertArrayHasKey('_request', $objectAsJson);
         $this->assertArrayHasKey('_requestArray', $objectAsJson);

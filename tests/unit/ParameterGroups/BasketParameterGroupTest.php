@@ -16,7 +16,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup as Basket;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class BasketParameterGroupTest extends Test
 {

@@ -23,11 +23,9 @@ use SimpleXMLElement;
  *
  * @link http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author Stephano Vogel
+ * @author Stephano Vogel <development@heidelpay.de>
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class PushTest extends Test
 {

@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup as Iden
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class IdentificationParameterGroupTest extends Test
 {

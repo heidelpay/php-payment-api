@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class PayPalPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -80,7 +78,7 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
         $PayPal = new PayPal();
         $PayPal->getRequest()->authentification(...$authentication);
         $PayPal->getRequest()->customerAddress(...$customerDetails);
-        $PayPal->_dryRun = true;
+        $PayPal->dryRun = true;
 
         $this->paymentObject = $PayPal;
     }

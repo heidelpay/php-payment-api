@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Simon Gabriel
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -112,7 +110,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
         $paymentObject = new EasyCreditPaymentMethod();
         $paymentObject->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
         $paymentObject->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
-        $paymentObject->_dryRun = false;
+        $paymentObject->dryRun = false;
 
         $this->paymentObject = $paymentObject;
 

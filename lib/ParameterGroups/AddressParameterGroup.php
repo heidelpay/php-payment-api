@@ -15,9 +15,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class AddressParameterGroup extends AbstractParameterGroup
 {

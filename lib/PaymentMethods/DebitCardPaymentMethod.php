@@ -2,6 +2,7 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
@@ -24,11 +25,9 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
  *
  * @author     Jens Richter
  *
- * @package    Heidelpay
- * @subpackage PhpPaymentApi
- * @category   PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
-class DebitCardPaymentMethod
+class DebitCardPaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;
     use RegistrationTransactionType {
@@ -52,15 +51,7 @@ class DebitCardPaymentMethod
      *
      * @var string payment code
      */
-    protected $_paymentCode = 'DC';
-
-
-    /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
-     */
-    protected $_brand;
+    protected $paymentCode = PaymentMethod::DEBIT_CARD;
 
     /**
      * Payment type authorisation
@@ -76,9 +67,9 @@ class DebitCardPaymentMethod
      * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Exception
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     public function authorize($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
     {
@@ -105,9 +96,9 @@ class DebitCardPaymentMethod
      * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Exception
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     public function debit($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
     {
@@ -135,9 +126,9 @@ class DebitCardPaymentMethod
      * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Exception
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     public function registration($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
     {

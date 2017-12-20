@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+
 /**
  * Transaction type rebill
  *
@@ -16,9 +18,7 @@ namespace Heidelpay\PhpPaymentApi\TransactionTypes;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait RebillTransactionType
 {
@@ -29,15 +29,17 @@ trait RebillTransactionType
      * example, in case of a higher shipping cost. Please make sure that you
      * have the permission of your customer to charge again.
      *
-     * @param string $PaymentReferenceId ( unique id of the debit or capture )
+     * @param string $paymentReferenceId (unique id of the debit or capture)
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod|boolean
+     * @return $this
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
-    public function rebill($PaymentReferenceId)
+    public function rebill($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RB");
+        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::REBILL);
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
+        $this->getRequest()->getIdentification()->set('referenceId', $paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

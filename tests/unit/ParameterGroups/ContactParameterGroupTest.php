@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup as Contact;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class ContactParameterGroupTest extends Test
 {

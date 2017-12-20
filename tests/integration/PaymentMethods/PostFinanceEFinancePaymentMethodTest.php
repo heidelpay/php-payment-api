@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Ronja Wann
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class PostFinanceEFinancePaymentMethodTest extends BasePaymentMethodTest
 {
@@ -81,7 +79,7 @@ class PostFinanceEFinancePaymentMethodTest extends BasePaymentMethodTest
         $PostFinanceEFinance = new PostFinanceEFinance();
         $PostFinanceEFinance->getRequest()->authentification(...$authentication);
         $PostFinanceEFinance->getRequest()->customerAddress(...$customerDetails);
-        $PostFinanceEFinance->_dryRun = true;
+        $PostFinanceEFinance->dryRun = true;
 
         $this->paymentObject = $PostFinanceEFinance;
     }

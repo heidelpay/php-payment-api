@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+
 /**
  * Transaction type refund
  *
@@ -15,9 +17,7 @@ namespace Heidelpay\PhpPaymentApi\TransactionTypes;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait RefundTransactionType
 {
@@ -27,15 +27,17 @@ trait RefundTransactionType
      * This payment type will be used to give a charge amount or even parts of
      * it back to the given account.
      *
-     * @param mixed $PaymentReferenceId payment reference id ( uniqe id of the debit or capture)
+     * @param mixed $paymentReferenceId payment reference id (unique id of the debit or capture)
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
+     * @return $this
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
-    public function refund($PaymentReferenceId)
+    public function refund($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RF");
+        $this->getRequest()->getPayment()->set('code', $this->getPaymentCode() . TransactionType::REFUND);
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
+        $this->getRequest()->getIdentification()->set('referenceId', $paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

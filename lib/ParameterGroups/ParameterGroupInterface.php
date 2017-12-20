@@ -14,7 +14,7 @@ use JsonSerializable;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay/php-api
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 interface ParameterGroupInterface extends JsonSerializable
 {
