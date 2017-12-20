@@ -14,7 +14,7 @@ use Heidelpay\PhpPaymentApi\Constants\TransactionType;
  *
  * @author Stephano Vogel <development@heidelpay.de>
  *
- * @package heidelpay/php-api/transactiontypes/initialize
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait InitializeTransactionType
 {
