@@ -8,9 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## Added
 - `fromJson()` and `fromPost()` static methods to instantiate Response and Request objects with a static call.
 - `RESULT_ACK` and `RESULT_NOK` constants inside of `ProcessingParameterGroup`
+- Several constants for Api Config, Paymentmethod codes, status/reason codes, ...
+
+## Removed
+- `AbstractPaymentMethod` class in favor of the `BasicPaymentMethodTrait`
 
 ## Changed
-- Declared `Response::splitArray()` as deprecated in favor of `fromPost()`.
+- Declared `Response::splitArray()` as deprecated in favor of `fromPost()` and replaced it's code with a `fromPost` call
 - Clearified the exception message in `verifySecurityHash()` (Response script/page should only be called by heidelpay)
 
 

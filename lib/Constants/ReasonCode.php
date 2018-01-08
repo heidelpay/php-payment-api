@@ -12,7 +12,7 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  *
  * @author Stephano Vogel <development@heidelpay.de>
  *
- * @package heidelpay\php-payment-api\constants\processing
+ * @package heidelpay\php-payment-api\constants
  */
 class ReasonCode
 {
