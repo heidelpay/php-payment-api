@@ -14,7 +14,7 @@ mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$
 ./vendor/bin/codecept run unit --coverage --coverage-xml
 
 ## perform this task only for php 7 with deps=0
-if [[ ($(phpenv version-name) == "7") && ("$deps" == "no") ]]; then
+if [[ ($(phpenv version-name) -eq "7") && ("$deps" == "no") ]]; then
     echo "Perform integration tests as well";
     ./vendor/bin/codecept run integration
 fi

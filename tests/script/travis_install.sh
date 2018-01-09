@@ -7,7 +7,7 @@ PHPVER=$(phpenv version-name)
 INSTALL_COMMAND="composer install --no-interaction --prefer-dist"
 UPDATE_COMMAND="composer update --no-interaction --prefer-source"
 
-if [ "$deps" -eq "no" ]; then
+if [ "$deps" == "no" ]; then
 
     # if PHP version is 5, use travis_wait for up to 20 minutes waiting time.
     if [ "$PHPVER" -eq "5" ]; then
@@ -19,6 +19,6 @@ if [ "$deps" -eq "no" ]; then
     fi
 fi
 
-if [ "$deps" -eq "high" ]; then
+if [ "$deps" == "high" ]; then
     ${UPDATE_COMMAND}
 fi
