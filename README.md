@@ -5,6 +5,7 @@
 [![PHP 5.6](https://img.shields.io/badge/php-5.6-blue.svg)](http://www.php.net)
 [![PHP 7.0](https://img.shields.io/badge/php-7.0-blue.svg)](http://www.php.net)
 [![PHP 7.1](https://img.shields.io/badge/php-7.1-blue.svg)](http://www.php.net)
+[![PHP 7.1](https://img.shields.io/badge/php-7.2-blue.svg)](http://www.php.net)
 ![Logo](https://dev.heidelpay.de/devHeidelpay_400_180.jpg)
 
 # Welcome to the heidelpay payment api for php
