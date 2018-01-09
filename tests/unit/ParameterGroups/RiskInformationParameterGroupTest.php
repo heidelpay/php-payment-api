@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup as Ris
  *
  * @author  Daniel Kraut
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class RiskInformationParameterGroupTest extends Test
 {

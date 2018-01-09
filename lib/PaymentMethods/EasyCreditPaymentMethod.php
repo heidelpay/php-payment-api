@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\Brand;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeOnRegistrationTransactionType as AuthorizeOnInitialization;
 use Heidelpay\PhpPaymentApi\TransactionTypes\FinalizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\InitializeTransactionType;
@@ -18,7 +20,7 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay\php-api\paymentmethods\easycredit
+ * @package heidelpay\php-payment-api\paymentmethods
  */
 class EasyCreditPaymentMethod implements PaymentMethodInterface
 {
@@ -30,16 +32,12 @@ class EasyCreditPaymentMethod implements PaymentMethodInterface
     use ReversalTransactionType;
 
     /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
+     * @var string Payment Code for this payment method
      */
-    protected $_paymentCode = 'HP';
+    protected $paymentCode = PaymentMethod::HIRE_PURCHASE;
 
     /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
+     * @var string Brand Code for this payment method
      */
-    protected $_brand = 'EASYCREDIT';
+    protected $brand = Brand::EASYCREDIT;
 }

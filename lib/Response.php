@@ -2,6 +2,9 @@
 
 namespace Heidelpay\PhpPaymentApi;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
+use Heidelpay\PhpPaymentApi\Constants\StatusCode;
 use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
 use Heidelpay\PhpPaymentApi\Exceptions\PaymentFormUrlException;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
@@ -17,9 +20,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
  *
  * @author     Jens Richter
  *
- * @package    Heidelpay
- * @subpackage PhpPaymentApi
- * @category   PhpPaymentApi
+ * @package heidelpay\php-payment-api
  */
 class Response extends AbstractMethod
 {
@@ -28,14 +29,14 @@ class Response extends AbstractMethod
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
      */
-    protected $connector = null;
+    protected $connector;
 
     /**
      * ProcessingParameterGroup
      *
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup
      */
-    protected $processing = null;
+    protected $processing;
 
     /**
      * The constructor will take a given response in post format and convert
@@ -45,8 +46,8 @@ class Response extends AbstractMethod
      */
     public function __construct($rawResponse = null)
     {
-        if ($rawResponse !== null and is_array($rawResponse)) {
-            $this->splitArray($rawResponse);
+        if ($rawResponse !== null && is_array($rawResponse)) {
+            $this->mapFromPost($rawResponse);
         }
     }
 
@@ -84,71 +85,12 @@ class Response extends AbstractMethod
      * @param array $rawResponse
      *
      * @return \Heidelpay\PhpPaymentApi\Response
+     *
+     * @deprecated 1.3.0 Response::fromPost should be used to create an instance with POST parameters.
      */
     public function splitArray($rawResponse)
     {
-        foreach ($rawResponse as $arrayKey => $arrayValue) {
-            $responseGroup = explode('_', strtolower($arrayKey), 2);
-
-            if (is_array($responseGroup)) {
-                switch ($responseGroup[0]) {
-                    case 'address':
-                        $this->getAddress()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case 'account':
-                        $this->getAccount()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case 'basket':
-                        $this->getBasket()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case 'criterion':
-                        $this->getCriterion()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case 'config':
-                        $this->getConfig()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case 'contact':
-                        $this->getContact()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case 'connector':
-                        $this->getConnector()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "frontend":
-                        $this->getFrontend()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "identification":
-                        $this->getIdentification()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "name":
-                        $this->getName()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "payment":
-                        $this->getPayment()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "presentation":
-                        $this->getPresentation()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "processing":
-                        $this->getProcessing()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "request":
-                        $this->getRequest()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "riskinformation":
-                        $this->getRequest()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "security":
-                        $this->getSecurity()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "transaction":
-                        $this->getTransaction()->set($responseGroup[1], $arrayValue);
-                        break;
-                    case "user":
-                        $this->getUser()->set($responseGroup[1], $arrayValue);
-                        break;
-                }
-            }
-        }
+        $this->mapFromPost($rawResponse);
         return $this;
     }
 
@@ -159,10 +101,7 @@ class Response extends AbstractMethod
      */
     public function isSuccess()
     {
-        if ($this->getProcessing()->getResult() === 'ACK') {
-            return true;
-        }
-        return false;
+        return $this->getProcessing()->getResult() === ProcessingResult::ACK;
     }
 
     /**
@@ -172,10 +111,7 @@ class Response extends AbstractMethod
      */
     public function isPending()
     {
-        if ($this->getProcessing()->getStatusCode() === '80') {
-            return true;
-        }
-        return false;
+        return $this->getProcessing()->getStatusCode() === StatusCode::WAITING;
     }
 
     /**
@@ -185,10 +121,7 @@ class Response extends AbstractMethod
      */
     public function isError()
     {
-        if ($this->getProcessing()->getResult() === 'ACK') {
-            return false;
-        }
-        return true;
+        return $this->getProcessing()->getResult() !== ProcessingResult::ACK;
     }
 
     /**
@@ -233,14 +166,14 @@ class Response extends AbstractMethod
         $type = null;
 
         if ($this->getPayment()->getCode() === null) {
-            throw new PaymentFormUrlException('PaymentCode not set');
+            throw new PaymentFormUrlException('The PaymentCode is not set.');
         }
 
         list($code, $type) = explode('.', $this->getPayment()->getCode());
 
-        if (($code == 'CC' or $code == 'DC')
-            and $this->getIdentification()->getReferenceId() === null
-            and $this->getFrontend()->getPaymentFrameUrl() !== null
+        if (($code === PaymentMethod::CREDIT_CARD || $code === PaymentMethod::DEBIT_CARD)
+            && $this->getIdentification()->getReferenceId() === null
+            && $this->getFrontend()->getPaymentFrameUrl() !== null
         ) {
             return $this->getFrontend()->getPaymentFrameUrl();
         }
@@ -266,14 +199,17 @@ class Response extends AbstractMethod
      * @param string $secret                      your application's secret hash
      * @param string $identificationTransactionId basket or order reference id
      *
-     * @throws \Exception
+     * @throws HashVerificationException
      *
      * @return boolean
      */
     public function verifySecurityHash($secret = null, $identificationTransactionId = null)
     {
-        if ($secret === null or $identificationTransactionId === null) {
-            throw new HashVerificationException('$secret or $identificationTransactionId undefined');
+        if ($secret === null || $identificationTransactionId === null) {
+            throw new HashVerificationException(
+                'verifySecurityHash() - $secret or $identificationTransactionId undefined. '
+                . 'Do not call the Response script directly, it is meant to be called by the heidelpay system.'
+            );
         }
 
         if ($this->getProcessing()->getResult() === null) {
@@ -290,12 +226,12 @@ class Response extends AbstractMethod
 
         $referenceHash = hash('sha512', $identificationTransactionId . $secret);
 
-        if ($referenceHash === (string)$this->getCriterion()->getSecretHash()) {
+        if ($referenceHash === $this->getCriterion()->getSecretHash()) {
             return true;
         }
 
         throw new HashVerificationException(
-            'Hash does not match. This could be some kind of manipulation or misconfiguration!'
+            'Hashes do not match. This could be some kind of manipulation or misconfiguration!'
         );
     }
 }

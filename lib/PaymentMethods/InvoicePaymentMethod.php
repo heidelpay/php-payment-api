@@ -2,6 +2,7 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
@@ -18,11 +19,9 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
-class InvoicePaymentMethod
+class InvoicePaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;
     use AuthorizeTransactionType;
@@ -30,16 +29,7 @@ class InvoicePaymentMethod
     use RefundTransactionType;
 
     /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
+     * @var string Payment Code for this payment method
      */
-    protected $_paymentCode = 'IV';
-
-    /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
-     */
-    protected $_brand;
+    protected $paymentCode = PaymentMethod::INVOICE;
 }

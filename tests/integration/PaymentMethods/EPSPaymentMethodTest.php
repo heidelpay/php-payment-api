@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Ronja Wann
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class EPSPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -80,7 +78,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
         $EPS = new EPS();
         $EPS->getRequest()->authentification(...$authentication);
         $EPS->getRequest()->customerAddress(...$customerDetails);
-        $EPS->_dryRun = true;
+        $EPS->dryRun = true;
 
         $this->paymentObject = $EPS;
     }

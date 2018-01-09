@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+
 /**
  * Transaction type reversal
  *
@@ -16,9 +18,7 @@ namespace Heidelpay\PhpPaymentApi\TransactionTypes;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait ReversalTransactionType
 {
@@ -29,15 +29,17 @@ trait ReversalTransactionType
      * it back to the given account. This can be used to lower an amount on an
      * invoice for example.
      *
-     * @param mixed $PaymentReferenceId payment reference id ( unique id of the authorisation)
+     * @param mixed $paymentReferenceId payment reference id (unique id of the authorisation)
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
+     * @return $this
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
-    public function reversal($PaymentReferenceId)
+    public function reversal($paymentReferenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RV");
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REVERSAL);
         $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->getRequest()->getIdentification()->set('referenceId', $PaymentReferenceId);
+        $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 
         return $this;

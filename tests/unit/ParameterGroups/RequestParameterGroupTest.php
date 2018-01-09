@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup as Request;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class RequestParameterGroupTest extends Test
 {

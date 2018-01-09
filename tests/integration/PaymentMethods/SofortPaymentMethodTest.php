@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class SofortPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -80,7 +78,7 @@ class SofortPaymentMethodTest extends BasePaymentMethodTest
         $Sofort = new Sofort();
         $Sofort->getRequest()->authentification(...$authentication);
         $Sofort->getRequest()->customerAddress(...$customerDetails);
-        $Sofort->_dryRun = true;
+        $Sofort->dryRun = true;
 
         $this->paymentObject = $Sofort;
     }
@@ -127,7 +125,7 @@ class SofortPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->basketData($timestamp, 3.54, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */
-        $this->paymentObject->_dryRun = true;
+        $this->paymentObject->dryRun = true;
 
         $this->paymentObject->refund((string)$referenceId);
 

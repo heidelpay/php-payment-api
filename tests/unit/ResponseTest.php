@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Response;
 use Heidelpay\PhpPaymentApi\Exceptions\PaymentFormUrlException;
 use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
@@ -18,9 +19,7 @@ use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class ResponseTest extends Test
 {
@@ -101,6 +100,8 @@ class ResponseTest extends Test
             'RISKINFORMATION_GUESTCHECKOUT' => 'FALSE',
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
             'CRITERION_TEST_VALUE' => 'Test Value',
+            'INVALID_PROP' => 'Invalid',
+            'INVALIDPROP' => '0',
         );
 
         $this->responseObject = new Response($responseSample);
@@ -371,5 +372,67 @@ class ResponseTest extends Test
     {
         $this->assertSame('Test Value', $this->responseObject->getCriterion()->get('test_value'));
         $this->assertSame('Test Value', $this->responseObject->getCriterion()->get('Test_Value'));
+    }
+
+    /**
+     * Test that checks if the static fromJson metod returns an instance
+     * of Response even when an empty JSON object is provided.
+     *
+     * @test
+     */
+    public function staticFromJsonMethodShouldReturnANewResponseInstanceOnEmptyJsonObject()
+    {
+        $response = Response::fromJson('{}');
+        $this->assertEquals(Response::class, get_class($response));
+    }
+
+    /**
+     * Test that checks if the static fromJson method returns an instance of Response.
+     *
+     * @test
+     */
+    public function staticFromJsonMethodShouldReturnNewResponseInstanceOnValidJsonObject()
+    {
+        $response = Response::fromJson($this->responseObject->toJson());
+        $this->assertEquals(Response::class, get_class($response));
+    }
+
+    /**
+     * Test that checks if an existing Response instance and an instance
+     * created by the fromJson mapper are matching ParameterGroup
+     * instances and their respective properies and values.
+     *
+     * @test
+     */
+    public function mappedJsonResponseAndToJsonRepresentationOfResponseObjectMustBeEqual()
+    {
+        $response = Response::fromJson($this->responseObject->toJson());
+        $this->assertEquals($this->responseObject, $response);
+    }
+
+    /**
+     * Test that checks if a JsonParserException will be thrown when an
+     * invalid JSON string is being provided to the fromJson method.
+     *
+     * @test
+     */
+    public function fromJsonMapperShouldThrowExceptionOnInvalidJsonString()
+    {
+        $invalidJson = '{"test: 0}';
+
+        $this->expectException(JsonParserException::class);
+        $response = Response::fromJson($invalidJson);
+        $response->getError();
+    }
+
+    /**
+     * Test that checks if the static fromPost method returns an instance of Response.
+     *
+     * @test
+     */
+    public function staticFromPostMethodShouldReturnNewResponseInstanceOnEmptyArray()
+    {
+        $request = Response::fromPost([]);
+        $this->assertEquals(Response::class, get_class($request));
     }
 }

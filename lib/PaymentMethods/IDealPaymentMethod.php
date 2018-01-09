@@ -2,6 +2,11 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\Brand;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+
 /**
  * iDeal Payment Class
  *
@@ -14,30 +19,21 @@ namespace Heidelpay\PhpPaymentApi\PaymentMethods;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
-class IDealPaymentMethod extends AbstractPaymentMethod
+class IDealPaymentMethod implements PaymentMethodInterface
 {
-    /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
-     */
-    protected $_paymentCode = 'OT';
+    use BasicPaymentMethodTrait;
+    use AuthorizeTransactionType;
+    use RefundTransactionType;
 
     /**
-     * Weather this Payment method can authorise transactions or not
-     *
-     * @var boolean canAuthorise
+     * @var string Payment Code for this payment method
      */
-    protected $_canAuthorise = true;
+    protected $paymentCode = PaymentMethod::ONLINE_TRANSFER;
 
     /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
+     * @var string Brand Code for this payment method
      */
-    protected $_brand = 'IDEAL';
+    protected $brand = Brand::IDEAL;
 }

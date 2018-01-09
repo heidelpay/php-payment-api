@@ -86,6 +86,8 @@ class Push
      * Push constructor.
      *
      * @param string $xmlResponse a raw string in xml format
+     *
+     * @throws XmlResponseParserException
      */
     public function __construct($xmlResponse = null)
     {
@@ -112,6 +114,8 @@ class Push
      * Then return it.
      *
      * @return Response|null
+     *
+     * @throws XmlResponseParserException
      */
     public function getResponse()
     {
@@ -125,6 +129,8 @@ class Push
     /**
      * Parses the raw XML response and maps the
      * attributes to a PhpPaymentApi Response.
+     *
+     * @throws XmlResponseParserException
      */
     private function parseXmlResponse()
     {
@@ -152,7 +158,7 @@ class Push
             }
 
             // set the criterion data
-            if (isset($xml->Transaction->Analysis->Criterion)) {
+            if (isset($xml->Transaction, $xml->Transaction->Analysis->Criterion)) {
                 foreach ($xml->Transaction->Analysis->Criterion as $criterion) {
                     $this->response->getCriterion()->set($criterion['name'], (string)$criterion);
                 }
@@ -220,7 +226,7 @@ class Push
      * @param SimpleXMLElement       $xmlResponse
      */
     private function setParameterGroupProperties(
-        AbstractParameterGroup &$parameterGroupInstance,
+        AbstractParameterGroup $parameterGroupInstance,
         PushMappingInterface $mappingClassInstance,
         SimpleXMLElement $xmlResponse
     ) {

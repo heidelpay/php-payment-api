@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup as Config;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class ConfigParameterGroupTest extends Test
 {

@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Ronja Wann
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class Przelewy24PaymentMethodTest extends BasePaymentMethodTest
 {
@@ -81,7 +79,7 @@ class Przelewy24PaymentMethodTest extends BasePaymentMethodTest
         $Przelewy24 = new Przelewy24();
         $Przelewy24->getRequest()->authentification(...$authentication);
         $Przelewy24->getRequest()->customerAddress(...$customerDetails);
-        $Przelewy24->_dryRun = true;
+        $Przelewy24->dryRun = true;
 
         $this->paymentObject = $Przelewy24;
     }

@@ -29,9 +29,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -135,7 +133,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $CreditCard->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
         $CreditCard->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
         $CreditCard->getRequest()->getCriterion()->set('TestValue', 'test');
-        $CreditCard->_dryRun = true;
+        $CreditCard->dryRun = true;
 
         $this->paymentObject = $CreditCard;
     }
@@ -206,7 +204,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->_dryRun = false;
+        $this->paymentObject->dryRun = false;
 
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 
@@ -241,7 +239,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->_dryRun = false;
+        $this->paymentObject->dryRun = false;
 
         $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
 

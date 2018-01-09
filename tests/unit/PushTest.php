@@ -2,6 +2,8 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
+use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
+use Heidelpay\PhpPaymentApi\Constants\StatusCode;
 use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpPaymentApi\Push;
 use Heidelpay\PhpPaymentApi\PushMapping\Account;
@@ -22,11 +24,9 @@ use SimpleXMLElement;
  *
  * @link http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author Stephano Vogel
+ * @author Stephano Vogel <development@heidelpay.de>
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class PushTest extends Test
 {
@@ -156,8 +156,8 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(StatusCode::NEW_TRANSACTION, $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingResult::ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('23.12', $response->getPresentation()->getAmount());
         $this->assertNotEquals('12.34', $response->getPresentation()->getAmount());
@@ -219,8 +219,8 @@ class PushTest extends Test
 
         $this->assertEquals('000.200.000', $response->getProcessing()->getReturnCode());
         $this->assertEquals('Transaction pending', $response->getProcessing()->getReturn());
-        $this->assertEquals('80', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(StatusCode::WAITING, $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingResult::ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('150.37', $response->getPresentation()->getAmount());
         $this->assertNotEquals('15.37', $response->getPresentation()->getAmount());
@@ -285,8 +285,8 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(StatusCode::NEW_TRANSACTION, $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingResult::ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('51.00', $response->getPresentation()->getAmount());
         $this->assertNotEquals('510.00', $response->getPresentation()->getAmount());
@@ -333,8 +333,8 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(StatusCode::NEW_TRANSACTION, $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingResult::ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('56.99', $response->getPresentation()->getAmount());
         $this->assertNotEquals('57.00', $response->getPresentation()->getAmount());
@@ -404,8 +404,8 @@ class PushTest extends Test
             'Request successfully processed in \'Merchant in Connector Test Mode\'',
             $response->getProcessing()->getReturn()
         );
-        $this->assertEquals('90', $response->getProcessing()->getStatusCode());
-        $this->assertEquals('ACK', $response->getProcessing()->getResult());
+        $this->assertEquals(StatusCode::NEW_TRANSACTION, $response->getProcessing()->getStatusCode());
+        $this->assertEquals(ProcessingResult::ACK, $response->getProcessing()->getResult());
 
         $this->assertEquals('107.00', $response->getPresentation()->getAmount());
         $this->assertNotEquals('106.99', $response->getPresentation()->getAmount());
@@ -483,7 +483,10 @@ class PushTest extends Test
 
         // implements the tested method
         $connector = new Processing();
-        $this->assertEquals(90, $connector->getXmlObjectFieldAttribute($xmlElement, 'Status:code'));
+        $this->assertEquals(
+            StatusCode::NEW_TRANSACTION,
+            $connector->getXmlObjectFieldAttribute($xmlElement, 'Status:code')
+        );
     }
 
     /**

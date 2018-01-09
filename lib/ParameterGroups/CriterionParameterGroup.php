@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
+
 /**
  * This class provides a key value store for api parameter
  *
@@ -16,14 +18,10 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class CriterionParameterGroup extends AbstractParameterGroup
 {
-    const SDK_VERSION = 'v1.1.0';
-
     /**
      * Currently used payment methode
      *
@@ -46,11 +44,11 @@ class CriterionParameterGroup extends AbstractParameterGroup
     public $sdk_name = 'Heidelpay\PhpPaymentApi';
 
     /**
-     * Sdk version
+     * SDK version
      *
      * @var string version
      */
-    public $sdk_version = self::SDK_VERSION;
+    public $sdk_version = ApiConfig::SDK_VERSION;
 
     /**
      * CriterionPaymentMethod getter

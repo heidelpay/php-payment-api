@@ -12,9 +12,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class SecurityParameterGroup extends AbstractParameterGroup
 {
@@ -38,7 +36,7 @@ class SecurityParameterGroup extends AbstractParameterGroup
      *
      * This is one of the main authentication parameter
      *
-     * @param string $sender authentication parameter f.e. 31HA07BC8142C5A171745D00AD63D182
+     * @param string $sender authentication parameter, e.g. 31HA07BC8142C5A171745D00AD63D182
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup
      */

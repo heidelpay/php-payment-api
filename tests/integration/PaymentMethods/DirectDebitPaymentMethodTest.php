@@ -20,9 +20,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -95,7 +93,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
         $DirectDebit = new DirectDebit();
         $DirectDebit->getRequest()->authentification(...$authentication);
         $DirectDebit->getRequest()->customerAddress(...$customerDetails);
-        $DirectDebit->_dryRun = true;
+        $DirectDebit->dryRun = true;
 
         $this->paymentObject = $DirectDebit;
     }
@@ -121,7 +119,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
         $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
 
-        $this->paymentObject->_dryRun = false;
+        $this->paymentObject->dryRun = false;
 
         $this->paymentObject->authorize();
 

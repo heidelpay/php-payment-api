@@ -15,9 +15,7 @@ use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
  *
  * @author     Jens Richter
  *
- * @package    Heidelpay
- * @subpackage PhpPaymentApi
- * @category   PhpPaymentApi
+ * @package heidelpay\php-payment-api
  */
 class Request extends AbstractMethod
 {
@@ -39,10 +37,10 @@ class Request extends AbstractMethod
     /**
      * Set all necessary authentication parameters for this request
      *
-     * @param string $securitySender     security sender parameter f.e 31HA07BC8142C5A171745D00AD63D182
-     * @param string $userLogin          user login parameter f.e. 31ha07bc8142c5a171744e5aef11ffd3
-     * @param string $userPassword       user password f.e. 93167DE7
-     * @param string $transactionChannel channel id of the payment method f.e. 31HA07BC8142C5A171744F3D6D155865
+     * @param string $securitySender     security sender parameter, e.g. 31HA07BC8142C5A171745D00AD63D182
+     * @param string $userLogin          user login parameter, e.g. 31ha07bc8142c5a171744e5aef11ffd3
+     * @param string $userPassword       user password, e.g. 93167DE7
+     * @param string $transactionChannel channel id of the payment method, e.g. 31HA07BC8142C5A171744F3D6D155865
      * @param bool   $sandboxRequest     choose between sandbox and productive payment system
      *
      * @return \Heidelpay\PhpPaymentApi\Request
@@ -58,10 +56,10 @@ class Request extends AbstractMethod
         $this->getUser()->setLogin($userLogin);
         $this->getUser()->setPassword($userPassword);
         $this->getTransaction()->setChannel($transactionChannel);
-        $this->getTransaction()->setMode("LIVE");
+        $this->getTransaction()->setMode('LIVE');
 
         if ($sandboxRequest) {
-            $this->getTransaction()->setMode("CONNECTOR_TEST");
+            $this->getTransaction()->setMode('CONNECTOR_TEST');
         }
         return $this;
     }
@@ -69,12 +67,12 @@ class Request extends AbstractMethod
     /**
      * Set all necessary parameter for a asynchronous request
      *
-     * @param string $languageCode language code 2 letters for error messages and iframe f.e EN
-     * @param string $responseUrl  response url of your application f.e https://www.url.com/response.php
+     * @param string $languageCode language code 2 letters for error messages and iframe, e.g. EN
+     * @param string $responseUrl  response url of your application, e.g. https://www.url.com/response.php
      *
      * @return \Heidelpay\PhpPaymentApi\Request
      */
-    public function async($languageCode = "EN", $responseUrl = null)
+    public function async($languageCode = 'EN', $responseUrl = null)
     {
         $this->getFrontend()->setLanguage($languageCode);
 
@@ -88,16 +86,16 @@ class Request extends AbstractMethod
     /**
      * Set all necessary customer parameter for a request
      *
-     * @param string $nameGiven      customer given name f.e. John
-     * @param string $nameFamily     customer family name f.e. Doe
-     * @param string $nameCompany    company name f.e. Heidelpay
-     * @param string $shopperId      customer id in your application f.e. 1249
-     * @param string $addressStreet  address street of the customer f.e. Vagerowstr.
-     * @param string $addressState   address state ot the customer f.e Bayern
-     * @param string $addressZip     address zip code f.e. 69115
-     * @param string $addressCity    address city f.e. Heidelberg
-     * @param string $addressCountry address country code 2 letters f.e. DE
-     * @param string $contactMail    email adress of the customer f.e. ab@mail.de
+     * @param string $nameGiven      customer given name, e.g. John
+     * @param string $nameFamily     customer family name, e.g. Doe
+     * @param string $nameCompany    company name, e.g. Heidelpay
+     * @param string $shopperId      customer id in your application, e.g. 1249
+     * @param string $addressStreet  address street of the customer, e.g. Vagerowstr.
+     * @param string $addressState   address state ot the customer, e.g. Bayern
+     * @param string $addressZip     address zip code, e.g. 69115
+     * @param string $addressCity    address city, e.g. Heidelberg
+     * @param string $addressCountry address country code 2 letters, e.g. DE
+     * @param string $contactMail    email adress of the customer, e.g. ab@mail.de
      *
      * @return \Heidelpay\PhpPaymentApi\Request
      */
@@ -130,9 +128,9 @@ class Request extends AbstractMethod
     /**
      * Set all basket or order information
      *
-     * @param string $shopIdentifier id of your application f.e. order-125454
-     * @param string $amount         amount of the current basket f.e. 20.12
-     * @param string $currency       currency code 3 letters f.e. USD
+     * @param string $shopIdentifier id of your application, e.g. order-125454
+     * @param string $amount         amount of the current basket, e.g. 20.12
+     * @param string $currency       currency code 3 letters, e.g. USD
      * @param string $secret         a secret to prevent your application against fake responses
      *
      * @return \Heidelpay\PhpPaymentApi\Request
@@ -142,7 +140,7 @@ class Request extends AbstractMethod
         $this->getIdentification()->setTransactionid($shopIdentifier);
         $this->getPresentation()->setAmount($amount);
         $this->getPresentation()->setCurrency($currency);
-        if ($secret !== null and $shopIdentifier !== null) {
+        if ($secret !== null && $shopIdentifier !== null) {
             $this->getCriterion()->setSecret($shopIdentifier, $secret);
         }
 
@@ -197,11 +195,11 @@ class Request extends AbstractMethod
     /**
      * Parameter used in case of b2c secured invoice or direct debit
      *
-     * @param null $salutation customer salutation MR/MRS (Mandatory)
-     * @param null $birthdate  customer birth date YYYY-MM-DD (Mandatory)
-     * @param null $basketId   id of a given basket using heidelpay basket api (Optional)
+     * @param string $salutation customer salutation MR/MRS (Mandatory)
+     * @param string $birthdate  customer birth date YYYY-MM-DD (Mandatory)
+     * @param string $basketId   id of a given basket using heidelpay basket api (Optional)
      *
-     * @return $this \Heidelpay\PhpPaymentApi\Request
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function b2cSecured($salutation = null, $birthdate = null, $basketId = null)
     {

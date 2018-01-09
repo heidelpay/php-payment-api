@@ -2,6 +2,11 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\Brand;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+
 /**
  * PostFinanceCard Payment Class
  *
@@ -14,37 +19,21 @@ namespace Heidelpay\PhpPaymentApi\PaymentMethods;
  *
  * @author  Ronja Wann
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
-class PostFinanceCardPaymentMethod extends AbstractPaymentMethod
+class PostFinanceCardPaymentMethod implements PaymentMethodInterface
 {
-    /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
-     */
-    protected $_paymentCode = 'OT';
+    use BasicPaymentMethodTrait;
+    use AuthorizeTransactionType;
+    use RefundTransactionType;
 
     /**
-     * Weather this Payment method can authorise transactions or not
-     *
-     * @var boolean canAuthorise
+     * @var string Payment Code for this payment method
      */
-    protected $_canAuthorise = true;
+    protected $paymentCode = PaymentMethod::ONLINE_TRANSFER;
 
     /**
-     * Weather this Payment method can refund transactions or not
-     *
-     * @var boolean canRefund
+     * @var string Brand Code for this payment method
      */
-    protected $_canRefund = true;
-
-    /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
-     */
-    protected $_brand = 'PFCARD';
+    protected $brand = Brand::POSTFINANCE_CARD;
 }

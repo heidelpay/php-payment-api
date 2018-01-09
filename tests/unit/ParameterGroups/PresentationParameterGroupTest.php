@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup as Presen
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class PresentationParameterGroupTest extends Test
 {

@@ -14,9 +14,7 @@ use Exception;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\exception
  */
 class HashVerificationException extends Exception
 {

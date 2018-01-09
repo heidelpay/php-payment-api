@@ -16,9 +16,7 @@ use Exception;
  *
  * @author     Stephano Vogel
  *
- * @package    heidelpay
- * @subpackage php-api
- * @category   php-api
+ * @package heidelpay\php-payment-api\exception
  */
 class UndefinedXmlResponseException extends Exception
 {

@@ -1,50 +1,32 @@
 language: php
 dist: trusty
-
 matrix:
   fast_finish: true
   include:
     - php: 5.6
       env: deps=no
-    - php: 7
+    - php: 7.0
       env: deps=no
-    - php: 7
+    - php: 7.0
       env: deps=high
     - php: 7.1
       env: deps=no
     - php: 7.1
       env: deps=high
-
-
+    - php: 7.2
+      env: deps=no
+    - php: 7.2
+      env: deps=high
 cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.php-cs-fixer
     - $HOME/.local
-
-before_script:
-    ## backup and disable xdebug
-    - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak
-    - echo > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - phpenv rehash
-    - mkdir -p "$HOME/.php-cs-fixer"
-    - mkdir -p build/logs
-    - composer self-update
-    - if [ "$deps" = "no" ]; then composer --prefer-dist install; fi;
-    - if [ "$deps" = "high" ]; then composer --prefer-source update; fi;
-
+before_install:
+    - ./tests/script/travis_before_install.sh
+install:
+    - if [ "$(phpenv version-name)" == "5.6" ]; then travis_wait ./tests/script/travis_install.sh; else ./tests/script/travis_install.sh; fi
 script:
-    - ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
-    ## enable xdebug
-    - mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - ./vendor/bin/codecept build
-    - ./vendor/bin/codecept run unit --coverage --coverage-xml
-    ## perform this task only for php 7 with deps=0
-    - |
-      if [[ ($(phpenv version-name) == "7") && ("$deps" == "no") ]]; then
-        echo "Perform integration tests as well";
-        ./vendor/bin/codecept run integration
-      fi
-
+    - ./tests/script/travis_script.sh
 after_success:
     - php vendor/bin/codacycoverage clover tests/_output/coverage.xml

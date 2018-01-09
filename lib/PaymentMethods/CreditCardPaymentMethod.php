@@ -2,6 +2,7 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
@@ -24,11 +25,9 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
  *
  * @author     Jens Richter
  *
- * @package    Heidelpay
- * @subpackage PhpPaymentApi
- * @category   PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
-class CreditCardPaymentMethod
+class CreditCardPaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;
     use RegistrationTransactionType {
@@ -48,18 +47,9 @@ class CreditCardPaymentMethod
     use RebillTransactionType;
 
     /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
+     * @var string Payment Code for this payment method
      */
-    protected $_paymentCode = 'CC';
-
-    /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
-     */
-    protected $_brand;
+    protected $paymentCode = PaymentMethod::CREDIT_CARD;
 
     /**
      * Payment type authorisation
@@ -75,7 +65,7 @@ class CreditCardPaymentMethod
      * @param mixed      $PreventAsyncRedirect - prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Exception
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
@@ -100,7 +90,7 @@ class CreditCardPaymentMethod
      * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Exception
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */
@@ -126,7 +116,7 @@ class CreditCardPaymentMethod
      * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Exception
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
      */

@@ -3,6 +3,8 @@
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
 use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
 
@@ -19,64 +21,44 @@ use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
 trait BasicPaymentMethodTrait
 {
-    /**
-     * Payment Url of the live payment server
-     *
-     * Please do not change the url.
-     *
-     * @var string url for heidelpay api connection real or live system
-     */
-    protected $_liveUrl = 'https://heidelpay.hpcgw.net/ngw/post';
-
-    /**
-     * Payment Url of the sandbox payment server
-     *
-     * Please do not change the url.
-     *
-     * @var string url for heidelpay api connection sandbox system
-     */
-    protected $_sandboxUrl = 'https://test-heidelpay.hpcgw.net/ngw/post';
-
     /**
      * HTTP Adapter for payment connection
      *
      * @var HttpAdapterInterface
      */
-    protected $_adapter = null;
+    protected $adapter;
 
     /**
      * Heidelpay request object
      *
      * @var \Heidelpay\PhpPaymentApi\Request
      */
-    protected $_request = null;
+    protected $request;
 
     /**
      * Heidelpay request array
      *
      * @var array request
      */
-    protected $_requestArray = null;
+    protected $requestArray;
 
     /**
      * Heidelpay response object
      *
      * @var \Heidelpay\PhpPaymentApi\Response
      */
-    protected $_response = null;
+    protected $response;
 
     /**
      * Heidelpay response array
      *
      * @var array response
      */
-    protected $_responseArray = null;
+    protected $responseArray;
 
     /**
      * Dry run
@@ -86,7 +68,35 @@ trait BasicPaymentMethodTrait
      *
      * @var boolean dry run
      */
-    public $_dryRun = false;
+    public $dryRun = false;
+
+    /**
+     * Returns the payment code for the payment request.
+     *
+     * @return string
+     */
+    public function getPaymentCode()
+    {
+        if (!property_exists($this, 'paymentCode')) {
+            return null;
+        }
+
+        return $this->paymentCode;
+    }
+
+    /**
+     * Returns the brand for the payment method.
+     *
+     * @return string
+     */
+    public function getBrand()
+    {
+        if (!property_exists($this, 'brand')) {
+            return null;
+        }
+
+        return $this->brand;
+    }
 
     /**
      * Return the name of the used class
@@ -101,11 +111,11 @@ trait BasicPaymentMethodTrait
     /**
      * Set a new payment request object
      *
-     * @param \Heidelpay\PhpPaymentApi\Request $Request
+     * @param \Heidelpay\PhpPaymentApi\Request $request
      */
-    public function setRequest(HeidelpayRequest $Request)
+    public function setRequest(HeidelpayRequest $request)
     {
-        $this->_request = $Request;
+        $this->request = $request;
     }
 
     /**
@@ -115,11 +125,11 @@ trait BasicPaymentMethodTrait
      */
     public function getRequest()
     {
-        if ($this->_request === null) {
-            return $this->_request = new HeidelpayRequest();
+        if ($this->request === null) {
+            return $this->request = new HeidelpayRequest();
         }
 
-        return $this->_request;
+        return $this->request;
     }
 
     /**
@@ -129,7 +139,7 @@ trait BasicPaymentMethodTrait
      */
     public function getResponse()
     {
-        return $this->_response;
+        return $this->response;
     }
 
     /**
@@ -139,7 +149,7 @@ trait BasicPaymentMethodTrait
      */
     public function setAdapter($adapter)
     {
-        $this->_adapter = $adapter;
+        $this->adapter = $adapter;
     }
 
     /**
@@ -149,13 +159,13 @@ trait BasicPaymentMethodTrait
      */
     public function getAdapter()
     {
-        return $this->_adapter;
+        return $this->adapter;
     }
 
     /**
      * Get url of the used payment api
      *
-     * @throws \Exception mode not set
+     * @throws UndefinedTransactionModeException
      *
      * @return boolean|string url of the payment api
      */
@@ -165,11 +175,13 @@ trait BasicPaymentMethodTrait
 
         if ($mode === null) {
             throw new UndefinedTransactionModeException('Transaction mode is not set');
-        } elseif ($mode == 'LIVE') {
-            return $this->_liveUrl;
         }
 
-        return $this->_sandboxUrl;
+        if ($mode === TransactionMode::LIVE) {
+            return ApiConfig::LIVE_URL;
+        }
+
+        return ApiConfig::TEST_URL;
     }
 
     /**
@@ -177,20 +189,22 @@ trait BasicPaymentMethodTrait
      *
      * It will add the used payment method  and the brand to the request. If
      * dry run is set the request will only be convert to an array.
+     *
+     * @throws UndefinedTransactionModeException
      */
     public function prepareRequest()
     {
         $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
-        if ($this->_brand !== null) {
-            $this->getRequest()->getAccount()->setBrand($this->_brand);
+        if ($this->getBrand() !== null) {
+            $this->getRequest()->getAccount()->setBrand($this->brand);
         }
 
         $uri = $this->getPaymentUrl();
-        $this->_requestArray = $this->getRequest()->convertToArray();
+        $this->requestArray = $this->getRequest()->convertToArray();
 
-        if ($this->_dryRun === false and $uri !== null and is_array($this->_requestArray)) {
-            list($this->_responseArray, $this->_response) =
-                $this->getRequest()->send($uri, $this->_requestArray, $this->getAdapter());
+        if ($this->dryRun === false && $uri !== null && is_array($this->requestArray)) {
+            list($this->responseArray, $this->response) =
+                $this->getRequest()->send($uri, $this->requestArray, $this->getAdapter());
         }
     }
 

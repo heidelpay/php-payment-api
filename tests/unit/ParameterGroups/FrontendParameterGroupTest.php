@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup as Frontend;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class FrontendParameterGroupTest extends Test
 {

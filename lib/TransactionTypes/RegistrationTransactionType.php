@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+
 /**
  * Transaction type registration
  *
@@ -16,9 +18,7 @@ namespace Heidelpay\PhpPaymentApi\TransactionTypes;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait RegistrationTransactionType
 {
@@ -29,11 +29,13 @@ trait RegistrationTransactionType
      * system. You will get back a payment reference id. This gives you a way
      * to charge this account later or even to make a recurring payment.
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
+     * @return $this
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function registration()
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".RG");
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REGISTRATION);
         $this->prepareRequest();
 
         return $this;

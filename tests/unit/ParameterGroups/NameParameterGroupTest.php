@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup as Name;
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class NameParameterGroupTest extends Test
 {

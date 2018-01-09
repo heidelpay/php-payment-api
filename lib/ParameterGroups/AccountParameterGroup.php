@@ -15,9 +15,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class AccountParameterGroup extends AbstractParameterGroup
 {
@@ -168,7 +166,7 @@ class AccountParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Setter for the account brand name f.e. SOFORT or PAYPAL
+     * Setter for the account brand name, e.g. SOFORT or PAYPAL
      *
      * @param $brand string name of the used brand in upper case
      *

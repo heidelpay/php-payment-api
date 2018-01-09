@@ -19,9 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @author  Ronja Wann
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\integration
  */
 class GiropayPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -78,7 +76,7 @@ class GiropayPaymentMethodTest extends BasePaymentMethodTest
         $giropay = new Giropay();
         $giropay->getRequest()->authentification(...$authentication);
         $giropay->getRequest()->customerAddress(...$customerDetails);
-        $giropay->_dryRun = true;
+        $giropay->dryRun = true;
 
         $this->paymentObject = $giropay;
     }

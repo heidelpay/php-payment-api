@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\Brand;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
@@ -22,11 +24,9 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\paymentmethods
  */
-class PayPalPaymentMethod
+class PayPalPaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;
     use RegistrationTransactionType;
@@ -40,16 +40,12 @@ class PayPalPaymentMethod
     use RebillTransactionType;
 
     /**
-     * Payment code for this payment method
-     *
-     * @var string payment code
+     * @var string Payment Code for this payment method
      */
-    protected $_paymentCode = 'VA';
+    protected $paymentCode = PaymentMethod::VIRTUAL_ACCOUNT;
 
     /**
-     * Payment brand name for this payment method
-     *
-     * @var string brand name
+     * @var string Brand Code for this payment method
      */
-    protected $_brand = 'PAYPAL';
+    protected $brand = Brand::PAYPAL;
 }

@@ -12,12 +12,13 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay
- * @subpackage php-api
- * @category php-api
+ * @package heidelpay\php-payment-api\push-mapping
  */
 class Account extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $fields = [
         'Bank' => 'bank',
         'BankName' => 'bankname',
@@ -30,28 +31,37 @@ class Account extends AbstractPushMapper
         'Number' => 'number',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public $fieldAttributes = [
         'Expiry:year' => 'expiry_year',
         'Expiry:month' => 'expiry_month',
     ];
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset($xmlElement->Transaction->Account->$field)) {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Account->$field)) {
             return (string)$xmlElement->Transaction->Account->$field;
         }
 
         return null;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getXmlObjectFieldAttribute(\SimpleXMLElement $xmlElement, $fieldAttribute)
     {
         list($field, $attribute) = explode(':', $fieldAttribute);
 
-        if (isset($xmlElement->Transaction->Account->$field)) {
-            if (isset($xmlElement->Transaction->Account->$field->attributes()->$attribute)) {
-                return (string)$xmlElement->Transaction->Account->$field->attributes()->$attribute;
-            }
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Account->$field,
+            $xmlElement->Transaction->Account->$field->attributes()->$attribute)
+        ) {
+            return (string)$xmlElement->Transaction->Account->$field->attributes()->$attribute;
         }
 
         return null;

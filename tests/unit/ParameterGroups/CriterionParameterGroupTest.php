@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup as Criterion
  *
  * @author  Jens Richter
  *
- * @category unittest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class CriterionParameterGroupTest extends Test
 {

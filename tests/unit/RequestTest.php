@@ -3,6 +3,8 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
+use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 
@@ -18,9 +20,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category UnitTest
+ * @package heidelpay\php-payment-api\tests\unit
  */
 class RequestTest extends Test
 {
@@ -47,7 +47,7 @@ class RequestTest extends Test
         $this->assertEquals($UserLogin, $Request->getUser()->getLogin());
         $this->assertEquals($UserPassword, $Request->getUser()->getPassword());
         $this->assertEquals($TransactionChannel, $Request->getTransaction()->getChannel());
-        $this->assertEquals('CONNECTOR_TEST', $Request->getTransaction()->getMode());
+        $this->assertEquals(TransactionMode::CONNECTOR_TEST, $Request->getTransaction()->getMode());
     }
 
     /**
@@ -222,5 +222,57 @@ class RequestTest extends Test
         $request->getCriterion()->set($fieldName, $value);
 
         $this->assertEquals($value, $request->getCriterion()->get($fieldName));
+    }
+
+    /**
+     * Test that checks if the static fromJson method returns an instance of Request.
+     *
+     * @test
+     */
+    public function staticFromJsonMethodShouldReturnNewRequestInstanceOnEmptyJsonObject()
+    {
+        $request = Request::fromJson('{}');
+        $this->assertEquals(Request::class, get_class($request));
+    }
+
+    /**
+     * Test that checks if an existing Request instance and an instance
+     * created by the fromJson mapper are matching ParameterGroup
+     * instances and their respective properies and values.
+     *
+     * @test
+     */
+    public function mappedJsonRequestAndToJsonRepresentationOfRequestObjectMustBeEqual()
+    {
+        $request = new Request();
+
+        $mappedRequest = Request::fromJson($request->toJson());
+        $this->assertEquals($request, $mappedRequest);
+    }
+
+    /**
+     * Test that checks if a JsonParserException will be thrown when an
+     * invalid JSON string is being provided to the fromJson method.
+     *
+     * @test
+     */
+    public function fromJsonMapperShouldThrowExceptionOnInvalidJson()
+    {
+        $invalidJson = '{"test: 0}';
+
+        $this->expectException(JsonParserException::class);
+        $request = Request::fromJson($invalidJson);
+        $request->getBasket();
+    }
+
+    /**
+     * Test that checks if the static fromPost method returns an instance of Request.
+     *
+     * @test
+     */
+    public function staticFromPostMethodShouldReturnNewRequestInstanceOnEmptyArray()
+    {
+        $request = Request::fromPost([]);
+        $this->assertEquals(Request::class, get_class($request));
     }
 }

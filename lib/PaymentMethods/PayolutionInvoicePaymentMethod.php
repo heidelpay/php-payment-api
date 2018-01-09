@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\Brand;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\FinalizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
@@ -19,7 +21,7 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
  *
  * @author Stephano Vogel <development@heidelpay.de>
  *
- * @package heidelpay\php-api\payment-methods\payolution-invoice
+ * @package heidelpay\php-payment-api\paymentmethods
  */
 class PayolutionInvoicePaymentMethod
 {
@@ -30,12 +32,12 @@ class PayolutionInvoicePaymentMethod
     use ReversalTransactionType;
 
     /**
-     * @var string Payment code
+     * @var string Payment Code for this payment method
      */
-    protected $_paymentCode = 'IV';
+    protected $paymentCode = PaymentMethod::INVOICE;
 
     /**
-     * @var string Brand name
+     * @var string Brand Code for this payment method
      */
-    protected $_brand = 'PAYOLUTION_DIRECT';
+    protected $brand = Brand::PAYOLUTION_DIRECT;
 }

@@ -10,6 +10,9 @@
     </transformer>
     <files>
         <directory>.</directory>
+        <ignore>tests/_data/*</ignore>
+        <ignore>tests/_output/*</ignore>
+        <ignore>tests/_support/*</ignore>
         <ignore>vendor/*</ignore>
     </files>
     <plugins>

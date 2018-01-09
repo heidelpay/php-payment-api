@@ -12,9 +12,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\parameter-groups
  */
 class IdentificationParameterGroup extends AbstractParameterGroup
 {
@@ -140,7 +138,7 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     /**
      * Setter for the customer id of your application
      *
-     * @param string $shopperid customer id f.e. 12042
+     * @param string $shopperid customer id, e.g. 12042
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */
@@ -154,9 +152,9 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * Setter for the transaction id
      *
      * The transaction id is an identifier given by your application to allow matching between
-     * your system and the payment system. This can be f.e. an order id or invoice id.
+     * your system and the payment system. This can be, e.g. an order id or invoice id.
      *
-     * @param string $transactionid f.e. order-1109
+     * @param string $transactionid, e.g. order-1109
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */
@@ -170,10 +168,10 @@ class IdentificationParameterGroup extends AbstractParameterGroup
      * Setter for the payment reference id or unique id
      *
      * Some kinds of transactions needs to reference to another transaction. This can be done
-     * by setting this parameter with the unique id of the reference transaction. F.e. if you
+     * by setting this parameter with the unique id of the reference transaction., e.g. if you
      * use debitOnRegistration you have to set the id of the registration.
      *
-     * @param string $referenceid f.e. 31HA07BC8142C5A171745D00AD63D182
+     * @param string $referenceid, e.g. 31HA07BC8142C5A171745D00AD63D182
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
      */

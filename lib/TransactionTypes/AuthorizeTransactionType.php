@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\TransactionTypes;
 
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+
 /**
  * Transaction type authorize
  *
@@ -17,9 +19,7 @@ namespace Heidelpay\PhpPaymentApi\TransactionTypes;
  *
  * @author  Jens Richter
  *
- * @package  Heidelpay
- * @subpackage PhpPaymentApi
- * @category PhpPaymentApi
+ * @package heidelpay\php-payment-api\transaction-types
  */
 trait AuthorizeTransactionType
 {
@@ -31,11 +31,13 @@ trait AuthorizeTransactionType
      * like Sofort and Giropay (so called online payments) this type will be
      * used just to get the redirect to their systems.
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\AbstractPaymentMethod
+     * @return $this
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function authorize()
     {
-        $this->getRequest()->getPayment()->set('code', $this->_paymentCode . ".PA");
+        $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::RESERVATION);
         $this->prepareRequest();
 
         return $this;
