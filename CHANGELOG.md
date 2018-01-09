@@ -6,16 +6,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [v1.3.0][v1.3.0]
 ## Added
-- `fromJson()` and `fromPost()` static methods to instantiate Response and Request objects with a static call.
-- `RESULT_ACK` and `RESULT_NOK` constants inside of `ProcessingParameterGroup`
-- Several constants for Api Config, Paymentmethod codes, status/reason codes, ...
+- `fromJson()` and `fromPost()` static methods to instantiate `Response` and `Request` objects with a static call.
+- Several constants for Api Config, Paymentmethod codes, status/reason codes, ... see the following classes in the `Heidelpay\PhpPaymentApi\Constants` namespace:
+  - `ApiConfig` includes this sdk's version, live and test api urls
+  - `Brand` includes codes for brands (e.g. Visa, giropay, PayPal)
+  - `PaymentMethod` includes codes for all payment methods (e.g. CC for Credit Card, OT for Online Transfer, ...)
+  - `ProcessingResult` includes transaction result codes (ACK and NOK for now)
+  - `ReasonCode` includes reason codes (indicators for errors) of transactions
+  - `StatusCode` includes transaction status codes
+  - `TransactionMode` includes transaction modes, which are important for the running environment
+  - `TransactionType` includes codes for transaction types (e.g. Capture, Debit, Reversal, ...)
+
+## Changed
+- Clearified the exception message in `verifySecurityHash()` (Response script/page should only be called by heidelpay)
 
 ## Removed
 - `AbstractPaymentMethod` class in favor of the `BasicPaymentMethodTrait`
 
-## Changed
+## Deprecated
 - Declared `Response::splitArray()` as deprecated in favor of `fromPost()` and replaced it's code with a `fromPost` call
-- Clearified the exception message in `verifySecurityHash()` (Response script/page should only be called by heidelpay)
 
 
 ## [v1.2.0][v1.2.0]

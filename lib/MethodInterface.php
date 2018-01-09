@@ -32,6 +32,8 @@ interface MethodInterface extends JsonSerializable
      * Takes a JSON representation of an instance and returns
      * a PHP object instance representation of it.
      *
+     * @since 1.3.0 First time this was introduced.
+     *
      * @param string $json
      *
      * @return AbstractMethod
@@ -43,6 +45,8 @@ interface MethodInterface extends JsonSerializable
     /**
      * Takes an array, e.g. a POST response and returns
      * a PHP object instance representation of it.
+     *
+     * @since 1.3.0 First time this was introduced.
      *
      * @param array $post
      *
