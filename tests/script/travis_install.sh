@@ -10,11 +10,11 @@ UPDATE_COMMAND="composer update --no-interaction --prefer-source"
 if [ "$deps" == "no" ]; then
 
     # if PHP version is 5, use travis_wait for up to 20 minutes waiting time.
-    if [ "$PHPVER" == "5" ]; then
+    if [[ "$PHPVER" =~ ^5\.[0-9]+$ ]]; then
         travis_wait ${INSTALL_COMMAND}
     fi
 
-    if [ "$PHPVER" == "7" ]; then
+    if [[ "$PHPVER" =~ ^7\.[0-9]+$ ]]; then
         ${INSTALL_COMMAND}
     fi
 fi
