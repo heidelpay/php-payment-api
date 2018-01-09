@@ -5,9 +5,9 @@ matrix:
   include:
     - php: 5.6
       env: deps=no
-    - php: 7
+    - php: 7.0
       env: deps=no
-    - php: 7
+    - php: 7.0
       env: deps=high
     - php: 7.1
       env: deps=no
@@ -25,7 +25,7 @@ cache:
 before_install:
     - ./tests/script/travis_before_install.sh
 install:
-    - ./tests/script/travis_install.sh
+    - if [ "$(phpenv version-name)" == "5.6" ]; then travis_wait ./tests/script/travis_install.sh; else ./tests/script/travis_install.sh; fi
 script:
     - ./tests/script/travis_script.sh
 after_success:
