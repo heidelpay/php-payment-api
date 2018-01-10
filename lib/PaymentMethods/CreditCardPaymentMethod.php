@@ -65,14 +65,15 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
     public function authorize($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
     {
-        $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $cssPath);
+        $this->getRequest()->getFrontend()->setEnabled('TRUE');
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->authorizeParent();
     }
@@ -88,13 +89,14 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
     public function debit($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
     {
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $cssPath);
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->debitParent();
     }
@@ -112,13 +114,14 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
     public function registration($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
     {
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $cssPath);
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->registrationParent();
     }

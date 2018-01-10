@@ -38,7 +38,7 @@ trait RebillTransactionType
     public function rebill($paymentReferenceId)
     {
         $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REBILL);
-        $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 

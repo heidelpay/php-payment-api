@@ -23,7 +23,6 @@ class FrontendParameterGroup extends AbstractParameterGroup
      */
     public $css_path;
 
-
     /**
      * FrontendEnabled
      *
@@ -194,11 +193,11 @@ class FrontendParameterGroup extends AbstractParameterGroup
     /**
      * Setter to disable the frontend
      *
-     * This setting will force the payment to act in syn mode. This is only possible
-     * for transaction that do not need user input. F. e. prepayment, invoice or transactions
-     * like debitOnRegistration (only not 3DSecure).
+     * This setting will force the payment to act in sync mode. This is only possible for
+     * transactions that do not need user input, e.g.prepayment, invoice or
+     * transactions like debitOnRegistration (only non-3DSecure).
      *
-     * @param string $enabled
+     * @param string $enabled 'FALSE' or 'TRUE'
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */

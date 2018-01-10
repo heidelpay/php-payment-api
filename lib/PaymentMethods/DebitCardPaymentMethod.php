@@ -65,6 +65,7 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     public function authorize($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
@@ -73,10 +74,10 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
          * Because of the payment card industriy restictions (Aka pci3) you have
          * to use a payment frame for the input of credit card information
          */
-        $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $cssPath);
+        $this->getRequest()->getFrontend()->setEnabled('TRUE');
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->authorizeParent();
     }
@@ -92,6 +93,7 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     public function debit($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
@@ -100,9 +102,9 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
          * Because of the payment card industriy restictions (Aka pci3) you have
          * to use a payment frame for the input of credit card information
          */
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $cssPath);
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->debitParent();
     }
@@ -120,6 +122,7 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\DebitCardPaymentMethod
      */
     public function registration($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
@@ -128,9 +131,9 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
          * Because of the payment card industriy restictions (Aka pci3) you have
          * to use a payment frame for the input of credit card information
          */
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $cssPath);
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->registrationParent();
     }

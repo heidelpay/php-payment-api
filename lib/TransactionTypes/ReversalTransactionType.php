@@ -38,7 +38,7 @@ trait ReversalTransactionType
     public function reversal($paymentReferenceId)
     {
         $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REVERSAL);
-        $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 

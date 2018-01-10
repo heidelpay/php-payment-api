@@ -117,7 +117,9 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * @inheritdoc
+     * Returns the Request instance.
+     *
+     * @return \Heidelpay\PhpPaymentApi\Request
      */
     public function getRequest()
     {
@@ -129,7 +131,9 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * @inheritdoc
+     * Returns the Response instance.
+     *
+     * @return \Heidelpay\PhpPaymentApi\Response
      */
     public function getResponse()
     {
@@ -137,7 +141,9 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * @inheritdoc
+     * Set a HTTP Adapter for payment communication
+     *
+     * @param \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface $adapter
      */
     public function setAdapter($adapter)
     {
@@ -145,7 +151,9 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * @inheritdoc
+     * Get HTTP Adapter for payment communication
+     *
+     * @return \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface
      */
     public function getAdapter()
     {

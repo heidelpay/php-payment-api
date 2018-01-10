@@ -36,7 +36,7 @@ trait RefundTransactionType
     public function refund($paymentReferenceId)
     {
         $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REFUND);
-        $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 
