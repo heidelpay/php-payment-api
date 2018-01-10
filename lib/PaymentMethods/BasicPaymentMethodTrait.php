@@ -109,19 +109,15 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Set a new payment request object
-     *
-     * @param \Heidelpay\PhpPaymentApi\Request $request
+     * @inheritdoc
      */
-    public function setRequest(HeidelpayRequest $request)
+    public function setRequest(HeidelpayRequest $heidelpayRequest)
     {
-        $this->request = $request;
+        $this->request = $heidelpayRequest;
     }
 
     /**
-     * Get payment request object
-     *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @inheritdoc
      */
     public function getRequest()
     {
@@ -133,9 +129,7 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Get response object
-     *
-     * @return \Heidelpay\PhpPaymentApi\Response
+     * @inheritdoc
      */
     public function getResponse()
     {
@@ -143,9 +137,7 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Set a HTTP Adapter for payment communication
-     *
-     * @param HttpAdapterInterface $adapter
+     * @inheritdoc
      */
     public function setAdapter($adapter)
     {
@@ -153,9 +145,7 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Get HTTP Adapter for payment communication
-     *
-     * @return HttpAdapterInterface
+     * @inheritdoc
      */
     public function getAdapter()
     {
@@ -163,11 +153,9 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Get url of the used payment api
+     * @inheritdoc
      *
      * @throws UndefinedTransactionModeException
-     *
-     * @return boolean|string url of the payment api
      */
     public function getPaymentUrl()
     {
