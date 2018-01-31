@@ -84,6 +84,7 @@ class PrepaymentPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment authorize transaction
      * @group connectionTest
      * @test
+     * @throws \Exception
      */
     public function authorize()
     {
@@ -119,6 +120,7 @@ class PrepaymentPaymentMethodTest extends BasePaymentMethodTest
      * @depends authorize
      * @group connectionTest
      * @test   *
+     * @throws \Exception
      */
     public function reversal($referenceId)
     {
@@ -141,6 +143,8 @@ class PrepaymentPaymentMethodTest extends BasePaymentMethodTest
             'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
 
+        $this->logDataToDebug();
+
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
 
@@ -153,6 +157,7 @@ class PrepaymentPaymentMethodTest extends BasePaymentMethodTest
      * @depends authorize
      * @test
      * @group connectionTest
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)
     {
@@ -165,6 +170,9 @@ class PrepaymentPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->refund((string)$referenceId);
 
         $this->assertEquals('PP.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
+
+        $this->logDataToDebug();
+
         return true;
     }
 }

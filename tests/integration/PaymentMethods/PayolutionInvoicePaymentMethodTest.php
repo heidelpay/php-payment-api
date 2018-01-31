@@ -116,6 +116,8 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
             'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
 
+        $this->logDataToDebug();
+
         return $this->authorizeReference = (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
 
@@ -153,6 +155,8 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
             $this->paymentObject->getResponse()->isError(),
             'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
+
+        $this->logDataToDebug();
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -192,6 +196,8 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
             'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
 
+        $this->logDataToDebug();
+
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
 
@@ -200,10 +206,10 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @param string $referenceId reference id of the invoice to refund
      *
-     * @return string payment reference id of the invoice refund transaction
      * @depends authorize
      * @test
      * @group connectionTest
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)
     {
@@ -216,6 +222,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->refund((string)$referenceId);
 
         $this->assertEquals('IV.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
-        return true;
+
+        $this->logDataToDebug();
     }
 }

@@ -226,4 +226,12 @@ trait BasicPaymentMethodTrait
     {
         return json_encode($this->jsonSerialize(), $options);
     }
+
+    /**
+     * @return array
+     */
+    public function getResponseArray()
+    {
+        return $this->responseArray;
+    }
 }

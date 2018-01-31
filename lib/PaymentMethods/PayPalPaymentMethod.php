@@ -10,6 +10,7 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\DebitOnRegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\ReregistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
@@ -30,6 +31,7 @@ class PayPalPaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;
     use RegistrationTransactionType;
+    use ReregistrationTransactionType;
     use AuthorizeTransactionType;
     use DebitTransactionType;
     use AuthorizeOnRegistrationTransactionType;
