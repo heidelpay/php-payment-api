@@ -7,6 +7,7 @@ use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
+use AspectMock\Test as aspectMockTest;
 
 /**
  *
@@ -274,5 +275,26 @@ class RequestTest extends Test
     {
         $request = Request::fromPost([]);
         $this->assertEquals(Request::class, get_class($request));
+    }
+
+    /**
+     * @test
+     */
+    public function sendShouldCreateCurlAdapterIfNoneExists()
+    {
+        aspectMockTest::func(
+            'Heidelpay\PhpPaymentApi\Adapter',
+            'extension_loaded',
+            false
+        );
+
+        $request = new Request();
+        $request->send();
+
+        aspectMockTest::func(
+            'Heidelpay\PhpPaymentApi\Adapter',
+            'extension_loaded',
+            false
+        )->verifyInvokedOnce();
     }
 }
