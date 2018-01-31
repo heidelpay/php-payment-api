@@ -152,9 +152,9 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
         $PreventAsyncRedirect = 'FALSE',
         $CssPath = null
     ) {
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($CssPath);
 
         return $this->reregistrationParent($referenceId);
     }

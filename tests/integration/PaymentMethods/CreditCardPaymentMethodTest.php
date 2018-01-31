@@ -167,12 +167,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->registration('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
 
         /* disable frontend (iframe) and submit the credit card information directly (only for testing) */
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-        $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->set('brand', $this->creditCardBrand);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
 
         /* prepare request and send it to payment api */
@@ -267,7 +267,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->dryRun = false;
 
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->debitOnRegistration((string)$referenceId);
 
@@ -306,7 +306,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->dryRun = false;
 
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->authorizeOnRegistration((string)$referenceId);
 
@@ -415,12 +415,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->debit('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
 
         /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-        $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->set('brand', $this->creditCardBrand);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
 
         /* prepare request and send it to payment api */
@@ -457,12 +457,12 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->authorize('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
 
         /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-        $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->set('brand', $this->creditCardBrand);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
 
         /* prepare request and send it to payment api */

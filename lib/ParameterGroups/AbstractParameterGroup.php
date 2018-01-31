@@ -23,7 +23,7 @@ abstract class AbstractParameterGroup implements ParameterGroupInterface
      */
     public static function getClassName()
     {
-        return get_called_class();
+        return static::class;
     }
 
     /**

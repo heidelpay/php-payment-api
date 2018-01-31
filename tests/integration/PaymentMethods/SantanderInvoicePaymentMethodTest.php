@@ -98,7 +98,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->authorize();
 

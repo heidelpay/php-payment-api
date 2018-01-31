@@ -117,10 +117,10 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
-        $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setIban($this->iban);
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
 
         $this->paymentObject->authorize();
 
@@ -187,10 +187,10 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
-        $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setIban($this->iban);
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
 
         $this->paymentObject->debit();
 
@@ -261,10 +261,10 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
-        $this->paymentObject->getRequest()->getAccount()->set('iban', $this->iban);
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setIban($this->iban);
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
 
         $this->paymentObject->registration();
 
@@ -406,7 +406,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->authorizeOnRegistration((string)$referenceId);
 
@@ -446,7 +446,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->debitOnRegistration((string)$referenceId);
 
