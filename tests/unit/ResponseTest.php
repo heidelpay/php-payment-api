@@ -29,6 +29,11 @@ class ResponseTest extends Test
     protected $responseObject;
 
     /**
+     * @var array
+     */
+    protected $responseArray;
+
+    /**
      * Secret
      *
      * The secret will be used to generate a hash using
@@ -48,7 +53,7 @@ class ResponseTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
-        $responseSample = array(
+        $this->responseArray = array(
             'NAME_FAMILY' => 'Berger-Payment',
             'IDENTIFICATION_TRANSACTIONID' => '2843294932',
             'ADDRESS_COUNTRY' => 'DE',
@@ -101,10 +106,9 @@ class ResponseTest extends Test
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
             'CRITERION_TEST_VALUE' => 'Test Value',
             'INVALID_PROP' => 'Invalid',
-            'INVALIDPROP' => '0',
         );
 
-        $this->responseObject = new Response($responseSample);
+        $this->responseObject = new Response($this->responseArray);
     }
 
     /**
@@ -432,7 +436,7 @@ class ResponseTest extends Test
      */
     public function staticFromPostMethodShouldReturnNewResponseInstanceOnEmptyArray()
     {
-        $request = Response::fromPost([]);
-        $this->assertEquals(Response::class, get_class($request));
+        $reponse = Response::fromPost([]);
+        $this->assertEquals(Response::class, get_class($reponse));
     }
 }

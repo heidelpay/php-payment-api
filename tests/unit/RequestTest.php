@@ -148,7 +148,7 @@ class RequestTest extends Test
      * @group integrationTest
      * @test
      */
-    public function convertToArray()
+    public function compareToArrayWithInputArray()
     {
         $request = new Request();
         $criterion = new CriterionParameterGroup();
@@ -173,7 +173,7 @@ class RequestTest extends Test
             'CRITERION.SDK_VERSION' => $criterion->getSdkVersion()
         );
 
-        $this->assertEquals($referenceVars, $request->convertToArray());
+        $this->assertEquals($referenceVars, $request->toArray());
     }
 
     /**

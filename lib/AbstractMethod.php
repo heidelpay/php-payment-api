@@ -382,6 +382,39 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * @inheritdoc
      */
+    public function toArray($doSort = false)
+    {
+        $result = [];
+        $request = get_object_vars($this);
+
+        if ($doSort) {
+            ksort($request);
+        }
+
+        foreach ($request as $parameterGroup => $parameterValues) {
+            if ($parameterValues === null) {
+                continue;
+            }
+
+            $paramValues = get_object_vars($parameterValues);
+            if ($doSort) {
+                ksort($paramValues);
+            }
+
+            foreach ($paramValues as $parameterLastName => $parameterValue) {
+                if ($parameterValue === null) {
+                    continue;
+                }
+
+                $result[strtoupper($parameterGroup . '.' . $parameterLastName)] = $parameterValue;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function jsonSerialize()
     {
         $return = [];
@@ -454,7 +487,7 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         foreach ($post as $paramGroupKey => $value) {
-            @list($paramGroupName, $paramGroupProp) = explode('_', strtolower($paramGroupKey), 2);
+            list($paramGroupName, $paramGroupProp) = explode('_', strtolower($paramGroupKey), 2);
 
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {

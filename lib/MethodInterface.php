@@ -15,7 +15,7 @@ use JsonSerializable;
  *
  * @author Stephano Vogel
  *
- * @package heidelpay/php-api
+ * @package heidelpay/php-payment-api
  */
 interface MethodInterface extends JsonSerializable
 {
@@ -27,6 +27,18 @@ interface MethodInterface extends JsonSerializable
      * @return string
      */
     public function toJson($options = 0);
+
+    /**
+     * Returns an array that represents the object instance.
+     *
+     * Uses uppercase keys to be compatible with the
+     * heidelpay POST Payment API.
+     *
+     * @param bool $doSort sort the keys in alphabetical order
+     *
+     * @return array
+     */
+    public function toArray($doSort);
 
     /**
      * Takes a JSON representation of an instance and returns
