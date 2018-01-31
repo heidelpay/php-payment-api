@@ -58,6 +58,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
      * Set up function will create a invoice object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
+     *
      * @throws \Exception
      */
     // @codingStandardsIgnoreStart
@@ -95,6 +96,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
     /**
      * @test
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function initialRequest()

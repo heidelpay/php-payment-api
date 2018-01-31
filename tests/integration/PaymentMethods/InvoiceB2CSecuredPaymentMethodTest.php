@@ -96,7 +96,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the invoice authorize transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function authorize()
@@ -136,7 +138,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function finalize($referenceId)
@@ -173,7 +177,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function reversal($referenceId)
@@ -211,7 +217,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @depends authorize
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)

@@ -107,7 +107,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the direct debit transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function authorize()
@@ -145,6 +147,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string
      *
      * @return string
+     *
      * @throws \Exception
      */
     public function capture($referenceId = null)
@@ -174,7 +177,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the direct debit transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function debit()
@@ -211,7 +216,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id of the direct debit refund transaction
      * @depends debit
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function refund($referenceId = null)
@@ -244,7 +251,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the direct debit transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function registration()
@@ -277,10 +286,13 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a direct debit reregistration
      *
      * @param null $referenceId
+     *
      * @return string payment reference id for the direct debit transaction
+     *
      * @throws \Exception
      * @depends registration
      * @group connectionTest
+     *
      * @test
      */
     public function reregistration($referenceId = null)
@@ -314,7 +326,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the credit card reversal transaction
      * @depends authorize
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function reversal($referenceId = null)
@@ -347,7 +361,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the direct debit rebill transaction
      * @depends debit
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function rebill($referenceId = null)
@@ -380,7 +396,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id of the direct debit authorisation
      * @depends registration
      * @test
-     * @group  connectionTest
+     *
+     * @group connectionTest
+     *
      * @throws \Exception
      */
     public function authorizeOnRegistration($referenceId = null)
@@ -418,7 +436,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id of the direct debit registration
      * @depends registration
      * @test
-     * @group  connectionTest
+     *
+     * @group connectionTest
+     *
      * @throws \Exception
      */
     public function debitOnRegistration($referenceId = null)
@@ -456,7 +476,9 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorizeOnRegistration
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function finalize($referenceId)

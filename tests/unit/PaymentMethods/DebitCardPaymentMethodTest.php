@@ -102,6 +102,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 
     /**
      * Set up function will create a payment method object for each test case
+     *
      * @throws \Exception
      */
     // @codingStandardsIgnoreStart

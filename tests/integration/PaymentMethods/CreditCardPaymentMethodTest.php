@@ -153,8 +153,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for credit cart registration without payment frame
      *
      * @return string payment reference id to the credit card registration
+     *
      * @group  connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function registration()
@@ -193,7 +195,9 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for credit cart reregistration without payment frame
      *
      * @param null $referenceId
+     *
      * @return string
+     *
      * @throws \Exception
      * @group  connectionTest
      * @depends registration
@@ -249,9 +253,11 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string reference id of the credit card registration
      *
      * @return string payment reference id to the credit card debit transaction
+     *
      * @depends registration
      * @group  connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function debitOnRegistration($referenceId = null)
@@ -286,9 +292,11 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @param mixed $referenceId reference id of the credit card registration
      *
      * @return string payment reference id of the credit card authorisation
+     *
      * @depends registration
      * @group  connectionTest
      * @test
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function authorizeOnRegistration($referenceId = null)
@@ -324,6 +332,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @param mixed $referenceId
      *
      * @return string
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function capture($referenceId = null)
@@ -355,9 +364,11 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string reference id of the credit card debit/capture to refund
      *
      * @return string payment reference id of the credit card refund transaction
+     *
      * @depends capture
      * @group connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function refund($referenceId = null)
@@ -390,8 +401,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a single credit card debit transaction without payment frame
      *
      * @return string payment reference id for the credit card debit transaction
+     *
      * @group connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function debit()
@@ -430,8 +443,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a single credit card authorisation without payment frame
      *
      * @return string payment reference id for the credit card authorize transaction
+     *
      * @group connectionTest
      * @test
+     *
      * @throws \Exception
      */
     public function authorize()
@@ -467,15 +482,16 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
-     * Test case for a credit card reversal of a existing authorisation
+     * Test case for a credit card reversal of a existing authorization
      *
      * @param mixed $referenceId id of the credit card authorisation
+     *
      * @return string payment reference id for the credit card reversal transaction
+     *
      * @throws \Exception
      * @depends authorize
      * @group connectionTest
      * @test
-     *
      */
     public function reversal($referenceId = null)
     {
@@ -504,7 +520,9 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a credit card rebill of an existing debit or capture
      *
      * @param mixed $referenceId id of the credit card debit or capture
+     *
      * @return string payment reference id for the credit card rebill transaction
+     *
      * @throws \Exception
      * @depends debit
      * @group connectionTest

@@ -87,6 +87,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the invoice authorize transaction
      * @group connectionTest
+     *
      * @test
      *
      * @throws \Exception
@@ -129,6 +130,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
      *
      * @throws \Exception
@@ -168,6 +170,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends finalize
      * @group connectionTest
+     *
      * @test
      *
      * @throws \Exception
@@ -208,7 +211,9 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @depends authorize
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)

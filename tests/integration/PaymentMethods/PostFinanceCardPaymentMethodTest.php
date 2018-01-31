@@ -88,9 +88,12 @@ class PostFinanceCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the PostFinanceCard authorize transaction
      * @group connectionTest
+     *
+     * @test
+     *
      * @throws \Exception
      */
-    public function testAuthorize()
+    public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);

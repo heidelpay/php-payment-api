@@ -86,6 +86,7 @@ class GiropayPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the Giropay authorize transaction
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function testAuthorize()

@@ -89,6 +89,7 @@ class Przelewy24PaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the Przelewy24 authorize transaction
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function testAuthorize()

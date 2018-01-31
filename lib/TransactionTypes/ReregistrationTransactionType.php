@@ -28,7 +28,9 @@ trait ReregistrationTransactionType
      * The passed reference id will identify the registration to update.
      *
      * @param $referenceId
+     *
      * @return ReregistrationTransactionType
+     *
      * @throws \Exception
      */
     public function reregistration($referenceId)

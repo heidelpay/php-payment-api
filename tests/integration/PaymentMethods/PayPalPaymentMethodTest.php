@@ -88,6 +88,7 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the PayPal registration transaction
      * @group connectionTest
+     *
      * @throws \Exception
      * @test
      */
@@ -118,9 +119,12 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a PayPal reregistration
      *
      * @group connectionTest
+     *
      * @param null $referenceId
+     *
      * @throws \Exception
      * @depends registration
+     *
      * @test
      */
     public function reregistration($referenceId = null)
@@ -149,7 +153,9 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the PayPal authorize transaction
      * @group connectionTest
+     *
      * @depends registration
+     *
      * @throws \Exception
      * @test
      */
@@ -179,7 +185,9 @@ class PayPalPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the PayPal authorize transaction
      * @group connectionTest
+     *
      * @depends registration
+     *
      * @throws \Exception
      * @test
      */

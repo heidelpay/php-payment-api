@@ -86,6 +86,7 @@ class IdealPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the iDeal authorize transaction
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function testAuthorize()

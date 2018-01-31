@@ -88,6 +88,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the EPS authorize transaction
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function testAuthorize()

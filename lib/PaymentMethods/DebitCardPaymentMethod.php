@@ -149,10 +149,10 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
      * Because of the payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
-     * @param mixed $referenceId
-     * @param null|mixed $PaymentFrameOrigin uri of your application like http://dev.heidelpay.com
-     * @param mixed $PreventAsyncRedirect prevention of redirecting the customer
-     * @param null|mixed $CssPath css url to style the Heidelpay payment frame
+     * @param mixed      $referenceId
+     * @param null|mixed $PaymentFrameOrigin   uri of your application like http://dev.heidelpay.com
+     * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
+     * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
      * @return ReregistrationTransactionType
      *

@@ -144,8 +144,11 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for debit cart registration without payment frame
      *
      * @return string payment reference id to the credit card registration
+     *
      * @group  connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function registration()
@@ -185,7 +188,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @depends registration
      * @group  connectionTest
      * @test
+     *
      * @param null $referenceId
+     *
      * @throws \Exception
      */
     public function reregistration($referenceId = null)
@@ -226,10 +231,13 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a debit card debit on a registration
      *
      * @param mixed $referenceId id of the debit card registration
+     *
      * @return string payment reference id to the debit card debit transaction
+     *
      * @throws \Exception
      * @depends registration
      * @group  connectionTest
+     *
      * @test
      */
     public function debitOnRegistration($referenceId = null)
@@ -266,9 +274,12 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string reference id of the debit card registration
      *
      * @return string payment reference id of the debit card authorisation
+     *
      * @depends registration
      * @group  connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function authorizeOnRegistration($referenceId = null)
@@ -305,6 +316,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string
      *
      * @return string
+     *
      * @throws \Exception
      */
     public function capture($referenceId = null)
@@ -337,7 +349,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id of the debit card refund transaction
      * @depends capture
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function refund($referenceId = null)
@@ -370,12 +384,15 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the debit card debit transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function debit()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->debit('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
@@ -409,7 +426,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the debit card authorize transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function authorize()
@@ -451,7 +470,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the debit card reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function reversal($referenceId = null)
@@ -484,7 +505,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the debit card rebill transaction
      * @depends debit
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function rebill($referenceId = null)

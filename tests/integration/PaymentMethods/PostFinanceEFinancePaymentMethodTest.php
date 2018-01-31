@@ -89,6 +89,7 @@ class PostFinanceEFinancePaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the PostFinanceEFinance authorize transaction
      * @group connectionTest
+     *
      * @throws \Exception
      */
     public function testAuthorize()

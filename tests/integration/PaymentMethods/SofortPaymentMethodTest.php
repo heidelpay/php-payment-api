@@ -88,7 +88,9 @@ class SofortPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the sofort authorize transaction
      * @group connectionTest
+     *
      * @test
+     *
      * @throws \Exception
      */
     public function authorize()
@@ -121,7 +123,9 @@ class SofortPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id of the Sofort refund transaction
      * @depends authorize
      * @test
+     *
      * @group connectionTest
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)

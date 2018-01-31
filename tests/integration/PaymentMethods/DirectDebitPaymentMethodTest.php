@@ -291,12 +291,13 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a direct debit reregistration
      *
      * @param null $referenceId
+     *
      * @return string payment reference id for the direct debit transaction
+     *
      * @throws \Exception
      * @group connectionTest
      * @depends registration
      * @test
-     *
      */
     public function reregistration($referenceId = null)
     {
