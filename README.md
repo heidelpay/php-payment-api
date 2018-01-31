@@ -47,11 +47,11 @@ You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 ## Documentation
 
-Please visit http://dev.heidelpay.com/heidelpay-php-api/ for the developer documentation.
+Please visit [http://dev.heidelpay.com/heidelpay-php-api/](http://dev.heidelpay.com/heidelpay-php-api/) for the developer documentation.
 
 ### Unit- and Integration tests
 
-This library comes with a set of unit tests. Please be do not run the integration tests on each build.
+This library comes with a set of unit and integration tests. Please do not run the integration tests on each build.
 
 Run prior to tests:
 `codecept build`
@@ -59,11 +59,14 @@ Run prior to tests:
 Run unit tests:
 `codecept run unit`
 
+Run unit tests with code coverage report:
+`codecept run unit --coverage --coverage-html`
+
 Run integration tests:
 `codecept run integration`
 
-Run unit tests with code coverage report:
-`codecept run unit --coverage --coverage-html`
+Run integration tests with debug output:
+`codecept run integration --debug`
 
 For coverage analysis results see:
 `./tests/_output/coverage/index.html`
@@ -72,13 +75,13 @@ For coverage analysis results see:
 
 Integration examples can be found in the example folder. Just open the
 
-_enableExamples.php and change
+`_enableExamples.php` and change
 
-define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', FALSE);
+`define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', FALSE);`
 
 to
 
-define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', TRUE);
+`define('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES', TRUE);`
 
 Please make sure to switch it off again, after you launch your application.
 

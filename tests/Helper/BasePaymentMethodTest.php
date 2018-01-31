@@ -189,5 +189,20 @@ class BasePaymentMethodTest extends Unit
         $output->writeln('<ok> success</ok>');
     }
 
+    /**
+     * Print debug data to codecept console (codecept run integration --debug)
+     * Pass result data if send has been called manually.
+     *
+     * @param mixed $result
+     */
+    protected function logDataToDebug($result = null)
+    {
+        $result = $result ?: $this->paymentObject->getResponseArray();
+        codecept_debug("\nrequest: " . print_r($this->paymentObject->getRequest()->toArray(), 1));
+        if (!empty($result)) {
+            codecept_debug('response: ' . print_r($result, 1));
+        }
+    }
+
     //</editor-fold>
 }

@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v1.4.0][v1.4.0]
+## Added
+- Transaction type reregistration.
+- Unit and integration tests for reregistration transaction.
+- `toArray()` method to the AbstractMethod class for Request/Response
+- Added important methods to the PaymentMethodInterface.
+
+## Changed
+- Added debug output to integration tests. Append `--debug` to see them (`codecept run integration --debug`).
+- Replaced magic setters.
 
 ## [v1.3.0][v1.3.0]
 ## Added
@@ -69,7 +79,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Removed
 - Needless parameters from `registration()`-method call in class `DirectDebitRegistration`.
 
-[v1.3.0]: https://github.com/heidelpay/php-payment-api/compare/v1.2.0...v1.3.0
-[v1.2.0]: https://github.com/heidelpay/php-payment-api/compare/v1.1.0...v1.2.0
-[v1.1.0]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/heidelpay/php-payment-api/tree/v1.0.0
+[v1.1.0]: https://github.com/heidelpay/php-payment-api/compare/v1.0.0...v1.1.0
+[v1.2.0]: https://github.com/heidelpay/php-payment-api/compare/v1.1.0...v1.2.0
+[v1.3.0]: https://github.com/heidelpay/php-payment-api/compare/v1.2.0...v1.3.0
+[v1.4.0]: https://github.com/heidelpay/php-payment-api/compare/v1.3.0...v1.4.0
