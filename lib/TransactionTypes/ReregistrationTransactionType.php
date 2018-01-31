@@ -18,6 +18,8 @@ use Heidelpay\PhpPaymentApi\Constants\TransactionType;
  * @package  Heidelpay
  * @subpackage PhpPaymentApi
  * @category PhpPaymentApi
+ *
+ * @since Class available since Release 1.4.0
  */
 trait ReregistrationTransactionType
 {
