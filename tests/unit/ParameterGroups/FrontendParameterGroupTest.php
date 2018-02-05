@@ -59,7 +59,7 @@ class FrontendParameterGroupTest extends Test
         $frontend = new Frontend();
 
         $value = 'https://dev.heidelpay.de';
-        $frontend->set('redirect_url', $value);
+        $frontend->setRedirectUrl($value);
 
         $this->assertEquals($value, $frontend->getRedirectUrl());
     }

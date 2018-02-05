@@ -240,7 +240,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
                 'USER.PWD' => $userPassword,
             ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -311,7 +311,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -370,7 +370,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -435,7 +435,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -499,7 +499,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -560,7 +560,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -621,7 +621,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -682,7 +682,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -743,7 +743,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -804,7 +804,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     //</editor-fold>
