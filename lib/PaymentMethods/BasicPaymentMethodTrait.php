@@ -9,7 +9,7 @@ use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
 
 /**
- * This classe is the basic payment method trait
+ * This class is the basic payment method trait
  *
  * It contains the main properties and functions for
  * every payment method
@@ -105,21 +105,19 @@ trait BasicPaymentMethodTrait
      */
     public static function getClassName()
     {
-        return substr(strrchr(get_called_class(), '\\'), 1);
+        return substr(strrchr(static::class, '\\'), 1);
     }
 
     /**
-     * Set a new payment request object
-     *
-     * @param \Heidelpay\PhpPaymentApi\Request $request
+     * @inheritdoc
      */
-    public function setRequest(HeidelpayRequest $request)
+    public function setRequest(HeidelpayRequest $heidelpayRequest)
     {
-        $this->request = $request;
+        $this->request = $heidelpayRequest;
     }
 
     /**
-     * Get payment request object
+     * Returns the Request instance.
      *
      * @return \Heidelpay\PhpPaymentApi\Request
      */
@@ -133,7 +131,7 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Get response object
+     * Returns the Response instance.
      *
      * @return \Heidelpay\PhpPaymentApi\Response
      */
@@ -145,7 +143,7 @@ trait BasicPaymentMethodTrait
     /**
      * Set a HTTP Adapter for payment communication
      *
-     * @param HttpAdapterInterface $adapter
+     * @param \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface $adapter
      */
     public function setAdapter($adapter)
     {
@@ -155,7 +153,7 @@ trait BasicPaymentMethodTrait
     /**
      * Get HTTP Adapter for payment communication
      *
-     * @return HttpAdapterInterface
+     * @return \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface
      */
     public function getAdapter()
     {
@@ -163,11 +161,9 @@ trait BasicPaymentMethodTrait
     }
 
     /**
-     * Get url of the used payment api
+     * @inheritdoc
      *
      * @throws UndefinedTransactionModeException
-     *
-     * @return boolean|string url of the payment api
      */
     public function getPaymentUrl()
     {
@@ -194,13 +190,13 @@ trait BasicPaymentMethodTrait
      */
     public function prepareRequest()
     {
-        $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
+        $this->getRequest()->getCriterion()->set('payment_method', static::getClassName());
         if ($this->getBrand() !== null) {
             $this->getRequest()->getAccount()->setBrand($this->brand);
         }
 
         $uri = $this->getPaymentUrl();
-        $this->requestArray = $this->getRequest()->convertToArray();
+        $this->requestArray = $this->getRequest()->toArray();
 
         if ($this->dryRun === false && $uri !== null && is_array($this->requestArray)) {
             list($this->responseArray, $this->response) =
@@ -229,5 +225,13 @@ trait BasicPaymentMethodTrait
     public function toJson($options = 0)
     {
         return json_encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponseArray()
+    {
+        return $this->responseArray;
     }
 }

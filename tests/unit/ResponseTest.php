@@ -29,6 +29,11 @@ class ResponseTest extends Test
     protected $responseObject;
 
     /**
+     * @var array
+     */
+    protected $responseArray;
+
+    /**
      * Secret
      *
      * The secret will be used to generate a hash using
@@ -48,7 +53,7 @@ class ResponseTest extends Test
     public function _before()
     {
         // @codingStandardsIgnoreEnd
-        $responseSample = array(
+        $this->responseArray = array(
             'NAME_FAMILY' => 'Berger-Payment',
             'IDENTIFICATION_TRANSACTIONID' => '2843294932',
             'ADDRESS_COUNTRY' => 'DE',
@@ -101,10 +106,9 @@ class ResponseTest extends Test
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
             'CRITERION_TEST_VALUE' => 'Test Value',
             'INVALID_PROP' => 'Invalid',
-            'INVALIDPROP' => '0',
         );
 
-        $this->responseObject = new Response($responseSample);
+        $this->responseObject = new Response($this->responseArray);
     }
 
     /**
@@ -186,7 +190,7 @@ class ResponseTest extends Test
         $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
 
         $expectedUrl = 'http://www.heidelpay.de';
-        $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->responseObject->getFrontend()->setRedirectUrl($expectedUrl);
 
         /** url in case of credit and debit card reference Transaction */
         $this->responseObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
@@ -196,8 +200,8 @@ class ResponseTest extends Test
         $this->responseObject->getIdentification()->set('referenceid', null);
 
         /** url for non credit or debit card transactions */
-        $this->responseObject->getPayment()->set('code', 'OT.PA');
-        $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->responseObject->getPayment()->setCode('OT.PA');
+        $this->responseObject->getFrontend()->setRedirectUrl($expectedUrl);
         $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
     }
 
@@ -211,7 +215,7 @@ class ResponseTest extends Test
     {
         $response = new Response();
 
-        $response->getFrontend()->set('redirect_url', null);
+        $response->getFrontend()->setRedirectUrl(null);
         $this->expectException(PaymentFormUrlException::class);
         $response->getPaymentFormUrl();
     }
@@ -226,8 +230,8 @@ class ResponseTest extends Test
     {
         $response = new Response();
 
-        $response->getPayment()->set('code', 'OT.PA');
-        $response->getFrontend()->set('redirect_url', null);
+        $response->getPayment()->setCode('OT.PA');
+        $response->getFrontend()->setRedirectUrl(null);
         $this->expectException(PaymentFormUrlException::class);
         $response->getPaymentFormUrl();
     }
@@ -432,7 +436,7 @@ class ResponseTest extends Test
      */
     public function staticFromPostMethodShouldReturnNewResponseInstanceOnEmptyArray()
     {
-        $request = Response::fromPost([]);
-        $this->assertEquals(Response::class, get_class($request));
+        $reponse = Response::fromPost([]);
+        $this->assertEquals(Response::class, get_class($reponse));
     }
 }

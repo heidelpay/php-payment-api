@@ -2,6 +2,7 @@
 
 namespace Heidelpay\PhpPaymentApi\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Request;
 use JsonSerializable;
 
 /**
@@ -31,6 +32,50 @@ interface PaymentMethodInterface extends JsonSerializable
      * @return string
      */
     public function getBrand();
+
+    /**
+     * Get url of the used payment api
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
+     * @return boolean|string url of the payment api
+     */
+    public function getPaymentUrl();
+
+    /**
+     * Get HTTP Adapter for payment communication
+     *
+     * @return \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface
+     */
+    public function getAdapter();
+
+    /**
+     * Returns the Request instance.
+     *
+     * @return \Heidelpay\PhpPaymentApi\Request
+     */
+    public function getRequest();
+
+    /**
+     * Returns the Response instance.
+     *
+     * @return \Heidelpay\PhpPaymentApi\Response
+     */
+    public function getResponse();
+
+    /**
+     * Set a HTTP Adapter for payment communication
+     *
+     * @param \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface $adapter
+     */
+    public function setAdapter($adapter);
+
+    /**
+     * Set a new payment request object
+     *
+     * @param \Heidelpay\PhpPaymentApi\Request $heidelpayRequest
+     */
+    public function setRequest(Request $heidelpayRequest);
 
     /**
      * Returns a Json representation of itself.

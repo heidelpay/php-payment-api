@@ -96,7 +96,7 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
      */
     public function getPaymentUrl()
     {
-        $this->paymentObject->getRequest()->getTransaction()->set('mode', 'LIVE');
+        $this->paymentObject->getRequest()->getTransaction()->setMode('LIVE');
         $this->assertSame(ApiConfig::LIVE_URL, $this->paymentObject->getPaymentUrl());
     }
 
@@ -109,7 +109,7 @@ class AbstractPaymentMethodTest extends BasePaymentMethodTest
      */
     public function getPaymentUrlException()
     {
-        $this->paymentObject->getRequest()->getTransaction()->set('mode', null);
+        $this->paymentObject->getRequest()->getTransaction()->setMode(null);
         $this->expectException(UndefinedTransactionModeException::class);
         $this->paymentObject->getPaymentUrl();
     }

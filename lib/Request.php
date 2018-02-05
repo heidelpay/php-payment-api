@@ -151,25 +151,12 @@ class Request extends AbstractMethod
      * Convert request object to post key value format
      *
      * @return array request
+     *
+     * @deprecated v1.3.1 replaced by toArray() in AbstractMethod
      */
     public function convertToArray()
     {
-        $array = array();
-        $request = (array)get_object_vars($this);
-
-        foreach ($request as $parameterFirstName => $parmaterValues) {
-            if ($parmaterValues === null) {
-                continue;
-            }
-
-            foreach ((array)get_object_vars($parmaterValues) as $parameterLastName => $parameterValue) {
-                if ($parameterValue === null) {
-                    continue;
-                }
-                $array[strtoupper($parameterFirstName . '.' . $parameterLastName)] = $parameterValue;
-            }
-        }
-        return $array;
+        return $this->toArray();
     }
 
     /**

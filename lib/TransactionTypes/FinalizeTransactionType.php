@@ -36,7 +36,7 @@ trait FinalizeTransactionType
     public function finalize($paymentReferenceId)
     {
         $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::FINALIZE);
-        $this->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();
 

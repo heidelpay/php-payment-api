@@ -7,6 +7,7 @@ use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
+use AspectMock\Test as aspectMockTest;
 
 /**
  *
@@ -148,7 +149,7 @@ class RequestTest extends Test
      * @group integrationTest
      * @test
      */
-    public function convertToArray()
+    public function compareToArrayWithInputArray()
     {
         $request = new Request();
         $criterion = new CriterionParameterGroup();
@@ -173,7 +174,7 @@ class RequestTest extends Test
             'CRITERION.SDK_VERSION' => $criterion->getSdkVersion()
         );
 
-        $this->assertEquals($referenceVars, $request->convertToArray());
+        $this->assertEquals($referenceVars, $request->toArray());
     }
 
     /**
@@ -274,5 +275,26 @@ class RequestTest extends Test
     {
         $request = Request::fromPost([]);
         $this->assertEquals(Request::class, get_class($request));
+    }
+
+    /**
+     * @test
+     */
+    public function sendShouldCreateCurlAdapterIfNoneExists()
+    {
+        aspectMockTest::func(
+            'Heidelpay\PhpPaymentApi\Adapter',
+            'extension_loaded',
+            false
+        );
+
+        $request = new Request();
+        $request->send();
+
+        aspectMockTest::func(
+            'Heidelpay\PhpPaymentApi\Adapter',
+            'extension_loaded',
+            false
+        )->verifyInvokedOnce();
     }
 }

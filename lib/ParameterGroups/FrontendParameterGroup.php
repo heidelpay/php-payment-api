@@ -23,7 +23,6 @@ class FrontendParameterGroup extends AbstractParameterGroup
      */
     public $css_path;
 
-
     /**
      * FrontendEnabled
      *
@@ -53,11 +52,13 @@ class FrontendParameterGroup extends AbstractParameterGroup
     public $payment_frame_origin;
 
     /**
-     * FrontendPaymentFrameUrl
+     * The URL of the payment frame to be loaded within an iFrame by the shop (e.g. CreditCard).
+     * Provided in the response.
      *
      * @var string url of the payment iframe, only for credit card and debit card because of pci restrictions
      */
     public $payment_frame_url;
+
     /**
      * FrontendPreventAsyncRedirect
      *
@@ -194,11 +195,11 @@ class FrontendParameterGroup extends AbstractParameterGroup
     /**
      * Setter to disable the frontend
      *
-     * This setting will force the payment to act in syn mode. This is only possible
-     * for transaction that do not need user input. F. e. prepayment, invoice or transactions
-     * like debitOnRegistration (only not 3DSecure).
+     * This setting will force the payment to act in sync mode. This is only possible for
+     * transactions that do not need user input, e.g.prepayment, invoice or
+     * transactions like debitOnRegistration (only non-3DSecure).
      *
-     * @param string $enabled
+     * @param string $enabled 'FALSE' or 'TRUE'
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
@@ -287,6 +288,17 @@ class FrontendParameterGroup extends AbstractParameterGroup
     public function setResponseUrl($response_url)
     {
         $this->response_url = $response_url;
+        return $this;
+    }
+
+    /**
+     * @param string $redirect_url
+     *
+     * @return FrontendParameterGroup
+     */
+    public function setRedirectUrl($redirect_url)
+    {
+        $this->redirect_url = $redirect_url;
         return $this;
     }
 }

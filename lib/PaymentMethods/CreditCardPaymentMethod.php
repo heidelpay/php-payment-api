@@ -9,6 +9,7 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\DebitTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeOnRegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\DebitOnRegistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+use Heidelpay\PhpPaymentApi\TransactionTypes\ReregistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
@@ -33,6 +34,9 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
     use RegistrationTransactionType {
         registration as registrationParent;
     }
+    use ReregistrationTransactionType {
+        reregistration as reregistrationParent;
+    }
     use AuthorizeTransactionType {
         authorize as authorizeParent;
     }
@@ -53,7 +57,6 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
 
     /**
      * Payment type authorisation
-     *
      * Depending on the payment method this type normally means that the amount
      * of the given account will only be authorized. In case of payment methods
      * like Sofort and Giropay (so called online payments) this type will only be
@@ -61,71 +64,98 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
      * Because of payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
-     * @param null|mixed $PaymentFrameOrigin   uri of your application like http://dev.heidelpay.com
-     * @param mixed      $PreventAsyncRedirect - prevention of redirecting the customer
-     * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
+     * @param null|mixed $paymentFrameOrigin   uri of your application like http://dev.heidelpay.com
+     * @param mixed      $preventAsyncRedirect - prevention of redirecting the customer
+     * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
      * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
-    public function authorize($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
+    public function authorize($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
     {
-        $this->getRequest()->getFrontend()->set('enabled', 'TRUE');
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+        $this->getRequest()->getFrontend()->setEnabled('TRUE');
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->authorizeParent();
     }
 
     /**
      * Payment type debit
-     *
      * This payment type will charge the given account directly.
      * Because of payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
-     * @param null|mixed $PaymentFrameOrigin   uri of your application like http://dev.heidelpay.com
-     * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
-     * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
+     * @param null|mixed $paymentFrameOrigin   uri of your application like http://dev.heidelpay.com
+     * @param mixed      $preventAsyncRedirect prevention of redirecting the customer
+     * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
      */
-    public function debit($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
+    public function debit($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
     {
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
 
         return $this->debitParent();
     }
 
     /**
      * Payment type registration
-     *
      * This payment type will be used to save account data inside the heidelpay
      * system. You will get a payment reference id back. This provides you a way
      * to charge this account later or even to make a recurring payment.
      * Because of the payment card industry restrictions (Aka pci3), you have
      * to use a payment frame solution to handle the customers credit card information.
      *
+     * @param null|mixed $paymentFrameOrigin   uri of your application like http://dev.heidelpay.com
+     * @param mixed      $preventAsyncRedirect prevention of redirecting the customer
+     * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     *
+     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod
+     */
+    public function registration($paymentFrameOrigin = null, $preventAsyncRedirect = 'FALSE', $cssPath = null)
+    {
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($cssPath);
+
+        return $this->registrationParent();
+    }
+
+    /**
+     * This payment type will be used to update account data inside the heidelpay
+     * system. The passed reference Id identifies the registration which is to be updated.
+     * The reference id is obtained by using the register method first.
+     * Because of the payment card industry restrictions (Aka pci3), you have
+     * to use a payment frame solution to handle the customers credit card information.
+     *
+     * @param mixed      $referenceId
      * @param null|mixed $PaymentFrameOrigin   uri of your application like http://dev.heidelpay.com
      * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
      * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
      *
-     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     * @return ReregistrationTransactionType
      *
-     * @return \Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod|boolean
+     * @throws \Exception
      */
-    public function registration($PaymentFrameOrigin = null, $PreventAsyncRedirect = 'FALSE', $CssPath = null)
-    {
-        $this->getRequest()->getFrontend()->set('payment_frame_origin', $PaymentFrameOrigin);
-        $this->getRequest()->getFrontend()->set('prevent_async_redirect', $PreventAsyncRedirect);
-        $this->getRequest()->getFrontend()->set('css_path', $CssPath);
+    public function reregistration(
+        $referenceId,
+        $PaymentFrameOrigin = null,
+        $PreventAsyncRedirect = 'FALSE',
+        $CssPath = null
+    ) {
+        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($PaymentFrameOrigin);
+        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($PreventAsyncRedirect);
+        $this->getRequest()->getFrontend()->setCssPath($CssPath);
 
-        return $this->registrationParent();
+        return $this->reregistrationParent($referenceId);
     }
 }
