@@ -35,7 +35,7 @@ trait ReregistrationTransactionType
      */
     public function reregistration($referenceId)
     {
-        $this->getRequest()->getPayment()->set('code', $this->paymentCode . '.' . TransactionType::REREGISTRATION);
+        $this->getRequest()->getPayment()->setCode($this->paymentCode . '.' . TransactionType::REREGISTRATION);
         $this->getRequest()->getIdentification()->setReferenceId($referenceId);
         $this->prepareRequest();
 

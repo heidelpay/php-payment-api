@@ -190,7 +190,7 @@ class ResponseTest extends Test
         $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
 
         $expectedUrl = 'http://www.heidelpay.de';
-        $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->responseObject->getFrontend()->setRedirectUrl($expectedUrl);
 
         /** url in case of credit and debit card reference Transaction */
         $this->responseObject->getIdentification()->set('referenceid', '31HA07BC8108A9126F199F2784552637');
@@ -200,8 +200,8 @@ class ResponseTest extends Test
         $this->responseObject->getIdentification()->set('referenceid', null);
 
         /** url for non credit or debit card transactions */
-        $this->responseObject->getPayment()->set('code', 'OT.PA');
-        $this->responseObject->getFrontend()->set('redirect_url', $expectedUrl);
+        $this->responseObject->getPayment()->setCode('OT.PA');
+        $this->responseObject->getFrontend()->setRedirectUrl($expectedUrl);
         $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
     }
 
@@ -215,7 +215,7 @@ class ResponseTest extends Test
     {
         $response = new Response();
 
-        $response->getFrontend()->set('redirect_url', null);
+        $response->getFrontend()->setRedirectUrl(null);
         $this->expectException(PaymentFormUrlException::class);
         $response->getPaymentFormUrl();
     }
@@ -230,8 +230,8 @@ class ResponseTest extends Test
     {
         $response = new Response();
 
-        $response->getPayment()->set('code', 'OT.PA');
-        $response->getFrontend()->set('redirect_url', null);
+        $response->getPayment()->setCode('OT.PA');
+        $response->getFrontend()->setRedirectUrl(null);
         $this->expectException(PaymentFormUrlException::class);
         $response->getPaymentFormUrl();
     }

@@ -161,10 +161,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
         $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryMonth($this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryYear($this->cardExpiryYear);
         $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setVerification($this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -214,7 +214,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'USER.PWD' => $userPassword,
             ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -243,10 +243,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
         $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryMonth($this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryYear($this->cardExpiryYear);
         $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setVerification($this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -297,7 +297,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'USER.PWD' => $userPassword,
             ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -320,10 +320,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
         $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryMonth($this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryYear($this->cardExpiryYear);
         $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setVerification($this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -372,7 +372,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     /**
@@ -395,10 +395,10 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
         $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->cardExpiryMonth);
-        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryMonth($this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryYear($this->cardExpiryYear);
         $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
-        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->cardVerification);
+        $this->paymentObject->getRequest()->getAccount()->setVerification($this->cardVerification);
 
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
@@ -447,7 +447,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER.PWD' => $userPassword,
         ];
 
-        $this->assertThat($this->paymentObject->getRequest()->convertToArray(), $this->arraysMatchExactly($expected));
+        $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
     }
 
     //</editor-fold>

@@ -64,6 +64,7 @@ class AccountParameterGroupTest extends Test
         $account->setBrand($value);
 
         $this->assertEquals($value, $account->getBrand());
+
     }
 
     /**
@@ -136,7 +137,7 @@ class AccountParameterGroupTest extends Test
         $account = new Account();
 
         $value = '3516.0799.6864';
-        $account->set('identification', $value);
+        $account->setIdentification($value);
 
         $this->assertEquals($value, $account->getIdentification());
     }
@@ -151,7 +152,7 @@ class AccountParameterGroupTest extends Test
         $account = new Account();
 
         $value = '05';
-        $account->set('expiry_month', $value);
+        $account->setExpiryMonth($value);
 
         $this->assertEquals($value, $account->getExpiryMonth());
     }
@@ -166,7 +167,7 @@ class AccountParameterGroupTest extends Test
         $account = new Account();
 
         $value = '2080';
-        $account->set('expiry_year', $value);
+        $account->setExpiryYear($value);
 
         $this->assertEquals($value, $account->getExpiryYear());
     }
@@ -197,7 +198,7 @@ class AccountParameterGroupTest extends Test
         $account = new Account();
 
         $value = '***';
-        $account->set('verification', $value);
+        $account->setVerification($value);
 
         $this->assertEquals($value, $account->getVerification());
     }
