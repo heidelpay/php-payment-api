@@ -64,7 +64,6 @@ class AccountParameterGroupTest extends Test
         $account->setBrand($value);
 
         $this->assertEquals($value, $account->getBrand());
-
     }
 
     /**

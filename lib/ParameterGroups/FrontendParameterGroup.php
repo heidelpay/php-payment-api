@@ -293,6 +293,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
 
     /**
      * @param string $redirect_url
+     *
      * @return FrontendParameterGroup
      */
     public function setRedirectUrl($redirect_url)
