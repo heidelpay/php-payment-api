@@ -1,7 +1,7 @@
 {
     "name": "heidelpay/php-payment-api",
     "description": "New client library for heidelpay payments replacing heidelpay/php-api.",
-    "license": "Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Jens Richter"
