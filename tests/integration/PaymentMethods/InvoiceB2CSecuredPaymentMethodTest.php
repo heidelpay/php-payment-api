@@ -96,13 +96,16 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the invoice authorize transaction
      * @group connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function authorize()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
 
@@ -122,6 +125,8 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
 
+        $this->logDataToDebug();
+
         return $this->authorizeReference = (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
 
@@ -133,7 +138,10 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function finalize($referenceId)
     {
@@ -156,6 +164,8 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
 
+        $this->logDataToDebug();
+
         return $referenceId;
     }
 
@@ -167,7 +177,10 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the prepayment reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function reversal($referenceId)
     {
@@ -192,6 +205,8 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
 
+        $this->logDataToDebug();
+
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
 
@@ -200,10 +215,12 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      *
      * @param string $referenceId reference id of the invoice to refund
      *
-     * @return string payment reference id of the invoice refund transaction
      * @depends authorize
      * @test
+     *
      * @group connectionTest
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)
     {
@@ -216,7 +233,8 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->refund((string)$referenceId);
 
         $this->assertEquals('IV.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
-        return true;
+
+        $this->logDataToDebug();
     }
 
     //</editor-fold>

@@ -58,6 +58,8 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
      * Set up function will create a invoice object for each test case
      *
      * @see PHPUnit_Framework_TestCase::setUp()
+     *
+     * @throws \Exception
      */
     // @codingStandardsIgnoreStart
     public function _before()
@@ -70,7 +72,6 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
             ->setTransactionChannel('31HA07BC8179C95F6B59366492FD253D')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
-
 
         $easyCredit = new EasyCreditPaymentMethod();
 
@@ -95,6 +96,8 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
     /**
      * @test
+     *
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function initialRequest()
     {
@@ -107,5 +110,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
         // following fields are essential for easy credit, so they must not be null.
         $this->assertNotNull($response->getConfig()->optin_text, 'easyCredit Optin Text is null.');
         $this->assertNotNull($response->getFrontend()->getRedirectUrl(), 'RedirectUrl is null.');
+
+        $this->logDataToDebug();
     }
 }

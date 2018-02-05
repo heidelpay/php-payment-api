@@ -9,7 +9,7 @@ use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
 
 /**
- * This classe is the basic payment method trait
+ * This class is the basic payment method trait
  *
  * It contains the main properties and functions for
  * every payment method
@@ -105,7 +105,7 @@ trait BasicPaymentMethodTrait
      */
     public static function getClassName()
     {
-        return substr(strrchr(get_called_class(), '\\'), 1);
+        return substr(strrchr(static::class, '\\'), 1);
     }
 
     /**
@@ -190,13 +190,13 @@ trait BasicPaymentMethodTrait
      */
     public function prepareRequest()
     {
-        $this->getRequest()->getCriterion()->set('payment_method', $this->getClassName());
+        $this->getRequest()->getCriterion()->set('payment_method', static::getClassName());
         if ($this->getBrand() !== null) {
             $this->getRequest()->getAccount()->setBrand($this->brand);
         }
 
         $uri = $this->getPaymentUrl();
-        $this->requestArray = $this->getRequest()->convertToArray();
+        $this->requestArray = $this->getRequest()->toArray();
 
         if ($this->dryRun === false && $uri !== null && is_array($this->requestArray)) {
             list($this->responseArray, $this->response) =
@@ -225,5 +225,13 @@ trait BasicPaymentMethodTrait
     public function toJson($options = 0)
     {
         return json_encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponseArray()
+    {
+        return $this->responseArray;
     }
 }

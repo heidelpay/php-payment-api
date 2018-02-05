@@ -59,6 +59,13 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
     protected $holder = 'Heidel Berger-Payment';
 
     /**
+     * Used to test reregistration
+     *
+     * @var string Account holder
+     */
+    protected $holder2 = 'Payment Berger-Heidel';
+
+    /**
      * Debit card number
      * Do not use real debit card information for this test. For more details read the information
      * on top of this test class.
@@ -137,8 +144,12 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * Test case for debit cart registration without payment frame
      *
      * @return string payment reference id to the credit card registration
+     *
      * @group  connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function registration()
     {
@@ -148,52 +159,102 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->registration('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
 
         /* disable frontend (ifame) and submit the debit card information directly (only for testing) */
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-        $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->set('brand', $this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'registration is pending');
         $this->assertFalse($response->isError(), 'registration failed : ' . print_r($response->getError(), 1));
 
+        $this->logDataToDebug($result);
+
         return (string)$response->getPaymentReferenceId();
+    }
+
+    /**
+     * Test case for debit cart reregistration without payment frame
+     *
+     * @depends registration
+     * @group  connectionTest
+     * @test
+     *
+     * @param null $referenceId
+     *
+     * @throws \Exception
+     */
+    public function reregistration($referenceId = null)
+    {
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+
+        $this->paymentObject->reregistration(
+            $referenceId,
+            'http://www.heidelpay.de',
+            'FALSE',
+            'http://www.heidelpay.de'
+        );
+
+        /* disable frontend (ifame) and submit the debit card information directly (only for testing) */
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder2);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
+
+        /* prepare request and send it to payment api */
+        $request = $this->paymentObject->getRequest()->toArray();
+        /** @var Response $response */
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'registration is pending');
+        $this->assertFalse($response->isError(), 'registration failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
     }
 
     /**
      * Test case for a debit card debit on a registration
      *
-     * @var string reference id of the debit card registration
+     * @param mixed $referenceId id of the debit card registration
      *
      * @return string payment reference id to the debit card debit transaction
+     *
+     * @throws \Exception
      * @depends registration
      * @group  connectionTest
-     * @test
      *
-     * @param mixed $referenceId
+     * @test
      */
     public function debitOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->debitOnRegistration((string)$referenceId);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
 
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'debit on registration is pending');
@@ -201,6 +262,8 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             $response->isError(),
             'debit on registration failed : ' . print_r($response->getError(), 1)
         );
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -211,23 +274,28 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string reference id of the debit card registration
      *
      * @return string payment reference id of the debit card authorisation
+     *
      * @depends registration
      * @group  connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function authorizeOnRegistration($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->authorizeOnRegistration((string)$referenceId);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
@@ -235,6 +303,8 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             $response->isError(),
             'authorized on registration failed : ' . print_r($response->getError(), 1)
         );
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -246,6 +316,8 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string
      *
      * @return string
+     *
+     * @throws \Exception
      */
     public function capture($referenceId = null)
     {
@@ -255,13 +327,16 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->capture((string)$referenceId);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'capture is pending');
         $this->assertFalse($response->isError(), 'capture failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -274,7 +349,10 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id of the debit card refund transaction
      * @depends capture
      * @test
+     *
      * @group connectionTest
+     *
+     * @throws \Exception
      */
     public function refund($referenceId = null)
     {
@@ -284,9 +362,10 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->refund((string)$referenceId);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize on registration is pending');
@@ -294,6 +373,8 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             $response->isError(),
             'authorized on registration failed : ' . print_r($response->getError(), 1)
         );
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -303,32 +384,39 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the debit card debit transaction
      * @group connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function debit()
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
         $this->paymentObject->debit('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
 
         /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-        $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->set('brand', $this->creditCardBrand);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'debit is pending');
         $this->assertFalse($response->isError(), 'debit failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -338,7 +426,10 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      *
      * @return string payment reference id for the debit card authorize transaction
      * @group connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function authorize()
     {
@@ -348,22 +439,25 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->authorize('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
 
         /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
-        $this->paymentObject->getRequest()->getFrontend()->set('enabled', 'FALSE');
-        $this->paymentObject->getRequest()->getAccount()->set('holder', $this->holder);
-        $this->paymentObject->getRequest()->getAccount()->set('number', $this->creditCartNumber);
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->creditCartNumber);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_month', $this->creditCardExpiryMonth);
         $this->paymentObject->getRequest()->getAccount()->set('expiry_year', $this->creditCardExpiryYear);
-        $this->paymentObject->getRequest()->getAccount()->set('brand', $this->creditCardBrand);
         $this->paymentObject->getRequest()->getAccount()->set('verification', $this->creditCardVerification);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'authorize is pending');
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -376,7 +470,10 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the debit card reversal transaction
      * @depends authorize
      * @group connectionTest
+     *
      * @test
+     *
+     * @throws \Exception
      */
     public function reversal($referenceId = null)
     {
@@ -386,13 +483,16 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->reversal((string)$referenceId);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'reversal is pending');
         $this->assertFalse($response->isError(), 'reversal failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }
@@ -405,7 +505,10 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the debit card rebill transaction
      * @depends debit
      * @test
+     *
      * @group connectionTest
+     *
+     * @throws \Exception
      */
     public function rebill($referenceId = null)
     {
@@ -415,13 +518,17 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->rebill((string)$referenceId);
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->convertToArray();
+        $request = $this->paymentObject->getRequest()->toArray();
+
         /** @var Response $response */
-        list(, $response) = $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
         $this->assertFalse($response->isPending(), 'reversal is pending');
         $this->assertFalse($response->isError(), 'reversal failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
 
         return (string)$response->getPaymentReferenceId();
     }

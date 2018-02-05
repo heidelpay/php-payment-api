@@ -95,7 +95,6 @@ class AccountParameterGroup extends AbstractParameterGroup
      * Account number can be used for non sepa direct debit transactions
      *
      * @var string number of the given account
-     *
      */
     public $number;
 
@@ -335,5 +334,49 @@ class AccountParameterGroup extends AbstractParameterGroup
     public function getVerification()
     {
         return $this->verification;
+    }
+
+    /**
+     * @param string $expiry_month
+     *
+     * @return AccountParameterGroup
+     */
+    public function setExpiryMonth($expiry_month)
+    {
+        $this->expiry_month = $expiry_month;
+        return $this;
+    }
+
+    /**
+     * @param string $expiry_year
+     *
+     * @return AccountParameterGroup
+     */
+    public function setExpiryYear($expiry_year)
+    {
+        $this->expiry_year = $expiry_year;
+        return $this;
+    }
+
+    /**
+     * @param string $verification
+     *
+     * @return AccountParameterGroup
+     */
+    public function setVerification($verification)
+    {
+        $this->verification = $verification;
+        return $this;
+    }
+
+    /**
+     * @param string $identification
+     *
+     * @return AccountParameterGroup
+     */
+    public function setIdentification($identification)
+    {
+        $this->identification = $identification;
+        return $this;
     }
 }
