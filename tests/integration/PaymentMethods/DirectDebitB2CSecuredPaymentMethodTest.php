@@ -139,6 +139,41 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
+     * Test case for a direct debit reversal of a existing authorisation
+     *
+     * @param string $referenceId payment reference id of the direct debit authorisation
+     *
+     * @return string payment reference id for the credit card reversal transaction
+     * @depends authorize
+     * @test
+     *
+     * @group connectionTest
+     *
+     * @throws \Exception
+     */
+    public function reversal($referenceId = null)
+    {
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
+
+        $this->paymentObject->reversal((string)$referenceId);
+
+        /* prepare request and send it to payment api */
+        $request = $this->paymentObject->getRequest()->toArray();
+        /** @var Response $response */
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
+        $this->assertFalse($response->isPending(), 'reversal is pending');
+        $this->assertFalse($response->isError(), 'reversal failed : ' . print_r($response->getError(), 1));
+
+        $this->logDataToDebug($result);
+
+        return (string)$response->getPaymentReferenceId();
+    }
+
+    /**
      * Capture Test
      *
      * @depends authorize
@@ -153,7 +188,7 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     public function capture($referenceId = null)
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 13.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 11.00, $this->currency, $this->secret);
 
         $this->paymentObject->capture((string)$referenceId);
 
@@ -316,41 +351,6 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
 
         $this->logDataToDebug($result);
-    }
-
-    /**
-     * Test case for a direct debit reversal of a existing authorisation
-     *
-     * @param string $referenceId payment reference id of the direct debit authorisation
-     *
-     * @return string payment reference id for the credit card reversal transaction
-     * @depends authorize
-     * @test
-     *
-     * @group connectionTest
-     *
-     * @throws \Exception
-     */
-    public function reversal($referenceId = null)
-    {
-        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
-
-        $this->paymentObject->reversal((string)$referenceId);
-
-        /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->toArray();
-        /** @var Response $response */
-        list($result, $response) =
-            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
-
-        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response->getError(), 1));
-        $this->assertFalse($response->isPending(), 'reversal is pending');
-        $this->assertFalse($response->isError(), 'reversal failed : ' . print_r($response->getError(), 1));
-
-        $this->logDataToDebug($result);
-
-        return (string)$response->getPaymentReferenceId();
     }
 
     /**
