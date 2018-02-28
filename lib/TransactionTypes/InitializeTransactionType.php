@@ -8,7 +8,7 @@ use Heidelpay\PhpPaymentApi\Constants\TransactionType;
  * Trait for the Initialize transaction type
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link https://dev.heidelpay.de/php-api
  *

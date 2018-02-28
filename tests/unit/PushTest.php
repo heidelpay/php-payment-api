@@ -20,7 +20,7 @@ use SimpleXMLElement;
  * Unit Test for the XML Push Response Mapping
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link http://dev.heidelpay.com/heidelpay-php-api/
  *
@@ -384,7 +384,7 @@ class PushTest extends Test
 
         $this->assertEquals('DE', $response->getConnector()->getAccountCountry());
         $this->assertEquals('COBADEFFXXX', $response->getConnector()->getAccountBic());
-        $this->assertEquals('Heidelberger Payment GmbH', $response->getConnector()->getAccountHolder());
+        $this->assertEquals('heidelpay GmbH', $response->getConnector()->getAccountHolder());
         $this->assertEquals('DE89370400440532013000', $response->getConnector()->getAccountIBan());
         /** @noinspection PhpDeprecationInspection */
         $this->assertEquals('37040044', $response->getConnector()->getAccountBank());
@@ -465,7 +465,7 @@ class PushTest extends Test
 
         // implements the tested method
         $connector = new Connector();
-        $this->assertEquals('Heidelberger Payment GmbH', $connector->getXmlObjectField($xmlElement, 'Holder'));
+        $this->assertEquals('heidelpay GmbH', $connector->getXmlObjectField($xmlElement, 'Holder'));
     }
 
     /**
@@ -523,11 +523,11 @@ class PushTest extends Test
         </Processing>
         <Payment code="CC.RG"> <!-- XmlObjectProperty -->
             <Status code="90" /> <!-- XmlObjectFieldAttribute -->
-            <Holder>Heidelberger Payment GmbH</Holder> <!-- XmlObjectField -->
+            <Holder>heidelpay GmbH</Holder> <!-- XmlObjectField -->
         </Payment>
         <Connector>
             <Account code="CC.RG"> <!-- XmlObjectProperty -->
-                <Holder>Heidelberger Payment GmbH</Holder> <!-- XmlObjectField -->
+                <Holder>heidelpay GmbH</Holder> <!-- XmlObjectField -->
             </Account>
         </Connector>
     </Transaction>
@@ -822,7 +822,7 @@ XML;
                 <Bic>COBADEFFXXX</Bic>
                 <Bank>37040044</Bank>
                 <Number>5320130</Number>
-                <Holder>Heidelberger Payment GmbH</Holder>
+                <Holder>heidelpay GmbH</Holder>
                 <Iban>DE89370400440532013000</Iban>
             </Account>
         </Connector>

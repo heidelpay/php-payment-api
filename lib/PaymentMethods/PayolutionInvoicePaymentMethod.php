@@ -15,7 +15,7 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
  * heidelpay PHP-API integration for Invoice by Payolution
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
- * @copyright Copyright © 2017-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2017-present heidelpay GmbH. All rights reserved.
  *
  * @link https://dev.heidelpay.de/php-api
  *
