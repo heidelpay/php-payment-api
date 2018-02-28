@@ -9,7 +9,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup as Config;
  * Unit test for ConfigParameterGroup
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
@@ -61,13 +61,13 @@ class ConfigParameterGroupTest extends Test
 
         $value = array(
             'optin' => 'Ich willige in die Übermittlung meiner oben angegebenen personenbezogenen Daten '
-                . 'sowie der Informationen über meinen Zahlungsverlauf durch die Heidelberger Payment GmbH an die '
+                . 'sowie der Informationen über meinen Zahlungsverlauf durch die heidelpay GmbH an die '
                 . 'Santander Consumer Bank AG („Santander“) sowie die Verwendung durch Santander für die postalische '
                 . 'Zusendung von Angeboten, etwa zur Umschuldung oder Refinanzierung durch Santander, gemäß der '
                 . 'Santander-Datenschutzerklärung zu. Mir ist bekannt, dass ich diese Einwilligung jederzeit wie '
                 . 'in der Datenschutzerklärung beschrieben, mit Wirkung für die Zukunft widerrufen kann.',
             'privacy_policy' => 'Santander Datenschutzerklärung: Die Santander Consumer Bank AG, Santander-Platz 1, '
-                . 'D-41061 Mönchengladbach („Santander“) unterstützt die Heidelberger Payment GmbH dabei, Ihnen die '
+                . 'D-41061 Mönchengladbach („Santander“) unterstützt die heidelpay GmbH dabei, Ihnen die '
                 . 'Möglichkeit eines Rechnungskaufs für Produkte oder Dienstleistungen, die sie erwerben wollen, '
                 . 'anzubieten. Werbezwecke Santander wird Ihren Namen und Ihre Adresse nutzen, um Ihnen postalisch '
                 . 'Informationen über Angebote der Santander Consumer Bank AG zuzusenden. Sollten Sie in '
