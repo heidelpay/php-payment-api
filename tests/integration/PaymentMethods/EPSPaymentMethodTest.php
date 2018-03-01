@@ -95,7 +95,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.com');
 
         $this->paymentObject->authorize();
 

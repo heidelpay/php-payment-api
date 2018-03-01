@@ -58,7 +58,7 @@ $Przelewy24->getRequest()->customerAddress(
         '69115',                   // Billing address post code
         'Heidelberg',              // Billing address city
         'PL',                      // Billing address country code
-        'support@heidelpay.de'     // Customer mail address
+        'support@heidelpay.com'     // Customer mail address
         
         );
 

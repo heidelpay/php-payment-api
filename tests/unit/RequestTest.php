@@ -63,7 +63,7 @@ class RequestTest extends Test
         $Request = new Request();
 
         $LanguageCode = 'DE';
-        $ResponseUrl = 'https://dev.heidelpay.de/';
+        $ResponseUrl = 'https://dev.heidelpay.com/';
 
         $Request->async($LanguageCode, $ResponseUrl);
 
@@ -92,7 +92,7 @@ class RequestTest extends Test
         $addressZip = '69115';
         $addressCity = 'Heidelberg';
         $addressCountry = 'DE';
-        $contactMail = 'development@heidelpay.de';
+        $contactMail = 'development@heidelpay.com';
 
         $Request->customerAddress(
             $nameGiven,

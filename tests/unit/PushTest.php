@@ -24,7 +24,7 @@ use SimpleXMLElement;
  *
  * @link http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author Stephano Vogel <development@heidelpay.de>
+ * @author Stephano Vogel <development@heidelpay.com>
  *
  * @package heidelpay\php-payment-api\tests\unit
  */
@@ -144,7 +144,7 @@ class PushTest extends Test
         $this->assertEquals('DE', $response->getAddress()->getCountry());
         $this->assertEquals('DE-BW', $response->getAddress()->getState());
 
-        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+        $this->assertEquals('development@heidelpay.com', $response->getContact()->getEmail());
 
         $this->assertEquals('2843294932', $response->getIdentification()->getTransactionId());
         $this->assertEquals('31HA07BC8108A9126F199F2784552637', $response->getIdentification()->getUniqueId());
@@ -204,7 +204,7 @@ class PushTest extends Test
         $this->assertEquals('Heidelberg', $response->getAddress()->getCity());
         $this->assertEquals('DE', $response->getAddress()->getCountry());
 
-        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+        $this->assertEquals('development@heidelpay.com', $response->getContact()->getEmail());
 
         $this->assertEquals('Heidel Berger-Payment', $response->getAccount()->getHolder());
         $this->assertEquals('471110******0000', $response->getAccount()->getNumber());
@@ -262,7 +262,7 @@ class PushTest extends Test
         $this->assertEquals('Heidelberg', $response->getAddress()->getCity());
         $this->assertEquals('DE', $response->getAddress()->getCountry());
 
-        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+        $this->assertEquals('development@heidelpay.com', $response->getContact()->getEmail());
 
         $this->assertEquals('Heidel Berger-Payment', $response->getAccount()->getHolder());
         $this->assertEquals('DE89370400440532013000', $response->getAccount()->getIban());
@@ -319,7 +319,7 @@ class PushTest extends Test
         $this->assertEquals('Heidelberg', $response->getAddress()->getCity());
         $this->assertEquals('DE', $response->getAddress()->getCountry());
 
-        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+        $this->assertEquals('development@heidelpay.com', $response->getContact()->getEmail());
 
         $this->assertEquals('308', $response->getIdentification()->getTransactionId());
         $this->assertEquals('31HA07BC816DC116ADA43CE7704010DE', $response->getIdentification()->getUniqueId());
@@ -391,7 +391,7 @@ class PushTest extends Test
         /** @noinspection PhpDeprecationInspection */
         $this->assertEquals('5320130', $response->getConnector()->getAccountNumber());
 
-        $this->assertEquals('development@heidelpay.de', $response->getContact()->getEmail());
+        $this->assertEquals('development@heidelpay.com', $response->getContact()->getEmail());
 
         $this->assertEquals('303', $response->getIdentification()->getTransactionId());
         $this->assertEquals('31HA07BC81561F9B12B3008CBC742D4E', $response->getIdentification()->getUniqueId());
@@ -577,14 +577,14 @@ XML;
                 <State>DE-BW</State>
             </Address>
             <Contact>
-                <Email>development@heidelpay.de</Email>
+                <Email>development@heidelpay.com</Email>
             </Contact>
         </Customer>
         <Frontend>
-            <ResponseUrl>http://dev.heidelpay.de/response.php</ResponseUrl>
+            <ResponseUrl>http://dev.heidelpay.com/response.php</ResponseUrl>
         </Frontend>
         <Analysis>
-            <Criterion name="PUSH_URL">http://dev.heidelpay.de/push.php</Criterion>
+            <Criterion name="PUSH_URL">http://dev.heidelpay.com/push.php</Criterion>
             <Criterion name="SDK_NAME">Heidelpay\PhpPaymentApi</Criterion>
             <Criterion name="SECRET">209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b318ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876</Criterion>
             <Criterion name="GUEST">false</Criterion>
@@ -642,15 +642,15 @@ XML;
                 <Country>DE</Country>
 			</Address>
 			<Contact>
-				<Email>development@heidelpay.de</Email>
+				<Email>development@heidelpay.com</Email>
 			</Contact>
 		</Customer>
 		<Frontend>
-			<ResponseUrl>http://dev.heidelpay.de/response.php</ResponseUrl>
+			<ResponseUrl>http://dev.heidelpay.com/response.php</ResponseUrl>
 		</Frontend>
 		<Analysis>
 			<Criterion name="SECRET">efe14520c747b753fb91c613c421f8b5ca0c51c4df0b35f3ca6d3204039bc283</Criterion>
-			<Criterion name="PUSH_URL">http://dev.heidelpay.de/push.php</Criterion>
+			<Criterion name="PUSH_URL">http://dev.heidelpay.com/push.php</Criterion>
 			<Criterion name="GUEST">false</Criterion>
 		</Analysis>
 		<RequestTimestamp>2017-04-04 07:29:18</RequestTimestamp>
@@ -710,7 +710,7 @@ XML;
                 <Country>DE</Country>
             </Address>
             <Contact>
-                <Email>development@heidelpay.de</Email>
+                <Email>development@heidelpay.com</Email>
             </Contact>
         </Customer>
         <Analysis>
@@ -719,7 +719,7 @@ XML;
             <Criterion name="SHOPMODULE.VERSION">Heidelpay Gateway 17.3.31</Criterion>
             <Criterion name="SECRET">a5a39cd99f11c247dbfaa2b9077000b7ee298947c4c90dcbe1043d46ffac8dbf72c9597ed71ab4c3d1ccebe85ba45c615ff1878e01e90b58e55da5e971157dff</Criterion>
             <Criterion name="SDK_VERSION">17.3.2</Criterion>
-            <Criterion name="PUSH_URL">http://dev.heidelpay.de/push.php</Criterion>
+            <Criterion name="PUSH_URL">http://dev.heidelpay.com/push.php</Criterion>
             <Criterion name="GUEST">false</Criterion>
         </Analysis>
         <RequestTimestamp>2017-03-31 15:55:32</RequestTimestamp>
@@ -769,14 +769,14 @@ XML;
                 <Country>DE</Country>
             </Address>
             <Contact>
-                <Email>development@heidelpay.de</Email>
+                <Email>development@heidelpay.com</Email>
             </Contact>
         </Customer>
         <Frontend>
-            <ResponseUrl>http://dev.heidelpay.de/response.php</ResponseUrl>
+            <ResponseUrl>http://dev.heidelpay.com/response.php</ResponseUrl>
         </Frontend>
         <Analysis>
-            <Criterion name="PUSH_URL">http://dev.heidelpay.de/push.php</Criterion>
+            <Criterion name="PUSH_URL">http://dev.heidelpay.com/push.php</Criterion>
             <Criterion name="SDK_NAME">Heidelpay\PhpPaymentApi</Criterion>
             <Criterion name="PAYMENT_METHOD">InvoicePaymentMethod</Criterion>
             <Criterion name="SECRET">40a18e0318822bf21f273e5f581834aaa6f169656dfaa6e826e767f4eddc6fe84e6c1e0974392997a2c6e68a921162f22a431053ff8fb0d37f1dc0cc8bc46c25</Criterion>
@@ -838,7 +838,7 @@ XML;
                 <Country>DE</Country>
             </Address>
             <Contact>
-                <Email>development@heidelpay.de</Email>
+                <Email>development@heidelpay.com</Email>
             </Contact>
         </Customer>
         <Analysis>
@@ -847,7 +847,7 @@ XML;
             <Criterion name="SHOPMODULE.VERSION">Heidelpay Gateway 17.3.31</Criterion>
             <Criterion name="SECRET">305e17d3b341233bb08fa37c2761134baffcc30c1bba205655c64fcc196fccb659a9f8aff5e237c60ffcae600e1f11e7342f60dbdd43b1cdc1a17a323c3f753d</Criterion>
             <Criterion name="SDK_VERSION">17.3.2</Criterion>
-            <Criterion name="PUSH_URL">http://dev.heidelpay.de/push.php</Criterion>
+            <Criterion name="PUSH_URL">http://dev.heidelpay.com/push.php</Criterion>
             <Criterion name="GUEST">false</Criterion>
         </Analysis>
         <RequestTimestamp>2017-04-03 14:12:36</RequestTimestamp>

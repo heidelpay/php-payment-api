@@ -63,13 +63,13 @@ class ResponseTest extends Test
             'TRANSACTION_MODE' => 'CONNECTOR_TEST',
             'ACCOUNT_EXPIRY_MONTH' => '05',
             'PROCESSING_TIMESTAMP' => '2016-09-16 12:14:31',
-            'CONTACT_EMAIL' => 'development@heidelpay.de',
-            'FRONTEND_RESPONSE_URL' => 'http://dev.heidelpay.de/response.php',
+            'CONTACT_EMAIL' => 'development@heidelpay.com',
+            'FRONTEND_RESPONSE_URL' => 'http://dev.heidelpay.com/response.php',
             'REQUEST_VERSION' => 1.0,
             'ACCOUNT_BRAND' => 'MASTER',
             'PROCESSING_STATUS_CODE' => '90',
             'NAME_GIVEN' => 'Heidel',
-            'FRONTEND_PAYMENT_FRAME_ORIGIN' => 'http://dev.heidelpay.de/',
+            'FRONTEND_PAYMENT_FRAME_ORIGIN' => 'http://dev.heidelpay.com/',
             'IDENTIFICATION_SHORTID' => '3379.5447.1520',
             'ADDRESS_CITY' => 'Heidelberg',
             'ACCOUNT_HOLDER' => 'Heidel Berger-Payment',
@@ -185,11 +185,11 @@ class ResponseTest extends Test
     public function getPaymentFormUrl()
     {
         /** iframe url for credit and debit card*/
-        $expectedUrl = 'http://dev.heidelpay.de';
+        $expectedUrl = 'http://dev.heidelpay.com';
         $this->responseObject->getFrontend()->set('payment_frame_url', $expectedUrl);
         $this->assertEquals($expectedUrl, $this->responseObject->getPaymentFormUrl());
 
-        $expectedUrl = 'http://www.heidelpay.de';
+        $expectedUrl = 'http://www.heidelpay.com';
         $this->responseObject->getFrontend()->setRedirectUrl($expectedUrl);
 
         /** url in case of credit and debit card reference Transaction */

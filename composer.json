@@ -49,9 +49,9 @@
         }
     },
     "support": {
-        "email": "development@heidelpay.de"
+        "email": "development@heidelpay.com"
     },
-    "homepage": "https://dev.heidelpay.de",
+    "homepage": "http://dev.heidelpay.com",
     "type": "library",
     "keywords": [
         "payment-api",

@@ -42,7 +42,7 @@ require_once __DIR__ . '/../../../autoload.php';
  /**
   * Set up your authentification data for Heidepay api
   *
-  * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
+  * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
   */
  $iDeal->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -74,7 +74,7 @@ require_once __DIR__ . '/../../../autoload.php';
      '69115',                   // Billing address post code
      'Heidelberg',              // Billing address city
      'DE',                      // Billing address country code
-     'support@heidelpay.de'     // Customer mail address
+     'support@heidelpay.com'     // Customer mail address
      );
  
  /**

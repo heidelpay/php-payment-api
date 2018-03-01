@@ -42,7 +42,7 @@ $CreditCard = new CreditCardPaymentMethod();
 /**
  * Set up your authentification data for Heidepay api
  *
- * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
+ * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
  */
 $CreditCard->getRequest()->authentification(
     '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -74,7 +74,7 @@ $CreditCard->getRequest()->customerAddress(
     '69115',                   // Billing address post code
     'Heidelberg',              // Billing address city
     'DE',                      // Billing address country code
-    'support@heidelpay.de'     // Customer mail address
+    'support@heidelpay.com'     // Customer mail address
 );
 
 /**
@@ -92,7 +92,7 @@ $CreditCard->getRequest()->basketData(
  */
 $CreditCard->registration(
     HEIDELPAY_PHP_PAYMENT_API_URL,
-    // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
+    // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.com
     'FALSE',
     // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
     HEIDELPAY_PHP_PAYMENT_API_URL .

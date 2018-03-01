@@ -56,7 +56,7 @@ $Giropay->getRequest()->customerAddress(
         '69115',                   // Billing address post code
         'Heidelberg',              // Billing address city
         'DE',                      // Billing address country code
-        'support@heidelpay.de'     // Customer mail address
+        'support@heidelpay.com'     // Customer mail address
         
         );
 

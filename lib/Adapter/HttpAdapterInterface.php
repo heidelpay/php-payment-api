@@ -9,7 +9,7 @@
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
- * @author  Simon Gabriel <simon.gabriel@heidelpay.de>
+ * @author  Simon Gabriel <simon.gabriel@heidelpay.com>
  *
  * @package  Heidelpay
  * @subpackage PhpPaymentApi

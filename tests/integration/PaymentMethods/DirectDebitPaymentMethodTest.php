@@ -118,7 +118,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->setAdapter(new CurlAdapter());
@@ -192,7 +192,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->getRequest()->getAccount()->setIban($this->iban);
@@ -265,7 +265,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->getRequest()->getAccount()->setIban($this->iban);
@@ -303,7 +303,7 @@ class DirectDebitPaymentMethodTest extends BasePaymentMethodTest
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 13.42, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->paymentObject->getRequest()->getAccount()->setIban($this->iban);
         $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder2);

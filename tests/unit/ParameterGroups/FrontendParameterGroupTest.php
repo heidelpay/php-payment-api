@@ -58,7 +58,7 @@ class FrontendParameterGroupTest extends Test
     {
         $frontend = new Frontend();
 
-        $value = 'https://dev.heidelpay.de';
+        $value = 'https://dev.heidelpay.com';
         $frontend->setRedirectUrl($value);
 
         $this->assertEquals($value, $frontend->getRedirectUrl());
@@ -73,7 +73,7 @@ class FrontendParameterGroupTest extends Test
     {
         $frontend = new Frontend();
 
-        $value = 'https://dev.heidelpay.de';
+        $value = 'https://dev.heidelpay.com';
         $frontend->setResponseUrl($value);
 
         $this->assertEquals($value, $frontend->getResponseUrl());
@@ -101,7 +101,7 @@ class FrontendParameterGroupTest extends Test
     {
         $frontend = new Frontend();
 
-        $value = 'https://dev.heidelpay.de';
+        $value = 'https://dev.heidelpay.com';
         $frontend->setPaymentFrameOrigin($value);
 
         $this->assertEquals($value, $frontend->getPaymentFrameOrigin());
@@ -114,7 +114,7 @@ class FrontendParameterGroupTest extends Test
     {
         $frontend = new Frontend();
 
-        $value = 'https://dev.heidelpay.de';
+        $value = 'https://dev.heidelpay.com';
         $frontend->set('payment_frame_url', $value);
 
         $this->assertEquals($value, $frontend->getPaymentFrameUrl());
@@ -127,7 +127,7 @@ class FrontendParameterGroupTest extends Test
     {
         $frontend = new Frontend();
 
-        $value = 'https://dev.heidelpay.de';
+        $value = 'https://dev.heidelpay.com';
         $frontend->setCssPath($value);
 
         $this->assertEquals($value, $frontend->getCssPath());

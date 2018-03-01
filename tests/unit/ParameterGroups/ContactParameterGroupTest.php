@@ -26,7 +26,7 @@ class ContactParameterGroupTest extends Test
     {
         $Contact = new Contact();
 
-        $email = 'development@heidelpay.de';
+        $email = 'development@heidelpay.com';
         $Contact->setEmail($email);
 
         $this->assertEquals($email, $Contact->getEmail());

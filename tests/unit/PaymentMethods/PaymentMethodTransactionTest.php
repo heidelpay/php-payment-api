@@ -185,7 +185,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             $this->currency,
             $this->secret
         );
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
 
         /* disable frontend (iframe) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -257,7 +257,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             $this->currency,
             $this->secret
         );
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
 
         /* disable frontend (ifame) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -382,7 +382,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
     {
         $timestamp = 'DirectDebitB2CSecuredPaymentMethodTest::debit 2017-11-01 12:33:14';
         $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
 
         $frontendEnabled = 'FALSE';
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);

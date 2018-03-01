@@ -154,8 +154,8 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             $this->secret
         );
 
-        $paymentFrameOrigin = 'http://www.heidelpay.de';
-        $cssPath = 'http://www.heidelpay.de';
+        $paymentFrameOrigin = 'http://www.heidelpay.com';
+        $cssPath = 'http://www.heidelpay.com';
         $preventAsyncRedirect = 'FALSE';
         $this->paymentObject->registration(
             $paymentFrameOrigin,
