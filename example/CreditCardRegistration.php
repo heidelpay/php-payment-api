@@ -4,14 +4,14 @@ namespace Heidelpay\Example\PhpPaymentApi;
 /**
  * Credit card registration example
  *
- * This is a coding example for credit card registration using heidelpay php-api
+ * This is a coding example for credit card registration using heidelpay php-payment-api
  * extension.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *

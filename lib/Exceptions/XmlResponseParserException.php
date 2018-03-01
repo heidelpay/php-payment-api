@@ -12,7 +12,7 @@ use Exception;
  * @license    Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright  Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link       http://dev.heidelpay.com/heidelpay-php-api/
+ * @link       http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author     Stephano Vogel
  *

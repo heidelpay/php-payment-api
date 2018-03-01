@@ -8,7 +8,7 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  * @license    Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright  Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link       http://dev.heidelpay.com/php-api
+ * @link       http://dev.heidelpay.com/php-payment-api
  *
  * @author     Stephano Vogel
  *
