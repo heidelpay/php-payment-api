@@ -13,9 +13,9 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
  * Sofort is a payment method from SOFORT GmbH also known as sofortüberweisung in Germany.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *

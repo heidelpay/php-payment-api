@@ -9,7 +9,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup as Connector
  * Unit test for ConnectorParameterGroup
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
@@ -74,7 +74,7 @@ class ConnectorParameterGroupTest extends Test
     {
         $connector = new Connector();
 
-        $value = 'Heidelberger Payment GmbH';
+        $value = 'heidelpay GmbH';
         $connector->set('account_holder', $value);
 
         $this->assertEquals($value, $connector->getAccountHolder());

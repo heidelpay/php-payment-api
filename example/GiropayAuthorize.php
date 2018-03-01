@@ -4,13 +4,13 @@ namespace Heidelpay\Example\PhpPaymentApi;
 /**
  * Sofort authorize example
  *
- * This is a coding example for Sofort authorize using the heidelpay php-api
+ * This is a coding example for Sofort authorize using the heidelpay php-payment-api
  * extension.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *
@@ -56,7 +56,7 @@ $Giropay->getRequest()->customerAddress(
         '69115',                   // Billing address post code
         'Heidelberg',              // Billing address city
         'DE',                      // Billing address country code
-        'support@heidelpay.de'     // Customer mail address
+        'support@heidelpay.com'     // Customer mail address
         
         );
 

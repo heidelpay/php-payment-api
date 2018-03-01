@@ -13,9 +13,9 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  * There is no actual communication to the server since the curl adapter is being mocked.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Simon Gabriel
  *
@@ -154,8 +154,8 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
             $this->secret
         );
 
-        $paymentFrameOrigin = 'http://www.heidelpay.de';
-        $cssPath = 'http://www.heidelpay.de';
+        $paymentFrameOrigin = 'http://www.heidelpay.com';
+        $cssPath = 'http://www.heidelpay.com';
         $preventAsyncRedirect = 'FALSE';
         $this->paymentObject->registration(
             $paymentFrameOrigin,

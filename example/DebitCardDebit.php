@@ -4,14 +4,14 @@ namespace Heidelpay\Example\PhpPaymentApi;
 /**
  * Debit card debit example
  *
- * This is a coding example for debit card debit using heidelpay php-api
+ * This is a coding example for debit card debit using heidelpay php-payment-api
  * extension.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *
@@ -42,7 +42,7 @@ require_once __DIR__ . '/../../../autoload.php';
  /**
   * Set up your authentification data for heidepay api
   *
-  * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
+  * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
   */
  $DebitCard->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -74,7 +74,7 @@ require_once __DIR__ . '/../../../autoload.php';
      '69115',                   // Billing address post code
      'Heidelberg',              // Billing address city
      'DE',                      // Billing address country code
-     'support@heidelpay.de'     // Customer mail address
+     'support@heidelpay.com'     // Customer mail address
      );
  
  /**
@@ -91,7 +91,7 @@ require_once __DIR__ . '/../../../autoload.php';
   * Set necessary parameters for Heidelpay payment Frame and send a registration request
   */
  $DebitCard->debit(
-    HEIDELPAY_PHP_PAYMENT_API_URL,                        // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.de
+    HEIDELPAY_PHP_PAYMENT_API_URL,                        // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.com
     'FALSE',                                   // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
     HEIDELPAY_PHP_PAYMENT_API_URL .
     HEIDELPAY_PHP_PAYMENT_API_FOLDER   // CSSPath - css url to style the Heidelpay payment frame

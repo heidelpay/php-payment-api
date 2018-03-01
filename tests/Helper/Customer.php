@@ -39,7 +39,7 @@ class Customer
     protected $addressCountry = 'DE';
 
     /** @var string $customerEmail */
-    protected $customerEmail = 'development@heidelpay.de';
+    protected $customerEmail = 'development@heidelpay.com';
 
     //</editor-fold>
 

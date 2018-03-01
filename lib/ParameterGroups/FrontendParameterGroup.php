@@ -6,9 +6,9 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  * This class provides every api parameter used for frontend settings like language etc.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *
@@ -47,7 +47,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     /**
      * FrontendPaymentFrameOrigin
      *
-     * @var string origin of your website (like "http://dev.heidelpay.de/"). Only required for hpf
+     * @var string origin of your website (like "http://dev.heidelpay.com/"). Only required for hpf
      */
     public $payment_frame_origin;
 
@@ -182,7 +182,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * credit and debit card. Please have a look into our documentation
      * for the allowed ccs parameter
      *
-     * @param string $css_path url to a css file, e.g. https://dev.heidelpay.de/heidelpay_iframe.css
+     * @param string $css_path url to a css file, e.g. http://dev.heidelpay.com/heidelpay_iframe.css
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      */
@@ -277,10 +277,10 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * this url in http post notation. Please make sure that this url is reachable
      * form the internet. The response will be send server to server, if you see
      * this url inside your browser, something went wrong. PLease check your php log
-     * first, if there is nothing you can identify please write to support@heidelpay.de
+     * first, if there is nothing you can identify please write to support@heidelpay.com
      * this the shortid of the transaction or the email address used for the request-
      *
-     * @param string $response_url, e.g. https://dev.heidelpay.de/reponse.php
+     * @param string $response_url, e.g. http://dev.heidelpay.com/reponse.php
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
      *

@@ -9,7 +9,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup as Contact;
  * Unit test for ContactParameterGroup
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
@@ -26,7 +26,7 @@ class ContactParameterGroupTest extends Test
     {
         $Contact = new Contact();
 
-        $email = 'development@heidelpay.de';
+        $email = 'development@heidelpay.com';
         $Contact->setEmail($email);
 
         $this->assertEquals($email, $Contact->getEmail());

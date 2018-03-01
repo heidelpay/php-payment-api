@@ -34,7 +34,7 @@ IV. Lizenz
 	1. Diese Vereinbarung räumt nur solchen Nutzern Nutzungsrechte ein, die Unternehmer im Sinne des BGB sind. Eine Nutzung durch Verbraucher ist nicht gestattet.
 	2. Die von heidelpay im Rahmen dieser Vereinbarung gewährte Lizenz, ist für den Nutzer unentgeltlich.
 	3. Unter der Voraussetzung der Einhaltung der Bestimmungen dieser Vereinbarung, erteilt heidelpay dem Nut-zer das zeitlich unbefristete, widerrufliche, räumlich auf Europa begrenzte Recht, das Plug-in zu verändern, unverändert oder in veränderter Form zu dem in der Präambel dargestellten Zweck für geschäftliche Zwecke zu nutzen, d.h. das Plug-in zu speichern, ablaufen zu lassen, zu vervielfältigen, zu verbreiten und öffentlich zugänglich zu machen.
-	4. Heidelpay kann neue Versionen/Updates des Plug-ins anbieten, die zum Beispiel Fehlerbehebungen und neue Funktionalitäten beinhalten können. Heidelpay empfiehlt daher die regelmässige Überprüfung der Ak-tualität des Plug-in, dies wird auf der Seite http://dev.heidelpay.de veröffentlicht. Auch diese neuen Versio-nen/Updates unterliegen den Bedingungen dieser Vereinbarung.
+	4. Heidelpay kann neue Versionen/Updates des Plug-ins anbieten, die zum Beispiel Fehlerbehebungen und neue Funktionalitäten beinhalten können. Heidelpay empfiehlt daher die regelmässige Überprüfung der Ak-tualität des Plug-in, dies wird auf der Seite http://dev.heidelpay.com veröffentlicht. Auch diese neuen Versio-nen/Updates unterliegen den Bedingungen dieser Vereinbarung.
 
 V. Beschränkungen
 
@@ -51,7 +51,7 @@ V. Beschränkungen
 
 VI. Datenschutz
 
-    Es gelten die Datenschutzbestimmugen, abrufbar unter https://dev.heidelpay.de/datenschutzerklaerung/ .
+    Es gelten die Datenschutzbestimmugen, abrufbar unter http://dev.heidelpay.de/datenschutzerklaerung/ .
 
 VII. FREISTELLUNG
 
@@ -119,7 +119,7 @@ IV. Licence
     1.	This Agreement shall only grant rights of use to users who are entrepreneurs within the meaning of the Ger-man Civil Code (BGB). Use by consumers shall not be permitted.
     2.	The licence granted by heidelpay under the terms of this Agreement shall be free of charge to the user.
     3.	Subject to compliance with the terms and conditions set out in this Agreement, heidelpay shall grant the user a revocable right for an unlimited period and exclusively in Europe to modify the plug-in, use it for business purposes in unmodified or modified form for the purpose indicated in the introduction, i.e. to save the plug-in, run it, copy it, distribute it and make it accessible to the general public.
-    4.	heidelpay may offer new versions/updates of the plug-in which may contain bug fixes and new features, for example. heidelpay therefore recommends regular checking to ensure the plug-in is up-to-date. Details are published on the website at http://dev.heidelpay.de. Said new versions/updates shall also be subject to the terms and conditions in this Agreement.
+    4.	heidelpay may offer new versions/updates of the plug-in which may contain bug fixes and new features, for example. heidelpay therefore recommends regular checking to ensure the plug-in is up-to-date. Details are published on the website at http://dev.heidelpay.com. Said new versions/updates shall also be subject to the terms and conditions in this Agreement.
 
 V. Restrictions
 
@@ -136,7 +136,7 @@ V. Restrictions
 
 VI.	Data protection
 
-    The data protection regulations, which are available from https://dev.heidelpay.de/datenschutzerklaerung/ shall apply.
+    The data protection regulations, which are available from http://dev.heidelpay.com/data-privacy-policy/ shall apply.
 
 VII. INDEMNITY
 
