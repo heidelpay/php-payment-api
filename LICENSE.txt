@@ -51,7 +51,7 @@ V. Beschränkungen
 
 VI. Datenschutz
 
-    Es gelten die Datenschutzbestimmugen, abrufbar unter http://dev.heidelpay.com/datenschutzerklaerung/ .
+    Es gelten die Datenschutzbestimmugen, abrufbar unter http://dev.heidelpay.de/datenschutzerklaerung/ .
 
 VII. FREISTELLUNG
 
@@ -136,7 +136,7 @@ V. Restrictions
 
 VI.	Data protection
 
-    The data protection regulations, which are available from http://dev.heidelpay.com/datenschutzerklaerung/ shall apply.
+    The data protection regulations, which are available from http://dev.heidelpay.com/data-privacy-policy/ shall apply.
 
 VII. INDEMNITY
 
