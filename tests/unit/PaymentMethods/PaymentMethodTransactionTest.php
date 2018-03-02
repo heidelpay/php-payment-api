@@ -151,23 +151,23 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         $this->assertSame($this->paymentObject, $object);
     }
 
-    /**
-     * Verify sendPost id called once in each payment method call.
-     *
-     * @dataProvider transactionCodeProvider
-     * @test
-     *
-     * @param $method
-     * @param $parameters
-     */
-    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
-    {
-        call_user_func([$this->paymentObject, $method], $parameters);
-
-        /** @var InstanceProxy $adapter */
-        $adapter = $this->getAdapterMock();
-        $adapter->verifyInvokedOnce('sendPost');
-    }
+//    /**
+//     * Verify sendPost id called once in each payment method call.
+//     *
+//     * @dataProvider transactionCodeProvider
+//     * @test
+//     *
+//     * @param $method
+//     * @param $parameters
+//     */
+//    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
+//    {
+//        call_user_func([$this->paymentObject, $method], $parameters);
+//
+//        /** @var InstanceProxy $adapter */
+//        $adapter = $this->getAdapterMock();
+//        $adapter->verifyInvokedOnce('sendPost');
+//    }
 
     //</editor-fold>
 
