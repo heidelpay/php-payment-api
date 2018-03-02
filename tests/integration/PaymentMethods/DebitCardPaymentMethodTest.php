@@ -23,7 +23,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
@@ -156,7 +156,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->registration('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
+        $this->paymentObject->registration('http://www.heidelpay.com', 'FALSE', 'http://www.heidelpay.com');
 
         /* disable frontend (ifame) and submit the debit card information directly (only for testing) */
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
@@ -200,9 +200,9 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->reregistration(
             $referenceId,
-            'http://www.heidelpay.de',
+            'http://www.heidelpay.com',
             'FALSE',
-            'http://www.heidelpay.de'
+            'http://www.heidelpay.com'
         );
 
         /* disable frontend (ifame) and submit the debit card information directly (only for testing) */
@@ -395,7 +395,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->debit('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
+        $this->paymentObject->debit('http://www.heidelpay.com', 'FALSE', 'http://www.heidelpay.com');
 
         /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
@@ -436,7 +436,7 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
 
-        $this->paymentObject->authorize('http://www.heidelpay.de', 'FALSE', 'http://www.heidelpay.de');
+        $this->paymentObject->authorize('http://www.heidelpay.com', 'FALSE', 'http://www.heidelpay.com');
 
         /* disable frontend (ifame) and submit the credit card information directly (only for testing) */
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');

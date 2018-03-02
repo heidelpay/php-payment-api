@@ -4,14 +4,14 @@ namespace Heidelpay\Example\PhpPaymentApi;
 /**
  * PostFinanceEFinance authorize example
  *
- * This is a coding example for PostFinance EFinance authorize using the heidelpay php-api
+ * This is a coding example for PostFinance EFinance authorize using the heidelpay php-payment-api
  * extension.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Ronja Wann
  *
@@ -58,7 +58,7 @@ $PostFinanceEFinance->getRequest()->customerAddress(
         '69115',                   // Billing address post code
         'Heidelberg',              // Billing address city
         'CH',                      // Billing address country code
-        'support@heidelpay.de'     // Customer mail address
+        'support@heidelpay.com'     // Customer mail address
         
         );
 

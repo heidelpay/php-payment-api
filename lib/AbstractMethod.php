@@ -24,9 +24,9 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup;
  * Abstract request/response class
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *
@@ -487,7 +487,7 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         foreach ($post as $paramGroupKey => $value) {
-            list($paramGroupName, $paramGroupProp) = explode('_', strtolower($paramGroupKey), 2);
+            @list($paramGroupName, $paramGroupProp) = explode('_', strtolower($paramGroupKey), 2);
 
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {

@@ -17,9 +17,9 @@ use PHPUnit\Framework\Constraint\Constraint;
  * test can false due to network issues and scheduled down times.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *
@@ -122,7 +122,7 @@ class CurlAdapterTest extends Unit
     {
         /** @var array $result_array */
         /** @var Response $response */
-        list($result_array, $response) = $this->curlAdapter->sendPost('https://abc.heidelpay.de/');
+        list($result_array, $response) = $this->curlAdapter->sendPost('https://abc.heidelpay.com/');
 
         $this->assertTrue(is_array($result_array), 'First result key should be an array.');
         $this->assertTrue(is_object($response), 'Second result key should be an object.');
@@ -160,7 +160,7 @@ class CurlAdapterTest extends Unit
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.LANGUAGE' => 'EN',
-            'FRONTEND.RESPONSE_URL' => 'http://dev.heidelpay.de',
+            'FRONTEND.RESPONSE_URL' => 'http://dev.heidelpay.com',
             'CONTACT.IP' => '127.0.0.1',
             'REQUEST.VERSION' => '1.0'
         );

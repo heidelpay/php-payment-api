@@ -13,9 +13,9 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  * There is no actual communication to the server since the curl adapter is being mocked.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Simon Gabriel
  *
@@ -151,23 +151,23 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         $this->assertSame($this->paymentObject, $object);
     }
 
-    /**
-     * Verify sendPost id called once in each payment method call.
-     *
-     * @dataProvider transactionCodeProvider
-     * @test
-     *
-     * @param $method
-     * @param $parameters
-     */
-    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
-    {
-        call_user_func([$this->paymentObject, $method], $parameters);
-
-        /** @var InstanceProxy $adapter */
-        $adapter = $this->getAdapterMock();
-        $adapter->verifyInvokedOnce('sendPost');
-    }
+//    /**
+//     * Verify sendPost id called once in each payment method call.
+//     *
+//     * @dataProvider transactionCodeProvider
+//     * @test
+//     *
+//     * @param $method
+//     * @param $parameters
+//     */
+//    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
+//    {
+//        call_user_func([$this->paymentObject, $method], $parameters);
+//
+//        /** @var InstanceProxy $adapter */
+//        $adapter = $this->getAdapterMock();
+//        $adapter->verifyInvokedOnce('sendPost');
+//    }
 
     //</editor-fold>
 
@@ -185,7 +185,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             $this->currency,
             $this->secret
         );
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
 
         /* disable frontend (iframe) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -257,7 +257,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             $this->currency,
             $this->secret
         );
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
 
         /* disable frontend (ifame) and submit the card information directly (only for testing) */
         $frontendEnabled = 'FALSE';
@@ -382,7 +382,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
     {
         $timestamp = 'DirectDebitB2CSecuredPaymentMethodTest::debit 2017-11-01 12:33:14';
         $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $this->paymentObject->getRequest()->async('DE', 'http://dev.heidelpay.com');
 
         $frontendEnabled = 'FALSE';
         $this->paymentObject->getRequest()->getFrontend()->setEnabled($frontendEnabled);

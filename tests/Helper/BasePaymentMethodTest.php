@@ -39,8 +39,8 @@ use PHPUnit\Framework\Constraint\Constraint;
  */
 class BasePaymentMethodTest extends Unit
 {
-    const REFERENCE_ID = 'http://www.heidelpay.de';
-    const REDIRECT_URL = 'https://dev.heidelpay.de';
+    const REFERENCE_ID = 'http://www.heidelpay.com';
+    const REDIRECT_URL = 'http://dev.heidelpay.com';
     const RESPONSE_URL = self::REDIRECT_URL . '/response';
     const PAYMENT_FRAME_ORIGIN = self::REFERENCE_ID;
     const CSS_PATH = self::REFERENCE_ID;
