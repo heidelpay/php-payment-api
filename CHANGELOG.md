@@ -6,11 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [v1.4.1][v1.4.1]
 ## Fixed
 - Error in DirectDebitB2CSecured during integration test of reversal transaction.
+- Fixed a bug which can cause errors due to irregular post parameters.
 
 ## Changed
 - Renamed "Heidelberger Payment GmbH" to "heidelpay GmbH" due to re-branding.
 - Changed tlds from de to com.
-- Fixed documentation and data-privacy-policy links.
+- Changed documentation and data-privacy-policy links.
 
 ## [v1.4.0][v1.4.0]
 ## Added
