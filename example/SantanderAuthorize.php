@@ -4,14 +4,14 @@ namespace Heidelpay\Example\PhpPaymentApi;
 /**
  * Invoice b2c secured authorize example
  *
- * This is a coding example for invoice b2c secured authorize using heidelpay php-api
+ * This is a coding example for invoice b2c secured authorize using heidelpay php-payment-api
  * extension.
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- * @copyright Copyright © 2016-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
- * @link  http://dev.heidelpay.com/heidelpay-php-api/
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
  * @author  Jens Richter
  *
@@ -42,7 +42,7 @@ $Invoice = new SantanderInvoicePaymentMethod();
 /**
  * Set up your authentification data for Heidepay api
  *
- * @link https://dev.heidelpay.de/testumgebung/#Authentifizierungsdaten
+ * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
  */
 $Invoice->getRequest()->authentification(
     '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
@@ -74,7 +74,7 @@ $Invoice->getRequest()->customerAddress(
     '69115',                   // Billing address post code
     'Heidelberg',              // Billing address city
     'DE',                      // Billing address country code
-    'support@heidelpay.de'     // Customer mail address
+    'support@heidelpay.com'     // Customer mail address
 );
 
 /**

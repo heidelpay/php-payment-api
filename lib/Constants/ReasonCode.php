@@ -6,11 +6,11 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  * Class for Reason Code constants
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
- * @copyright Copyright © 2017-present Heidelberger Payment GmbH. All rights reserved.
+ * @copyright Copyright © 2017-present heidelpay GmbH. All rights reserved.
  *
  * @link http://dev.heidelpay.com/php-payment-api
  *
- * @author Stephano Vogel <development@heidelpay.de>
+ * @author Stephano Vogel <development@heidelpay.com>
  *
  * @package heidelpay\php-payment-api\constants
  *

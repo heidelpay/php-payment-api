@@ -6,7 +6,7 @@
 [![PHP 7.0](https://img.shields.io/badge/php-7.0-blue.svg)](http://www.php.net)
 [![PHP 7.1](https://img.shields.io/badge/php-7.1-blue.svg)](http://www.php.net)
 [![PHP 7.1](https://img.shields.io/badge/php-7.2-blue.svg)](http://www.php.net)
-![Logo](https://dev.heidelpay.de/devHeidelpay_400_180.jpg)
+![Logo](http://dev.heidelpay.com/devHeidelpay_400_180.jpg)
 
 # Welcome to the heidelpay payment api for php
 
@@ -47,7 +47,7 @@ You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 ## Documentation
 
-Please visit [http://dev.heidelpay.com/heidelpay-php-api/](http://dev.heidelpay.com/heidelpay-php-api/) for the developer documentation.
+Please visit [http://dev.heidelpay.com/heidelpay-php-payment-api/](http://dev.heidelpay.com/heidelpay-php-payment-api/) for the developer documentation.
 
 ### Unit- and Integration tests
 

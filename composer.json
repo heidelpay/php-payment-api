@@ -28,9 +28,8 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
         "heidelpay/phpdocumentor": "2.9.1",
-        "phpunit/php-code-coverage": "<5.3",
-        "codeception/codeception": "^2.3",
-        "codeception/aspect-mock": "^2.1",
+        "codeception/codeception": "~2.3.9",
+        "codeception/aspect-mock": "~2.1.1",
         "codacy/coverage": "^1.4"
     },
     "suggest": {
@@ -49,9 +48,9 @@
         }
     },
     "support": {
-        "email": "development@heidelpay.de"
+        "email": "development@heidelpay.com"
     },
-    "homepage": "https://dev.heidelpay.de",
+    "homepage": "http://dev.heidelpay.com",
     "type": "library",
     "keywords": [
         "payment-api",

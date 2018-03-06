@@ -78,7 +78,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
         $easyCredit->getRequest()->authentification(...$authentication);
         $easyCredit->getRequest()->customerAddress(...$customerDetails);
         $easyCredit->getRequest()->b2cSecured('MR', '1970-01-01');
-        $easyCredit->getRequest()->async('DE', 'https://dev.heidelpay.de');
+        $easyCredit->getRequest()->async('DE', 'https://dev.heidelpay.com');
 
         $easyCredit->getRequest()->getRiskInformation()->set('guestcheckout', false);
         $easyCredit->getRequest()->getRiskInformation()->set('since', '2013-01-01');
