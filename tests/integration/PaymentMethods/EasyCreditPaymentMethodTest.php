@@ -4,7 +4,6 @@ namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
 use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
-use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 
 /**
  * easyCredit Tests

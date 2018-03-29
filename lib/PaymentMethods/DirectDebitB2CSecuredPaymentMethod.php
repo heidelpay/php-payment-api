@@ -13,11 +13,8 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\ReregistrationTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
-use Heidelpay\PhpPaymentApi\TransactionTypes\FinalizeTransactionType;
 
 /**
- * Direct debit secured for B2C payment Class
- *
  * Direct debit secured for B2C payment method
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

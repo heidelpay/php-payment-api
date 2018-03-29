@@ -5,7 +5,6 @@ namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\PaymentMethods\PayolutionInvoicePaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
-use Heidelpay\PhpPaymentApi\PaymentMethods\PayPalPaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 
 /**

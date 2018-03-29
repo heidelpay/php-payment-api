@@ -2,7 +2,6 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
-use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;

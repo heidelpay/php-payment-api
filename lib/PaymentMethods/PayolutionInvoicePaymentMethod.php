@@ -10,8 +10,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\ReversalTransactionType;
 
 /**
- * Payolution Invoice
- *
  * heidelpay php-payment-api integration for Invoice by Payolution
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.

@@ -5,7 +5,6 @@ namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 use Heidelpay\PhpPaymentApi\Response;
 use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
-use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 
 /**
  *  Credit card test
