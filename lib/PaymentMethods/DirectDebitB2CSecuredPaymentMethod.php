@@ -42,7 +42,6 @@ class DirectDebitB2CSecuredPaymentMethod implements PaymentMethodInterface
     use ReversalTransactionType;
     use CaptureTransactionType;
     use RebillTransactionType;
-    use FinalizeTransactionType;
 
     /**
      * @var string Payment Code for this payment method

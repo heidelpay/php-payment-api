@@ -467,45 +467,4 @@ class DirectDebitB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
 
         return (string)$response->getPaymentReferenceId();
     }
-
-    /**
-     * Test case for a invoice finalize of a existing authorisation
-     *
-     * @param $referenceId string payment reference id of the invoice authorisation
-     *
-     * @return string payment reference id for the prepayment reversal transaction
-     * @depends authorizeOnRegistration
-     * @group connectionTest
-     *
-     * @test
-     *
-     * @throws \Exception
-     */
-    public function finalize($referenceId)
-    {
-        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 2.12, $this->currency, $this->secret);
-
-        $this->paymentObject->dryRun = false;
-
-        $this->paymentObject->finalize($referenceId);
-
-        /* verify response */
-        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
-
-        /* transaction result */
-        $this->assertTrue(
-            $this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
-        );
-        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse(
-            $this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
-        );
-
-        $this->logDataToDebug();
-
-        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
-    }
 }
