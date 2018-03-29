@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup as Transaction;
 
 /**
@@ -43,7 +44,7 @@ class TransactionParameterGroupTest extends Test
     {
         $transaction = new Transaction();
 
-        $value = 'LIVE';
+        $value = TransactionMode::LIVE;
         $transaction->setMode($value);
 
         $this->assertEquals($value, $transaction->getMode());

@@ -5,6 +5,9 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 use AspectMock\Proxy\InstanceProxy;
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\PaymentMethods\DirectDebitB2CSecuredPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
@@ -23,7 +26,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  */
 class PaymentMethodTransactionTest extends BasePaymentMethodTest
 {
-    const PAYMENT_METHOD_SHORT = 'DD';
+    const PAYMENT_METHOD_SHORT = PaymentMethod::DIRECT_DEBIT;
     const CUSTOMER_BIRTHDAY = '1982-07-12';
     const CUSTOMER_SALUTATION = 'MR';
 
@@ -118,15 +121,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
     public static function transactionCodeProvider()
     {
         return [
-            ['authorize', null, 'PA'],
-            ['debit', null,'DB'],
-            ['registration', null,'RG'],
-            ['authorizeOnRegistration', null,'PA'],
-            ['debitOnRegistration', null,'DB'],
-            ['refund', null,'RF'],
-            ['reversal', null,'RV'],
-            ['rebill', null,'RB'],
-            ['capture', null,'CP']
+            ['authorize', null, TransactionType::RESERVATION],
+            ['debit', null, TransactionType::DEBIT],
+            ['registration', null, TransactionType::REGISTRATION],
+            ['refund', null, TransactionType::REFUND],
+            ['reversal', null, TransactionType::REVERSAL],
+            ['rebill', null, TransactionType::REBILL],
+            ['capture', null, TransactionType::CAPTURE]
         ];
     }
 
@@ -229,13 +230,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
                 'NAME.GIVEN' => $firstName,
                 'NAME.FAMILY' => $lastName,
                 'NAME.BIRTHDATE' => self::CUSTOMER_BIRTHDAY,
-                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RG',
+                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::REGISTRATION,
                 'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
                 'PRESENTATION.CURRENCY' => $this->currency,
                 'REQUEST.VERSION' => '1.0',
                 'SECURITY.SENDER' => $securitySender,
                 'TRANSACTION.CHANNEL' => $transactionChannel,
-                'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+                'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
                 'USER.LOGIN' => $userLogin,
                 'USER.PWD' => $userPassword,
             ];
@@ -300,13 +301,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.PA',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::RESERVATION,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -359,13 +360,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.PA',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::RESERVATION,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -424,13 +425,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::DEBIT,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -488,13 +489,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::DEBIT,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -549,13 +550,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.FAMILY' => $lastName,
             'NAME.BIRTHDATE' => self::CUSTOMER_BIRTHDAY,
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RF',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::REFUND,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -610,13 +611,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RV',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::REVERSAL,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword
         ];
@@ -671,13 +672,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::REBILL,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -732,13 +733,13 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
             'NAME.SALUTATION' => self::CUSTOMER_SALUTATION,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.CP',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::CAPTURE,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];

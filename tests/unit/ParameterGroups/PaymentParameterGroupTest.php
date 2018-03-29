@@ -3,6 +3,8 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup as Payment;
 
 /**
@@ -26,7 +28,7 @@ class PaymentParameterGroupTest extends Test
     {
         $Payment = new Payment();
 
-        $value = 'IV.PA';
+        $value = PaymentMethod::INVOICE . '.' . TransactionType::RESERVATION;
         $Payment->setCode($value);
 
         $this->assertEquals($value, $Payment->getCode());

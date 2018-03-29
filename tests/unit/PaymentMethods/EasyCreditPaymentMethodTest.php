@@ -4,8 +4,11 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 
 /**
  * This test class verifies the special functionality of the EasyCreditPaymentMethod not covered in
@@ -23,7 +26,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  */
 class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 {
-    const PAYMENT_METHOD_SHORT = 'HP';
+    const PAYMENT_METHOD_SHORT = PaymentMethod::HIRE_PURCHASE;
 
     //<editor-fold desc="Init">
 
@@ -172,13 +175,13 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.TRANSACTIONID' => $timestamp,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.IN',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::INITIALIZE,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];

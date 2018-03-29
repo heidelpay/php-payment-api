@@ -4,8 +4,11 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 
 /**
  * This test class verifies the special functionality of the CreditCardPaymentMethod not covered in
@@ -23,7 +26,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  */
 class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 {
-    const PAYMENT_METHOD_SHORT = 'CC';
+    const PAYMENT_METHOD_SHORT = PaymentMethod::CREDIT_CARD;
 
     //<editor-fold desc="Init">
 
@@ -203,13 +206,13 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'IDENTIFICATION.TRANSACTIONID' => $timestamp,
                 'NAME.GIVEN' => $firstName,
                 'NAME.FAMILY' => $lastName,
-                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RG',
+                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::REGISTRATION,
                 'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
                 'PRESENTATION.CURRENCY' => $this->currency,
                 'REQUEST.VERSION' => '1.0',
                 'SECURITY.SENDER' => $securitySender,
                 'TRANSACTION.CHANNEL' => $transactionChannel,
-                'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+                'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
                 'USER.LOGIN' => $userLogin,
                 'USER.PWD' => $userPassword,
             ];
@@ -286,13 +289,13 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
                 'IDENTIFICATION.REFERENCEID' => $referenceId,
                 'NAME.GIVEN' => $firstName,
                 'NAME.FAMILY' => $lastName,
-                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.RR',
+                'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::REREGISTRATION,
                 'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
                 'PRESENTATION.CURRENCY' => $this->currency,
                 'REQUEST.VERSION' => '1.0',
                 'SECURITY.SENDER' => $securitySender,
                 'TRANSACTION.CHANNEL' => $transactionChannel,
-                'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+                'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
                 'USER.LOGIN' => $userLogin,
                 'USER.PWD' => $userPassword,
             ];
@@ -361,13 +364,13 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.TRANSACTIONID' => $timestamp,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.PA',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::RESERVATION,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
@@ -436,13 +439,13 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'IDENTIFICATION.TRANSACTIONID' => $timestamp,
             'NAME.GIVEN' => $firstName,
             'NAME.FAMILY' => $lastName,
-            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.DB',
+            'PAYMENT.CODE' => self::PAYMENT_METHOD_SHORT . '.' . TransactionType::DEBIT,
             'PRESENTATION.AMOUNT' => self::TEST_AMOUNT,
             'PRESENTATION.CURRENCY' => $this->currency,
             'REQUEST.VERSION' => '1.0',
             'SECURITY.SENDER' => $securitySender,
             'TRANSACTION.CHANNEL' => $transactionChannel,
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'USER.LOGIN' => $userLogin,
             'USER.PWD' => $userPassword,
         ];
