@@ -2,8 +2,11 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Constants\StatusCode;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpPaymentApi\Push;
 use Heidelpay\PhpPaymentApi\PushMapping\Account;
@@ -163,7 +166,10 @@ class PushTest extends Test
         $this->assertNotEquals('12.34', $response->getPresentation()->getAmount());
         $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
 
-        $this->assertEquals('CC.RG', $response->getPayment()->getCode());
+        $this->assertEquals(
+            PaymentMethod::CREDIT_CARD . '.' . TransactionType::REGISTRATION,
+            $response->getPayment()->getCode()
+        );
 
         $this->assertEquals('000.100.112', $response->getError()['code']);
         $this->assertEquals(
@@ -226,7 +232,10 @@ class PushTest extends Test
         $this->assertNotEquals('15.37', $response->getPresentation()->getAmount());
         $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
 
-        $this->assertEquals('CC.DB', $response->getPayment()->getCode());
+        $this->assertEquals(
+            PaymentMethod::CREDIT_CARD . '.' . TransactionType::DEBIT,
+            $response->getPayment()->getCode()
+        );
 
         $this->assertEquals('000.200.000', $response->getError()['code']);
         $this->assertEquals('Transaction pending', $response->getError()['message']);
@@ -292,7 +301,10 @@ class PushTest extends Test
         $this->assertNotEquals('510.00', $response->getPresentation()->getAmount());
         $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
 
-        $this->assertEquals('DD.DB', $response->getPayment()->getCode());
+        $this->assertEquals(
+            PaymentMethod::DIRECT_DEBIT . '.' . TransactionType::DEBIT,
+            $response->getPayment()->getCode()
+        );
     }
 
     /**
@@ -340,7 +352,10 @@ class PushTest extends Test
         $this->assertNotEquals('57.00', $response->getPresentation()->getAmount());
         $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
 
-        $this->assertEquals('IV.RC', $response->getPayment()->getCode());
+        $this->assertEquals(
+            PaymentMethod::INVOICE . '.' . TransactionType::RECEIPT,
+            $response->getPayment()->getCode()
+        );
 
         $this->assertEquals('000.100.112', $response->getError()['code']);
         $this->assertEquals(
@@ -411,7 +426,10 @@ class PushTest extends Test
         $this->assertNotEquals('106.99', $response->getPresentation()->getAmount());
         $this->assertEquals('EUR', $response->getPresentation()->getCurrency());
 
-        $this->assertEquals('PP.PA', $response->getPayment()->getCode());
+        $this->assertEquals(
+            PaymentMethod::PREPAYMENT . '.' . TransactionType::RESERVATION,
+            $response->getPayment()->getCode()
+        );
 
         $this->assertEquals('000.100.112', $response->getError()['code']);
         $this->assertEquals(
@@ -447,7 +465,7 @@ class PushTest extends Test
         $this->assertEquals(null, $response->getProcessing()->getStatusCode());
         $this->assertEquals(null, $response->getProcessing()->code);
         $this->assertEquals(null, $response->getTransaction()->getChannel());
-        $this->assertEquals('CONNECTOR_TEST', $response->getTransaction()->getMode());
+        $this->assertEquals(TransactionMode::CONNECTOR_TEST, $response->getTransaction()->getMode());
     }
 
     /**
@@ -504,7 +522,7 @@ class PushTest extends Test
 
         // implements the tested method
         $address = new Payment();
-        $this->assertEquals('CC.RG', $address->getXmlObjectProperty($xmlElement, 'code'));
+        $this->assertEquals(PaymentMethod::CREDIT_CARD . '.' . TransactionType::REGISTRATION, $address->getXmlObjectProperty($xmlElement, 'code'));
     }
 
     /**

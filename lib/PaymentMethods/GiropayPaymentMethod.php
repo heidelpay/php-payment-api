@@ -8,8 +8,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 
 /**
- * Giropay Payment Class
- *
  * Giropay is a payment method from giropay GmbH in Germany.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

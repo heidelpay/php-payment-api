@@ -15,8 +15,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
 
 /**
- * Credit Card Payment Class
- *
  * This class will be used for every credit card transaction
  *
  * @license    Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

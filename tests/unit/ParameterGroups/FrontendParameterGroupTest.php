@@ -4,6 +4,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup as Frontend;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 
 /**
  * Unit test for FrontendParameterGroup
@@ -88,7 +89,7 @@ class FrontendParameterGroupTest extends Test
     {
         $frontend = new Frontend();
 
-        $value = 'CONNECTOR_TEST';
+        $value = TransactionMode::CONNECTOR_TEST;
         $frontend->setMode($value);
 
         $this->assertEquals($value, $frontend->getMode());

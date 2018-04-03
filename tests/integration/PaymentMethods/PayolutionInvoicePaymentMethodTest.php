@@ -2,8 +2,10 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\PaymentMethods\PayolutionInvoicePaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 
 /**
  * Connection tests can fail due to network issues and scheduled downtime.
@@ -226,7 +228,7 @@ class PayolutionInvoicePaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->refund((string)$referenceId);
 
-        $this->assertEquals('IV.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
+        $this->assertEquals(PaymentMethod::INVOICE . '.' . TransactionType::REFUND, $this->paymentObject->getRequest()->getPayment()->getCode());
 
         $this->logDataToDebug();
     }

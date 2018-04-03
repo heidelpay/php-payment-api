@@ -3,6 +3,8 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
@@ -90,24 +92,24 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
     public static function paymentMethodProvider()
     {
         return [
-            ['CreditCardPaymentMethod', 'CC'],
-            ['DebitCardPaymentMethod', 'DC'],
-            ['DirectDebitB2CSecuredPaymentMethod', 'DD'],
-            ['DirectDebitPaymentMethod', 'DD'],
-            ['EasyCreditPaymentMethod', 'HP', 'EASYCREDIT'],
-            ['EPSPaymentMethod', 'OT', 'EPS'],
-            ['GiropayPaymentMethod', 'OT', 'GIROPAY'],
-            ['IDealPaymentMethod', 'OT', 'IDEAL'],
-            ['InvoiceB2CSecuredPaymentMethod', 'IV'],
-            ['InvoicePaymentMethod', 'IV'],
-            ['PayPalPaymentMethod', 'VA', 'PAYPAL'],
-            ['PostFinanceCardPaymentMethod', 'OT', 'PFCARD'],
-            ['PostFinanceEFinancePaymentMethod', 'OT', 'PFEFINANCE'],
-            ['PrepaymentPaymentMethod', 'PP'],
-            ['Przelewy24PaymentMethod', 'OT', 'PRZELEWY24'],
-            ['SantanderInvoicePaymentMethod', 'IV', 'SANTANDER'],
-            ['SofortPaymentMethod', 'OT', 'SOFORT'],
-            ['PayolutionInvoicePaymentMethod', 'IV', 'PAYOLUTION_DIRECT']
+            ['CreditCardPaymentMethod', PaymentMethod::CREDIT_CARD],
+            ['DebitCardPaymentMethod', PaymentMethod::DEBIT_CARD],
+            ['DirectDebitB2CSecuredPaymentMethod', PaymentMethod::DIRECT_DEBIT],
+            ['DirectDebitPaymentMethod', PaymentMethod::DIRECT_DEBIT],
+            ['EasyCreditPaymentMethod', PaymentMethod::HIRE_PURCHASE, 'EASYCREDIT'],
+            ['EPSPaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'EPS'],
+            ['GiropayPaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'GIROPAY'],
+            ['IDealPaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'IDEAL'],
+            ['InvoiceB2CSecuredPaymentMethod', PaymentMethod::INVOICE],
+            ['InvoicePaymentMethod', PaymentMethod::INVOICE],
+            ['PayPalPaymentMethod', PaymentMethod::VIRTUAL_ACCOUNT, 'PAYPAL'],
+            ['PostFinanceCardPaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'PFCARD'],
+            ['PostFinanceEFinancePaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'PFEFINANCE'],
+            ['PrepaymentPaymentMethod', PaymentMethod::PREPAYMENT],
+            ['Przelewy24PaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'PRZELEWY24'],
+            ['SantanderInvoicePaymentMethod', PaymentMethod::INVOICE, 'SANTANDER'],
+            ['SofortPaymentMethod', PaymentMethod::ONLINE_TRANSFER, 'SOFORT'],
+            ['PayolutionInvoicePaymentMethod', PaymentMethod::INVOICE, 'PAYOLUTION_DIRECT']
         ];
     }
 
@@ -139,7 +141,7 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
 
         $requestArray = $this->paymentObject->getRequest()->toArray();
         $this->assertArrayHasKey('PAYMENT.CODE', $requestArray);
-        $this->assertSame($paymentCode . '.RF', $requestArray['PAYMENT.CODE']);
+        $this->assertSame($paymentCode . '.' . TransactionType::REFUND, $requestArray['PAYMENT.CODE']);
         $this->assertSame($paymentMethodClass, $requestArray['CRITERION.PAYMENT_METHOD']);
         if (null !== $brand) {
             $this->assertArrayHasKey('ACCOUNT.BRAND', $requestArray);

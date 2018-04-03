@@ -2,6 +2,8 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\Response;
 use Heidelpay\PhpPaymentApi\PaymentMethods\SofortPaymentMethod as Sofort;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
@@ -138,7 +140,7 @@ class SofortPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->refund((string)$referenceId);
 
-        $this->assertEquals('OT.RF', $this->paymentObject->getRequest()->getPayment()->getCode());
+        $this->assertEquals(PaymentMethod::ONLINE_TRANSFER . '.' . TransactionType::REFUND, $this->paymentObject->getRequest()->getPayment()->getCode());
 
         $this->logDataToDebug();
     }
