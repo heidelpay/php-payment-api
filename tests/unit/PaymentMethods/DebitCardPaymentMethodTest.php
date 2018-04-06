@@ -395,6 +395,30 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
+     * Verify that authorize does not overwrite parameters when it is called without any arguments
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function authorizeShouldNotOverwriteParametersWhenCalledWithNoArguments()
+    {
+        $timestamp = 'DebitCardPaymentMethodTest::authorize 2017-10-27 13:37:00';
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
+
+        $preventAsyncRedirect = 'FALSE';
+        $this->paymentObject->getRequest()->getFrontend()->setPaymentFrameOrigin(self::PAYMENT_FRAME_ORIGIN);
+        $this->paymentObject->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->paymentObject->getRequest()->getFrontend()->setCssPath(self::CSS_PATH);
+
+        $this->paymentObject->authorize();
+
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPaymentFrameOrigin(), self::PAYMENT_FRAME_ORIGIN);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPreventAsyncRedirect(), $preventAsyncRedirect);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getCssPath(), self::CSS_PATH);
+    }
+
+    /**
      * Verify debit parameters generated as expected
      *
      * @test
@@ -471,6 +495,80 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         ];
 
         $this->assertThat($this->paymentObject->getRequest()->toArray(), $this->arraysMatchExactly($expected));
+    }
+
+    /**
+     * Verify that debit does not overwrite parameters when it is called without any arguments
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function debitShouldNotOverwriteParametersWhenCalledWithNoArguments()
+    {
+        $timestamp = 'DebitCardPaymentMethodTest::debit 2017-10-27 13:37:00';
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
+
+        $preventAsyncRedirect = 'FALSE';
+        $this->paymentObject->getRequest()->getFrontend()->setPaymentFrameOrigin(self::PAYMENT_FRAME_ORIGIN);
+        $this->paymentObject->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->paymentObject->getRequest()->getFrontend()->setCssPath(self::CSS_PATH);
+
+        $this->paymentObject->debit();
+
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPaymentFrameOrigin(), self::PAYMENT_FRAME_ORIGIN);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPreventAsyncRedirect(), $preventAsyncRedirect);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getCssPath(), self::CSS_PATH);
+    }
+
+    /**
+     * Verify that registration does not overwrite parameters when it is called without any arguments
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function registrationShouldNotOverwriteParametersWhenCalledWithNoArguments()
+    {
+        $timestamp = 'DebitCardPaymentMethodTest::registration 2017-10-27 13:37:00';
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
+
+        $preventAsyncRedirect = 'FALSE';
+        $this->paymentObject->getRequest()->getFrontend()->setPaymentFrameOrigin(self::PAYMENT_FRAME_ORIGIN);
+        $this->paymentObject->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->paymentObject->getRequest()->getFrontend()->setCssPath(self::CSS_PATH);
+
+        $this->paymentObject->registration();
+
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPaymentFrameOrigin(), self::PAYMENT_FRAME_ORIGIN);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPreventAsyncRedirect(), $preventAsyncRedirect);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getCssPath(), self::CSS_PATH);
+    }
+
+    /**
+     * Verify that reregistration does not overwrite parameters when it is called without any arguments
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function reregistrationShouldNotOverwriteParametersWhenCalledWithNoArguments()
+    {
+        $timestamp = 'DebitCardPaymentMethodTest::reregistration 2017-10-27 13:37:00';
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
+
+        $preventAsyncRedirect = 'FALSE';
+        $this->paymentObject->getRequest()->getFrontend()->setPaymentFrameOrigin(self::PAYMENT_FRAME_ORIGIN);
+        $this->paymentObject->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        $this->paymentObject->getRequest()->getFrontend()->setCssPath(self::CSS_PATH);
+
+        $referenceId = '123';
+        $this->paymentObject->reregistration($referenceId);
+
+        $this->assertEquals($this->paymentObject->getRequest()->getIdentification()->getReferenceId(), $referenceId);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPaymentFrameOrigin(), self::PAYMENT_FRAME_ORIGIN);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPreventAsyncRedirect(), $preventAsyncRedirect);
+        $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getCssPath(), self::CSS_PATH);
     }
 
     //</editor-fold>

@@ -18,7 +18,7 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  */
 class ApiConfig
 {
-    const SDK_VERSION = 'v1.4.1';
+    const SDK_VERSION = 'v1.5.0';
 
     const LIVE_URL = 'https://heidelpay.hpcgw.net/ngw/post';
     const TEST_URL = 'https://test-heidelpay.hpcgw.net/ngw/post';
