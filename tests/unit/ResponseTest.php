@@ -369,8 +369,6 @@ class ResponseTest extends Test
     {
         $holder = $this->responseObject->getConnector()->getAccountHolder();
 
-        print_r($this->responseObject);
-
         $this->assertSame('Test Account Holder', $holder);
     }
 
