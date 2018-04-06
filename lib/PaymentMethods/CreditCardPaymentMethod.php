@@ -160,6 +160,7 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
      * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @return ReregistrationTransactionType
+     *
      * @throws \Exception
      */
     public function reregistration(
