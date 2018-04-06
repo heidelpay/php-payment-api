@@ -110,6 +110,7 @@ class ResponseTest extends Test
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
             'CRITERION_TEST_VALUE' => 'Test Value',
             'INVALID_PROP' => 'Invalid',
+            'lang' => 'de'
         );
 
         $this->responseObject = new Response($this->responseArray);
@@ -367,6 +368,8 @@ class ResponseTest extends Test
     public function responseObjectShouldContainConnectorAccountHolder()
     {
         $holder = $this->responseObject->getConnector()->getAccountHolder();
+
+        print_r($this->responseObject);
 
         $this->assertSame('Test Account Holder', $holder);
     }

@@ -77,9 +77,16 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
          * to use a payment frame for the input of credit card information
          */
         $this->getRequest()->getFrontend()->setEnabled('TRUE');
-        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->setCssPath($cssPath);
+
+        if ($paymentFrameOrigin !== null) {
+            $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        }
+        if ($preventAsyncRedirect !== $this->getRequest()->getFrontend()->getPreventAsyncRedirect()) {
+            $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        }
+        if ($cssPath !== null) {
+            $this->getRequest()->getFrontend()->setCssPath($cssPath);
+        }
 
         return $this->authorizeParent();
     }
@@ -104,9 +111,15 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
          * Because of the payment card industriy restictions (Aka pci3) you have
          * to use a payment frame for the input of credit card information
          */
-        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->setCssPath($cssPath);
+        if ($paymentFrameOrigin !== null) {
+            $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        }
+        if ($preventAsyncRedirect !== $this->getRequest()->getFrontend()->getPreventAsyncRedirect()) {
+            $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        }
+        if ($cssPath !== null) {
+            $this->getRequest()->getFrontend()->setCssPath($cssPath);
+        }
 
         return $this->debitParent();
     }
@@ -133,9 +146,15 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
          * Because of the payment card industriy restictions (Aka pci3) you have
          * to use a payment frame for the input of credit card information
          */
-        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
-        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
-        $this->getRequest()->getFrontend()->setCssPath($cssPath);
+        if ($paymentFrameOrigin !== null) {
+            $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        }
+        if ($preventAsyncRedirect !== $this->getRequest()->getFrontend()->getPreventAsyncRedirect()) {
+            $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        }
+        if ($cssPath !== null) {
+            $this->getRequest()->getFrontend()->setCssPath($cssPath);
+        }
 
         return $this->registrationParent();
     }
@@ -148,23 +167,28 @@ class DebitCardPaymentMethod implements PaymentMethodInterface
      * to use a payment frame solution to handle the customers credit card information.
      *
      * @param mixed      $referenceId
-     * @param null|mixed $PaymentFrameOrigin   uri of your application like http://dev.heidelpay.com
-     * @param mixed      $PreventAsyncRedirect prevention of redirecting the customer
-     * @param null|mixed $CssPath              css url to style the Heidelpay payment frame
+     * @param null|mixed $paymentFrameOrigin   uri of your application like http://dev.heidelpay.com
+     * @param mixed      $preventAsyncRedirect prevention of redirecting the customer
+     * @param null|mixed $cssPath              css url to style the Heidelpay payment frame
      *
      * @return ReregistrationTransactionType
-     *
      * @throws \Exception
      */
     public function reregistration(
         $referenceId,
-        $PaymentFrameOrigin = null,
-        $PreventAsyncRedirect = 'FALSE',
-        $CssPath = null
+        $paymentFrameOrigin = null,
+        $preventAsyncRedirect = 'FALSE',
+        $cssPath = null
     ) {
-        $this->getRequest()->getFrontend()->setPaymentFrameOrigin($PaymentFrameOrigin);
-        $this->getRequest()->getFrontend()->setPreventAsyncRedirect($PreventAsyncRedirect);
-        $this->getRequest()->getFrontend()->setCssPath($CssPath);
+        if ($paymentFrameOrigin !== null) {
+            $this->getRequest()->getFrontend()->setPaymentFrameOrigin($paymentFrameOrigin);
+        }
+        if ($preventAsyncRedirect !== $this->getRequest()->getFrontend()->getPreventAsyncRedirect()) {
+            $this->getRequest()->getFrontend()->setPreventAsyncRedirect($preventAsyncRedirect);
+        }
+        if ($cssPath !== null) {
+            $this->getRequest()->getFrontend()->setCssPath($cssPath);
+        }
 
         return $this->reregistrationParent($referenceId);
     }
