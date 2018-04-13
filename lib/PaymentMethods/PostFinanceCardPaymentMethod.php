@@ -8,8 +8,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 
 /**
- * PostFinanceCard Payment Class
- *
  * PostFinance Card is a payment method in Switzerland.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

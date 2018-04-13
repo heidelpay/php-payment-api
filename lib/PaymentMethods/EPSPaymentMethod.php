@@ -8,8 +8,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 
 /**
- * EPS Payment Class
- *
  * EPS is a payment method in Austria.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

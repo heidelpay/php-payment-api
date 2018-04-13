@@ -9,8 +9,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\FinalizeTransactionType;
 
 /**
- * Invoice B2C secured Payment Class
- *
  * This payment method is for the secured B2C invoice.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.

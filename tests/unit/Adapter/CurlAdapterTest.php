@@ -3,11 +3,15 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\Adapter;
 
 use Codeception\Test\Unit;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\Response;
 use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 use AspectMock\Test as test;
 use Heidelpay\Tests\PhpPaymentApi\Helper\Constraints\ArraysMatchConstraint;
 use PHPUnit\Framework\Constraint\Constraint;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 
 /**
  * Unit test for the curl adapter
@@ -71,7 +75,7 @@ class CurlAdapterTest extends Unit
         list($response_array, ) = $this->curlAdapter->sendPost('', '');
 
         $expected = [
-            'PROCESSING_RESULT' => 'NOK',
+            'PROCESSING_RESULT' => ProcessingResult::NOK,
             'PROCESSING_RETURN' => 'Connection error php-curl not installed',
             'PROCESSING_RETURN_CODE' => 'CON.ERR.CUR'
         ];
@@ -102,7 +106,7 @@ class CurlAdapterTest extends Unit
         list($response_array, ) = $this->curlAdapter->sendPost('', '');
 
         $expected = [
-            'PROCESSING_RESULT' => 'NOK',
+            'PROCESSING_RESULT' => ProcessingResult::NOK,
             'PROCESSING_RETURN' => 'Connection error http status Test Error' ,
             'PROCESSING_RETURN_CODE' => 'CON.ERR.MY_TEST_ERROR_CODE'
         ];
@@ -127,7 +131,7 @@ class CurlAdapterTest extends Unit
         $this->assertTrue(is_array($result_array), 'First result key should be an array.');
         $this->assertTrue(is_object($response), 'Second result key should be an object.');
         $expected = array(
-            'PROCESSING_RESULT' => 'NOK',
+            'PROCESSING_RESULT' => ProcessingResult::NOK,
             'PROCESSING_RETURN_CODE' => 'CON.ERR.DEF'
         );
         $this->assertEquals($expected['PROCESSING_RESULT'], $result_array['PROCESSING_RESULT']);
@@ -154,9 +158,9 @@ class CurlAdapterTest extends Unit
             'SECURITY.SENDER' => '31HA07BC8142C5A171745D00AD63D182',
             'USER.LOGIN' => '31ha07bc8142c5a171744e5aef11ffd3',
             'USER.PWD' => '93167DE7',
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'TRANSACTION.CHANNEL' => '31HA07BC8142C5A171744F3D6D155865',
-            'PAYMENT.CODE' => 'CC.RG',
+            'PAYMENT.CODE' => PaymentMethod::CREDIT_CARD . '.' . TransactionType::REGISTRATION,
             'FRONTEND.MODE' => 'WHITELABEL',
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.LANGUAGE' => 'EN',

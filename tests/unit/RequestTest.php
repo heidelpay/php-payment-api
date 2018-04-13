@@ -169,7 +169,7 @@ class RequestTest extends Test
             'PRESENTATION.AMOUNT' => 23.12,
             'PRESENTATION.CURRENCY' => 'EUR',
             'REQUEST.VERSION' => '1.0',
-            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+            'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'CRITERION.SDK_NAME' => $criterion->getSdkName(),
             'CRITERION.SDK_VERSION' => $criterion->getSdkVersion()
         );

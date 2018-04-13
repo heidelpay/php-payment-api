@@ -15,8 +15,6 @@ use Heidelpay\PhpPaymentApi\TransactionTypes\CaptureTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RebillTransactionType;
 
 /**
- * Direct debit payment Class
- *
  * Direct debit payment method
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
