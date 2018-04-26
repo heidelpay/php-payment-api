@@ -110,6 +110,7 @@ class ResponseTest extends Test
             'CONNECTOR_ACCOUNT_HOLDER' => 'Test Account Holder',
             'CRITERION_TEST_VALUE' => 'Test Value',
             'INVALID_PROP' => 'Invalid',
+            'lang' => 'de'
         );
 
         $this->responseObject = new Response($this->responseArray);
