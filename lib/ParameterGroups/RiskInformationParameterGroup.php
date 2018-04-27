@@ -19,26 +19,26 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     /**
      * @var bool if guest checkout (true/false) (optional)
      */
-    public $guestcheckout;
+    public $customerGuestCheckout;
 
     /**
      * @var string first date of customers relationship (YYYY-MM-DD) (optional)
      */
-    public $since;
+    public $customerSince;
 
     /**
      * @var integer of customer's order count (optional)
      */
-    public $ordercount;
+    public $customerOrderCount;
 
     /**
      * Guestcheckout getter
      *
      * @return bool state
      */
-    public function getGuestcheckout()
+    public function getCustomerGuestCheckout()
     {
-        return $this->guestcheckout;
+        return $this->customerGuestCheckout;
     }
 
     /**
@@ -46,9 +46,9 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @return string since
      */
-    public function getSince()
+    public function getCustomerSince()
     {
-        return $this->since;
+        return $this->customerSince;
     }
 
     /**
@@ -56,47 +56,47 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @return int ordercount
      */
-    public function getOrdercount()
+    public function getCustomerOrderCount()
     {
-        return $this->ordercount;
+        return $this->customerOrderCount;
     }
 
     /**
      * setter for is quest checkout
      *
-     * @param string $guestcheckout
+     * @param string $customerGuestCheckout
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
-    public function setGuestCheckout($guestcheckout)
+    public function setGuestCheckout($customerGuestCheckout)
     {
-        $this->guestcheckout = $guestcheckout;
+        $this->customerGuestCheckout = $customerGuestCheckout;
         return $this;
     }
 
     /**
      * setter for customer since
      *
-     * @param string $since
+     * @param string $customerSince
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
-    public function setSince($since)
+    public function setCustomerSince($customerSince)
     {
-        $this->since = $since;
+        $this->customerSince = $customerSince;
         return $this;
     }
 
     /**
      * setter for order count
      *
-     * @param int $ordercount
+     * @param int $customerOrderCount
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
-    public function setOrderCount($ordercount)
+    public function setOrderCount($customerOrderCount)
     {
-        $this->ordercount = $ordercount;
+        $this->customerOrderCount = $customerOrderCount;
         return $this;
     }
 }
