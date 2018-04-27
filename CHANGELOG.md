@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [v1.5.1][v1.5.1]
 ### Changed
 - Replaced warning suppression in mapFromPost method.
+- Visibility of *Parent methods in `CreditCardPaymentMethod` and `DebitCardPaymentMethods`
 
 ### Fixed
 - Parameter names in riskinformation group.
