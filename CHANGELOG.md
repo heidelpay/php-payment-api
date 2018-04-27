@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Replaced warning suppression in mapFromPost method.
 - Visibility of *Parent methods in `CreditCardPaymentMethod` and `DebitCardPaymentMethods`
+- Prohibit setting the mode parameter of the frontend group.
 
 ### Fixed
 - Parameter names in riskinformation group.
