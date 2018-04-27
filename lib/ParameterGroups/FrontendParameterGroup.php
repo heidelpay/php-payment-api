@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
+use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
+
 /**
  * This class provides every api parameter used for frontend settings like language etc.
  *
@@ -42,7 +44,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @var string always set to withelabel on ngw (mandatory)
      */
-    public $mode = 'WHITELABEL';
+    public $mode = FrontendMode::FRONTEND_MODE_WHITELABEL;
 
     /**
      * FrontendPaymentFrameOrigin
@@ -230,10 +232,11 @@ class FrontendParameterGroup extends AbstractParameterGroup
      * @param string $mode
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     *
+     * @deprecated Change of the mode propertie is prohibited since ngw-api needs WHITELABLE mode.
      */
     public function setMode($mode)
     {
-        $this->mode = $mode;
         return $this;
     }
 
@@ -300,5 +303,23 @@ class FrontendParameterGroup extends AbstractParameterGroup
     {
         $this->redirect_url = $redirect_url;
         return $this;
+    }
+
+    /**
+     * Override magic setter to prohibit change of specific properties.
+     *
+     * @param string $key
+     * @param string $value
+     *
+     * @return $this|AbstractParameterGroup
+     */
+    public function set($key, $value)
+    {
+        $unchangeableProperties = ['mode'];
+        if (in_array(strtolower($key), $unchangeableProperties)) {
+            return $this;
+        }
+
+        return parent::set($key, $value);
     }
 }

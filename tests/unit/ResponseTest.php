@@ -11,6 +11,7 @@ use Heidelpay\PhpPaymentApi\Exceptions\PaymentFormUrlException;
 use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
+use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
 
 /**
  *
@@ -86,7 +87,7 @@ class ResponseTest extends Test
             'IDENTIFICATION_SHOPPERID' => '12344',
             'PROCESSING_RETURN_CODE' => '000.100.112',
             'PROCESSING_RESULT' => ProcessingResult::ACK,
-            'FRONTEND_MODE' => 'WHITELABEL',
+            'FRONTEND_MODE' => FrontendMode::FRONTEND_MODE_WHITELABEL,
             'IDENTIFICATION_UNIQUEID' => '31HA07BC8108A9126F199F2784552637',
             'CRITERION_SECRET' => '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b3' .
                 '18ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
