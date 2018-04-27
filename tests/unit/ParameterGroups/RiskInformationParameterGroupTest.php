@@ -29,7 +29,7 @@ class RiskInformationParameterGroupTest extends Test
         $riskInformation = new RiskInformation();
 
         $guestcheckout = false;
-        $riskInformation->setGuestCheckout($guestcheckout);
+        $riskInformation->setCustomerGuestCheckout($guestcheckout);
 
         $this->assertFalse($riskInformation->getCustomerGuestCheckout(), 'guestcheckout should be false');
     }
@@ -59,7 +59,7 @@ class RiskInformationParameterGroupTest extends Test
         $riskInformation = new RiskInformation();
 
         $ordercount = 5;
-        $riskInformation->setOrderCount($ordercount);
+        $riskInformation->setCustomerOrderCount($ordercount);
 
         $this->assertEquals($ordercount, $riskInformation->getCustomerOrderCount());
     }

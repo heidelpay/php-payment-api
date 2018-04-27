@@ -68,7 +68,7 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
-    public function setGuestCheckout($customerGuestCheckout)
+    public function setCustomerGuestCheckout($customerGuestCheckout)
     {
         $this->customerGuestCheckout = $customerGuestCheckout;
         return $this;
@@ -94,7 +94,7 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
      *
      * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
      */
-    public function setOrderCount($customerOrderCount)
+    public function setCustomerOrderCount($customerOrderCount)
     {
         $this->customerOrderCount = $customerOrderCount;
         return $this;
