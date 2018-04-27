@@ -30,16 +30,16 @@ class CreditCardPaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;
     use RegistrationTransactionType {
-        registration as registrationParent;
+        registration as protected registrationParent;
     }
     use ReregistrationTransactionType {
-        reregistration as reregistrationParent;
+        reregistration as protected reregistrationParent;
     }
     use AuthorizeTransactionType {
-        authorize as authorizeParent;
+        authorize as protected authorizeParent;
     }
     use DebitTransactionType {
-        debit as debitParent;
+        debit as protected debitParent;
     }
     use AuthorizeOnRegistrationTransactionType;
     use DebitOnRegistrationTransactionType;
