@@ -487,7 +487,12 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         foreach ($post as $paramGroupKey => $value) {
-            @list($paramGroupName, $paramGroupProp) = explode('_', strtolower($paramGroupKey), 2);
+            $values = explode('_', strtolower($paramGroupKey), 2);
+            if (count($values) < 2) {
+                continue;
+            }
+
+            list($paramGroupName, $paramGroupProp) = $values;
 
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {

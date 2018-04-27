@@ -8,6 +8,7 @@ use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 use AspectMock\Test as aspectMockTest;
+use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
 
 /**
  *
@@ -164,7 +165,7 @@ class RequestTest extends Test
         $referenceVars = array(
             'CRITERION.SECRET' => '209022666cd4706e5f451067592b6be1aff4a913d5bb7f8249f7418ee25c91b318ebac66f41a6692539c8923adfdad6aae26138b1b3a7e37a197ab952be57876',
             'FRONTEND.ENABLED' => 'TRUE',
-            'FRONTEND.MODE' => 'WHITELABEL',
+            'FRONTEND.MODE' => FrontendMode::FRONTEND_MODE_WHITELABEL,
             'IDENTIFICATION.TRANSACTIONID' => '2843294932',
             'PRESENTATION.AMOUNT' => 23.12,
             'PRESENTATION.CURRENCY' => 'EUR',
