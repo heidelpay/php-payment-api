@@ -57,7 +57,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
      */
     protected $secret = 'Heidelpay-PhpPaymentApi';
 
-     //</editor-fold>
+    //</editor-fold>
 
     //<editor-fold desc="Setup">
 
