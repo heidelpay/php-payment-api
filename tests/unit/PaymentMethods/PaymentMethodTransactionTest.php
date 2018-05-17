@@ -199,7 +199,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -271,7 +271,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -333,7 +333,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -395,7 +395,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -462,7 +462,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -523,7 +523,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -584,7 +584,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -645,7 +645,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
@@ -706,7 +706,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
             $this->customerData->getCustomerDataArray();
 
-        list($securitySender, $userLogin, $userPassword, $transactionChannel,) =
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
         // this is done to avoid syntax warnings
