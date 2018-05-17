@@ -25,7 +25,7 @@ use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
  *
  * @package heidelpay\php-payment-api\tests\unit
  */
-class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
+class SantanderHirePurchasePaymentMethodTest extends BasePaymentMethodTest
 {
     const PAYMENT_METHOD_SHORT = PaymentMethod::HIRE_PURCHASE;
 
