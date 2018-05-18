@@ -76,5 +76,5 @@ class Brand
 
     // Hire Purchase
     const EASYCREDIT = 'EASYCREDIT';
-    const SANTANDER_HP = 'SANTANDER_HP'
+    const SANTANDER_HP = 'SANTANDER_HP';
 }
