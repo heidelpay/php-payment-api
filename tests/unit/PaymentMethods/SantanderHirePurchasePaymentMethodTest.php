@@ -117,7 +117,7 @@ class SantanderHirePurchasePaymentMethodTest extends BasePaymentMethodTest
         $object = $this->paymentObject;
 
         $expected = [
-            'ACCOUNT.BRAND' => Brand::SANTANDER,
+            'ACCOUNT.BRAND' => Brand::SANTANDER_HP,
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
             'ADDRESS.STATE' => $state,

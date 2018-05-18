@@ -39,5 +39,5 @@ class SantanderHirePurchasePaymentMethod implements PaymentMethodInterface
     /**
      * @var string Brand Code for this payment method
      */
-    protected $brand = Brand::SANTANDER;
+    protected $brand = Brand::SANTANDER_HP;
 }
