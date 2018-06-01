@@ -11,7 +11,7 @@ mv ~/.phpenv/versions/$(phpenv version-name)/xdebug.ini.bak ~/.phpenv/versions/$
 
 ## run the tests
 ./vendor/bin/codecept build
-./vendor/bin/codecept run unit --coverage --coverage-xml --no-ansi
+./vendor/bin/codecept run unit --coverage --coverage-xml
 
 ## perform this task only for php 7 with deps=no
 if [[ ($(phpenv version-name) == "7.0") && ("$deps" == "no") ]]; then
