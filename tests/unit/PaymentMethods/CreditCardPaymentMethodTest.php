@@ -5,6 +5,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
 use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
@@ -588,6 +589,76 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             $methodName . ' is callable but should not be!');
 
         $this->success();
+    }
+
+    /**
+     * Verify that getResponseArray returns the response array.
+     *
+     * @test
+     */
+    public function getResponseArrayShouldReturnTheArrayReceivedWithinTheResponse()
+    {
+        $timestamp = 'CreditCardPaymentMethodTest::debit 2018-07-24 15:48:33';
+        $this->paymentObject->getRequest()->basketData($timestamp, self::TEST_AMOUNT, $this->currency, $this->secret);
+
+        $preventAsyncRedirect = 'FALSE';
+        $this->paymentObject->debit(self::PAYMENT_FRAME_ORIGIN, $preventAsyncRedirect, self::CSS_PATH);
+
+        /* disable frontend (ifame) and submit the card information directly (only for testing) */
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getAccount()->setHolder($this->holder);
+        $this->paymentObject->getRequest()->getAccount()->setNumber($this->cartNumber);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryMonth($this->cardExpiryMonth);
+        $this->paymentObject->getRequest()->getAccount()->setExpiryYear($this->cardExpiryYear);
+        $this->paymentObject->getRequest()->getAccount()->setBrand($this->cardBrand);
+        $this->paymentObject->getRequest()->getAccount()->setVerification($this->cardVerification);
+
+        list($firstName, $lastName, , $shopperId, $street, $state, $zip, $city, $country, $email) =
+            $this->customerData->getCustomerDataArray();
+
+        list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
+            $this->authentication->getAuthenticationArray();
+
+        $bla = [
+            'PROCESSING_RESULT' => ProcessingResult::NOK,
+            'PROCESSING_RETURN' => 'FRONTEND.RESPONSE_URL missing',
+            'POST_VALIDATION' => ProcessingResult::NOK,
+            'ADDRESS_CITY' => $city,
+            'ADDRESS_COUNTRY' => $country,
+            'ADDRESS_STATE' => $state,
+            'ADDRESS_STREET' => $street,
+            'ADDRESS_ZIP' => $zip,
+            'CONFIG_BRANDS' => '{"CUP":"China Union Pay","MASTER":"MasterCard","JCB":"JCB","DISCOVERY":"Discover",' .
+                '"VISA":"Visa","DINERS":"Diners","AMEX":"American Express"}',
+            'CONTACT_EMAIL' => $email,
+            'CONTACT_IP' => '95.90.250.177',
+            'CRITERION_PAYMENT_METHOD' => $this->paymentObject::getClassName(),
+            'CRITERION_SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION_SDK_VERSION' => ApiConfig::SDK_VERSION,
+            'CRITERION_SECRET' => '0e84bb8994d5fc23190561b64d2df94ebfe96965dfd5e08de3b52b2400b7526425a80c45adc0a3f' .
+                '5b26e1acb92827dd7e075ea06ff1c566bded8484ca29234bd',
+            'FRONTEND_CSS_PATH' => self::CSS_PATH,
+            'FRONTEND_ENABLED' => 'TRUE',
+            'FRONTEND_MODE' => FrontendMode::FRONTEND_MODE_WHITELABEL,
+            'FRONTEND_PAYMENT_FRAME_ORIGIN' => self::PAYMENT_FRAME_ORIGIN,
+            'FRONTEND_PREVENT_ASYNC_REDIRECT' => $preventAsyncRedirect,
+            'IDENTIFICATION_SHOPPERID' => $shopperId,
+            'IDENTIFICATION_TRANSACTIONID' => $timestamp,
+            'NAME_FAMILY' => $lastName,
+            'NAME_GIVEN' => $firstName,
+            'PAYMENT_CODE' => PaymentMethod::CREDIT_CARD . '.' . TransactionType::DEBIT,
+            'PRESENTATION_AMOUNT' => (string)self::TEST_AMOUNT,
+            'PRESENTATION_CURRENCY' => $this->currency,
+            'REQUEST_VERSION' => '1.0',
+            'SECURITY_SENDER' => $securitySender,
+            'TRANSACTION_CHANNEL' => $transactionChannel,
+            'TRANSACTION_MODE' => TransactionMode::CONNECTOR_TEST,
+            'USER_LOGIN' => $userLogin,
+            'USER_PWD' => $userPassword
+        ];
+
+        $this->assertEquals($bla, $this->paymentObject->getResponseArray());
+        echo print_r($this->paymentObject->getResponseArray(),1);
     }
 
     //</editor-fold>
