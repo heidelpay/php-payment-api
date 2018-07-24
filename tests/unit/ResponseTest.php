@@ -492,7 +492,7 @@ class ResponseTest extends Test
             }
 
             $manipulatedResponseArray[$key] = $item;
-        };
+        }
 
         return $manipulatedResponseArray;
     }

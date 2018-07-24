@@ -658,7 +658,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         ];
 
         $this->assertEquals($expectedResponseArray, $this->paymentObject->getResponseArray());
-        echo print_r($this->paymentObject->getResponseArray(),1);
+        echo print_r($this->paymentObject->getResponseArray(), 1);
     }
 
     //</editor-fold>

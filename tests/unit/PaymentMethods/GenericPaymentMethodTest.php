@@ -170,8 +170,10 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
 
 /**
  * This class is used to test the perform trait test.
+ *
  * @package Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods
  */
-class DummyPaymentMethod {
+class DummyPaymentMethod
+{
     use BasicPaymentMethodTrait;
 }
