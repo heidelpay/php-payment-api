@@ -619,7 +619,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         list($securitySender, $userLogin, $userPassword, $transactionChannel, ) =
             $this->authentication->getAuthenticationArray();
 
-        $bla = [
+        $expectedResponseArray = [
             'PROCESSING_RESULT' => ProcessingResult::NOK,
             'PROCESSING_RETURN' => 'FRONTEND.RESPONSE_URL missing',
             'POST_VALIDATION' => ProcessingResult::NOK,
@@ -657,7 +657,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'USER_PWD' => $userPassword
         ];
 
-        $this->assertEquals($bla, $this->paymentObject->getResponseArray());
+        $this->assertEquals($expectedResponseArray, $this->paymentObject->getResponseArray());
         echo print_r($this->paymentObject->getResponseArray(),1);
     }
 
