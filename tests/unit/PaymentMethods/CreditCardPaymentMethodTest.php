@@ -621,7 +621,6 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         $expectedResponseArray = [
             'PROCESSING_RESULT' => ProcessingResult::NOK,
-            'PROCESSING_RETURN' => 'FRONTEND.RESPONSE_URL missing',
             'POST_VALIDATION' => ProcessingResult::NOK,
             'ADDRESS_CITY' => $city,
             'ADDRESS_COUNTRY' => $country,
@@ -629,7 +628,6 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS_STREET' => $street,
             'ADDRESS_ZIP' => $zip,
             'CONTACT_EMAIL' => $email,
-            'CONTACT_IP' => '95.90.250.177',
             'CRITERION_PAYMENT_METHOD' => $this->paymentObject::getClassName(),
             'CRITERION_SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
             'CRITERION_SDK_VERSION' => ApiConfig::SDK_VERSION,
@@ -657,8 +655,8 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
 
         $responseArray = $this->paymentObject->getResponseArray();
 
-        // exclude brands due to different orders in the array
-        unset($responseArray['CONFIG_BRANDS']);
+        // exclude fields which may vary
+        unset($responseArray['CONFIG_BRANDS'], $responseArray['CONTACT_IP'], $responseArray['PROCESSING_RETURN']);
 
         $this->assertEquals($expectedResponseArray, $responseArray);
     }
