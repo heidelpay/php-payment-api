@@ -5,7 +5,6 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
-use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
 use Heidelpay\PhpPaymentApi\PaymentMethods\CreditCardPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
