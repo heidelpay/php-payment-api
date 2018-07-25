@@ -629,7 +629,7 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
             'ADDRESS_ZIP' => $zip,
             'CONTACT_EMAIL' => $email,
             'CRITERION_PAYMENT_METHOD' => $this->paymentObject::getClassName(),
-            'CRITERION_SDK_NAME' => 'Heidelpay\\PhpPaymentApi',
+            'CRITERION_SDK_NAME' => 'Heidelpay\PhpPaymentApi',
             'CRITERION_SDK_VERSION' => ApiConfig::SDK_VERSION,
             'CRITERION_SECRET' => '0e84bb8994d5fc23190561b64d2df94ebfe96965dfd5e08de3b52b2400b7526425a80c45adc0a3f' .
                 '5b26e1acb92827dd7e075ea06ff1c566bded8484ca29234bd',
