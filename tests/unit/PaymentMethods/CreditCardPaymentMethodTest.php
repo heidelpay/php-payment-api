@@ -654,6 +654,8 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         ];
 
         $responseArray = $this->paymentObject->getResponseArray();
+        echo print_r($expectedResponseArray, 1);
+        echo print_r($responseArray, 1);
 
         // exclude fields which may vary
         unset($responseArray['CONFIG_BRANDS'], $responseArray['CONTACT_IP'], $responseArray['PROCESSING_RETURN']);
