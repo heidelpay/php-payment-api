@@ -24,7 +24,7 @@ class Customer
     protected $shopperId = '1234';
 
     /** @var string $addressStreet */
-    protected $addressStreet = 'Vagerowstr. 18';
+    protected $addressStreet = 'Vangerowstr. 18';
 
     /** @var string $addressState */
     protected $addressState = 'DE-BW';
