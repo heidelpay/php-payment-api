@@ -654,13 +654,16 @@ class CreditCardPaymentMethodTest extends BasePaymentMethodTest
         ];
 
         $responseArray = $this->paymentObject->getResponseArray();
-        echo 'Expected: ' . print_r($expectedResponseArray, 1);
-        echo 'Actual: ' . print_r($responseArray, 1);
 
         // exclude fields which may vary
         unset($responseArray['CONFIG_BRANDS'], $responseArray['CONTACT_IP'], $responseArray['PROCESSING_RETURN']);
 
+        $this->assertTrue(is_array($responseArray));
         $this->assertEquals($expectedResponseArray, $responseArray);
+
+        foreach ($expectedResponseArray as $key=>$item) {
+            $this->assertEquals($item, $responseArray[$key]);
+        }
     }
 
     //</editor-fold>
