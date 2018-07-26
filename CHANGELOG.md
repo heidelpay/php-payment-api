@@ -4,13 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [v1.5.1][v1.5.1]
+
+### Added
+- Payment method 'Santander Hire Purchase' and corresponding tests (unit and integration).
+- Missing unit tests.
+
 ### Changed
 - Replaced warning suppression in mapFromPost method.
 - Visibility of *Parent methods in `CreditCardPaymentMethod` and `DebitCardPaymentMethods`
 - Prohibit setting the mode parameter of the frontend group.
+- Renamed 'Heidelberger Payment GmbH' to 'heidelpay GmbH'.
+- Re-enabled test deactivated due to error with aspect-mock package.
 
 ### Fixed
 - Parameter names in riskinformation group.
+- Fix test data.
+
+### Removed
+- Php 5.6 from travis workflow.
 
 ## [v1.5.0][v1.5.0]
 ### Added
