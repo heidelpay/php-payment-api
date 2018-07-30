@@ -114,6 +114,8 @@ class ResponseTest extends Test
             'lang' => 'de'
         );
 
+        ksort($this->responseArray);
+
         $this->responseObject = new Response($this->responseArray);
     }
 
@@ -444,5 +446,85 @@ class ResponseTest extends Test
     {
         $reponse = Response::fromPost([]);
         $this->assertEquals(Response::class, get_class($reponse));
+    }
+
+    /**
+     * Assert the object is being updated with the given rawResponseParameters and then returned.
+     *
+     * @test
+     */
+    public function splitArrayShouldUpdateAndReturnTheResponseObjectUsingTheGivenResponseArray()
+    {
+        $this->compareResponseArrayToActualArray($this->responseArray);
+
+        // change all parameters of the response
+        $manipulatedResponseArray = $this->getManipulatedArray();
+        $this->responseObject->splitArray($manipulatedResponseArray);
+
+        $this->compareResponseArrayToActualArray($manipulatedResponseArray);
+    }
+
+    /**
+     * Return a response array with manipulated values.
+     *
+     * @return array
+     */
+    private function getManipulatedArray()
+    {
+        $manipulatedResponseArray = [];
+
+        foreach ($this->responseArray as $key => $item) {
+            switch (true) {
+                case is_float($item):
+                    $item = 123.45;
+                    break;
+                case is_bool($item):
+                    $item = !$item;
+                    break;
+                case is_string($item):
+                    if ($key !== 'FRONTEND_MODE') {
+                        $item .= '--' . $key;
+                    }
+                    break;
+                default:
+                    // do nothing
+                    break;
+            }
+
+            $manipulatedResponseArray[$key] = $item;
+        }
+
+        return $manipulatedResponseArray;
+    }
+
+    /**
+     * Replaces the underscore of the raw response with a period to make it comparable.
+     *
+     * @return array
+     */
+    private function getComparableArray(array $responseArray = [])
+    {
+        $comparableResponseArray = [];
+        foreach ($responseArray as $key => $item) {
+            $comparableResponseArray[preg_replace('/_/', '.', $key, 1)] = $item;
+        }
+        return $comparableResponseArray;
+    }
+
+    /**
+     * Compares a given rawResponse with the properties of the response object by converting it back into an array.
+     *
+     * @param $responseArray
+     */
+    private function compareResponseArrayToActualArray($responseArray)
+    {
+        $comparableResponseArray = $this->getComparableArray($responseArray);
+        $responseObjectArray = $this->responseObject->toArray(true);
+
+        foreach ($comparableResponseArray as $key => $item) {
+            if (array_key_exists($key, $responseObjectArray)) {
+                $this->assertEquals($comparableResponseArray[$key], $responseObjectArray[$key]);
+            }
+        }
     }
 }

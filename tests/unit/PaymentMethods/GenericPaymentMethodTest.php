@@ -5,6 +5,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+use Heidelpay\PhpPaymentApi\PaymentMethods\BasicPaymentMethodTrait;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
@@ -153,5 +154,26 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
         $this->success();
     }
 
+    /**
+     * Verify getPaymentCode returns null if the property 'paymentCode' does not exist.
+     *
+     * @test
+     */
+    public function basicPaymentMethodTraitShouldReturnNullWhenAPropertyIsNotDefined()
+    {
+        $paymentMethod = new DummyPaymentMethod();
+        $this->assertNull($paymentMethod->getPaymentCode());
+    }
+
     //</editor-fold>
+}
+
+/**
+ * This class is used to test the perform trait test.
+ *
+ * @package Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods
+ */
+class DummyPaymentMethod
+{
+    use BasicPaymentMethodTrait;
 }

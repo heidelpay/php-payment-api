@@ -13,8 +13,6 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  * @author Simon Gabriel <development@heidelpay.com>
  *
  * @package heidelpay\php-payment-api\constants
- *
- * @since 1.5.1 First time this was introduced.
  */
 class FrontendMode
 {
