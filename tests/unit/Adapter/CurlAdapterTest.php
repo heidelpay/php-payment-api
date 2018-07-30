@@ -12,6 +12,7 @@ use AspectMock\Test as test;
 use Heidelpay\Tests\PhpPaymentApi\Helper\Constraints\ArraysMatchConstraint;
 use PHPUnit\Framework\Constraint\Constraint;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
+use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
 
 /**
  * Unit test for the curl adapter
@@ -161,7 +162,7 @@ class CurlAdapterTest extends Unit
             'TRANSACTION.MODE' => TransactionMode::CONNECTOR_TEST,
             'TRANSACTION.CHANNEL' => '31HA07BC8142C5A171744F3D6D155865',
             'PAYMENT.CODE' => PaymentMethod::CREDIT_CARD . '.' . TransactionType::REGISTRATION,
-            'FRONTEND.MODE' => 'WHITELABEL',
+            'FRONTEND.MODE' => FrontendMode::FRONTEND_MODE_WHITELABEL,
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.LANGUAGE' => 'EN',
             'FRONTEND.RESPONSE_URL' => 'http://dev.heidelpay.com',

@@ -138,6 +138,23 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 
+    //<editor-fold desc="dataProviders">
+
+    /**
+     * @return array
+     */
+    public static function traitImportedParentMethods()
+    {
+        return [
+            ['authorizeParent'],
+            ['debitParent'],
+            ['registrationParent'],
+            ['reregistrationParent'],
+        ];
+    }
+
+    //</editor-fold>
+
     //<editor-fold desc="Tests">
 
     /**
@@ -569,6 +586,24 @@ class DebitCardPaymentMethodTest extends BasePaymentMethodTest
         $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPaymentFrameOrigin(), self::PAYMENT_FRAME_ORIGIN);
         $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getPreventAsyncRedirect(), $preventAsyncRedirect);
         $this->assertEquals($this->paymentObject->getRequest()->getFrontend()->getCssPath(), self::CSS_PATH);
+    }
+
+    /**
+     * Verify that the imported but overwritten trait methods declared as *parent
+     * are not callable from the instance itself.
+     *
+     * @dataProvider traitImportedParentMethods
+     * @test
+     *
+     * @param string $methodName
+     */
+    public function parentTraitMethodShouldNotBeCallable($methodName)
+    {
+        $this->log(' Testing visibility for method ' . $methodName . ' on ' . get_class($this->paymentObject) .  ' ...');
+
+        $this->assertNotInternalType('callable', [$this->paymentObject, $methodName], ' is callable but should not be!');
+
+        $this->success();
     }
 
     //</editor-fold>

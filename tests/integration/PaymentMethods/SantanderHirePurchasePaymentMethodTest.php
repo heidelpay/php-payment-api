@@ -2,22 +2,22 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
-use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\SantanderHirePurchasePaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
- * easyCredit Tests
+ * Santander hire purchase Tests
  *
  * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
  *
  * @link http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author Stephano Vogel
+ * @author Simon Gabriel
  *
  * @package heidelpay\php-payment-api\tests\integration
  */
-class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
+class SantanderHirePurchasePaymentMethodTest extends BasePaymentMethodTest
 {
     /**
      * Transaction currency
@@ -41,7 +41,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod
+     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\SantanderHirePurchasePaymentMethod
      */
     protected $paymentObject;
 
@@ -66,32 +66,32 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setSecuritySender('31HA07BC8181E8CCFDAD64E8A4B3B766')
-            ->setUserLogin('31ha07bc8181e8ccfdad73fd513d2a53')
-            ->setUserPassword('4B2D4BE3')
-            ->setTransactionChannel('31HA07BC8179C95F6B59366492FD253D')
+            ->setSecuritySender('31HA07BC8142C823FFA6831A1C7A39EF')
+            ->setUserLogin('31ha07bc8142c823ffa666acb95d3b3f')
+            ->setUserPassword('81C93566')
+            ->setTransactionChannel('31HA07BC8142C823FFA60C952A9C414D')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
-        $easyCredit = new EasyCreditPaymentMethod();
+        $santander = new SantanderHirePurchasePaymentMethod();
 
-        $easyCredit->getRequest()->authentification(...$authentication);
-        $easyCredit->getRequest()->customerAddress(...$customerDetails);
-        $easyCredit->getRequest()->b2cSecured('MR', '1970-01-01');
-        $easyCredit->getRequest()->async('DE', 'https://dev.heidelpay.com');
+        $santander->getRequest()->authentification(...$authentication);
+        $santander->getRequest()->customerAddress(...$customerDetails);
+        $santander->getRequest()->b2cSecured('MR', '1970-01-01');
+        $santander->getRequest()->async('DE', 'https://dev.heidelpay.com');
 
-        $easyCredit->getRequest()->getRiskInformation()->set('guestcheckout', false);
-        $easyCredit->getRequest()->getRiskInformation()->set('since', '2013-01-01');
-        $easyCredit->getRequest()->getRiskInformation()->set('ordercount', 3);
+        $santander->getRequest()->getRiskInformation()->set('guestcheckout', false);
+        $santander->getRequest()->getRiskInformation()->set('since', '2013-01-01');
+        $santander->getRequest()->getRiskInformation()->set('ordercount', 3);
 
-        $easyCredit->getRequest()->basketData(
-            'heidelpayEasyCreditTest',
+        $santander->getRequest()->basketData(
+            'santanderHirePurchaseTest',
             500.98,
             $this->currency,
             $this->secret
         );
 
-        $this->paymentObject = $easyCredit;
+        $this->paymentObject = $santander;
     }
 
     /**
@@ -107,8 +107,7 @@ class EasyCreditPaymentMethodTest extends BasePaymentMethodTest
 
         $this->assertTrue($response->isSuccess(), 'Response is not successful.');
 
-        // following fields are essential for easy credit, so they must not be null.
-        $this->assertNotNull($response->getConfig()->optin_text, 'easyCredit Optin Text is null.');
+        // following field is essential for santander hire purchase, so it must not be null.
         $this->assertNotNull($response->getFrontend()->getRedirectUrl(), 'RedirectUrl is null.');
 
         $this->logDataToDebug();

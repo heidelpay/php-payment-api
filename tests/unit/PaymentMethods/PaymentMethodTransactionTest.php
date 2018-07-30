@@ -152,23 +152,23 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
         $this->assertSame($this->paymentObject, $object);
     }
 
-//    /**
-//     * Verify sendPost id called once in each payment method call.
-//     *
-//     * @dataProvider transactionCodeProvider
-//     * @test
-//     *
-//     * @param $method
-//     * @param $parameters
-//     */
-//    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
-//    {
-//        call_user_func([$this->paymentObject, $method], $parameters);
-//
-//        /** @var InstanceProxy $adapter */
-//        $adapter = $this->getAdapterMock();
-//        $adapter->verifyInvokedOnce('sendPost');
-//    }
+    /**
+     * Verify sendPost id called once in each payment method call.
+     *
+     * @dataProvider transactionCodeProvider
+     * @test
+     *
+     * @param $method
+     * @param $parameters
+     */
+    public function verifySendPostIsCalledOnceInEachPaymentMethodCall($method, $parameters)
+    {
+        call_user_func([$this->paymentObject, $method], $parameters);
+
+        /** @var InstanceProxy $adapter */
+        $adapter = $this->getAdapterMock();
+        $adapter->verifyInvokedOnce('sendPost');
+    }
 
     //</editor-fold>
 
@@ -204,7 +204,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected =
             [
                 'ACCOUNT.HOLDER' => $this->holder,
@@ -338,7 +338,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -400,7 +400,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ACCOUNT.HOLDER' => $this->holder,
             'ACCOUNT.IBAN' => $this->iban,
@@ -467,7 +467,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -528,7 +528,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -589,7 +589,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -650,7 +650,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,
@@ -711,7 +711,7 @@ class PaymentMethodTransactionTest extends BasePaymentMethodTest
 
         // this is done to avoid syntax warnings
         $object = $this->paymentObject;
-        
+
         $expected = [
             'ADDRESS.CITY' => $city,
             'ADDRESS.COUNTRY' => $country,

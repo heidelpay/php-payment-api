@@ -3,8 +3,8 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup as Frontend;
-use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 
 /**
  * Unit test for FrontendParameterGroup
@@ -81,18 +81,19 @@ class FrontendParameterGroupTest extends Test
     }
 
     /**
-     *Frontend mode getter/setter test
+     * Frontend mode getter/setter test
      *
      * @test
      */
-    public function mode()
+    public function modeShouldNotBeChangeable()
     {
         $frontend = new Frontend();
 
-        $value = TransactionMode::CONNECTOR_TEST;
-        $frontend->setMode($value);
+        $frontend->setMode('DEFAULT');
+        $this->assertEquals(FrontendMode::FRONTEND_MODE_WHITELABEL, $frontend->getMode());
 
-        $this->assertEquals($value, $frontend->getMode());
+        $frontend->set('mode', 'OTHERMODE');
+        $this->assertEquals(FrontendMode::FRONTEND_MODE_WHITELABEL, $frontend->getMode());
     }
 
     /**
