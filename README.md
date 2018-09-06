@@ -92,3 +92,5 @@ to
 
 Please make sure to switch it off again, after you launch your application.
 
+To enable the easyCredit example you might have to change the file permissions for the file "example/EasyCredit/EasyCreditResponseParams.txt".\
+It will be used to store the post-parameters send asynchronously by the payment which otherwise would not be accessable in the client session.
