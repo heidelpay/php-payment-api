@@ -29,51 +29,45 @@ require_once './_enableExamples.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 if (!empty($_POST)) {
-    echo HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCreditResponse.php';
-//    mail('simon.gabriel@heidelpay.com', 'betreff', print_r($_POST,1));
-    file_put_contents (EASY_CREDIT_RESPONSE_PARAMS_TXT, print_r($_POST, 1));
+    $responseURL = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCreditResponse.php';
+    echo $responseURL;
+    file_put_contents (EASY_CREDIT_RESPONSE_PARAMS_TXT, json_encode($_POST));
     exit();
 }
+$reservationURL = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCreditReservation.php';
 
-$params = file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT);
+$params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT),1);
 
-echo print_r($params,1);
+$response = Response::fromPost($params);
+//var_dump($response);
 
-///**
-// * Load a new instance of the payment method
-// */
-// $easyCredit = new EasyCreditPaymentMethod();
-//
-// /** @var Response $response */
-// $response = Response::fromPost($_POST);
-
-// var_dump($_POST);
-// var_dump($response);
-// var_dump($response->getCriterion()->get('EASYCREDIT_AMORTISATIONTEXT'));
-
-
-//$easyCredit->initialize();
-//
-//?>
-<!--<html>-->
-<!--<head>-->
-<!--	<title>EasyCredit example</title>-->
-<!--</head>-->
-<!--<body>-->
+?>
+<html>
+<head>
+	<title>EasyCredit example</title>
+</head>
+<body>
 <?php
 //$response = $easyCredit->getResponse();
-//if ($response->isSuccess()) {
-//        echo '<input type="checkbox" required value="true"/><p>';
-//        echo $response->getConfig()->getOptinText();
-//        echo'</p><a href="'. $response->getPaymentFormUrl().'">Weiter zu easyCredit...</a>';
-//    } else {
-//        echo '<pre>'. print_r($response->getError(), 1).'</pre>';
-//    }
-// ?>
-<!-- <p>It is not necessary to show the redirect url to your customer. You can-->
-<!-- use php header to forward your customer directly.<br/>-->
-<!-- For example:<br/>-->
-<!-- header('Location: '.$Invoice->getResponse()->getPaymentFromUrl());-->
-<!-- </p>-->
-<!-- </body>-->
-<!-- </html>-->
+if ($response->isSuccess()) {
+    echo '<strong>Hier Ihr ausgewählter Ratenplan: </strong>' . '</br>';
+    $amortisationtext = $response->getCriterion()->get('EASYCREDIT_AMORTISATIONTEXT');
+    $precontractInformationUrl = $response->getCriterion()->get('EASYCREDIT_PRECONTRACTINFORMATIONURL');
+    echo $amortisationtext  . '</br></br>';
+    echo '<a href="' . $precontractInformationUrl . '">Ihre vorvertraglichen Informationen zum Download...</a></br>';
+    echo 'Rechnungsbetrag: ' . $response->getCriterion()->get('EASYCREDIT_TOTALORDERAMOUNT') . '</br>';
+    echo 'Zinsen: '. $response->getCriterion()->get('EASYCREDIT_ACCRUINGINTEREST') . '</br>';
+    echo 'Gesamt inkl. Zinsen: '. $response->getCriterion()->get('EASYCREDIT_TOTALAMOUNT') . '</br>';
+
+    echo'</p><a href="'. $reservationURL .'">Bestellen...</a>';
+} else {
+    echo '<pre>'. print_r($response->getError(), 1).'</pre>';
+}
+?>
+ <p>It is not necessary to show the redirect url to your customer. You can
+ use php header to forward your customer directly.<br/>
+ For example:<br/>
+ header('Location: '.$Invoice->getResponse()->getPaymentFromUrl());
+ </p>
+ </body>
+ </html>
