@@ -32,11 +32,11 @@ if (!empty($_POST)) {
     $responseURL = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCredit/EasyCreditResponse.php';
     echo $responseURL;
     file_put_contents (EASY_CREDIT_RESPONSE_PARAMS_TXT, json_encode($_POST));
-    exit();
+    exit;
 }
 $reservationURL = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCredit/EasyCreditReservation.php';
 
-$params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT),1);
+$params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT), 1);
 
 $response = Response::fromPost($params);
 
@@ -47,7 +47,7 @@ $response = Response::fromPost($params);
 </head>
 <body>
 <?php
-//$response = $easyCredit->getResponse();
+echo '<h1>EasyCredit example</h1>';
 if ($response->isSuccess()) {
     echo '<strong>Hier Ihr ausgewählter Ratenplan: </strong>' . '</br>';
     $amortisationtext = $response->getCriterion()->get('EASYCREDIT_AMORTISATIONTEXT');
@@ -63,10 +63,5 @@ if ($response->isSuccess()) {
     echo '<pre>'. print_r($response->getError(), 1).'</pre>';
 }
 ?>
- <p>It is not necessary to show the redirect url to your customer. You can
- use php header to forward your customer directly.<br/>
- For example:<br/>
- header('Location: '.$Invoice->getResponse()->getPaymentFromUrl());
- </p>
- </body>
- </html>
+</body>
+</html>

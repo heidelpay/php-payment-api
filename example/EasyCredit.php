@@ -28,11 +28,16 @@ if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_
     exit();
 }
 
-
 /**
  * Require the composer autoloader file
  */
 require_once __DIR__ . '/../vendor/autoload.php';
+
+if (!is_writable(__DIR__ . '/EasyCredit/EasyCreditResponseParams.txt')) {
+    echo '<h1>EasyCredit example</h1>';
+    echo 'File: ' . __DIR__ . '/EasyCredit/EasyCreditResponseParams.txt' . ' is not writable or does not exist. Please change permissions.';
+    exit;
+}
 
 /**
  * Load a new instance of the payment method
@@ -51,6 +56,7 @@ $easyCredit->getRequest()->authentification(
     '31HA07BC8179C95F6B59366492FD253D',  // TransactionChannel credit card without 3d secure
     true                                 // Enable sandbox mode
 );
+
 /**
  * Set up asynchronous request parameters
  */
@@ -60,30 +66,33 @@ $easyCredit->getRequest()->async(
     HEIDELPAY_PHP_PAYMENT_API_FOLDER .
     'EasyCredit/EasyCreditResponse.php'  // Response url from your application
 );
+
 /**
  * Set up customer information required for risk checks
  */
 $easyCredit->getRequest()->customerAddress(
     'Heidel',                  // Given name
-    'Berger-Payment',           // Family name
-    null,                     // Company Name
+    'Berger-Payment',          // Family name
+    null,                      // Company Name
     '12344',                   // Customer id of your application
     'Vagerowstr. 18',          // Billing address street
     'DE-BW',                   // Billing address state
     '69115',                   // Billing address post code
     'Heidelberg',              // Billing address city
     'DE',                      // Billing address country code
-    'support@heidelpay.com'     // Customer mail address
+    'support@heidelpay.com'    // Customer mail address
 );
+
 /**
  * Set up basket or transaction information
  */
 $easyCredit->getRequest()->basketData(
-    '2843294932', // Reference Id of your application
-    203.12,                         // Amount of this request
-    'EUR',                         // Currency code of this request
-    '39542395235ßfsokkspreipsr'    // A secret passphrase from your application
+    '2843294932',               // Reference Id of your application
+    203.12,                     // Amount of this request
+    'EUR',                      // Currency code of this request
+    '39542395235ßfsokkspreipsr' // A secret passphrase from your application
 );
+
 /**
  * Set up risk information.
  */
@@ -91,6 +100,7 @@ $easyCredit->getRequest()->getRiskInformation()
     ->setCustomerGuestCheckout('false')
     ->setCustomerOrderCount('23')
     ->setCustomerSince('2005-08-12');
+
 /**
  * Set necessary parameters for Heidelpay payment and send the request
  */
@@ -103,22 +113,18 @@ $easyCredit->initialize();
 </head>
 <body>
 <?php
+
+echo '<h1>EasyCredit example</h1>';
 $response = $easyCredit->getResponse();
 if ($response->isSuccess()) {
-        echo '<input type="checkbox" required value="true"/><p>';
-        echo $response->getConfig()->getOptinText();
-        echo'</p><a href="'. $response->getPaymentFormUrl().'">Weiter zu easyCredit...</a>';
+        echo '<form action="'.$response->getPaymentFormUrl().'" method="POST">';
+        echo '<p> <input id="opt_in_cb" type="checkbox" required value="true"/>';
+        echo '<label for="opt_in_cb">' . $response->getConfig()->getOptinText() . '*</label></p>';
+        echo '<input type="submit" value="Weiter zu easyCredit..."/>';
+        echo '</form>';
     } else {
         echo '<pre>'. print_r($response->getError(), 1).'</pre>';
     }
  ?>
- <p>It is not necessary to show the redirect url to your customer. You can  
- use php header to forward your customer directly.<br/>
- For example:<br/>
- header('Location: '.$Invoice->getResponse()->getPaymentFromUrl());
- </p> 
- </body>
- </html>
- 
- 
- 
+</body>
+</html>

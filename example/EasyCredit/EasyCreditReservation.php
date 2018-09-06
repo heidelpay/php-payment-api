@@ -2,7 +2,7 @@
 namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
- * Handles response for EasyCredit example
+ * Performs the reservation transaction for the EasyCredit example
  *
  * This is a coding example for invoice authorize using heidelpay php-payment-api
  * extension.
@@ -28,7 +28,7 @@ require_once './../_enableExamples.php';
  */
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT),1);
+$params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT), 1);
 
 $response = Response::fromPost($params);
 
@@ -71,6 +71,7 @@ $request->customerAddress(
     'DE',                      // Billing address country code
     'support@heidelpay.com'     // Customer mail address
 );
+
 /**
  * Set up basket or transaction information
  */
@@ -95,9 +96,10 @@ $request->getRiskInformation()
 $easyCredit->authorizeOnRegistration($response->getIdentification()->getUniqueId());
 
 $url = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpaySuccess.php';
-
 if ($response->isError()) {
     $url = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpayError.php';
 }
+
+// Redirect to failure or success page
 Header('Location: ' . $url);
 ?>
