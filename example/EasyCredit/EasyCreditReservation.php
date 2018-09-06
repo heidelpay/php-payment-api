@@ -21,12 +21,12 @@ use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
 use Heidelpay\PhpPaymentApi\Response;
 
 const EASY_CREDIT_RESPONSE_PARAMS_TXT = __DIR__ . '/EasyCreditResponseParams.txt';
-require_once './_enableExamples.php';
+require_once './../_enableExamples.php';
 
 /**
  * Require the composer autoloader file
  */
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 $params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT),1);
 
@@ -94,10 +94,10 @@ $request->getRiskInformation()
  */
 $easyCredit->authorizeOnRegistration($response->getIdentification()->getUniqueId());
 
-$url = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . '/HeidelpaySuccess.php';
+$url = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpaySuccess.php';
 
 if ($response->isError()) {
-    $url = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . '/HeidelpayError.php';
+    $url = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpayError.php';
 }
 Header('Location: ' . $url);
 ?>

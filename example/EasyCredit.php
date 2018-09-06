@@ -58,7 +58,7 @@ $easyCredit->getRequest()->async(
     'EN', // Language code for the Frame
     HEIDELPAY_PHP_PAYMENT_API_URL .
     HEIDELPAY_PHP_PAYMENT_API_FOLDER .
-    'EasyCreditResponse.php'  // Response url from your application
+    'EasyCredit/EasyCreditResponse.php'  // Response url from your application
 );
 /**
  * Set up customer information required for risk checks
