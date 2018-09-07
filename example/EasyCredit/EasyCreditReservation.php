@@ -95,20 +95,21 @@ $request->getRiskInformation()
     ->setCustomerOrderCount('23')
     ->setCustomerSince('2005-08-12');
 
-//####### 11.2. This time we call the method authorizeOnRegistration passing along the uinqueId of the previouse #######
+//####### 11.2. This time we call the method authorizeOnRegistration passing along the uniqueId of the previous #######
 //#######       initialization as a reference to let the payment server know which payment plan to use.                #
 /**
  * Set necessary parameters for Heidelpay payment and send the request
  */
 $easyCredit->authorizeOnRegistration($response->getIdentification()->getUniqueId());
+$authorizationResponse = $easyCredit->getResponse();
 
 //####### 12. Now we redirect to the success or error page depending on the result of the request. #####################
 //#######     Keep in mind there are three possible results: Success, Pending and Error.                               #
-//#######     Since both pending and success indicate a successfull handling by the payment server both should         #
+//#######     Since both pending and success indicate a successful handling by the payment server both should         #
 //#######     redirect to the success page.                                                                            #
 $url = HEIDELPAY_SUCCESS_PAGE;
-if ($response->isError()) {
-    $url = HEIDELPAY_FAILURE_PAGE;
+if ($authorizationResponse->isError()) {
+    $url = HEIDELPAY_FAILURE_PAGE . '?errorMessage=' . $authorizationResponse->getError()['message'];
 }
 
 header('Location: ' . $url); // perform the redirect
