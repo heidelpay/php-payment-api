@@ -20,26 +20,48 @@ namespace Heidelpay\Example\PhpPaymentApi;
 use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
 use Heidelpay\PhpPaymentApi\Response;
 
-const EASY_CREDIT_RESPONSE_PARAMS_TXT = __DIR__ . '/EasyCreditResponseParams.txt';
-require_once './../_enableExamples.php';
+//#######   Checks whether examples are enabled. #######################################################################
+require_once __DIR__ . '/EasyCreditConstants.php';
 
 /**
  * Require the composer autoloader file
  */
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+//####### 4. This page is called in a server-to-server request as soon as the customer selected a payment plan.        #
+//####### 6. This page will be called a second time when the customer is redirected back to the "shop" which in reality#
+//#######    would probably be a different page. Since this will be done without any POST-data the next step will be #7#
+
+//####### 5. The server-to-server request after the payment plan selection will provide the selected information       #
+//#######    as post data.                                                                                             #
+//#######    In this request we will two things:                                                                       #
+//#######       1.  We will store the post data withing the reponse file (see RESPONSE_FILE_NAME constant) to make it  #
+//#######           available in the customer session.                                                                 #
+//#######       2.  We will provide the redirectUrl the customer will be redirected to. It is crutial to just return   #
+//#######           the Url and nothing else, no html tags no comments, no newlines, just the url.                     #
 if (!empty($_POST)) {
-    $responseURL = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCredit/EasyCreditResponse.php';
-    echo $responseURL;
-    file_put_contents (EASY_CREDIT_RESPONSE_PARAMS_TXT, json_encode($_POST));
+    file_put_contents (RESPONSE_FILE_NAME, json_encode($_POST));
+    echo RESPONSE_URL;
     exit;
 }
-$reservationURL = HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'EasyCredit/EasyCreditReservation.php';
 
-$params = json_decode(file_get_contents(EASY_CREDIT_RESPONSE_PARAMS_TXT), 1);
+//####### 7. We read the post data from the response file (see RESPONSE_FILE_NAME constant), since this ist the        #
+//#######    customer session where we need the information.                                                           #
+$params = json_decode(file_get_contents(RESPONSE_FILE_NAME), 1);
 
+//####### 8. We creates a heidelpay response object from the post data to conveniently access the information we need. #
 $response = Response::fromPost($params);
 
+//####### 9. This renders the information on the payment plan sent by easyCredit. ######################################
+//#######    It is necessary to show the information again to the customer prior to him placing the order.             #
+//#######    The rendered information consists of...
+//#######       1. ... the amortisation text
+//#######       2. ... a link to download precontract information
+//#######       3. ... the order total
+//#######       4. ... the interest due to the payment plan
+//#######       5. ... the total incl. the interest
+//#######    After that the customer can place the order which will send a reservation command to our payment server. ##
+//#######    For the next step see the file defined with the RESERVATION_URL constant.
 ?>
 <html>
 <head>
@@ -49,16 +71,16 @@ $response = Response::fromPost($params);
 <?php
 echo '<h1>EasyCredit example</h1>';
 if ($response->isSuccess()) {
-    echo '<strong>Hier Ihr ausgewählter Ratenplan: </strong>' . '</br>';
+    echo '<strong>Please approve your payment plan: </strong>' . '</br>';
     $amortisationtext = $response->getCriterion()->get('EASYCREDIT_AMORTISATIONTEXT');
     $precontractInformationUrl = $response->getCriterion()->get('EASYCREDIT_PRECONTRACTINFORMATIONURL');
     echo $amortisationtext  . '</br></br>';
-    echo '<a href="' . $precontractInformationUrl . '" target="_blank">Ihre vorvertraglichen Informationen zum Download...</a></br>';
-    echo 'Rechnungsbetrag: ' . $response->getCriterion()->get('EASYCREDIT_TOTALORDERAMOUNT') . '</br>';
-    echo 'Zinsen: '. $response->getCriterion()->get('EASYCREDIT_ACCRUINGINTEREST') . '</br>';
-    echo 'Gesamt inkl. Zinsen: '. $response->getCriterion()->get('EASYCREDIT_TOTALAMOUNT') . '</br>';
+    echo '<a href="' . $precontractInformationUrl . '" target="_blank">Download the precontract information here...</a></br>';
+    echo 'Order total: ' . $response->getCriterion()->get('EASYCREDIT_TOTALORDERAMOUNT') . '</br>';
+    echo 'Interest: '. $response->getCriterion()->get('EASYCREDIT_ACCRUINGINTEREST') . '</br>';
+    echo 'Total incl. interest: '. $response->getCriterion()->get('EASYCREDIT_TOTALAMOUNT') . '</br>';
 
-    echo'</p><a href="'. $reservationURL .'">Zahlungspflichtig bestellen...</a>';
+    echo'</p><a href="'. RESERVATION_URL .'">Place order...</a>';
 } else {
     echo '<pre>'. print_r($response->getError(), 1).'</pre>';
 }

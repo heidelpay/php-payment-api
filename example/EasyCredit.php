@@ -23,26 +23,35 @@ namespace Heidelpay\Example\PhpPaymentApi;
 
 use Heidelpay\PhpPaymentApi\PaymentMethods\EasyCreditPaymentMethod;
 
-require_once './_enableExamples.php';
-if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
-    exit();
-}
+//#######   Checks whether examples are enabled. #######################################################################
+require_once __DIR__ . '/EasyCredit/EasyCreditConstants.php';
 
 /**
  * Require the composer autoloader file
  */
 require_once __DIR__ . '/../vendor/autoload.php';
 
-if (!is_writable(__DIR__ . '/EasyCredit/EasyCreditResponseParams.txt')) {
+//#######   Checks whether the response file is writable. ##############################################################
+//#######   The results from the easyCredit payment plan selection will be sent via POST in a server-to-server request.#
+//#######   Normally the information will be stored within the database to make them accessable in the customer session#
+//#######   in order to safe the information in this example we use the file defined in RESPONSE_FILE_NAME constant.   #
+//#######   Only necessary for this example.                                                                           #
+if (!is_writable(RESPONSE_FILE_NAME)) {
     echo '<h1>EasyCredit example</h1>';
-    echo 'File: ' . __DIR__ . '/EasyCredit/EasyCreditResponseParams.txt' . ' is not writable or does not exist. Please change permissions.';
+    echo 'File: ' . RESPONSE_FILE_NAME . ' is not writable or does not exist. Please change permissions.';
     exit;
 }
 
+//####### 1. Create an instance of the easyCredit payment method. ######################################################
 /**
  * Load a new instance of the payment method
  */
  $easyCredit = new EasyCreditPaymentMethod();
+
+//####### 2. Prepare and send an initialization request. ######################################################
+//#######    The response will provide a redirectUrl to a form where the customer can select the payment plan #
+//#######    And an opt-in text the customer needs to agree to before redirecting him to the redirectUrl.     #
+//#######    Please make sure to set the riskinformation (see below) in order to increase acceptance rate.    #
 
 /**
  * Set up your authentification data for Heidepay api
@@ -62,9 +71,7 @@ $easyCredit->getRequest()->authentification(
  */
 $easyCredit->getRequest()->async(
     'EN', // Language code for the Frame
-    HEIDELPAY_PHP_PAYMENT_API_URL .
-    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
-    'EasyCredit/EasyCreditResponse.php'  // Response url from your application
+    RESPONSE_URL  // Response url from your application
 );
 
 /**
@@ -113,14 +120,18 @@ $easyCredit->initialize();
 </head>
 <body>
 <?php
-
+//####### 3. Render a form containing a locally validated checkbox for the opt-in (see #2). ############################
+//#######    Submit will redirect to the redirectUrl (see #2). #########################################################
+//#######    When the customer selected a payment plan the responseUrl which is send with the above request will be    #
+//#######    called by the heidelpay payment server.
+//#######    For next steps see the file defined with the RESPONSE_URL constant.
 echo '<h1>EasyCredit example</h1>';
 $response = $easyCredit->getResponse();
 if ($response->isSuccess()) {
-        echo '<form action="'.$response->getPaymentFormUrl().'" method="POST">';
+        echo '<form action="' . $response->getPaymentFormUrl() . '" method="POST">';
         echo '<p> <input id="opt_in_cb" type="checkbox" required value="true"/>';
         echo '<label for="opt_in_cb">' . $response->getConfig()->getOptinText() . '*</label></p>';
-        echo '<input type="submit" value="Weiter zu easyCredit..."/>';
+        echo '<input type="submit" value="To easyCredit..."/>';
         echo '</form>';
     } else {
         echo '<pre>'. print_r($response->getError(), 1).'</pre>';
