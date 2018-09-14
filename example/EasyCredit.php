@@ -29,7 +29,7 @@ require_once __DIR__ . '/EasyCredit/EasyCreditConstants.php';
 /**
  * Require the composer autoloader file
  */
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 
 //#######   Checks whether the response file is writable. ##############################################################
 //#######   The results from the easyCredit payment plan selection will be sent via POST in a server-to-server request.#
