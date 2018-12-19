@@ -3,12 +3,15 @@
 namespace Heidelpay\PhpPaymentApi;
 
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
+use Heidelpay\PhpPaymentApi\ParameterGroups\AbstractParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup;
@@ -54,6 +57,11 @@ abstract class AbstractMethod implements MethodInterface
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
      */
     protected $basket;
+
+    /**
+     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup
+     */
+    protected $company;
 
     /**
      * ConfigParameterGroup
@@ -187,6 +195,20 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         return $this->basket;
+    }
+
+    /**
+     * Company getter
+     *
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup
+     */
+    public function getCompany()
+    {
+        if ($this->company === null) {
+            return $this->company = new CompanyParameterGroup();
+        }
+
+        return $this->company;
     }
 
     /**
@@ -401,12 +423,33 @@ abstract class AbstractMethod implements MethodInterface
                 ksort($paramValues);
             }
 
-            foreach ($paramValues as $parameterLastName => $parameterValue) {
-                if ($parameterValue === null) {
-                    continue;
-                }
+            $tempResult = $result;
+            $result = array_merge(
+                $tempResult,
+                $this->buildParameterArray($parameterValues, $parameterGroup)
+            );
+        }
+        return $result;
+    }
 
-                $result[strtoupper($parameterGroup . '.' . $parameterLastName)] = $parameterValue;
+    public function buildParameterArray($requestParameter, $parentParameterName)
+    {
+        $result = [];
+        if (!($requestParameter instanceof AbstractParameterGroup || is_array($requestParameter))) {
+            if ($requestParameter !== null) {
+                $result[strtoupper($parentParameterName)] = $requestParameter;
+                return $result;
+            }
+        } else {
+            if (is_object($requestParameter)) {
+                $requestParameter = get_object_vars($requestParameter);
+            }
+            foreach ($requestParameter as $parameterName => $parameterSubValue) {
+                $tempResult = $result;
+                $result = array_merge(
+                    $tempResult,
+                    $this->buildParameterArray($parameterSubValue, $parentParameterName . '.' . $parameterName)
+                );
             }
         }
         return $result;
@@ -482,6 +525,7 @@ abstract class AbstractMethod implements MethodInterface
      */
     protected function mapFromPost(array $post)
     {
+        echo print_r($post, 1);
         if (empty($post)) {
             return;
         }
@@ -496,7 +540,49 @@ abstract class AbstractMethod implements MethodInterface
 
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {
-                $this->{$parameterGroupGetterFunc}()->set($paramGroupProp, $value);
+                $parameterGroup = $this->{$parameterGroupGetterFunc}();
+
+                if (array_key_exists($paramGroupProp, get_object_vars($parameterGroup))) {
+                    $parameterGroup->set($paramGroupProp, $value);
+                } else {
+                    $this->mapParameterToAttribute($parameterGroup, $paramGroupProp, $value);
+                }
+            }
+        }
+
+        $this->getCompany()->getLocation()->set('zip', '123456');
+        //$this->getCompany()->getExecutive()[1]->set('family', '123456');
+        //echo print_r($this->getCompany()->getExecutive(), 1);
+    }
+
+    protected function mapParameterToAttribute($parameterGroup, $paramGroupProp, $value)
+    {
+        $values = explode('_', strtolower($paramGroupProp), 2);
+
+        if (count($values) < 2) {
+            if ($parameterGroup instanceof AbstractParameterGroup) {
+                $parameterGroup->set($paramGroupProp, $value);
+            }
+        } else {
+            list($paramGroupName, $paramGroupString) = $values;
+            $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
+            //echo $parameterGroupGetterFunc . '';
+            //echo print_r($parameterGroup, 1);
+            if ($paramGroupProp !== null && is_callable([$parameterGroup, $parameterGroupGetterFunc])) {
+                $parameterGroup = $parameterGroup->{$parameterGroupGetterFunc}();
+                $this->mapParameterToAttribute($parameterGroup, $paramGroupString, $value);
+            }
+
+            echo $paramGroupName . "\n\t";
+            if (is_numeric($paramGroupName)) {
+                //echo $paramGroupString;
+                $executives = $this->getCompany()->executive;
+                if ((int)$paramGroupName + 1 > count(($this->getCompany()->executive))) {
+                    //array_push($this->getCompany()->executive, new ExecutiveParameterGroup());
+                    $this->getCompany()->executive[] = new ExecutiveParameterGroup();
+                    echo 'hello ' . $paramGroupName . ' - ' . print_r($executives, 1);
+                }
+                //$this->getCompany()->getExecutive()[$paramGroupString];
             }
         }
     }
