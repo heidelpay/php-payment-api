@@ -5,6 +5,7 @@ namespace Heidelpay\PhpPaymentApi;
 use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 
 /**
  * Heidelpay request object
@@ -82,6 +83,55 @@ class Request extends AbstractMethod
             $this->getFrontend()->setEnabled('TRUE');
         }
         return $this;
+    }
+
+    public function company(
+        $companyName = null,
+        $poBox = null,
+        $street = null,
+        $zip = null,
+        $city = null,
+        $country = null,
+        $CommercialSector = null,
+        $registrationType = null,
+        $commercialRegisterNumber = null,
+        $vatId = null,
+        array $executive = [null]
+    ) {
+        $this->getCompany()->setCompanyname($companyName);
+        $this->getCompany()->getLocation()->setPobox($poBox);
+        $this->getCompany()->getLocation()->setStreet($street);
+        $this->getCompany()->getLocation()->setZip($zip);
+        $this->getCompany()->getLocation()->setCity($city);
+        $this->getCompany()->getLocation()->setCountry($country);
+        $this->getCompany()->setRegistrationtype($registrationType);
+        $this->getCompany()->setCommercialregisternumber($commercialRegisterNumber);
+        $this->getCompany()->setVatid($vatId);
+        $this->getCompany()->setCommercialSector($CommercialSector);
+    }
+
+    public function companyExecutive(
+        $function = 'OWNER',
+        $salutation = null,
+        $given = null,
+        $family = null,
+        $birthdate = null,
+        $email = null,
+        $phone = null,
+        $home = null
+    ) {
+        $executive = new ExecutiveParameterGroup();
+        $executive->setFunction($function);
+        $executive->setSalutation($salutation);
+        $executive->setGiven($given);
+        $executive->setFamily($family);
+        $executive->setBirthdate($birthdate);
+        $executive->setEmail($email);
+        $executive->setPhone($phone);
+        $executive->setHome($home);
+        $executives = $this->getCompany()->getExecutive();
+        array_push($executives, $executive);
+        $this->getCompany()->setExecutive($executives);
     }
 
     /**
