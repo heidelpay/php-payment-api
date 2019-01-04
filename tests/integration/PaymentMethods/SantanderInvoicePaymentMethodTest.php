@@ -2,6 +2,9 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Heidelpay\PhpBasketApi\Request as BasketRequest;
+use Heidelpay\PhpBasketApi\Response as BasketResponse;
+use Heidelpay\PhpBasketApi\Object\BasketItem;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\PaymentMethods\SantanderInvoicePaymentMethod;
@@ -95,6 +98,8 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      */
     public function authorize()
     {
+        $basketReferenceId = $this->createTestBasket();
+
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 123.12, $this->currency, $this->secret);
 
@@ -102,6 +107,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.com');
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->paymentObject->getRequest()->getCustomer()->setOptIn2(true);
+        $this->paymentObject->getRequest()->getBasket()->setId($basketReferenceId);
 
         $this->paymentObject->authorize();
 
@@ -172,19 +178,21 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      * @param $referenceId string payment reference id of the invoice authorisation
      *
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends authorize
      * @group connectionTest
      *
      * @test
      *
      * @throws \Exception
      */
-    public function finalize($referenceId)
+    public function finalize()
     {
-        $this->markTestSkipped('needs basket reference to work');
+        $basketReferenceId = $this->createTestBasket();
+        $referenceId = $this->authorize();
 
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 82.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->basketData($timestamp, 123.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->getBasket()->setId($basketReferenceId);
+
 
         $this->paymentObject->finalize($referenceId);
 
@@ -229,8 +237,55 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->refund((string)$referenceId);
 
-        $this->assertEquals(PaymentMethod::INVOICE . '.' . TransactionType::REFUND, $this->paymentObject->getRequest()->getPayment()->getCode());
+        $this->assertEquals(
+            PaymentMethod::INVOICE . '.' . TransactionType::REFUND,
+            $this->paymentObject->getRequest()->getPayment()->getCode()
+        );
 
         $this->logDataToDebug();
+    }
+
+    /**
+     * @return string
+     *
+     * @throws \Heidelpay\PhpBasketApi\Exception\BasketException
+     * @throws \Heidelpay\PhpBasketApi\Exception\CurlAdapterException
+     * @throws \Heidelpay\PhpBasketApi\Exception\InvalidBasketitemPositionException
+     * @throws \Heidelpay\PhpBasketApi\Exception\ParameterOverflowException
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     */
+    public function createTestBasket()
+    {
+        $basketRequest = new BasketRequest();
+
+        $basketItem = (new BasketItem())
+            ->setBasketItemReferenceId('refId')
+            ->setTitle('item name')
+            ->setAmountNet(12312)
+            ->setAmountPerUnit(12312)
+            ->setQuantity(1);
+
+        $basketRequest->getBasket()
+            ->setCurrencyCode('EUR')
+            ->setBasketReferenceId('123456')
+            ->addBasketItem($basketItem)
+            ->setAmountTotalNet(12312);
+
+        $basketRequest->setAuthentication(
+            $this->authentication->getUserLogin(),
+            $this->authentication->getUserPassword(),
+            $this->authentication->getSecuritySender()
+        );
+
+        $basketRequest->setIsSandboxMode(true);
+
+        /** @var BasketResponse $basketResponse */
+        $basketResponse = $basketRequest->addNewBasket();
+
+        $this->logDataToDebug($basketResponse);
+
+        $this->assertTrue($basketResponse->isSuccess());
+
+        return $basketResponse->getBasketId();
     }
 }
