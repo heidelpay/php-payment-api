@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Missing parameter CUSTOMER.OptIn_2 for Santander Invoice.
 
+### Changed
+- Used BasketApi to enable additional integration tests for Santander IV.
+
 ## [v1.6.2][v1.6.2]
 
 ### Fixed
