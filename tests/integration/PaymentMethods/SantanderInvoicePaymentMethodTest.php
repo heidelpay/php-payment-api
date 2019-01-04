@@ -101,6 +101,7 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
         $this->paymentObject->getRequest()->async('DE', 'https://dev.heidelpay.com');
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $this->paymentObject->getRequest()->getCustomer()->setOptIn2(true);
 
         $this->paymentObject->authorize();
 
@@ -124,59 +125,21 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
-     * Test case for a invoice finalize of a existing authorisation
-     *
-     * @param $referenceId string payment reference id of the invoice authorisation
-     *
-     * @return string payment reference id for the prepayment reversal transaction
-     * @depends authorize
-     * @group connectionTest
-     *
-     * @test
-     *
-     * @throws \Exception
-     */
-    public function finalize($referenceId)
-    {
-        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 82.12, $this->currency, $this->secret);
-
-        $this->paymentObject->finalize($referenceId);
-
-        /* verify response */
-        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
-
-        /* transaction result */
-        $this->assertTrue(
-            $this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
-        );
-        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse(
-            $this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
-        );
-
-        $this->logDataToDebug();
-
-        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
-    }
-
-    /**
      * Test case for a invoice reversal of a existing authorisation
      *
      *
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends finalize
      * @group connectionTest
+     * @depends authorize
      *
      * @test
      *
      * @throws \Exception
+     *
+     * @param mixed $referenceId
      */
-    public function reversal()
+    public function reversal($referenceId)
     {
-        $referenceId = $this->authorize();
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.54, $this->currency, $this->secret);
 
@@ -204,11 +167,52 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
     }
 
     /**
+     * Test case for a invoice finalize of a existing authorisation
+     *
+     * @param $referenceId string payment reference id of the invoice authorisation
+     *
+     * @return string payment reference id for the prepayment reversal transaction
+     * @depends authorize
+     * @group connectionTest
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function finalize($referenceId)
+    {
+        $this->markTestSkipped('needs basket reference to work');
+
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 82.12, $this->currency, $this->secret);
+
+        $this->paymentObject->finalize($referenceId);
+
+        /* verify response */
+        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+
+        /* transaction result */
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
+        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
+
+        $this->logDataToDebug();
+
+        return $referenceId;
+    }
+
+    /**
      * Test case for invoice refund
      *
      * @param string $referenceId reference id of the invoice to refund
      *
-     * @depends authorize
+     * @depends finalize
      * @test
      *
      * @group connectionTest
