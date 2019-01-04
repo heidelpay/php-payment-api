@@ -30,7 +30,7 @@ class CustomerParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param string $optIn_2
+     * @param bool $optIn_2
      *
      * @return CustomerParameterGroup
      */
