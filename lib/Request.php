@@ -96,7 +96,7 @@ class Request extends AbstractMethod
         $registrationType = null,
         $commercialRegisterNumber = null,
         $vatId = null,
-        array $executive = [null]
+        $executives = null
     ) {
         $this->getCompany()->setCompanyname($companyName);
         $this->getCompany()->getLocation()->setPobox($poBox);
@@ -108,9 +108,21 @@ class Request extends AbstractMethod
         $this->getCompany()->setCommercialregisternumber($commercialRegisterNumber);
         $this->getCompany()->setVatid($vatId);
         $this->getCompany()->setCommercialSector($CommercialSector);
+        $this->getCompany()->setExecutive($executives);
     }
 
-    public function companyExecutive(
+    /**
+     * A
+     * @param string $function
+     * @param null $salutation
+     * @param null $given
+     * @param null $family
+     * @param null $birthdate
+     * @param null $email
+     * @param null $phone
+     * @param null $home
+     */
+    public function addExecutive(
         $function = 'OWNER',
         $salutation = null,
         $given = null,
@@ -130,7 +142,7 @@ class Request extends AbstractMethod
         $executive->setPhone($phone);
         $executive->setHome($home);
         $executives = $this->getCompany()->getExecutive();
-        array_push($executives, $executive);
+        $executives[] = $executive;
         $this->getCompany()->setExecutive($executives);
     }
 

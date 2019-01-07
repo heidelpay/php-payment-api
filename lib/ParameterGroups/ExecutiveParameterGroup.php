@@ -137,11 +137,15 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
         $this->phone = $phone;
     }
 
+
     /**
-     * @return mixed
+     * @return HomeParameterGroup
      */
     public function getHome()
     {
+        if ($this->home === null) {
+            return $this->home = new HomeParameterGroup();
+        }
         return $this->home;
     }
 

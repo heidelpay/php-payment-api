@@ -13,10 +13,22 @@ use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
 use Heidelpay\PhpPaymentApi\ParameterGroups\HomeParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup;
 use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
+use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Company;
 
 class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
 {
+    /**
+     * @var Company
+     */
+    protected $company;
+
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->company = new Company();
+    }
     /**
      * Set up function will create a payment method object for each test case
      *
@@ -26,54 +38,20 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     public function _before()
     {
         // @codingStandardsIgnoreEnd
-        //$this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
+        $this->authentication->setTransactionChannel('31HA07BC8142C5A171744F3D6D155865');
 
         $paymentObject = new InvoiceB2CSecuredPaymentMethod();
-        //$paymentObject->getRequest()->getTransaction()->setChannel('123456789');
-        //$paymentObject->getRequest()->authentification(...$this->authentication->getAuthenticationArray());
-        //$paymentObject->getRequest()->customerAddress(...$this->customerData->getCustomerDataArray());
 
-        $paymentObject->dryRun = false;
-
-        $this->paymentObject = $paymentObject;
-
-        $this->mockCurlAdapter();
-    }
-
-    /**
-     * Tear down function will remove all registered test doubles (i.e. Mocks)
-     */
-    // @codingStandardsIgnoreStart
-    public function _after()
-    {
-        // @codingStandardsIgnoreEnd
-        $this->paymentObject = null;
-        test::clean();
-    }
-
-    /**
-     * Prepare request test company
-     *
-     * @desc This test will convert the request object to post array format
-     * @group integrationTest
-     * @test
-     */
-    public function companyParametersShouldBeSetAsExpected()
-    {
-        $request = $this->paymentObject->getRequest();
-        $location = new LocationParameterGroup();
-        $location->street = 'street';
-        $location->pobox = 'poBox';
-        $location->zip = 'zip';
-        $location->city = 'city';
-        $location->country = 'country';
+        $request = $paymentObject->getRequest();
+        $request->authentification(...$this->authentication->getAuthenticationArray());
+        $request->customerAddress(...$this->customerData->getCustomerDataArray());
+        $request->company(...$this->company->getCompanyDataArray());
 
         $home = new HomeParameterGroup();
         $home->street = 'Vangerowstr. 18';
         $home->city = 'Heidelberg';
         $home->country = 'DE';
         $home->zip = '69115';
-
         $executiveOne = [
             'OWNER',
             null,
@@ -96,22 +74,34 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             null
         ];
 
-        $request->companyExecutive(...$executiveOne);
-        $request->companyExecutive(...$executiveTwo);
-        $request->company(
-            'heidelpay GmbH',
-            'poBox',
-            'street',
-            'zip',
-            'city',
-            'country',
-            CommercialSector::AIR_TRANSPORT,
-            RegistrationType::REGISTERED,
-            '123456789',
-            '123456'
-        );
+        $request->addExecutive(...$executiveOne);
+        $request->addExecutive(...$executiveTwo);
+        $paymentObject->dryRun = false;
 
-        $referenceVars = array(
+        $this->paymentObject = $paymentObject;
+
+        $this->mockCurlAdapter();
+    }
+
+    /**
+     * Tear down function will remove all registered test doubles (i.e. Mocks)
+     */
+    // @codingStandardsIgnoreStart
+    public function _after()
+    {
+        // @codingStandardsIgnoreEnd
+        $this->paymentObject = null;
+        test::clean();
+    }
+
+    /**
+     * Prepare request company.
+     * This test will convert the request object to post array format
+     * @test
+     */
+    public function companyParametersShouldBeSetAsExpected()
+    {
+        $expectedRequestArray = [
             'COMPANY.COMPANYNAME' => 'heidelpay GmbH',
             'COMPANY.REGISTRATIONTYPE' => RegistrationType::REGISTERED,
             'COMPANY.COMMERCIALREGISTERNUMBER' => '123456789',
@@ -140,8 +130,60 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY.EXECUTIVE.1.HOME.COUNTRY' => 'DE',
             'COMPANY.EXECUTIVE.2.FUNCTION' => 'OWNER',
             'COMPANY.EXECUTIVE.2.BIRTHDATE' => '123',
+            'ADDRESS.CITY' => 'Heidelberg',
+            'ADDRESS.COUNTRY' => 'DE',
+            'ADDRESS.STATE' => 'DE-BW',
+            'ADDRESS.STREET' => 'Vangerowstr. 18',
+            'ADDRESS.ZIP' => '69115',
+            'CONTACT.EMAIL' => 'development@heidelpay.com',
+            'IDENTIFICATION.SHOPPERID' => '1234',
+            'NAME.GIVEN' => 'Heidel',
+            'NAME.FAMILY' => 'Berger-Payment',
+            'SECURITY.SENDER' => '31HA07BC8142C5A171745D00AD63D182',
+            'TRANSACTION.CHANNEL' => '31HA07BC8142C5A171744F3D6D155865',
+            'USER.LOGIN' => '31ha07bc8142c5a171744e5aef11ffd3',
+            'USER.PWD' => '93167DE7',
+        ];
+
+        $request = $this->paymentObject->getRequest();
+
+        $this->assertThat($expectedRequestArray, $this->arraysMatchExactly($request->toArray()));
+    }
+
+    /**
+     * @test
+     */
+    public function requestPostArrayShouldBeMappedAsExpected()
+    {
+        $postResponse = [
+            'COMPANY_COMMERCIALREGISTERNUMBER' => '123456789',
+            'COMPANY_COMMERCIALSECTOR' => 'AIR_TRANSPORT',
+            'COMPANY_COMPANYNAME' => 'heidelpay GmbH',
+            'COMPANY_EXECUTIVE_1_BIRTHDATE' => '1988-12-12',
+            'COMPANY_EXECUTIVE_1_EMAIL' => 'example@email.de',
+            'COMPANY_EXECUTIVE_1_FAMILY' => 'Händler',
+            'COMPANY_EXECUTIVE_1_FUNCTION' => 'OWNER',
+            'COMPANY_EXECUTIVE_1_GIVEN' => 'Testkäufer',
+            'COMPANY_EXECUTIVE_1_HOME_CITY' => 'Heidelberg',
+            'COMPANY_EXECUTIVE_1_HOME_COUNTRY' => 'DE',
+            'COMPANY_EXECUTIVE_1_HOME_STREET' => 'Vangerowstr. 18',
+            'COMPANY_EXECUTIVE_1_HOME_ZIP' => '69115',
+            'COMPANY_EXECUTIVE_1_PHONE' => '062216471400',
+            'COMPANY_EXECUTIVE_2_FUNCTION' => 'OWNER',
+            'COMPANY_EXECUTIVE_2_BIRTHDATE' => '123',
+            'COMPANY_LOCATION_POBOX' => 'poBox',
+            'COMPANY_LOCATION_CITY' => 'city',
+            'COMPANY_LOCATION_COUNTRY' => 'country',
+            'COMPANY_LOCATION_STREET' => 'street',
+            'COMPANY_LOCATION_ZIP' => 'zip',
+            'COMPANY_REGISTRATIONTYPE' => 'REGISTERED',
+            'COMPANY_VATID' => '123456',
+        ];
+
+        $this->assertEquals(
+            $this->paymentObject->getRequest()->getCompany(),
+            Request::fromPost($postResponse)->getCompany()
         );
 
-        $this->assertEquals($referenceVars, $this->paymentObject->getRequest()->toArray(), 'test');
     }
 }

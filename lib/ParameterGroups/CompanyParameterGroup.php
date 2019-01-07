@@ -26,7 +26,6 @@ class CompanyParameterGroup extends AbstractParameterGroup
 {
     public function __construct()
     {
-        $this->executive = [null];
     }
 
     /**
@@ -45,7 +44,7 @@ class CompanyParameterGroup extends AbstractParameterGroup
      */
     public $executive;
 
-    public $commercialSector;
+    public $commercialsector;
 
     /**
      * @var \Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup
@@ -136,10 +135,15 @@ class CompanyParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getExecutive()
     {
+        if ($this->executive === null) {
+            return array(
+                null,
+            );
+        }
         return $this->executive;
     }
 
@@ -156,7 +160,7 @@ class CompanyParameterGroup extends AbstractParameterGroup
      */
     public function getCommercialSector()
     {
-        return $this->commercialSector;
+        return $this->commercialsector;
     }
 
     /**
@@ -164,6 +168,6 @@ class CompanyParameterGroup extends AbstractParameterGroup
      */
     public function setCommercialSector($commercialSector)
     {
-        $this->commercialSector = $commercialSector;
+        $this->commercialsector = $commercialSector;
     }
 }

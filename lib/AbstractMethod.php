@@ -496,21 +496,25 @@ abstract class AbstractMethod implements MethodInterface
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {
                 $parameterGroup = $this->{$parameterGroupGetterFunc}();
-
+                //If property exists in parameter group set the value.
                 if (array_key_exists($paramGroupProp, get_object_vars($parameterGroup))) {
                     $parameterGroup->set($paramGroupProp, $value);
                 } else {
-                    $this->mapParameterToAttribute($parameterGroup, $paramGroupProp, $value);
+                    // call function to map subParameterGroups
+                    $this->mapSubParameterGroups($parameterGroup, $paramGroupProp, $value);
                 }
             }
         }
-
-        $this->getCompany()->getLocation()->set('zip', '123456');
-        //$this->getCompany()->getExecutive()[1]->set('family', '123456');
-        //echo print_r($this->getCompany()->getExecutive(), 1);
     }
 
-    protected function mapParameterToAttribute($parameterGroup, $paramGroupProp, $value)
+
+    /**
+     * Functions to map response array to attributes to sub parameter classes recursively
+     * @param $parameterGroup
+     * @param $paramGroupProp
+     * @param $value
+     */
+    protected function mapSubParameterGroups($parameterGroup, $paramGroupProp, $value)
     {
         $values = explode('_', strtolower($paramGroupProp), 2);
 
@@ -521,23 +525,27 @@ abstract class AbstractMethod implements MethodInterface
         } else {
             list($paramGroupName, $paramGroupString) = $values;
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
-            //echo $parameterGroupGetterFunc . '';
-            //echo print_r($parameterGroup, 1);
             if ($paramGroupProp !== null && is_callable([$parameterGroup, $parameterGroupGetterFunc])) {
                 $parameterGroup = $parameterGroup->{$parameterGroupGetterFunc}();
-                $this->mapParameterToAttribute($parameterGroup, $paramGroupString, $value);
+                if (is_array($parameterGroup)) {
+                    $parameterGroup = $paramGroupName;
+                }
+                $this->mapSubParameterGroups($parameterGroup, $paramGroupString, $value);
             }
 
-            echo $paramGroupName . "\n\t";
+            //If $paramGroupName is a number handle it like an array.
             if (is_numeric($paramGroupName)) {
-                //echo $paramGroupString;
-                $executives = $this->getCompany()->executive;
+                $executives = $this->getCompany()->getExecutive();
                 if ((int)$paramGroupName + 1 > count(($this->getCompany()->executive))) {
-                    //array_push($this->getCompany()->executive, new ExecutiveParameterGroup());
-                    $this->getCompany()->executive[] = new ExecutiveParameterGroup();
-                    echo 'hello ' . $paramGroupName . ' - ' . print_r($executives, 1);
+                    $this->getCompany()->setExecutive(
+                        array_merge(
+                            $executives,
+                            [new ExecutiveParameterGroup()]
+                        )
+                    );
                 }
-                //$this->getCompany()->getExecutive()[$paramGroupString];
+                $executive = $this->getCompany()->getExecutive()[$paramGroupName];
+                $this->mapSubParameterGroups($executive, $paramGroupString, $value);
             }
         }
     }
