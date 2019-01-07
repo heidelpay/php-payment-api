@@ -12,6 +12,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CustomerParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup;
@@ -37,25 +38,16 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup;
  */
 abstract class AbstractMethod implements MethodInterface
 {
-    /**
-     * AccountParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
-     */
+    /** @var AccountParameterGroup */
     protected $account;
 
-    /**
-     * AddressParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
-     */
+    /** @var AddressParameterGroup */
     protected $address;
 
-    /**
-     * BasketParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
-     */
+    /** @var CustomerParameterGroup */
+    protected $customer;
+
+    /** @var BasketParameterGroup */
     protected $basket;
 
     /**
@@ -63,102 +55,51 @@ abstract class AbstractMethod implements MethodInterface
      */
     protected $company;
 
-    /**
-     * ConfigParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup
-     */
+    /** @var ConfigParameterGroup */
     protected $config;
 
-    /**
-     * ContactParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
-     */
+    /** @var ContactParameterGroup */
     protected $contact;
 
-    /**
-     * CriterionParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup
-     */
+    /** @var CriterionParameterGroup */
     protected $criterion;
 
-    /**
-     * FrontendParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
-     */
+    /** @var FrontendParameterGroup */
     protected $frontend;
 
-    /**
-     * IdentificationParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
-     */
+    /** @var IdentificationParameterGroup */
     protected $identification;
 
-    /**
-     * NameParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
-     */
+    /** @var NameParameterGroup */
     protected $name;
 
-    /**
-     * PaymentParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup
-     */
+    /** @var PaymentParameterGroup */
     protected $payment;
 
-    /**
-     * PresentationParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
-     */
+    /** @var PresentationParameterGroup */
     protected $presentation;
 
-
-    /**
-     * RequestParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup
-     */
+    /** @var RequestParameterGroup */
     protected $request;
 
-    /**
-     * RiskInformationParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
-     */
+    /** @var RiskInformationParameterGroup */
     protected $riskinformation;
 
-    /**
-     * SecurityParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup
-     */
+    /** @var SecurityParameterGroup */
     protected $security;
 
-    /**
-     * TransactionParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
-     */
+    /** @var TransactionParameterGroup */
     protected $transaction;
 
-    /**
-     * UserParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup
-     */
+    /** @var UserParameterGroup */
     protected $user;
+
+    //<editor-fold desc="Getters/Setters">
 
     /**
      * Account getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
+     * @return AccountParameterGroup
      */
     public function getAccount()
     {
@@ -172,7 +113,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Address getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
+     * @return AddressParameterGroup
      */
     public function getAddress()
     {
@@ -186,7 +127,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Basket getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
+     * @return BasketParameterGroup
      */
     public function getBasket()
     {
@@ -214,7 +155,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Config getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup
+     * @return ConfigParameterGroup
      */
     public function getConfig()
     {
@@ -228,7 +169,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Contact getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
+     * @return ContactParameterGroup
      */
     public function getContact()
     {
@@ -242,7 +183,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Criterion getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup
+     * @return CriterionParameterGroup
      */
     public function getCriterion()
     {
@@ -256,7 +197,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Frondend getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function getFrontend()
     {
@@ -270,7 +211,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Identification getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
+     * @return IdentificationParameterGroup
      */
     public function getIdentification()
     {
@@ -284,7 +225,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Name getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
+     * @return NameParameterGroup
      */
     public function getName()
     {
@@ -298,7 +239,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Payment getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup
+     * @return PaymentParameterGroup
      */
     public function getPayment()
     {
@@ -312,7 +253,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Presentation getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
+     * @return PresentationParameterGroup
      */
     public function getPresentation()
     {
@@ -326,7 +267,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Request getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup
+     * @return RequestParameterGroup
      */
     public function getRequest()
     {
@@ -340,7 +281,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * RiskInformation getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
+     * @return RiskInformationParameterGroup
      */
     public function getRiskInformation()
     {
@@ -354,7 +295,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Security getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup
+     * @return SecurityParameterGroup
      */
     public function getSecurity()
     {
@@ -368,7 +309,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Transaction getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
+     * @return TransactionParameterGroup
      */
     public function getTransaction()
     {
@@ -382,7 +323,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * User getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup
+     * @return UserParameterGroup
      */
     public function getUser()
     {
@@ -392,6 +333,20 @@ abstract class AbstractMethod implements MethodInterface
 
         return $this->user;
     }
+
+    /**
+     * @return CustomerParameterGroup
+     */
+    public function getCustomer()
+    {
+        if ($this->customer === null) {
+            return $this->customer = new CustomerParameterGroup();
+        }
+
+        return $this->customer;
+    }
+
+    //</editor-fold>
 
     /**
      * @inheritdoc
