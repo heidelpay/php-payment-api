@@ -208,6 +208,11 @@ abstract class AbstractMethod implements MethodInterface
         return $this->frontend;
     }
 
+    public function getHome()
+    {
+        return $this->getCompany()->getExecutive()[1]->getHome();
+    }
+
     /**
      * Identification getter
      *
@@ -220,6 +225,11 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         return $this->identification;
+    }
+
+    public function getLocation()
+    {
+        return $this->getCompany()->getLocation();
     }
 
     /**

@@ -52,6 +52,41 @@ class CompanyParameterGroup extends AbstractParameterGroup
     public $location;
 
     /**
+     * A
+     * @param string $function
+     * @param null $salutation
+     * @param null $given
+     * @param null $family
+     * @param null $birthdate
+     * @param null $email
+     * @param null $phone
+     * @param null $home
+     */
+    public function addExecutive(
+        $function = 'OWNER',
+        $salutation = null,
+        $given = null,
+        $family = null,
+        $birthdate = null,
+        $email = null,
+        $phone = null,
+        $home = null
+    ) {
+        $executive = new ExecutiveParameterGroup();
+        $executive->setFunction($function);
+        $executive->setSalutation($salutation);
+        $executive->setGiven($given);
+        $executive->setFamily($family);
+        $executive->setBirthdate($birthdate);
+        $executive->setEmail($email);
+        $executive->setPhone($phone);
+        $executive->setHome($home);
+        $executives = $this->getExecutive();
+        $executives[] = $executive;
+        $this->setExecutive($executives);
+    }
+
+    /**
      * @return LocationParameterGroup
      */
     public function getLocation()
@@ -140,8 +175,9 @@ class CompanyParameterGroup extends AbstractParameterGroup
     public function getExecutive()
     {
         if ($this->executive === null) {
-            return array(
+            return $this->executive = array(
                 null,
+                new ExecutiveParameterGroup()
             );
         }
         return $this->executive;

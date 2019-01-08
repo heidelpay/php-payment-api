@@ -81,6 +81,13 @@ class PushTest extends Test
     protected $xmlInvalidResponse;
 
     /**
+     * Example response that covers company properties
+     *
+     * @var string
+     */
+    protected $xmlSampleCompanyResponse;
+
+    /**
      * Sets up the fixture, for example, open a network connection.
      */
     // @codingStandardsIgnoreStart
@@ -93,6 +100,7 @@ class PushTest extends Test
         $this->setSampleIvRcResponse();
         $this->setSamplePpPaResponse();
         $this->setSampleInvalidResponse();
+        $this->setSampleCompanyResponse();
     }
 
     /**
@@ -446,6 +454,60 @@ class PushTest extends Test
             . '59a9f8aff5e237c60ffcae600e1f11e7342f60dbdd43b1cdc1a17a323c3f753d',
             $response->getCriterion()->getSecretHash()
         );
+    }
+
+    /**
+     * @test
+     * @throws XmlResponseParserException
+     */
+    public function hasValidMappedCompanyProperties()
+    {
+        $push = new Push($this->xmlSampleCompanyResponse);
+        $response = $push->getResponse();
+
+        if (!($response instanceof Response)) {
+            throw new \RuntimeException('Response is not set!');
+        }
+
+        $this->assertEquals('heidelpay GmbH', $response->getCompany()->companyname);
+        $this->assertEquals('REGISTERED', $response->getCompany()->registrationtype);
+        $this->assertEquals('123456789', $response->getCompany()->commercialregisternumber);
+        $this->assertEquals('123456', $response->getCompany()->vatid);
+        $this->assertEquals('AIR_TRANSPORT', $response->getCompany()->commercialsector);
+
+        $this->assertEquals(null, $response->getCompany()->getLocation()->pobox);
+        $this->assertEquals('Vangerowstr. 18', $response->getCompany()->getLocation()->street);
+        $this->assertEquals('69115', $response->getCompany()->getLocation()->zip);
+        $this->assertEquals('Heidelberg', $response->getCompany()->getLocation()->city);
+        $this->assertEquals('DE', $response->getCompany()->getLocation()->country);
+
+        $this->assertEquals('Testkäufer', $response->getCompany()->getExecutive()[1]->given);
+        $this->assertEquals('Händler', $response->getCompany()->getExecutive()[1]->family);
+        $this->assertEquals('1988-12-12', $response->getCompany()->getExecutive()[1]->birthdate);
+        $this->assertEquals('062216471400', $response->getCompany()->getExecutive()[1]->phone);
+        $this->assertEquals('example@email.de', $response->getCompany()->getExecutive()[1]->email);
+        $this->assertEquals('OWNER', $response->getCompany()->getExecutive()[1]->function);
+
+
+        $this->assertEquals('Vangerowstr. 18', $response->getCompany()->getExecutive()[1]->getHome()->street);
+        $this->assertEquals('69115', $response->getCompany()->getExecutive()[1]->getHome()->zip);
+        $this->assertEquals('Heidelberg', $response->getCompany()->getExecutive()[1]->getHome()->city);
+        $this->assertEquals('DE', $response->getCompany()->getExecutive()[1]->getHome()->country);
+        
+        $this->assertEquals('Testkäufer-2', $response->getCompany()->getExecutive()[2]->given);
+        $this->assertEquals('Händler-2', $response->getCompany()->getExecutive()[2]->family);
+        $this->assertEquals('1988-02-02', $response->getCompany()->getExecutive()[2]->birthdate);
+        $this->assertEquals('062216471400', $response->getCompany()->getExecutive()[2]->phone);
+        $this->assertEquals('example@email.de', $response->getCompany()->getExecutive()[2]->email);
+        $this->assertEquals('OWNER2', $response->getCompany()->getExecutive()[2]->function);
+
+
+        $this->assertEquals('Vangerowstr. 22', $response->getCompany()->getExecutive()[2]->getHome()->street);
+        $this->assertEquals('69115', $response->getCompany()->getExecutive()[2]->getHome()->zip);
+        $this->assertEquals('Heidelberg2', $response->getCompany()->getExecutive()[2]->getHome()->city);
+        $this->assertEquals('DE', $response->getCompany()->getExecutive()[2]->getHome()->country);
+
+        codecept_debug('response: ' . print_r($response, 1));
     }
 
     /**
@@ -887,6 +949,61 @@ XML;
             <Reason>SUCCESSFULL</Reason>
             <Return>Request successfully processed in 'Merchant in Connector Test Mode'</Return>
         </Processing>
+    </Transaction>
+</Response>
+XML;
+    }
+
+    private function setSampleCompanyResponse()
+    {
+        $this->xmlSampleCompanyResponse = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response version="1.0">
+    <Transaction mode="CONNECTOR_TEST" response="SYNC" channel="31HA07BC8122B949FB64075AFB0798AE" source="WPF">
+        <Customer>
+            <Type>B2B</Type>
+            <Company>
+                <CompanyName>heidelpay GmbH</CompanyName>
+                <Location>
+                    <Street>Vangerowstr. 18</Street>
+                    <Zip>69115</Zip>
+                    <City>Heidelberg</City>
+                    <Country>DE</Country>
+                </Location>
+                <RegistrationType>REGISTERED</RegistrationType>
+                <CommercialRegisterNumber>123456789</CommercialRegisterNumber>
+                <VatID>123456</VatID>
+                <Executive>
+                    <Given>Testkäufer</Given>
+                    <Family>Händler</Family>
+                    <Birthdate>1988-12-12</Birthdate>
+                    <Phone>062216471400</Phone>
+                    <Email>example@email.de</Email>
+                    <Function>OWNER</Function>
+                    <Home>
+                        <Street>Vangerowstr. 18</Street>
+                        <Zip>69115</Zip>
+                        <City>Heidelberg</City>
+                        <Country>DE</Country>
+                    </Home>
+                </Executive>
+                <Executive>
+                    <Given>Testkäufer-2</Given>
+                    <Family>Händler-2</Family>
+                    <Birthdate>1988-02-02</Birthdate>
+                    <Phone>062216471400</Phone>
+                    <Email>example@email.de</Email>
+                    <Function>OWNER2</Function>
+                    <Home>
+                        <Street>Vangerowstr. 22</Street>
+                        <Zip>69115</Zip>
+                        <City>Heidelberg2</City>
+                        <Country>DE</Country>
+                    </Home>
+                </Executive>
+                <CommercialSector>AIR_TRANSPORT</CommercialSector>
+            </Company>
+        </Customer>
     </Transaction>
 </Response>
 XML;
