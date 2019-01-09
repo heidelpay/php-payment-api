@@ -507,7 +507,7 @@ abstract class AbstractMethod implements MethodInterface
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {
                 $parameterGroup = $this->{$parameterGroupGetterFunc}();
                 //If property exists in parameter group set the value.
-                if (array_key_exists($paramGroupProp, get_object_vars($parameterGroup))) {
+                if (array_key_exists($paramGroupProp, get_object_vars($parameterGroup)) || $parameterGroup instanceof CriterionParameterGroup) {
                     $parameterGroup->set($paramGroupProp, $value);
                 } else {
                     // call function to map subParameterGroups

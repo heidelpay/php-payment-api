@@ -108,6 +108,16 @@ $executiveOne = [
     '062216471400',
     $home
 ];
+$executiveTwo = [
+    'OWNER',
+    null,
+    'Testkäufer',
+    'Händler',
+    '1988-12-12',
+    'example@email.de',
+    '062216471400',
+    $home
+];
 
 
 $companyArray = [
@@ -125,6 +135,7 @@ $companyArray = [
 
 $invoice->getRequest()->company(...$companyArray);
 $invoice->getRequest()->addExecutive(...$executiveOne);
+$invoice->getRequest()->addExecutive(...$executiveTwo);
 
 /**
  * Set necessary parameters for Heidelpay payment and send the request
