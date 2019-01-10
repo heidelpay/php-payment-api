@@ -1,26 +1,59 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 22.11.2018
- * Time: 18:44
- */
+
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
+/**
+ * This class provides every api parameter related to the company location data
+ *
+ * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
+ *
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
+ *
+ * @author  David Owusu
+ *
+ * @package heidelpay\php-payment-api\parameter-groups
+ */
 class LocationParameterGroup extends AbstractParameterGroup
 {
+    /**
+     * Company location pobox
+     *
+     * @var string
+     */
     public $pobox;
 
+    /**
+     * Company location street
+     * @var string
+     */
     public $street;
 
+    /**
+     * Company location zip
+     *
+     * @var string
+     */
     public $zip;
 
+    /**
+     * Company location city
+     *
+     * @var string
+     */
     public $city;
 
+    /**
+     * Company location country
+     *
+     * @var string
+     */
     public $country;
 
     /**
-     * @return mixed
+     * Company location pobox getter
+     *
+     * @return string
      */
     public function getPobox()
     {
@@ -28,15 +61,21 @@ class LocationParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $pobox
+     * Setter for company location pobox
+     *
+     * @param $pobox
+     * @return $this
      */
     public function setPobox($pobox)
     {
         $this->pobox = $pobox;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Company location street getter
+     *
+     * @return string
      */
     public function getStreet()
     {
@@ -44,15 +83,21 @@ class LocationParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $street
+     * Setter for company location street
+     *
+     * @param $street
+     * @return $this
      */
     public function setStreet($street)
     {
         $this->street = $street;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Company location zip getter
+     *
+     * @return string
      */
     public function getZip()
     {
@@ -60,15 +105,21 @@ class LocationParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $zip
+     * Setter for company location pobox
+     *
+     * @param $zip
+     * @return $this
      */
     public function setZip($zip)
     {
         $this->zip = $zip;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Company location city getter
+     *
+     * @return string
      */
     public function getCity()
     {
@@ -76,15 +127,21 @@ class LocationParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $city
+     * Setter for company location city
+     *
+     * @param $city
+     * @return $this
      */
     public function setCity($city)
     {
         $this->city = $city;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Company location country getter
+     *
+     * @return string
      */
     public function getCountry()
     {
@@ -92,10 +149,14 @@ class LocationParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $country
+     * Setter for company location country
+     *
+     * @param $country
+     * @return $this
      */
     public function setCountry($country)
     {
         $this->country = $country;
+        return $this;
     }
 }

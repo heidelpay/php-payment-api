@@ -62,7 +62,7 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * setter for is quest checkout
+     * setter for is guest checkout
      *
      * @param string $customerGuestCheckout
      *

@@ -1,12 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 26.11.2018
- * Time: 13:28
- */
+
 namespace Heidelpay\PhpPaymentApi\Constants;
 
+/**
+ * Class for Commercial sector constants
+ *
+ * @license Use of this software requires acceptance of the License Agreement. See LICENSE file.
+ * @copyright Copyright © 2017-present heidelpay GmbH. All rights reserved.
+ *
+ * @link http://dev.heidelpay.com/php-payment-api
+ *
+ * @author Stephano Vogel <development@heidelpay.com>
+ *
+ * @package heidelpay\php-payment-api\constants
+ *
+ * @since 1.3.0 First time this was introduced.
+ */
 class CommercialSector
 {
     const OTHERS_COMMERCIAL_SECTORS = 'OTHERS_COMMERCIAL_SECTORS';
@@ -33,12 +42,14 @@ class CommercialSector
     const ELECTRICITY_GAS_AND_STEAM_SUPPLY = 'ELECTRICITY_GAS_AND_STEAM_SUPPLY';
     const WATER_COLLECTION_TREATMENT_AND_SUPPLY = 'WATER_COLLECTION_TREATMENT_AND_SUPPLY';
     const SEWERAGE = 'SEWERAGE';
+
     const MANUFACTURE_OF_FOOD_PRODUCTS = 'MANUFACTURE_OF_FOOD_PRODUCTS';
     const MANUFACTURE_OF_BEVERAGES = 'MANUFACTURE_OF_BEVERAGES';
     const MANUFACTURE_OF_TEXTILES = 'MANUFACTURE_OF_TEXTILES';
     const MANUFACTURE_OF_WEARING_APPAREL = 'MANUFACTURE_OF_WEARING_APPAREL';
     const MANUFACTURE_OF_LEATHER_AND_RELATED_PRODUCTS = 'MANUFACTURE_OF_LEATHER_AND_RELATED_PRODUCTS';
     const MANUFACTURE_OF_PHARMACEUTICAL_PRODUCTS = 'MANUFACTURE_OF_PHARMACEUTICAL_PRODUCTS';
+
     const REPAIR_AND_INSTALLATION_OF_MACHINERY_AND_EQUIPMENT = 'REPAIR_AND_INSTALLATION_OF_MACHINERY_AND_EQUIPMENT';
     const TRADE_AND_REPAIR_OF_MOTOR_VEHICLES = 'TRADE_AND_REPAIR_OF_MOTOR_VEHICLES';
     const PUBLISHING_ACTIVITIES = 'PUBLISHING_ACTIVITIES';

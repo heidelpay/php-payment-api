@@ -85,6 +85,23 @@ class Request extends AbstractMethod
         return $this;
     }
 
+    /**
+     * Set all necessary parameter for company.
+     *
+     * The executive array can be created beforehand or kept empty and be added later
+     *
+     * @param string $companyName
+     * @param string $poBox
+     * @param string $street
+     * @param string $zip
+     * @param string $city
+     * @param string $country
+     * @param string $CommercialSector
+     * @param string $registrationType
+     * @param string $commercialRegisterNumber
+     * @param string $vatId
+     * @param array $executives
+     */
     public function company(
         $companyName = null,
         $poBox = null,
@@ -108,41 +125,6 @@ class Request extends AbstractMethod
         $this->getCompany()->setCommercialregisternumber($commercialRegisterNumber);
         $this->getCompany()->setVatid($vatId);
         $this->getCompany()->setCommercialSector($CommercialSector);
-        $this->getCompany()->setExecutive($executives);
-    }
-
-    /**
-     * A
-     * @param string $function
-     * @param null $salutation
-     * @param null $given
-     * @param null $family
-     * @param null $birthdate
-     * @param null $email
-     * @param null $phone
-     * @param null $home
-     */
-    public function addExecutive(
-        $function = 'OWNER',
-        $salutation = null,
-        $given = null,
-        $family = null,
-        $birthdate = null,
-        $email = null,
-        $phone = null,
-        $home = null
-    ) {
-        $executive = new ExecutiveParameterGroup();
-        $executive->setFunction($function);
-        $executive->setSalutation($salutation);
-        $executive->setGiven($given);
-        $executive->setFamily($family);
-        $executive->setBirthdate($birthdate);
-        $executive->setEmail($email);
-        $executive->setPhone($phone);
-        $executive->setHome($home);
-        $executives = $this->getCompany()->getExecutive();
-        $executives[] = $executive;
         $this->getCompany()->setExecutive($executives);
     }
 

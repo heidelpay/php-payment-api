@@ -1,32 +1,81 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 26.11.2018
- * Time: 11:26
- */
+
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
+/**
+ * This class provides every api parameter related to the company executive data
+ *
+ * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
+ *
+ * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
+ *
+ * @author  David Owusu
+ *
+ * @package heidelpay\php-payment-api\parameter-groups
+ */
 class ExecutiveParameterGroup extends AbstractParameterGroup
 {
+    /**
+     * Executive funktion
+     *
+     * @var string
+     */
     public $function;
 
+    /**
+     * Executive salutation
+     *
+     * @var string
+     */
     public $salutation;
 
+    /**
+     * Executive name given
+     *
+     * @var string
+     */
     public $given;
 
+    /**
+     * Executive name family
+     *
+     * @var string
+     */
     public $family;
 
+    /**
+     * Executive birthdate
+     *
+     * @var string
+     */
     public $birthdate;
 
+    /**
+     * Executive email
+     *
+     * @var string
+     */
     public $email;
 
+    /**
+     * Executive phone number
+     *
+     * @var string
+     */
     public $phone;
 
+    /**
+     * Executive home parametergroup
+     *
+     * @var HomeParameterGroup
+     */
     public $home;
 
     /**
-     * @return mixed
+     * Executive function getter
+     *
+     * @return string | null
      */
     public function getFunction()
     {
@@ -34,15 +83,20 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for executive function
+     *
      * @param mixed $function
      */
     public function setFunction($function)
     {
         $this->function = $function;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Executive salutatin getter
+     *
+     * @return string | null
      */
     public function getSalutation()
     {
@@ -50,15 +104,20 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for executive salutation
+     *
      * @param mixed $salutation
      */
     public function setSalutation($salutation)
     {
         $this->salutation = $salutation;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Executive name given getter
+     *
+     * @return string | null
      */
     public function getGiven()
     {
@@ -66,15 +125,18 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for executive name given
      * @param mixed $given
      */
     public function setGiven($given)
     {
         $this->given = $given;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Executive family name getter
+     * @return string | null
      */
     public function getFamily()
     {
@@ -82,15 +144,20 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for executive family name
+     *
      * @param mixed $family
      */
     public function setFamily($family)
     {
         $this->family = $family;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Executive birthdate getter
+     *
+     * @return string | null
      */
     public function getBirthdate()
     {
@@ -98,15 +165,20 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $birthdate
+     * Setter for executive birthdate
+     *
+     * @param string $birthdate format:YYYY-MMM-DD
      */
     public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Executive email getter
+     *
+     * @return string | null
      */
     public function getEmail()
     {
@@ -114,15 +186,20 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $email
+     * Setter for executive email
+     *
+     * @param string $email
      */
     public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Executive phone number getter
+     *
+     * @return string | null
      */
     public function getPhone()
     {
@@ -130,15 +207,20 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for executive phone number
+     *
      * @param mixed $phone
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
+        return $this;
     }
 
 
     /**
+     * Executive home getter
+     *
      * @return HomeParameterGroup
      */
     public function getHome()
@@ -150,10 +232,13 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $home
+     * Setter for executive home
+     *
+     * @param HomeParameterGroup $home
      */
     public function setHome($home)
     {
         $this->home = $home;
+        return $this;
     }
 }

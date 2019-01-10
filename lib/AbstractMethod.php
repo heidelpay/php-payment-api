@@ -50,9 +50,7 @@ abstract class AbstractMethod implements MethodInterface
     /** @var BasketParameterGroup */
     protected $basket;
 
-    /**
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup
-     */
+    /** @var CompanyParameterGroup */
     protected $company;
 
     /** @var ConfigParameterGroup */
@@ -391,21 +389,30 @@ abstract class AbstractMethod implements MethodInterface
             $tempResult = $result;
             $result = array_merge(
                 $tempResult,
-                $this->buildParameterArray($parameterValues, $parameterGroup)
+                $this->buildSubParameterArray($parameterValues, $parameterGroup)
             );
         }
         return $result;
     }
 
-    public function buildParameterArray($requestParameter, $parentParameterName)
+    /**
+     * Build an array for subParameterGroups like Company->location
+     *
+     * @param mixed $requestParameter Is whether a parametergroup, array or string
+     * @param $parentParameterName
+     * @return array
+     */
+    public function buildSubParameterArray($requestParameter, $parentParameterName)
     {
         $result = [];
         if (!($requestParameter instanceof AbstractParameterGroup || is_array($requestParameter))) {
+            // If $requestParameter is no subGroup set the array parameter
             if ($requestParameter !== null) {
                 $result[strtoupper($parentParameterName)] = $requestParameter;
                 return $result;
             }
         } else {
+            // handle subParameterGroup
             if (is_object($requestParameter)) {
                 $requestParameter = get_object_vars($requestParameter);
             }
@@ -413,7 +420,7 @@ abstract class AbstractMethod implements MethodInterface
                 $tempResult = $result;
                 $result = array_merge(
                     $tempResult,
-                    $this->buildParameterArray($parameterSubValue, $parentParameterName . '.' . $parameterName)
+                    $this->buildSubParameterArray($parameterSubValue, $parentParameterName . '.' . $parameterName)
                 );
             }
         }
@@ -511,7 +518,7 @@ abstract class AbstractMethod implements MethodInterface
                     $parameterGroup->set($paramGroupProp, $value);
                 } else {
                     // call function to map subParameterGroups
-                    $this->mapSubParameterGroups($parameterGroup, $paramGroupProp, $value);
+                    $this->mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value);
                 }
             }
         }
@@ -519,20 +526,23 @@ abstract class AbstractMethod implements MethodInterface
 
 
     /**
-     * Functions to map response array to attributes to sub parameter classes recursively
+     * Map response array attributes to sub parameter classes recursively
+     *
      * @param $parameterGroup
      * @param $paramGroupProp
      * @param $value
      */
-    protected function mapSubParameterGroups($parameterGroup, $paramGroupProp, $value)
+    protected function mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value)
     {
         $values = explode('_', strtolower($paramGroupProp), 2);
 
         if (count($values) < 2) {
-            if ($parameterGroup instanceof AbstractParameterGroup) {
+            //set the parameter of the given subgroup
+            if ($parameterGroup instanceof AbstractParameterGroup && is_callable([$parameterGroup, 'get' . ucfirst($paramGroupProp)])) {
                 $parameterGroup->set($paramGroupProp, $value);
             }
         } else {
+            // look for subParameterGroup and call this function on it
             list($paramGroupName, $paramGroupString) = $values;
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$parameterGroup, $parameterGroupGetterFunc])) {
@@ -540,22 +550,17 @@ abstract class AbstractMethod implements MethodInterface
                 if (is_array($parameterGroup)) {
                     $parameterGroup = $paramGroupName;
                 }
-                $this->mapSubParameterGroups($parameterGroup, $paramGroupString, $value);
+                $this->mapSubGroupsFromPost($parameterGroup, $paramGroupString, $value);
             }
 
-            //If $paramGroupName is a number handle it like an array.
-            if (is_numeric($paramGroupName)) {
-                $executives = $this->getCompany()->getExecutive();
+            //Handle executive parametergroup
+            if (is_numeric($paramGroupName) && $parameterGroup === 'executive') {
+                echo print_r($parameterGroup, 1);
                 if ((int)$paramGroupName + 1 > count(($this->getCompany()->executive))) {
-                    $this->getCompany()->setExecutive(
-                        array_merge(
-                            $executives,
-                            [new ExecutiveParameterGroup()]
-                        )
-                    );
+                    $this->getCompany()->addExecutive(new ExecutiveParameterGroup());
                 }
                 $executive = $this->getCompany()->getExecutive()[$paramGroupName];
-                $this->mapSubParameterGroups($executive, $paramGroupString, $value);
+                $this->mapSubGroupsFromPost($executive, $paramGroupString, $value);
             }
         }
     }

@@ -1,22 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 27.11.2018
- * Time: 11:48
- */
+
 namespace Heidelpay\PhpPaymentApi\PushMapping;
 
+/**
+ * XML Push Mapping Class for the Company Parameter Group
+ *
+ * @license    Use of this software requires acceptance of the License Agreement. See LICENSE file.
+ * @copyright  Copyright © 2016-present heidelpay GmbH. All rights reserved.
+ *
+ * @link       http://dev.heidelpay.com/php-payment-api
+ *
+ * @author     David Owusu
+ *
+ * @package heidelpay\php-payment-api\push-mapping
+ */
 class Company extends AbstractPushMapper
 {
+    /**
+     * @inheritdoc
+     */
     public $fields = [
         'CompanyName' => 'companyname',
         'RegistrationType' => 'registrationtype',
         'CommercialRegisterNumber' => 'commercialregisternumber',
         'VatID' => 'vatid',
-        //'Executive' => 'executive',
         'CommercialSector' => 'commercialsector',
-        //'Location' => 'location',
     ];
 
     /**

@@ -1,17 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 22.11.2018
- * Time: 17:44
- */
+
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
 /**
- * This class provides every api parameter related to the company account data
- *
- * The Account group holds all information regarding a credit card or bank account.
- * Many parameters depend on the chosen payment method.
+ * This class provides every api parameter related to the company data
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2016-present heidelpay GmbH. All rights reserved.
@@ -24,43 +16,61 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
  */
 class CompanyParameterGroup extends AbstractParameterGroup
 {
-    public function __construct()
-    {
-    }
-
     /**
-     * @var string company name.
+     * Name of the company
+     *
+     * @var string
      */
     public $companyname;
 
+    /** Registration type
+     * Allowed values: "REGISTRED" , "UNREGISTRED"
+     * @var string
+     */
     public $registrationtype;
 
+    /**
+     * @var string
+     */
     public $commercialregisternumber;
 
+    /**
+     * @var string
+     */
     public $vatid;
 
     /**
-     * @var array $executive contains an array of Executives
+     * array of Executives
+     *
+     * @var array
      */
     public $executive;
 
+    /**
+     * Commercial sector of company
+     *
+     * @var string
+     */
     public $commercialsector;
 
     /**
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup
+     * Company location Parametergroup
+     *
+     * @var LocationParameterGroup
      */
     public $location;
 
     /**
-     * A
+     * Function to add an executive to the existing list
+     *
      * @param string $function
-     * @param null $salutation
-     * @param null $given
-     * @param null $family
-     * @param null $birthdate
-     * @param null $email
-     * @param null $phone
-     * @param null $home
+     * @param string $salutation
+     * @param string $given
+     * @param string $family
+     * @param string $birthdate
+     * @param string $email
+     * @param string $phone
+     * @param HomeParameterGroup $home
      */
     public function addExecutive(
         $function = 'OWNER',
@@ -71,105 +81,25 @@ class CompanyParameterGroup extends AbstractParameterGroup
         $email = null,
         $phone = null,
         $home = null
-    ) {
-        $executive = new ExecutiveParameterGroup();
-        $executive->setFunction($function);
-        $executive->setSalutation($salutation);
-        $executive->setGiven($given);
-        $executive->setFamily($family);
-        $executive->setBirthdate($birthdate);
-        $executive->setEmail($email);
-        $executive->setPhone($phone);
-        $executive->setHome($home);
+    )
+    {
+        $newExecutive = new ExecutiveParameterGroup();
+        $newExecutive->setFunction($function);
+        $newExecutive->setSalutation($salutation);
+        $newExecutive->setGiven($given);
+        $newExecutive->setFamily($family);
+        $newExecutive->setBirthdate($birthdate);
+        $newExecutive->setEmail($email);
+        $newExecutive->setPhone($phone);
+        $newExecutive->setHome($home);
         $executives = $this->getExecutive();
-        $executives[] = $executive;
+        $executives[] = $newExecutive;
         $this->setExecutive($executives);
     }
 
     /**
-     * @return LocationParameterGroup
-     */
-    public function getLocation()
-    {
-        if ($this->location === null) {
-            return $this->location = new LocationParameterGroup();
-        }
-        return $this->location;
-    }
-
-    /**
-     * @param LocationParameterGroup $location
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCompanyname()
-    {
-        return $this->companyname;
-    }
-
-    /**
-     * @param string $companyname
-     */
-    public function setCompanyname($companyname)
-    {
-        $this->companyname = $companyname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRegistrationtype()
-    {
-        return $this->registrationtype;
-    }
-
-    /**
-     * @param mixed $registrationtype
-     */
-    public function setRegistrationtype($registrationtype)
-    {
-        $this->registrationtype = $registrationtype;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCommercialregisternumber()
-    {
-        return $this->commercialregisternumber;
-    }
-
-    /**
-     * @param mixed $commercialregisternumber
-     */
-    public function setCommercialregisternumber($commercialregisternumber)
-    {
-        $this->commercialregisternumber = $commercialregisternumber;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVatid()
-    {
-        return $this->vatid;
-    }
-
-    /**
-     * @param mixed $vatid
-     */
-    public function setVatid($vatid)
-    {
-        $this->vatid = $vatid;
-    }
-
-    /**
+     * Company executive getter
+     *
      * @return array
      */
     public function getExecutive()
@@ -184,15 +114,128 @@ class CompanyParameterGroup extends AbstractParameterGroup
     }
 
     /**
+     * Setter for company executive
+     *
      * @param array $executive
      */
     public function setExecutive($executive)
     {
         $this->executive = $executive;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Company location getter
+     *
+     * @return LocationParameterGroup
+     */
+    public function getLocation()
+    {
+        if ($this->location === null) {
+            return $this->location = new LocationParameterGroup();
+        }
+        return $this->location;
+    }
+
+    /**
+     * Setter for company location
+     *
+     * @param LocationParameterGroup $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * Companyname getter
+     *
+     * @return string | null
+     */
+    public function getCompanyname()
+    {
+        return $this->companyname;
+    }
+
+    /**
+     * Setter for companyname
+     *
+     * @param string $companyname
+     */
+    public function setCompanyname($companyname)
+    {
+        $this->companyname = $companyname;
+        return $this;
+    }
+
+    /**
+     * Company registrationtype getter
+     *
+     * @return string | null
+     */
+    public function getRegistrationtype()
+    {
+        return $this->registrationtype;
+    }
+
+    /**
+     * Setter for company registrationtype
+     *
+     * @param string $registrationtype
+     */
+    public function setRegistrationtype($registrationtype)
+    {
+        $this->registrationtype = $registrationtype;
+        return $this;
+    }
+
+    /**
+     * Commercialregistrnumber getter
+     *
+     * @return string | null
+     */
+    public function getCommercialregisternumber()
+    {
+        return $this->commercialregisternumber;
+    }
+
+    /**
+     * Setter for commercialregistrnumber
+     *
+     * @param string $commercialregisternumber
+     */
+    public function setCommercialregisternumber($commercialregisternumber)
+    {
+        $this->commercialregisternumber = $commercialregisternumber;
+        return $this;
+    }
+
+    /**
+     * Company vatid getter
+     *
+     * @return string | null
+     */
+    public function getVatid()
+    {
+        return $this->vatid;
+    }
+
+    /**
+     * Setter for vatid
+     *
+     * @param string $vatid
+     */
+    public function setVatid($vatid)
+    {
+        $this->vatid = $vatid;
+        return $this;
+    }
+
+    /**
+     * Commercialsector getter
+     *
+     * @return string | null
      */
     public function getCommercialSector()
     {
@@ -200,10 +243,13 @@ class CompanyParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param mixed $commercialSector
+     * Setter commerialSector
+     *
+     * @param string $commercialSector
      */
     public function setCommercialSector($commercialSector)
     {
         $this->commercialsector = $commercialSector;
+        return $this;
     }
 }
