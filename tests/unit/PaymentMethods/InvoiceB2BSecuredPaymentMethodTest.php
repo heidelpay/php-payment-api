@@ -74,8 +74,8 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             null
         ];
 
-        $request->addExecutive(...$executiveOne);
-        $request->addExecutive(...$executiveTwo);
+        $request->getCompany()->addExecutive(...$executiveOne);
+        $request->getCompany()->addExecutive(...$executiveTwo);
         $paymentObject->dryRun = false;
 
         $this->paymentObject = $paymentObject;
@@ -185,5 +185,31 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             Request::fromPost($postResponse)->getCompany()
         );
 
+    }
+
+    /**
+     * @test
+     */
+    public function fromJsonShouldBeMapped()
+    {
+        $request = new Request();
+        $executiveOne = [
+            'OWNER',
+            null,
+            'Testkäufer',
+            'Händler',
+            '1988-12-12',
+            'example@email.de',
+            '062216471400',
+            null
+        ];
+
+        $company = new Company();
+        $company->getCompanyDataArray();
+        $request->company(...$company->getCompanyDataArray());
+        $request->getCompany()->addExecutive(...$executiveOne);
+
+        $mappedRequest = Request::fromJson($request->toJson());
+        $this->assertEquals($request, $mappedRequest);
     }
 }
