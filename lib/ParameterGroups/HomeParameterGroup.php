@@ -44,6 +44,19 @@ class HomeParameterGroup extends AbstractParameterGroup
      */
     public $country;
 
+    public function __construct(
+        $street = null,
+        $zip = null,
+        $city = null,
+        $country = null
+    )
+    {
+        $this->street = $street;
+        $this->zip = $zip;
+        $this->city = $city;
+        $this->country = $country;
+    }
+
     /**
      * Executive home street getter
      *

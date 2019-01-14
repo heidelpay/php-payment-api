@@ -95,6 +95,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
         $executives = $this->getExecutive();
         $executives[] = $newExecutive;
         $this->setExecutive($executives);
+
+        return $this;
     }
 
     /**

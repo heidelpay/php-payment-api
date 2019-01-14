@@ -72,6 +72,22 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
      */
     public $home;
 
+    public function home(
+        $street = null,
+        $zip = null,
+        $city = null,
+        $country = null
+    )
+    {
+        $this->home = new HomeParameterGroup(
+            $street,
+            $zip,
+            $city,
+            $country
+        );
+        return $this;
+    }
+
     /**
      * Executive function getter
      *

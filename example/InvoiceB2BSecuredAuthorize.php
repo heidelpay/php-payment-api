@@ -98,7 +98,7 @@ $home->city = 'Heidelberg';
 $home->country = 'DE';
 $home->zip = '69115';
 
-$executiveOne = [
+$executive = [
     'OWNER',
     null,
     'Testkäufer',
@@ -108,17 +108,6 @@ $executiveOne = [
     '062216471400',
     $home
 ];
-$executiveTwo = [
-    'OWNER',
-    null,
-    'Testkäufer',
-    'Händler',
-    '1988-12-12',
-    'example@email.de',
-    '062216471400',
-    $home
-];
-
 
 $companyArray = [
     'heidelpay GmbH',
@@ -134,15 +123,12 @@ $companyArray = [
 ];
 
 $invoice->getRequest()->company(...$companyArray);
-$invoice->getRequest()->addExecutive(...$executiveOne);
-$invoice->getRequest()->addExecutive(...$executiveTwo);
+$invoice->getRequest()->getCompany()->addExecutive(...$executive);
 
 /**
  * Set necessary parameters for Heidelpay payment and send the request
  */
 $invoice->authorize();
-//echo print_r($invoice->getResponse(), 1);
-echo print_r($invoice->getResponse(), 1) . '\n';
 
 ?>
 <html>

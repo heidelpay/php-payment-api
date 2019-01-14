@@ -15,15 +15,15 @@ use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
 class Company
 {
     protected $companyName = 'heidelpay GmbH';
-    protected $poBox = 'poBox';
-    protected $street = 'street';
-    protected $zip = 'zip';
-    protected $city = 'city';
-    protected $country = 'country';
+    protected $poBox = null;
+    protected $street = 'Vangerowstr. 18';
+    protected $zip = '69115';
+    protected $city = 'Heidelberg';
+    protected $country = 'DE';
     protected $commercialSector = CommercialSector::AIR_TRANSPORT;
     protected $registrationType = RegistrationType::REGISTERED;
-    protected $commercialRegisterNumber = '123456789';
-    protected $vatId = '123456';
+    protected $commercialRegisterNumber = 'HRB 702091';
+    protected $vatId = 'DE 253 689 876';
     protected  $executive = [null];
 
     public function getCompanyDataArray()

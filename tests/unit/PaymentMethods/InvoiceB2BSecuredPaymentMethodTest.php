@@ -11,7 +11,6 @@ use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;
 use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
 use Heidelpay\PhpPaymentApi\ParameterGroups\HomeParameterGroup;
-use Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup;
 use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
@@ -47,11 +46,14 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
         $request->customerAddress(...$this->customerData->getCustomerDataArray());
         $request->company(...$this->company->getCompanyDataArray());
 
-        $home = new HomeParameterGroup();
-        $home->street = 'Vangerowstr. 18';
-        $home->city = 'Heidelberg';
-        $home->country = 'DE';
-        $home->zip = '69115';
+        $homeDataArray = [
+            'Vangerowstr. 18',
+            '69115',
+            'Heidelberg',
+            'DE',
+        ];
+        $home = new HomeParameterGroup(...$homeDataArray);
+
         $executiveOne = [
             'OWNER',
             null,
@@ -104,8 +106,8 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
         $expectedRequestArray = [
             'COMPANY.COMPANYNAME' => 'heidelpay GmbH',
             'COMPANY.REGISTRATIONTYPE' => RegistrationType::REGISTERED,
-            'COMPANY.COMMERCIALREGISTERNUMBER' => '123456789',
-            'COMPANY.VATID' => '123456',
+            'COMPANY.COMMERCIALREGISTERNUMBER' => 'HRB 702091',
+            'COMPANY.VATID' => 'DE 253 689 876',
             'COMPANY.COMMERCIALSECTOR' => CommercialSector::AIR_TRANSPORT,
             'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
             'CRITERION.SDK_VERSION' => 'v1.6.2',
@@ -113,11 +115,11 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'FRONTEND.MODE' => 'WHITELABEL',
             'REQUEST.VERSION' => '1.0',
             'TRANSACTION.MODE' => 'CONNECTOR_TEST',
-            'COMPANY.LOCATION.STREET' => 'street',
-            'COMPANY.LOCATION.POBOX' => 'poBox',
-            'COMPANY.LOCATION.ZIP' => 'zip',
-            'COMPANY.LOCATION.CITY' => 'city',
-            'COMPANY.LOCATION.COUNTRY' => 'country',
+            'COMPANY.LOCATION.STREET' => 'Vangerowstr. 18',
+            //'COMPANY.LOCATION.POBOX' => null,
+            'COMPANY.LOCATION.ZIP' => '69115',
+            'COMPANY.LOCATION.CITY' => 'Heidelberg',
+            'COMPANY.LOCATION.COUNTRY' => 'DE',
             'COMPANY.EXECUTIVE.1.FUNCTION' => 'OWNER',
             'COMPANY.EXECUTIVE.1.BIRTHDATE' => '1988-12-12',
             'COMPANY.EXECUTIVE.1.GIVEN' => 'Testkäufer',
@@ -156,9 +158,9 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     public function requestPostArrayShouldBeMappedAsExpected()
     {
         $postResponse = [
-            'COMPANY_COMMERCIALREGISTERNUMBER' => '123456789',
-            'COMPANY_COMMERCIALSECTOR' => 'AIR_TRANSPORT',
             'COMPANY_COMPANYNAME' => 'heidelpay GmbH',
+            'COMPANY_COMMERCIALREGISTERNUMBER' => 'HRB 702091',
+            'COMPANY_COMMERCIALSECTOR' => 'AIR_TRANSPORT',
             'COMPANY_EXECUTIVE_1_BIRTHDATE' => '1988-12-12',
             'COMPANY_EXECUTIVE_1_EMAIL' => 'example@email.de',
             'COMPANY_EXECUTIVE_1_FAMILY' => 'Händler',
@@ -171,13 +173,13 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY_EXECUTIVE_1_PHONE' => '062216471400',
             'COMPANY_EXECUTIVE_2_FUNCTION' => 'OWNER',
             'COMPANY_EXECUTIVE_2_BIRTHDATE' => '123',
-            'COMPANY_LOCATION_POBOX' => 'poBox',
-            'COMPANY_LOCATION_CITY' => 'city',
-            'COMPANY_LOCATION_COUNTRY' => 'country',
-            'COMPANY_LOCATION_STREET' => 'street',
-            'COMPANY_LOCATION_ZIP' => 'zip',
+            'COMPANY_LOCATION_POBOX' => null,
+            'COMPANY_LOCATION_STREET' => 'Vangerowstr. 18',
+            'COMPANY_LOCATION_ZIP' => '69115',
+            'COMPANY_LOCATION_CITY' => 'Heidelberg',
+            'COMPANY_LOCATION_COUNTRY' => 'DE',
             'COMPANY_REGISTRATIONTYPE' => 'REGISTERED',
-            'COMPANY_VATID' => '123456',
+            'COMPANY_VATID' => 'DE 253 689 876',
         ];
 
         $this->assertEquals(
@@ -190,7 +192,7 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     /**
      * @test
      */
-    public function fromJsonShouldBeMapped()
+    public function fromJsonShouldBeMappedAsExpected()
     {
         $request = new Request();
         $executiveOne = [
