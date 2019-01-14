@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Santanter Invoice integration tests.
 
 ### Added
+- Payment method for B2B invoice secured and corresponding tests.
 - Missing parameter CUSTOMER.OptIn_2 for Santander Invoice.
 
 ### Changed
