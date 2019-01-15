@@ -52,7 +52,7 @@ class ConfigParameterGroup extends AbstractParameterGroup
     /**
      * Config brands getter
      *
-     * @return string
+     * @return array
      */
     public function getBrands()
     {
