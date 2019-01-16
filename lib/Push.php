@@ -10,6 +10,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup;
@@ -171,11 +172,13 @@ class Push
                 $xmlExecutive = $xml->Transaction->Customer->Company->Executive;
 
                 for ($index = 0; $index < $executivesCount; $index++) {
-                    if (!isset($this->response->getCompany()->getExecutive()[$index+1])) {
-                        $this->response->getCompany()->addExecutive();
+                    if (!isset($this->response->getCompany()->getExecutive()[$index])) {
+                        $executive = $this->response->getCompany()->getExecutive();
+                        $executive[] = new ExecutiveParameterGroup();
+                        $this->response->getCompany()->setExecutive($executive);
                     }
-                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index+1], new Executive(), $xmlExecutive[$index]);
-                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index+1]->getHome(), new Home(), $xmlExecutive[$index]);
+                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index], new Executive(), $xmlExecutive[$index]);
+                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index]->getHome(), new Home(), $xmlExecutive[$index]);
                 }
             }
 
