@@ -5,9 +5,7 @@
  * Date: 03.01.2019
  * Time: 16:38
  */
-
 namespace Heidelpay\Tests\PhpPaymentApi\Helper;
-
 
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;
 use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
@@ -24,7 +22,7 @@ class Company
     protected $registrationType = RegistrationType::REGISTERED;
     protected $commercialRegisterNumber = 'HRB 702091';
     protected $vatId = 'DE 253 689 876';
-    protected  $executive = [null];
+    protected $executive = [];
 
     public function getCompanyDataArray()
     {
@@ -41,7 +39,6 @@ class Company
             $this->vatId,
             $this->executive
         ];
-
     }
 
     /**
@@ -142,5 +139,4 @@ class Company
         $this->executive = $executive;
         return $this;
     }
-
 }

@@ -39,4 +39,3 @@ class Location extends AbstractPushMapper
         return null;
     }
 }
-

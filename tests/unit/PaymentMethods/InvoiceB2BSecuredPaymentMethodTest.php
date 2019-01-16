@@ -10,11 +10,11 @@ namespace Heidelpay\Tests\PhpPaymentApi\unit\PaymentMethods;
 use AspectMock\Test as test;
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;
 use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
-use Heidelpay\PhpPaymentApi\ParameterGroups\HomeParameterGroup;
 use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
 use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 use Heidelpay\Tests\PhpPaymentApi\Helper\Company;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Executive;
 
 class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
 {
@@ -28,6 +28,7 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
         parent::__construct($name, $data, $dataName);
         $this->company = new Company();
     }
+
     /**
      * Set up function will create a payment method object for each test case
      *
@@ -46,38 +47,13 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
         $request->customerAddress(...$this->customerData->getCustomerDataArray());
         $request->company(...$this->company->getCompanyDataArray());
 
-        $homeDataArray = [
-            'Vangerowstr. 18',
-            '69115',
-            'Heidelberg',
-            'DE',
-        ];
-        $home = new HomeParameterGroup(...$homeDataArray);
+        $executive = new Executive();
 
-        $executiveOne = [
-            'OWNER',
-            null,
-            'Testkäufer',
-            'Händler',
-            '1988-12-12',
-            'example@email.de',
-            '062216471400',
-            $home
-        ];
-
-        $executiveTwo = [
-            'OWNER',
-            null,
-            null,
-            null,
-            '123',
-            null,
-            null,
-            null
-        ];
+        $executiveOne = $executive->getExecutiveOneArray();
+        $executiveTwo = $executive->getExecutiveTwoArray();
 
         $request->getCompany()->addExecutive(...$executiveOne);
-        $request->getCompany()->addExecutive(...$executiveTwo);
+        //$request->getCompany()->addExecutive(...$executiveTwo);
         $paymentObject->dryRun = false;
 
         $this->paymentObject = $paymentObject;
@@ -99,6 +75,7 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     /**
      * Prepare request company.
      * This test will convert the request object to post array format
+     *
      * @test
      */
     public function companyParametersShouldBeSetAsExpected()
@@ -130,8 +107,8 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY.EXECUTIVE.1.HOME.ZIP' => '69115',
             'COMPANY.EXECUTIVE.1.HOME.CITY' => 'Heidelberg',
             'COMPANY.EXECUTIVE.1.HOME.COUNTRY' => 'DE',
-            'COMPANY.EXECUTIVE.2.FUNCTION' => 'OWNER',
-            'COMPANY.EXECUTIVE.2.BIRTHDATE' => '123',
+          /*  'COMPANY.EXECUTIVE.2.FUNCTION' => 'OWNER',
+            'COMPANY.EXECUTIVE.2.BIRTHDATE' => '123',*/
             'ADDRESS.CITY' => 'Heidelberg',
             'ADDRESS.COUNTRY' => 'DE',
             'ADDRESS.STATE' => 'DE-BW',
@@ -149,7 +126,7 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
 
         $request = $this->paymentObject->getRequest();
 
-        $this->assertThat($expectedRequestArray, $this->arraysMatchExactly($request->toArray()));
+        $this->assertThat($request->toArray(), $this->arraysMatchExactly($expectedRequestArray));
     }
 
     /**
@@ -171,8 +148,8 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY_EXECUTIVE_1_HOME_STREET' => 'Vangerowstr. 18',
             'COMPANY_EXECUTIVE_1_HOME_ZIP' => '69115',
             'COMPANY_EXECUTIVE_1_PHONE' => '062216471400',
-            'COMPANY_EXECUTIVE_2_FUNCTION' => 'OWNER',
-            'COMPANY_EXECUTIVE_2_BIRTHDATE' => '123',
+            /*'COMPANY_EXECUTIVE_2_FUNCTION' => 'OWNER',
+            'COMPANY_EXECUTIVE_2_BIRTHDATE' => '123',*/
             'COMPANY_LOCATION_POBOX' => null,
             'COMPANY_LOCATION_STREET' => 'Vangerowstr. 18',
             'COMPANY_LOCATION_ZIP' => '69115',
@@ -186,7 +163,6 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             $this->paymentObject->getRequest()->getCompany(),
             Request::fromPost($postResponse)->getCompany()
         );
-
     }
 
     /**
@@ -195,21 +171,13 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     public function fromJsonShouldBeMappedAsExpected()
     {
         $request = new Request();
-        $executiveOne = [
-            'OWNER',
-            null,
-            'Testkäufer',
-            'Händler',
-            '1988-12-12',
-            'example@email.de',
-            '062216471400',
-            null
-        ];
 
+        $executive = new Executive();
         $company = new Company();
+
         $company->getCompanyDataArray();
         $request->company(...$company->getCompanyDataArray());
-        $request->getCompany()->addExecutive(...$executiveOne);
+        $request->getCompany()->addExecutive(...$executive->getExecutiveOneArray());
 
         $mappedRequest = Request::fromJson($request->toJson());
         $this->assertEquals($request, $mappedRequest);

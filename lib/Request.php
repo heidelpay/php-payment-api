@@ -5,7 +5,6 @@ namespace Heidelpay\PhpPaymentApi;
 use Heidelpay\PhpPaymentApi\Adapter\CurlAdapter;
 use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
-use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 
 /**
  * Heidelpay request object
@@ -100,7 +99,7 @@ class Request extends AbstractMethod
      * @param string $registrationType
      * @param string $commercialRegisterNumber
      * @param string $vatId
-     * @param array $executives
+     * @param array  $executives
      */
     public function company(
         $companyName = null,

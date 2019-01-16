@@ -6,7 +6,6 @@ use Codeception\TestCase\Test;
 
 use Heidelpay\PhpPaymentApi\ParameterGroups\HomeParameterGroup as Home;
 
-
 /**
  * Unit test for CompanyParameterGroup
  *

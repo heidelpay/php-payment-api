@@ -43,4 +43,3 @@ class Home extends AbstractPushMapper
         return null;
     }
 }
-

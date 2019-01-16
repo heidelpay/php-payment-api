@@ -50,10 +50,10 @@ $invoice = new InvoiceB2BSecuredPaymentMethod();
  * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
  */
 $invoice->getRequest()->authentification(
-    '31HA07BC8181E8CCFDAD64E8A4B3B766',  // SecuritySender
-    '31ha07bc8181e8ccfdad73fd513d2a53',  // UserLogin
-    '4B2D4BE3',                          // UserPassword
-    '31HA07BC8122B949FB64075AFB0798AE',  // TransactionChannel credit card without 3d secure
+    '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
+    '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
+    '93167DE7',                          // UserPassword
+    '31HA07BC8129FBA7AF655AB2C27E5B3C',  // TransactionChannel credit card without 3d secure
     true                                 // Enable sandbox mode
 );
 /**
@@ -92,6 +92,20 @@ $invoice->getRequest()->basketData(
     '39542395235ßfsokkspreipsr'    // A secret passphrase from your application
 );
 
+$companyArray = [
+    'heidelpay GmbH',
+    null,
+    'Vangerowstr. 18',
+    '69115',
+    'Heidelberg',
+    'DE',
+    CommercialSector::AIR_TRANSPORT,
+    RegistrationType::REGISTERED,
+    '123456789',
+    '123456'
+];
+
+
 $home = new HomeParameterGroup();
 $home->street = 'Vangerowstr. 18';
 $home->city = 'Heidelberg';
@@ -109,18 +123,6 @@ $executive = [
     $home
 ];
 
-$companyArray = [
-    'heidelpay GmbH',
-    null,
-    'Vangerowstr. 18',
-    '69115',
-    'Heidelberg',
-    'DE',
-    CommercialSector::AIR_TRANSPORT,
-    RegistrationType::REGISTERED,
-    '123456789',
-    '123456'
-];
 
 $invoice->getRequest()->company(...$companyArray);
 $invoice->getRequest()->getCompany()->addExecutive(...$executive);

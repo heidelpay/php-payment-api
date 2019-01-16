@@ -6,7 +6,6 @@ use Codeception\TestCase\Test;
 
 use Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup as Location;
 
-
 /**
  * Unit test for CompanyParameterGroup
  *
@@ -107,6 +106,4 @@ class LocationParameterGroupTest extends Test
 
         $this->assertEquals($value, $this->location->getCountry());
     }
-
-
 }

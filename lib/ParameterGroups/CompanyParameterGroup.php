@@ -25,6 +25,7 @@ class CompanyParameterGroup extends AbstractParameterGroup
 
     /** Registration type
      * Allowed values: "REGISTRED" , "UNREGISTRED"
+     *
      * @var string
      */
     public $registrationtype;
@@ -63,35 +64,48 @@ class CompanyParameterGroup extends AbstractParameterGroup
     /**
      * Function to add an executive to the existing list
      *
-     * @param string $function
-     * @param string $salutation
-     * @param string $given
-     * @param string $family
-     * @param string $birthdate
-     * @param string $email
-     * @param string $phone
+     * @param string             $function
+     * @param string             $salutation
+     * @param string             $given
+     * @param string             $family
+     * @param string             $birthdate
+     * @param string             $email
+     * @param string             $phone
      * @param HomeParameterGroup $home
+     * @param mixed              $homeStreet
+     * @param mixed              $homeZip
+     * @param mixed              $homeCity
+     * @param mixed              $homeCountry
      */
     public function addExecutive(
-        $function = 'OWNER',
-        $salutation = null,
-        $given = null,
-        $family = null,
-        $birthdate = null,
-        $email = null,
-        $phone = null,
-        $home = null
-    )
-    {
+        $function,
+        $salutation,
+        $given,
+        $family,
+        $birthdate,
+        $email,
+        $phone,
+        $homeStreet,
+        $homeZip,
+        $homeCity,
+        $homeCountry
+    ) {
         $newExecutive = new ExecutiveParameterGroup();
-        $newExecutive->setFunction($function);
+        $newExecutive->setFunction(!empty($function) && is_string($function) ?$function: 'OWNER');
         $newExecutive->setSalutation($salutation);
         $newExecutive->setGiven($given);
         $newExecutive->setFamily($family);
         $newExecutive->setBirthdate($birthdate);
         $newExecutive->setEmail($email);
         $newExecutive->setPhone($phone);
-        $newExecutive->setHome($home);
+
+        $home = $newExecutive->getHome();
+
+        $home->street = $homeStreet;
+        $home->city = $homeCity;
+        $home->country =$homeCountry;
+        $home->zip = $homeZip;
+
         $executives = $this->getExecutive();
         $executives[] = $newExecutive;
         $this->setExecutive($executives);
@@ -103,15 +117,23 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Company executive getter
      *
      * @return array
+     *
+     * @param null|mixed $index
      */
-    public function getExecutive()
+    public function getExecutive($index = null)
     {
         if ($this->executive === null) {
-            return $this->executive = array(
-                null,
-                new ExecutiveParameterGroup()
-            );
+            return $this->executive = [];
         }
+
+        if ($index !== null) {
+            if (!is_bool($index) && isset($this->executive[$index])) {
+                return $this->executive[$index];
+            } else {
+                return null;
+            }
+        }
+
         return $this->executive;
     }
 

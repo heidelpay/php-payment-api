@@ -25,6 +25,7 @@ class LocationParameterGroup extends AbstractParameterGroup
 
     /**
      * Company location street
+     *
      * @var string
      */
     public $street;
@@ -64,6 +65,7 @@ class LocationParameterGroup extends AbstractParameterGroup
      * Setter for company location pobox
      *
      * @param $pobox
+     *
      * @return $this
      */
     public function setPobox($pobox)
@@ -86,6 +88,7 @@ class LocationParameterGroup extends AbstractParameterGroup
      * Setter for company location street
      *
      * @param $street
+     *
      * @return $this
      */
     public function setStreet($street)
@@ -108,6 +111,7 @@ class LocationParameterGroup extends AbstractParameterGroup
      * Setter for company location pobox
      *
      * @param $zip
+     *
      * @return $this
      */
     public function setZip($zip)
@@ -130,6 +134,7 @@ class LocationParameterGroup extends AbstractParameterGroup
      * Setter for company location city
      *
      * @param $city
+     *
      * @return $this
      */
     public function setCity($city)
@@ -152,6 +157,7 @@ class LocationParameterGroup extends AbstractParameterGroup
      * Setter for company location country
      *
      * @param $country
+     *
      * @return $this
      */
     public function setCountry($country)

@@ -77,8 +77,7 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
         $zip = null,
         $city = null,
         $country = null
-    )
-    {
+    ) {
         $this->home = new HomeParameterGroup(
             $street,
             $zip,
@@ -142,6 +141,7 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
 
     /**
      * Setter for executive name given
+     *
      * @param mixed $given
      */
     public function setGiven($given)
@@ -152,6 +152,7 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
 
     /**
      * Executive family name getter
+     *
      * @return string | null
      */
     public function getFamily()
@@ -232,7 +233,6 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
         $this->phone = $phone;
         return $this;
     }
-
 
     /**
      * Executive home getter

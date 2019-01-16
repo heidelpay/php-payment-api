@@ -206,11 +206,6 @@ abstract class AbstractMethod implements MethodInterface
         return $this->frontend;
     }
 
-    public function getHome()
-    {
-        return $this->getCompany()->getExecutive()[1]->getHome();
-    }
-
     /**
      * Identification getter
      *
@@ -400,6 +395,7 @@ abstract class AbstractMethod implements MethodInterface
      *
      * @param mixed $requestParameter Is whether a parametergroup, array or string
      * @param $parentParameterName
+     *
      * @return array
      */
     public function buildSubParameterArray($requestParameter, $parentParameterName)
@@ -417,6 +413,7 @@ abstract class AbstractMethod implements MethodInterface
                 $requestParameter = get_object_vars($requestParameter);
             }
             foreach ($requestParameter as $parameterName => $parameterSubValue) {
+                $parameterName = is_numeric($parameterName)?$parameterName+1:$parameterName;
                 $tempResult = $result;
                 $result = array_merge(
                     $tempResult,
@@ -488,7 +485,7 @@ abstract class AbstractMethod implements MethodInterface
                         //echo print_r($value, 1) . "\n\t";
                         $this->{$parameterGroupGetterFunc}()->set($property, $value);
                     } else {
-                       $this->mapFromJsonSubGroups($this->{$parameterGroupGetterFunc}(), $property, $value);
+                        $this->mapFromJsonSubGroups($this->{$parameterGroupGetterFunc}(), $property, $value);
                     }
                 }
             }
@@ -511,15 +508,17 @@ abstract class AbstractMethod implements MethodInterface
             if (is_array($content)) {
                 foreach ($content as $index => $value) {
                     if ($index+1 > count($subParameterGroup)) {
-                        $parameterGroup->{$addFunction}();
+                        $className = 'Heidelpay\PhpPaymentApi\ParameterGroups\\'.ucfirst($propertyName) . "ParameterGroup";
+                        $subParameterGroup[] = new $className();
+                        $parameterGroup->set($propertyName, $subParameterGroup);
                     }
 
-                    if($value == null) {
+                    if ($value == null) {
                         continue;
                     }
 
                     foreach ($value as $arrayParameter => $arrayParameterValue) {
-                        if(!empty($subParameterGroup[$index])) {
+                        if (!empty($subParameterGroup[$index])) {
                             $this->mapFromJsonSubGroups($subParameterGroup[$index], $arrayParameter, $arrayParameterValue);
                         }
                     }
@@ -564,13 +563,12 @@ abstract class AbstractMethod implements MethodInterface
         }
     }
 
-
     /**
      * Map response array attributes to sub parameter classes recursively
      *
-     * @param $parameterGroup
-     * @param $paramGroupProp
-     * @param $value
+     * @param mixed  $parameterGroup
+     * @param string $paramGroupProp
+     * @param string $value
      */
     protected function mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value)
     {
@@ -596,10 +594,12 @@ abstract class AbstractMethod implements MethodInterface
             //Handle executive parametergroup
             if (is_numeric($paramGroupName) && $parameterGroup === 'executive') {
                 //echo print_r($parameterGroup, 1);
-                if ((int)$paramGroupName + 1 > count(($this->getCompany()->executive))) {
-                    $this->getCompany()->addExecutive(new ExecutiveParameterGroup());
+                if ((int)$paramGroupName > count(($this->getCompany()->executive))) {
+                    $executives = $this->getCompany()->getExecutive();
+                    $executives[] = new ExecutiveParameterGroup();
+                    $this->getCompany()->setExecutive($executives);
                 }
-                $executive = $this->getCompany()->getExecutive()[$paramGroupName];
+                $executive = $this->getCompany()->getExecutive()[$paramGroupName-1];
                 $this->mapSubGroupsFromPost($executive, $paramGroupString, $value);
             }
         }

@@ -49,8 +49,7 @@ class HomeParameterGroup extends AbstractParameterGroup
         $zip = null,
         $city = null,
         $country = null
-    )
-    {
+    ) {
         $this->street = $street;
         $this->zip = $zip;
         $this->city = $city;
@@ -111,6 +110,7 @@ class HomeParameterGroup extends AbstractParameterGroup
 
     /**
      * Setter for executive home city
+     *
      * @param string $city
      */
     public function setCity($city)

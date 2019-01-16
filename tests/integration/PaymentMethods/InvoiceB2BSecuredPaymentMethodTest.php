@@ -89,11 +89,9 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setSecuritySender('31HA07BC8181E8CCFDAD64E8A4B3B766')
-            ->setUserLogin('31ha07bc8181e8ccfdad73fd513d2a53')
-            ->setUserPassword('4B2D4BE3')
-            ->setTransactionChannel('31HA07BC8122B949FB64075AFB0798AE')
+            ->setTransactionChannel('31HA07BC8129FBA7AF655AB2C27E5B3C')
             ->getAuthenticationArray();
+
         $customerDetails = $this->customerData->getCustomerDataArray();
         $companyDetails = $this->companyData->getCompanyDataArray();
 
@@ -143,6 +141,8 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             $this->paymentObject->getResponse()->isError(),
             'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
+        $this->assertEquals($this->paymentObject->getRequest()->getCompany(), $this->paymentObject->getResponse()->getCompany(),
+            'request\'s company object differs from respons\'s company object');
 
         $this->logDataToDebug();
 

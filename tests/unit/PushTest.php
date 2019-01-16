@@ -458,6 +458,7 @@ class PushTest extends Test
 
     /**
      * @test
+     *
      * @throws XmlResponseParserException
      */
     public function hasValidMappedCompanyProperties()

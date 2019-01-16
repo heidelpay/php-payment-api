@@ -171,11 +171,11 @@ class Push
                 $xmlExecutive = $xml->Transaction->Customer->Company->Executive;
 
                 for ($index = 0; $index < $executivesCount; $index++) {
-                    if(!isset($this->response->getCompany()->getExecutive()[$index+1])) {
+                    if (!isset($this->response->getCompany()->getExecutive()[$index+1])) {
                         $this->response->getCompany()->addExecutive();
                     }
-                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index+1], new Executive() , $xmlExecutive[$index]);
-                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index+1]->getHome(), new Home() , $xmlExecutive[$index]);
+                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index+1], new Executive(), $xmlExecutive[$index]);
+                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index+1]->getHome(), new Home(), $xmlExecutive[$index]);
                 }
             }
 

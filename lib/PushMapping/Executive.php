@@ -33,7 +33,7 @@ class Executive extends AbstractPushMapper
      */
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset( $xmlElement->$field)) {
+        if (isset($xmlElement->$field)) {
             return (string)$xmlElement->$field;
         }
 

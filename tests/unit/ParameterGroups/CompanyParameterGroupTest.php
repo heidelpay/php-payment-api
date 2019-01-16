@@ -5,8 +5,10 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 use Codeception\TestCase\Test;
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup as Company;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup as Location;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Executive;
 
 /**
  * Unit test for CompanyParameterGroup
@@ -32,6 +34,11 @@ class CompanyParameterGroupTest extends Test
     public function _before()
     {
         $this->company = new Company();
+        $executive = new Executive();
+
+        $this->company->addExecutive(...$executive->getExecutiveOneArray());
+        $this->company->addExecutive(...$executive->getExecutiveTwoArray());
+        $this->company->addExecutive(...$executive->getExecutiveOneArray());
     }
 
     /**
@@ -104,7 +111,6 @@ class CompanyParameterGroupTest extends Test
     public function executive()
     {
         $value = [
-            null,
             new ExecutiveParameterGroup()
         ];
 
@@ -112,6 +118,36 @@ class CompanyParameterGroupTest extends Test
         $this->assertEquals($value, $this->company->getExecutive());
     }
 
+    /**
+     * @param ExecutiveParameterGroup $expected
+     * @param mixed                   $index
+     * @dataProvider executiveGetterIndexShouldWorkAsExpectedDataProvider
+     * @test
+     */
+    public function executiveGetterIndexShouldWorkAsExpected($expected, $index)
+    {
+        $this->assertEquals($expected, $this->company->getExecutive($index));
+    }
+
+    public function executiveGetterIndexShouldWorkAsExpectedDataProvider()
+    {
+        $executiveFixture = new Executive();
+
+        $testCompany = new CompanyParameterGroup();
+        $testCompany->addExecutive(...$executiveFixture->getExecutiveOneArray());
+        $testCompany->addExecutive(...$executiveFixture->getExecutiveTwoArray());
+        $testCompany->addExecutive(...$executiveFixture->getExecutiveOneArray());
+
+        return [
+            'index exists' => [$testCompany->executive[0], 0],
+            'index of second executive' => [$testCompany->executive[1], 1],
+            'last element exists' => [$testCompany->executive[2], 2],
+            'index element doesnt exists' => [null, 3],
+            'negative index' => [null, -3],
+            'index is boolean true' => [null, true],
+            'index is boolean false' => [null, false],
+        ];
+    }
 
     /**
      * CommercialSector getter/setter test
@@ -137,5 +173,32 @@ class CompanyParameterGroupTest extends Test
         $this->company->setLocation($value);
 
         $this->assertEquals($value, $this->company->getLocation());
+    }
+
+    /**
+     * @dataProvider functionShouldBeSetAsExpectedDataProvider
+     * @test
+     *
+     * @param mixed $expected
+     * @param mixed $function
+     */
+    public function functionShouldBeSetAsExpected($expected, $function)
+    {
+        $company = new Company();
+        $company->addExecutive($function, '', '', '', '', '', '', '', '', '', '');
+
+        $this->assertEquals($expected, $company->getExecutive()[0]->getFunction());
+    }
+
+    public function functionShouldBeSetAsExpectedDataProvider()
+    {
+        return [
+            'function is null' => ['OWNER', null],
+            'function is empty string' => ['OWNER', ''],
+            'function is false' => ['OWNER', false],
+            'function is true' => ['OWNER', true],
+            'function is string' => ['hello world', 'hello world'],
+            'function is number' => ['OWNER', 42],
+        ];
     }
 }

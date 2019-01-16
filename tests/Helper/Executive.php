@@ -5,25 +5,12 @@
  * Date: 14.01.2019
  * Time: 09:34
  */
-
 namespace Heidelpay\Tests\PhpPaymentApi\Helper;
-
-
-use Heidelpay\PhpPaymentApi\ParameterGroups\HomeParameterGroup;
 
 class Executive
 {
-
     public function __construct()
     {
-        $homeDataArray = [
-            'Vangerowstr. 18',
-            '69115',
-            'Heidelberg',
-            'DE',
-        ];
-        $home = new HomeParameterGroup(...$homeDataArray);
-
         $this->executiveOneArray = [
             'OWNER',
             null,
@@ -32,18 +19,24 @@ class Executive
             '1988-12-12',
             'example@email.de',
             '062216471400',
-            $home
+            'Vangerowstr. 18',
+            '69115',
+            'Heidelberg',
+            'DE',
         ];
 
         $this->executiveTwoArray = [
             'OWNER',
-            null,
-            null,
-            null,
+            '',
+            '',
+            '',
             '123',
-            null,
-            null,
-            null
+            '',
+            '',
+            'null',
+            'null',
+            'null',
+            'null'
         ];
     }
 
