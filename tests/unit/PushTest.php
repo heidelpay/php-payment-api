@@ -997,7 +997,7 @@ XML;
                     <Email>example@email.de</Email>
                     <Function></Function>
                     <Home>
-<!--                        <Street>Vangerowstr. 22</Street>
+                        <!--<Street>Vangerowstr. 22</Street>
                         <Zip>69115</Zip>
                         <City>Heidelberg2</City>
                         <Country>DE</Country>-->

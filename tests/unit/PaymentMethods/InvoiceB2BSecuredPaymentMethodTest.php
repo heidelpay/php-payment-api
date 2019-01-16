@@ -140,6 +140,8 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
     /**
      * @dataProvider requestPostArrayShouldBeMappedAsExpectedDataProvider
      * @test
+     *
+     * @param mixed $parameterArray
      */
     public function requestPostArrayShouldBeMappedAsExpected($parameterArray)
     {
