@@ -417,7 +417,8 @@ abstract class AbstractMethod implements MethodInterface
                 $tempResult = $result;
                 $result = array_merge(
                     $tempResult,
-                    $this->buildSubParameterArray($parameterSubValue, $parentParameterName . '.' . $parameterName)
+                    $this->buildSubParameterArray($parameterSubValue,
+                        $parentParameterName . '.' . $parameterName)
                 );
             }
         }
@@ -593,7 +594,6 @@ abstract class AbstractMethod implements MethodInterface
 
             //Handle executive parametergroup
             if (is_numeric($paramGroupName) && $parameterGroup === 'executive') {
-                //echo print_r($parameterGroup, 1);
                 if ((int)$paramGroupName > count(($this->getCompany()->executive))) {
                     $executives = $this->getCompany()->getExecutive();
                     $executives[] = new ExecutiveParameterGroup();

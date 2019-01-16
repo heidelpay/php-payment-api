@@ -489,24 +489,25 @@ class PushTest extends Test
         $this->assertEquals('example@email.de', $response->getCompany()->getExecutive()[0]->email);
         $this->assertEquals('OWNER', $response->getCompany()->getExecutive()[0]->function);
 
-
         $this->assertEquals('Vangerowstr. 18', $response->getCompany()->getExecutive()[0]->getHome()->street);
         $this->assertEquals('69115', $response->getCompany()->getExecutive()[0]->getHome()->zip);
         $this->assertEquals('Heidelberg', $response->getCompany()->getExecutive()[0]->getHome()->city);
         $this->assertEquals('DE', $response->getCompany()->getExecutive()[0]->getHome()->country);
-        
+
+
         $this->assertEquals('Testkäufer-2', $response->getCompany()->getExecutive()[1]->given);
         $this->assertEquals('Händler-2', $response->getCompany()->getExecutive()[1]->family);
         $this->assertEquals('1988-02-02', $response->getCompany()->getExecutive()[1]->birthdate);
         $this->assertEquals('062216471400', $response->getCompany()->getExecutive()[1]->phone);
         $this->assertEquals('example@email.de', $response->getCompany()->getExecutive()[1]->email);
-        $this->assertEquals('OWNER2', $response->getCompany()->getExecutive()[1]->function);
+        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->function);
 
+        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->street);
+        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->zip);
+        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->city);
+        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->country);
 
-        $this->assertEquals('Vangerowstr. 22', $response->getCompany()->getExecutive()[1]->getHome()->street);
-        $this->assertEquals('69115', $response->getCompany()->getExecutive()[1]->getHome()->zip);
-        $this->assertEquals('Heidelberg2', $response->getCompany()->getExecutive()[1]->getHome()->city);
-        $this->assertEquals('DE', $response->getCompany()->getExecutive()[1]->getHome()->country);
+        $this->assertNotNull($response->getCompany()->getExecutive()[2]);
 
         codecept_debug('response: ' . print_r($response, 1));
     }
@@ -994,13 +995,15 @@ XML;
                     <Birthdate>1988-02-02</Birthdate>
                     <Phone>062216471400</Phone>
                     <Email>example@email.de</Email>
-                    <Function>OWNER2</Function>
+                    <Function></Function>
                     <Home>
-                        <Street>Vangerowstr. 22</Street>
+<!--                        <Street>Vangerowstr. 22</Street>
                         <Zip>69115</Zip>
                         <City>Heidelberg2</City>
-                        <Country>DE</Country>
+                        <Country>DE</Country>-->
                     </Home>
+                </Executive>
+                <Executive>
                 </Executive>
                 <CommercialSector>AIR_TRANSPORT</CommercialSector>
             </Company>
