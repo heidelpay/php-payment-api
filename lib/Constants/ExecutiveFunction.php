@@ -5,9 +5,7 @@
  * Date: 17.01.2019
  * Time: 16:29
  */
-
 namespace Heidelpay\PhpPaymentApi\Constants;
-
 
 class ExecutiveFunction
 {

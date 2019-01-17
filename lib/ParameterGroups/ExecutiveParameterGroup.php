@@ -17,8 +17,8 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 class ExecutiveParameterGroup extends AbstractParameterGroup
 {
     /**
-     * The function of the executive in the company. Default will be set to "OWNER"
-     *
+     * The function of the executive in the company. Default: "OWNER"
+     * Possible other values are: "PARTNER", "SHAREHOLDER", "DIRECTOR", "MANAGER", "REGISTERED_MANAGER".
      * @var string
      */
     public $function;
