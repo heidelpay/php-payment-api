@@ -168,8 +168,8 @@ class Push
 
             // set Executives
             if (isset($xml->Transaction, $xml->Transaction->Customer->Company->Executive)) {
-                $executivesCount = $xml->Transaction->Customer->Company->Executive->count();
                 $xmlExecutive = $xml->Transaction->Customer->Company->Executive;
+                $executivesCount = $xmlExecutive->count();
 
                 $executiveMapper = new Executive();
                 $homeMapper = new Home();

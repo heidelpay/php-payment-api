@@ -12,7 +12,6 @@ class Executive
     public function __construct()
     {
         $this->executiveOneArray = [
-            'OWNER',
             null,
             'Testkäufer',
             'Händler',
@@ -23,10 +22,10 @@ class Executive
             '69115',
             'Heidelberg',
             'DE',
+            'OWNER',
         ];
 
         $this->executiveTwoArray = [
-            'OWNER',
             '',
             '',
             '',
@@ -36,7 +35,8 @@ class Executive
             'null',
             'null',
             'null',
-            'null'
+            'null',
+            'OWNER',
         ];
     }
 

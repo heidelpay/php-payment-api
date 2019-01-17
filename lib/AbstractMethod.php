@@ -220,6 +220,11 @@ abstract class AbstractMethod implements MethodInterface
         return $this->identification;
     }
 
+    /**
+     * company location getter
+     *
+     * @return ParameterGroups\LocationParameterGroup
+     */
     public function getLocation()
     {
         return $this->getCompany()->getLocation();
@@ -381,12 +386,9 @@ abstract class AbstractMethod implements MethodInterface
                 ksort($paramValues);
             }
 
-            $tempResult = $result;
-            $result = array_merge(
-                $tempResult,
-                $this->buildSubParameterArray($parameterValues, $parameterGroup)
-            );
+            $result[] = $this->buildSubParameterArray($parameterValues, $parameterGroup);
         }
+        $result = array_merge(...$result);
         return $result;
     }
 
@@ -493,6 +495,13 @@ abstract class AbstractMethod implements MethodInterface
         }
     }
 
+    /**
+     * Maps subparametergroups of JSON object
+     *
+     * @param AbstractParameterGroup $parameterGroup
+     * @param string                 $propertyName
+     * @param mixed                  $content
+     */
     protected function mapFromJsonSubGroups($parameterGroup, $propertyName, $content)
     {
         $getterFunction = 'get' . ucfirst($propertyName);

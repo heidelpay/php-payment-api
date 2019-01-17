@@ -185,7 +185,7 @@ class CompanyParameterGroupTest extends Test
     public function functionShouldBeSetAsExpected($expected, $function)
     {
         $company = new Company();
-        $company->addExecutive($function, '', '', '', '', '', '', '', '', '', '');
+        $company->addExecutive('', '', '', '', '', '', '', '', '', '',$function);
 
         $this->assertEquals($expected, $company->getExecutive()[0]->getFunction());
     }

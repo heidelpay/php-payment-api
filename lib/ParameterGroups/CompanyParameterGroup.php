@@ -2,6 +2,8 @@
 
 namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 
+use Heidelpay\PhpPaymentApi\Constants\ExecutiveFunction;
+
 /**
  * This class provides every api parameter related to the company data
  *
@@ -24,7 +26,7 @@ class CompanyParameterGroup extends AbstractParameterGroup
     public $companyname;
 
     /** Registration type
-     * Allowed values: "REGISTRED" , "UNREGISTRED"
+     * Allowed values: "REGISTERED" , "UNREGISTERED"
      *
      * @var string
      */
@@ -76,9 +78,10 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * @param mixed              $homeZip
      * @param mixed              $homeCity
      * @param mixed              $homeCountry
+     *
+     * @return CompanyParameterGroup
      */
     public function addExecutive(
-        $function,
         $salutation,
         $given,
         $family,
@@ -88,10 +91,11 @@ class CompanyParameterGroup extends AbstractParameterGroup
         $homeStreet,
         $homeZip,
         $homeCity,
-        $homeCountry
+        $homeCountry,
+        $function = ExecutiveFunction::OWNER
     ) {
         $newExecutive = new ExecutiveParameterGroup();
-        $newExecutive->setFunction(!empty($function) && is_string($function) ?$function: 'OWNER');
+        $newExecutive->setFunction(!empty($function) && is_string($function) ?$function: ExecutiveFunction::OWNER);
         $newExecutive->setSalutation($salutation);
         $newExecutive->setGiven($given);
         $newExecutive->setFamily($family);

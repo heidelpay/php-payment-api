@@ -17,7 +17,7 @@ namespace Heidelpay\PhpPaymentApi\ParameterGroups;
 class ExecutiveParameterGroup extends AbstractParameterGroup
 {
     /**
-     * Executive funktion
+     * The function of the executive in the company. Default will be set to "OWNER"
      *
      * @var string
      */
@@ -31,14 +31,14 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     public $salutation;
 
     /**
-     * Executive name given
+     * First name of the executive
      *
      * @var string
      */
     public $given;
 
     /**
-     * Executive name family
+     * Family name of the executive
      *
      * @var string
      */
@@ -94,7 +94,7 @@ class ExecutiveParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Executive salutatin getter
+     * Executive salutation getter
      *
      * @return string | null
      */

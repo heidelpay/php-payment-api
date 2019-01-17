@@ -114,17 +114,18 @@ class Request extends AbstractMethod
         $vatId = null,
         $executives = null
     ) {
-        $this->getCompany()->setCompanyname($companyName);
-        $this->getCompany()->getLocation()->setPobox($poBox);
-        $this->getCompany()->getLocation()->setStreet($street);
-        $this->getCompany()->getLocation()->setZip($zip);
-        $this->getCompany()->getLocation()->setCity($city);
-        $this->getCompany()->getLocation()->setCountry($country);
-        $this->getCompany()->setRegistrationtype($registrationType);
-        $this->getCompany()->setCommercialregisternumber($commercialRegisterNumber);
-        $this->getCompany()->setVatid($vatId);
-        $this->getCompany()->setCommercialSector($CommercialSector);
-        $this->getCompany()->setExecutive($executives);
+        $this->getCompany()->setCompanyname($companyName)
+            ->setRegistrationtype($registrationType)
+            ->setCommercialregisternumber($commercialRegisterNumber)
+            ->setVatid($vatId)
+            ->setCommercialSector($CommercialSector)
+            ->setExecutive($executives)
+            ->getLocation()
+                ->setPobox($poBox)
+                ->setStreet($street)
+                ->setZip($zip)
+                ->setCity($city)
+                ->setCountry($country);
     }
 
     /**

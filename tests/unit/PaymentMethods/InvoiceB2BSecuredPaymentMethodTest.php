@@ -159,7 +159,6 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY_EXECUTIVE_1_HOME_STREET' => 'Vangerowstr. 18',
             'COMPANY_EXECUTIVE_1_HOME_ZIP' => '69115',
             'COMPANY_EXECUTIVE_1_PHONE' => '062216471400',
-
             'COMPANY_EXECUTIVE_2_FUNCTION' => 'OWNER',
             'COMPANY_EXECUTIVE_2_SALUTATION' => '',
             'COMPANY_EXECUTIVE_2_BIRTHDATE' => '123',
@@ -193,6 +192,7 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY_EXECUTIVE_1' => '1988-12-12',
             'COMPANY_EXECUTIVE_EMAIL' => 'example@email.de',
             'COMPANY_EXECUTIVE_HOME' => 'home',
+            'COMPANY_EXECUTIVE_1_' => 'home',
         ];
         return [
             'only default array used' => [[]],

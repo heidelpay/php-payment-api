@@ -470,44 +470,46 @@ class PushTest extends Test
             throw new \RuntimeException('Response is not set!');
         }
 
-        $this->assertEquals('heidelpay GmbH', $response->getCompany()->companyname);
-        $this->assertEquals('REGISTERED', $response->getCompany()->registrationtype);
-        $this->assertEquals('123456789', $response->getCompany()->commercialregisternumber);
-        $this->assertEquals('123456', $response->getCompany()->vatid);
-        $this->assertEquals('AIR_TRANSPORT', $response->getCompany()->commercialsector);
+        $company = $response->getCompany();
+        $this->assertEquals('heidelpay GmbH', $company->companyname);
+        $this->assertEquals('REGISTERED', $company->registrationtype);
+        $this->assertEquals('123456789', $company->commercialregisternumber);
+        $this->assertEquals('123456', $company->vatid);
+        $this->assertEquals('AIR_TRANSPORT', $company->commercialsector);
 
-        $this->assertEquals(null, $response->getCompany()->getLocation()->pobox);
-        $this->assertEquals('Vangerowstr. 18', $response->getCompany()->getLocation()->street);
-        $this->assertEquals('69115', $response->getCompany()->getLocation()->zip);
-        $this->assertEquals('Heidelberg', $response->getCompany()->getLocation()->city);
-        $this->assertEquals('DE', $response->getCompany()->getLocation()->country);
+        $this->assertEquals(null, $company->getLocation()->pobox);
+        $this->assertEquals('Vangerowstr. 18', $company->getLocation()->street);
+        $this->assertEquals('69115', $company->getLocation()->zip);
+        $this->assertEquals('Heidelberg', $company->getLocation()->city);
+        $this->assertEquals('DE', $company->getLocation()->country);
 
-        $this->assertEquals('Testkäufer', $response->getCompany()->getExecutive()[0]->given);
-        $this->assertEquals('Händler', $response->getCompany()->getExecutive()[0]->family);
-        $this->assertEquals('1988-12-12', $response->getCompany()->getExecutive()[0]->birthdate);
-        $this->assertEquals('062216471400', $response->getCompany()->getExecutive()[0]->phone);
-        $this->assertEquals('example@email.de', $response->getCompany()->getExecutive()[0]->email);
-        $this->assertEquals('OWNER', $response->getCompany()->getExecutive()[0]->function);
+        $executive = $company->getExecutive();
+        $this->assertEquals('Testkäufer', $executive[0]->given);
+        $this->assertEquals('Händler', $executive[0]->family);
+        $this->assertEquals('1988-12-12', $executive[0]->birthdate);
+        $this->assertEquals('062216471400', $executive[0]->phone);
+        $this->assertEquals('example@email.de', $executive[0]->email);
+        $this->assertEquals('OWNER', $executive[0]->function);
 
-        $this->assertEquals('Vangerowstr. 18', $response->getCompany()->getExecutive()[0]->getHome()->street);
-        $this->assertEquals('69115', $response->getCompany()->getExecutive()[0]->getHome()->zip);
-        $this->assertEquals('Heidelberg', $response->getCompany()->getExecutive()[0]->getHome()->city);
-        $this->assertEquals('DE', $response->getCompany()->getExecutive()[0]->getHome()->country);
+        $this->assertEquals('Vangerowstr. 18', $executive[0]->getHome()->street);
+        $this->assertEquals('69115', $executive[0]->getHome()->zip);
+        $this->assertEquals('Heidelberg', $executive[0]->getHome()->city);
+        $this->assertEquals('DE', $executive[0]->getHome()->country);
 
 
-        $this->assertEquals('Testkäufer-2', $response->getCompany()->getExecutive()[1]->given);
-        $this->assertEquals('Händler-2', $response->getCompany()->getExecutive()[1]->family);
-        $this->assertEquals('1988-02-02', $response->getCompany()->getExecutive()[1]->birthdate);
-        $this->assertEquals('062216471400', $response->getCompany()->getExecutive()[1]->phone);
-        $this->assertEquals('example@email.de', $response->getCompany()->getExecutive()[1]->email);
-        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->function);
+        $this->assertEquals('Testkäufer-2', $executive[1]->given);
+        $this->assertEquals('Händler-2', $executive[1]->family);
+        $this->assertEquals('1988-02-02', $executive[1]->birthdate);
+        $this->assertEquals('062216471400', $executive[1]->phone);
+        $this->assertEquals('example@email.de', $executive[1]->email);
+        $this->assertEquals(null, $executive[1]->function);
 
-        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->street);
-        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->zip);
-        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->city);
-        $this->assertEquals(null, $response->getCompany()->getExecutive()[1]->getHome()->country);
+        $this->assertEquals(null, $executive[1]->getHome()->street);
+        $this->assertEquals(null, $executive[1]->getHome()->zip);
+        $this->assertEquals(null, $executive[1]->getHome()->city);
+        $this->assertEquals(null, $executive[1]->getHome()->country);
 
-        $this->assertNotNull($response->getCompany()->getExecutive()[2]);
+        $this->assertNotNull($executive[2]);
 
         codecept_debug('response: ' . print_r($response, 1));
     }
