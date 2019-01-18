@@ -10,11 +10,9 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  *
  * @link http://dev.heidelpay.com/php-payment-api
  *
- * @author Stephano Vogel <development@heidelpay.com>
+ * @author David Owusu <development@heidelpay.com>
  *
  * @package heidelpay\php-payment-api\constants
- *
- * @since 1.3.0 First time this was introduced.
  */
 class TransactionMode
 {

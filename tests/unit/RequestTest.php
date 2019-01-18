@@ -298,4 +298,13 @@ class RequestTest extends Test
             false
         )->verifyInvokedOnce();
     }
+
+    /**
+    * @test
+    */
+    public function factoringParameterShouldBeSetAsExpected(){
+        $request = new Request();
+
+        $request->factoring('123', 'invoice123', 'CANLE');
+    }
 }

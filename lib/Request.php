@@ -127,6 +127,18 @@ class Request extends AbstractMethod
     }
 
     /**
+     * @param string $shopperid
+     * @param string $invoiceid
+     * @param string $reversaltype string $reversaltype "CANCLE, RETURN or CREDIT"
+     */
+    public function factoring($shopperid, $invoiceid, $reversaltype)
+    {
+        $this->getIdentification()->setShopperid($shopperid);
+        $this->getIdentification()->setInvoiceid($invoiceid);
+        $this->getPayment()->setReversaltype($reversaltype);
+    }
+
+    /**
      * Set all basket or order information
      *
      * @param string $shopIdentifier id of your application, e.g. order-125454

@@ -34,6 +34,11 @@ class PaymentParameterGroup extends AbstractParameterGroup
     public $code;
 
     /**
+     * @var string $reversaltype "CANCLE, RETURN or CREDIT"
+     */
+    public $reversaltype;
+
+    /**
      * PamyentCode getter
      *
      * @return string code
@@ -55,4 +60,22 @@ class PaymentParameterGroup extends AbstractParameterGroup
         $this->code = $code;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getReversaltype()
+    {
+        return $this->reversaltype;
+    }
+
+    /**
+     * @param string $reversaltype
+     */
+    public function setReversaltype($reversaltype)
+    {
+        $this->reversaltype = $reversaltype;
+        return $this;
+    }
+
 }
