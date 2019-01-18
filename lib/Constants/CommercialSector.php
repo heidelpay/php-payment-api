@@ -13,7 +13,6 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  * @author Stephano Vogel <development@heidelpay.com>
  *
  * @package heidelpay\php-payment-api\constants
- *
  */
 class CommercialSector
 {
