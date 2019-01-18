@@ -14,7 +14,6 @@ namespace Heidelpay\PhpPaymentApi\Constants;
  *
  * @package heidelpay\php-payment-api\constants
  *
- * @since 1.3.0 First time this was introduced.
  */
 class CommercialSector
 {
