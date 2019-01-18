@@ -13,7 +13,7 @@ namespace Heidelpay\Example\PhpPaymentApi;
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
- * @author  David Owusu
+ * @author  David Owusu  <development@heidelpay.com>
  *
  * @category example
  */
