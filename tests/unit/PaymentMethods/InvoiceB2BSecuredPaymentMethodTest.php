@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 28.11.2018
- * Time: 13:12
- */
+
 namespace Heidelpay\Tests\PhpPaymentApi\unit\PaymentMethods;
 
 use AspectMock\Test as test;

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 14.01.2019
- * Time: 09:34
- */
+
 namespace Heidelpay\Tests\PhpPaymentApi\Helper;
 
 class Executive

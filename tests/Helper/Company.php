@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 03.01.2019
- * Time: 16:38
- */
+
 namespace Heidelpay\Tests\PhpPaymentApi\Helper;
 
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;

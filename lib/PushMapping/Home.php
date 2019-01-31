@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David.Owusu
- * Date: 12.12.2018
- * Time: 16:36
- */
+
 namespace Heidelpay\PhpPaymentApi\PushMapping;
 
 /**
