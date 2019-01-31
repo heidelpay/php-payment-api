@@ -24,8 +24,6 @@ namespace Heidelpay\Example\PhpPaymentApi;
 
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;
 use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
-use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
-use Heidelpay\PhpPaymentApi\ParameterGroups\HomeParameterGroup;
 use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2BSecuredPaymentMethod;
 
 require_once './_enableExamples.php';
@@ -63,7 +61,7 @@ $invoice->getRequest()->async(
     'EN', // Language code for the Frame
     HEIDELPAY_PHP_PAYMENT_API_URL .
     HEIDELPAY_PHP_PAYMENT_API_FOLDER .
-    'InvoiceB2BSecuredAuthorize.php'  // Response url from your application
+    'HeidelpayResponse.php' // Response url from your application
 );
 
 /**
@@ -92,43 +90,46 @@ $invoice->getRequest()->basketData(
     '39542395235ßfsokkspreipsr'    // A secret passphrase from your application
 );
 
+/**
+ * Set up company information necessary for B2B.
+ */
 $companyArray = [
-    'heidelpay GmbH',
-    null,
-    'Vangerowstr. 18',
-    '69115',
-    'Heidelberg',
-    'DE',
-    CommercialSector::AIR_TRANSPORT,
-    RegistrationType::REGISTERED,
-    '123456789',
-    '123456'
+    'heidelpay GmbH',               // Company name
+    null,                           // Address postbox
+    'Vangerowstr. 18',              // Address street
+    '69115',                        // Address zip
+    'Heidelberg',                   // Address city
+    'DE',                           // Address country
+    CommercialSector::AIR_TRANSPORT, // CommercialSector provides
+    RegistrationType::NOT_REGISTERED, // Registration Type
+    '123123',    // commercial register number. Necessary if registration type is "REGISTERED"
+    '123456'        // Vat id
 ];
 
-
-$home = new HomeParameterGroup();
-$home->street = 'Vangerowstr. 18';
-$home->city = 'Heidelberg';
-$home->country = 'DE';
-$home->zip = '69115';
-
+/**
+ * Set up executive Information. Executive is necessary if registration type is "NOT_REGISTERED"
+ */
 $executive = [
-    'OWNER',
-    null,
-    'Testkäufer',
-    'Händler',
-    '1988-12-12',
-    'example@email.de',
-    '062216471400',
-    $home
+    'Herr',             // Salutation
+    'Testkäufer',       // Given name
+    'Händler',          // Family name
+    '1988-12-12',       // Birthdate
+    'example@email.de', // Email address
+    '062216471400',     // Phone number
+    'Vangerowstr. 18',  // Address street
+    '69115',            // Address zip
+    'Heidelberg',       // Address city
+    'DE',               // Address country
 ];
 
-
+/**
+ * Set request data für B2B.
+ */
 $invoice->getRequest()->company(...$companyArray);
 $invoice->getRequest()->getCompany()->addExecutive(...$executive);
 
 /**
- * Set necessary parameters for Heidelpay payment and send the request
+ * Set necessary parameters for heidelpay payment and send the request
  */
 $invoice->authorize();
 
@@ -141,7 +142,6 @@ $invoice->authorize();
 <?php
 if ($invoice->getResponse()->isSuccess()) {
     echo '<a href="' . $invoice->getResponse()->getPaymentFormUrl() . '">place Invoice</a><br/>';
-    //echo print_r($invoice->getResponse(), 1);
 } else {
     echo '<pre>' . print_r($invoice->getResponse()->getError(), 1) . '</pre>';
 }
