@@ -27,7 +27,7 @@ class UserParameterGroup extends AbstractParameterGroup
     /**
      * UserPwd
      *
-     * The Passwort of the payment account
+     * The password of the payment account
      *
      * @var string pwd (mandatory)
      */

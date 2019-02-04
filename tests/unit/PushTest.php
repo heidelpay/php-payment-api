@@ -81,6 +81,13 @@ class PushTest extends Test
     protected $xmlInvalidResponse;
 
     /**
+     * Example response that covers company properties
+     *
+     * @var string
+     */
+    protected $xmlSampleCompanyResponse;
+
+    /**
      * Sets up the fixture, for example, open a network connection.
      */
     // @codingStandardsIgnoreStart
@@ -93,6 +100,7 @@ class PushTest extends Test
         $this->setSampleIvRcResponse();
         $this->setSamplePpPaResponse();
         $this->setSampleInvalidResponse();
+        $this->setSampleCompanyResponse();
     }
 
     /**
@@ -446,6 +454,64 @@ class PushTest extends Test
             . '59a9f8aff5e237c60ffcae600e1f11e7342f60dbdd43b1cdc1a17a323c3f753d',
             $response->getCriterion()->getSecretHash()
         );
+    }
+
+    /**
+     * @test
+     *
+     * @throws XmlResponseParserException
+     */
+    public function hasValidMappedCompanyProperties()
+    {
+        $push = new Push($this->xmlSampleCompanyResponse);
+        $response = $push->getResponse();
+
+        if (!($response instanceof Response)) {
+            throw new \RuntimeException('Response is not set!');
+        }
+
+        $company = $response->getCompany();
+        $this->assertEquals('heidelpay GmbH', $company->companyname);
+        $this->assertEquals('REGISTERED', $company->registrationtype);
+        $this->assertEquals('123456789', $company->commercialregisternumber);
+        $this->assertEquals('123456', $company->vatid);
+        $this->assertEquals('AIR_TRANSPORT', $company->commercialsector);
+
+        $this->assertEquals(null, $company->getLocation()->pobox);
+        $this->assertEquals('Vangerowstr. 18', $company->getLocation()->street);
+        $this->assertEquals('69115', $company->getLocation()->zip);
+        $this->assertEquals('Heidelberg', $company->getLocation()->city);
+        $this->assertEquals('DE', $company->getLocation()->country);
+
+        $executive = $company->getExecutive();
+        $this->assertEquals('Testkäufer', $executive[0]->given);
+        $this->assertEquals('Händler', $executive[0]->family);
+        $this->assertEquals('1988-12-12', $executive[0]->birthdate);
+        $this->assertEquals('062216471400', $executive[0]->phone);
+        $this->assertEquals('example@email.de', $executive[0]->email);
+        $this->assertEquals('OWNER', $executive[0]->function);
+
+        $this->assertEquals('Vangerowstr. 18', $executive[0]->getHome()->street);
+        $this->assertEquals('69115', $executive[0]->getHome()->zip);
+        $this->assertEquals('Heidelberg', $executive[0]->getHome()->city);
+        $this->assertEquals('DE', $executive[0]->getHome()->country);
+
+
+        $this->assertEquals('Testkäufer-2', $executive[1]->given);
+        $this->assertEquals('Händler-2', $executive[1]->family);
+        $this->assertEquals('1988-02-02', $executive[1]->birthdate);
+        $this->assertEquals('062216471400', $executive[1]->phone);
+        $this->assertEquals('example@email.de', $executive[1]->email);
+        $this->assertEquals(null, $executive[1]->function);
+
+        $this->assertEquals(null, $executive[1]->getHome()->street);
+        $this->assertEquals(null, $executive[1]->getHome()->zip);
+        $this->assertEquals(null, $executive[1]->getHome()->city);
+        $this->assertEquals(null, $executive[1]->getHome()->country);
+
+        $this->assertNotNull($executive[2]);
+
+        codecept_debug('response: ' . print_r($response, 1));
     }
 
     /**
@@ -887,6 +953,63 @@ XML;
             <Reason>SUCCESSFULL</Reason>
             <Return>Request successfully processed in 'Merchant in Connector Test Mode'</Return>
         </Processing>
+    </Transaction>
+</Response>
+XML;
+    }
+
+    private function setSampleCompanyResponse()
+    {
+        $this->xmlSampleCompanyResponse = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response version="1.0">
+    <Transaction mode="CONNECTOR_TEST" response="SYNC" channel="31HA07BC8122B949FB64075AFB0798AE" source="WPF">
+        <Customer>
+            <Type>B2B</Type>
+            <Company>
+                <CompanyName>heidelpay GmbH</CompanyName>
+                <Location>
+                    <Street>Vangerowstr. 18</Street>
+                    <Zip>69115</Zip>
+                    <City>Heidelberg</City>
+                    <Country>DE</Country>
+                </Location>
+                <RegistrationType>REGISTERED</RegistrationType>
+                <CommercialRegisterNumber>123456789</CommercialRegisterNumber>
+                <VatID>123456</VatID>
+                <Executive>
+                    <Given>Testkäufer</Given>
+                    <Family>Händler</Family>
+                    <Birthdate>1988-12-12</Birthdate>
+                    <Phone>062216471400</Phone>
+                    <Email>example@email.de</Email>
+                    <Function>OWNER</Function>
+                    <Home>
+                        <Street>Vangerowstr. 18</Street>
+                        <Zip>69115</Zip>
+                        <City>Heidelberg</City>
+                        <Country>DE</Country>
+                    </Home>
+                </Executive>
+                <Executive>
+                    <Given>Testkäufer-2</Given>
+                    <Family>Händler-2</Family>
+                    <Birthdate>1988-02-02</Birthdate>
+                    <Phone>062216471400</Phone>
+                    <Email>example@email.de</Email>
+                    <Function></Function>
+                    <Home>
+                        <!--<Street>Vangerowstr. 22</Street>
+                        <Zip>69115</Zip>
+                        <City>Heidelberg2</City>
+                        <Country>DE</Country>-->
+                    </Home>
+                </Executive>
+                <Executive>
+                </Executive>
+                <CommercialSector>AIR_TRANSPORT</CommercialSector>
+            </Company>
+        </Customer>
     </Transaction>
 </Response>
 XML;

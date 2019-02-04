@@ -7,10 +7,13 @@ use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AbstractParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\LocationParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup;
@@ -18,10 +21,14 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup;
 use Heidelpay\PhpPaymentApi\PushMapping\Account;
 use Heidelpay\PhpPaymentApi\PushMapping\Address;
+use Heidelpay\PhpPaymentApi\PushMapping\Company;
 use Heidelpay\PhpPaymentApi\PushMapping\Connector;
 use Heidelpay\PhpPaymentApi\PushMapping\Contact;
+use Heidelpay\PhpPaymentApi\PushMapping\Executive;
 use Heidelpay\PhpPaymentApi\PushMapping\Frontend;
+use Heidelpay\PhpPaymentApi\PushMapping\Home;
 use Heidelpay\PhpPaymentApi\PushMapping\Identification;
+use Heidelpay\PhpPaymentApi\PushMapping\Location;
 use Heidelpay\PhpPaymentApi\PushMapping\Name;
 use Heidelpay\PhpPaymentApi\PushMapping\Payment;
 use Heidelpay\PhpPaymentApi\PushMapping\Presentation;
@@ -71,10 +78,12 @@ class Push
     private $mapping = [
         AccountParameterGroup::class => Account::class,
         AddressParameterGroup::class => Address::class,
+        CompanyParameterGroup::class => Company::class,
         ConnectorParameterGroup::class => Connector::class,
         ContactParameterGroup::class => Contact::class,
         FrontendParameterGroup::class => Frontend::class,
         IdentificationParameterGroup::class => Identification::class,
+        LocationParameterGroup::class => Location::class,
         NameParameterGroup::class => Name::class,
         PaymentParameterGroup::class => Payment::class,
         PresentationParameterGroup::class => Presentation::class,
@@ -154,6 +163,25 @@ class Push
                 if ($mapperClassName = $this->getMappingClass($parameterGroupInstance)) {
                     $mapperInstance = new $mapperClassName;
                     $this->setParameterGroupProperties($parameterGroupInstance, $mapperInstance, $xml);
+                }
+            }
+
+            // set Executives
+            if (isset($xml->Transaction, $xml->Transaction->Customer->Company->Executive)) {
+                $xmlExecutive = $xml->Transaction->Customer->Company->Executive;
+                $executivesCount = $xmlExecutive->count();
+
+                $executiveMapper = new Executive();
+                $homeMapper = new Home();
+
+                for ($index = 0; $index < $executivesCount; $index++) {
+                    if (!isset($this->response->getCompany()->getExecutive()[$index])) {
+                        $executive = $this->response->getCompany()->getExecutive();
+                        $executive[] = new ExecutiveParameterGroup();
+                        $this->response->getCompany()->setExecutive($executive);
+                    }
+                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index], $executiveMapper, $xmlExecutive[$index]);
+                    $this->setParameterGroupProperties($this->response->getCompany()->getExecutive()[$index]->getHome(), $homeMapper, $xmlExecutive[$index]);
                 }
             }
 
