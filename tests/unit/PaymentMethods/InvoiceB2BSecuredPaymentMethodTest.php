@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\unit\PaymentMethods;
 
 use AspectMock\Test as test;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\CommercialSector;
 use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
 use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
@@ -82,7 +83,7 @@ class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
             'COMPANY.VATID' => 'DE 253 689 876',
             'COMPANY.COMMERCIALSECTOR' => CommercialSector::AIR_TRANSPORT,
             'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => 'v1.6.2',
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'REQUEST.VERSION' => '1.0',
