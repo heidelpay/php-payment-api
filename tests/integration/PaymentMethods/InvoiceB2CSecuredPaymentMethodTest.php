@@ -79,7 +79,7 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setTransactionChannel('31HA07BC81856CAD6D8E05CDDE7E2AC8')
+            ->setTransactionChannel('31HA07BC8129FBA7AF65934626B0F907')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
