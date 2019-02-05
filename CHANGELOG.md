@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Payment method for B2B invoice secured and corresponding tests.
 - Missing parameter CUSTOMER.OptIn_2 for Santander Invoice.
+- Example implementation for Santander paying by installments
 
 ### Changed
 - Used BasketApi to enable additional integration tests for Santander IV.
