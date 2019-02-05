@@ -77,8 +77,8 @@ $santanderHp->getRequest()->async(
  * Set up customer information required for risk checks. For a declined transaction please enable code below.
  */
 $santanderHp->getRequest()->customerAddress(
-    'Ampel',            // Given name
-    'Grün',             // Family name
+    'Grün',            // Given name
+    'Ampel',             // Family name
     null,             // Company Name
     '12345',             // Customer id of your application
     'Lichtweg 2',       // Billing address street
@@ -89,8 +89,8 @@ $santanderHp->getRequest()->customerAddress(
     'g.ampel@test.de'   // Customer mail address
 );
 //$santanderHp->getRequest()->customerAddress(
-//    'Ampel',            // Given name
-//    'Rot',             // Family name
+//    'Rot',            // Given name
+//    'Ampel',             // Family name
 //    null,             // Company Name
 //    '12345',             // Customer id of your application
 //    'Lichtweg 2',       // Billing address street
