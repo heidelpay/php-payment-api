@@ -3,12 +3,16 @@
 namespace Heidelpay\PhpPaymentApi;
 
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
+use Heidelpay\PhpPaymentApi\ParameterGroups\AbstractParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\CustomerParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ExecutiveParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup;
@@ -34,123 +38,66 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup;
  */
 abstract class AbstractMethod implements MethodInterface
 {
-    /**
-     * AccountParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
-     */
+    /** @var AccountParameterGroup */
     protected $account;
 
-    /**
-     * AddressParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
-     */
+    /** @var AddressParameterGroup */
     protected $address;
 
-    /**
-     * BasketParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
-     */
+    /** @var CustomerParameterGroup */
+    protected $customer;
+
+    /** @var BasketParameterGroup */
     protected $basket;
 
-    /**
-     * ConfigParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup
-     */
+    /** @var CompanyParameterGroup */
+    protected $company;
+
+    /** @var ConfigParameterGroup */
     protected $config;
 
-    /**
-     * ContactParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
-     */
+    /** @var ContactParameterGroup */
     protected $contact;
 
-    /**
-     * CriterionParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup
-     */
+    /** @var CriterionParameterGroup */
     protected $criterion;
 
-    /**
-     * FrontendParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
-     */
+    /** @var FrontendParameterGroup */
     protected $frontend;
 
-    /**
-     * IdentificationParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
-     */
+    /** @var IdentificationParameterGroup */
     protected $identification;
 
-    /**
-     * NameParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
-     */
+    /** @var NameParameterGroup */
     protected $name;
 
-    /**
-     * PaymentParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup
-     */
+    /** @var PaymentParameterGroup */
     protected $payment;
 
-    /**
-     * PresentationParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
-     */
+    /** @var PresentationParameterGroup */
     protected $presentation;
 
-
-    /**
-     * RequestParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup
-     */
+    /** @var RequestParameterGroup */
     protected $request;
 
-    /**
-     * RiskInformationParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
-     */
+    /** @var RiskInformationParameterGroup */
     protected $riskinformation;
 
-    /**
-     * SecurityParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup
-     */
+    /** @var SecurityParameterGroup */
     protected $security;
 
-    /**
-     * TransactionParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
-     */
+    /** @var TransactionParameterGroup */
     protected $transaction;
 
-    /**
-     * UserParameterGroup
-     *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup
-     */
+    /** @var UserParameterGroup */
     protected $user;
+
+    //<editor-fold desc="Getters/Setters">
 
     /**
      * Account getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AccountParameterGroup
+     * @return AccountParameterGroup
      */
     public function getAccount()
     {
@@ -164,7 +111,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Address getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\AddressParameterGroup
+     * @return AddressParameterGroup
      */
     public function getAddress()
     {
@@ -178,7 +125,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Basket getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\BasketParameterGroup
+     * @return BasketParameterGroup
      */
     public function getBasket()
     {
@@ -190,9 +137,23 @@ abstract class AbstractMethod implements MethodInterface
     }
 
     /**
+     * Company getter
+     *
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\CompanyParameterGroup
+     */
+    public function getCompany()
+    {
+        if ($this->company === null) {
+            return $this->company = new CompanyParameterGroup();
+        }
+
+        return $this->company;
+    }
+
+    /**
      * Config getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ConfigParameterGroup
+     * @return ConfigParameterGroup
      */
     public function getConfig()
     {
@@ -206,7 +167,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Contact getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ContactParameterGroup
+     * @return ContactParameterGroup
      */
     public function getContact()
     {
@@ -220,7 +181,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Criterion getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup
+     * @return CriterionParameterGroup
      */
     public function getCriterion()
     {
@@ -234,7 +195,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Frondend getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function getFrontend()
     {
@@ -248,7 +209,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Identification getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup
+     * @return IdentificationParameterGroup
      */
     public function getIdentification()
     {
@@ -260,9 +221,19 @@ abstract class AbstractMethod implements MethodInterface
     }
 
     /**
+     * company location getter
+     *
+     * @return ParameterGroups\LocationParameterGroup
+     */
+    public function getLocation()
+    {
+        return $this->getCompany()->getLocation();
+    }
+
+    /**
      * Name getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\NameParameterGroup
+     * @return NameParameterGroup
      */
     public function getName()
     {
@@ -276,7 +247,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Payment getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup
+     * @return PaymentParameterGroup
      */
     public function getPayment()
     {
@@ -290,7 +261,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Presentation getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup
+     * @return PresentationParameterGroup
      */
     public function getPresentation()
     {
@@ -304,7 +275,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Request getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup
+     * @return RequestParameterGroup
      */
     public function getRequest()
     {
@@ -318,7 +289,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * RiskInformation getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
+     * @return RiskInformationParameterGroup
      */
     public function getRiskInformation()
     {
@@ -332,7 +303,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Security getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup
+     * @return SecurityParameterGroup
      */
     public function getSecurity()
     {
@@ -346,7 +317,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * Transaction getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup
+     * @return TransactionParameterGroup
      */
     public function getTransaction()
     {
@@ -360,7 +331,7 @@ abstract class AbstractMethod implements MethodInterface
     /**
      * User getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup
+     * @return UserParameterGroup
      */
     public function getUser()
     {
@@ -370,6 +341,20 @@ abstract class AbstractMethod implements MethodInterface
 
         return $this->user;
     }
+
+    /**
+     * @return CustomerParameterGroup
+     */
+    public function getCustomer()
+    {
+        if ($this->customer === null) {
+            return $this->customer = new CustomerParameterGroup();
+        }
+
+        return $this->customer;
+    }
+
+    //</editor-fold>
 
     /**
      * @inheritdoc
@@ -401,12 +386,42 @@ abstract class AbstractMethod implements MethodInterface
                 ksort($paramValues);
             }
 
-            foreach ($paramValues as $parameterLastName => $parameterValue) {
-                if ($parameterValue === null) {
-                    continue;
-                }
+            $result[] = $this->buildSubParameterArray($parameterValues, $parameterGroup);
+        }
+        $result = array_merge(...$result);
+        return $result;
+    }
 
-                $result[strtoupper($parameterGroup . '.' . $parameterLastName)] = $parameterValue;
+    /**
+     * Build an array for subParameterGroups like Company->location
+     *
+     * @param mixed $requestParameter Is whether a parametergroup, array or string
+     * @param $parentParameterName
+     *
+     * @return array
+     */
+    public function buildSubParameterArray($requestParameter, $parentParameterName)
+    {
+        $result = [];
+        if (!($requestParameter instanceof AbstractParameterGroup || is_array($requestParameter))) {
+            // If $requestParameter is no subGroup set the array parameter
+            if ($requestParameter !== null) {
+                $result[strtoupper($parentParameterName)] = $requestParameter;
+                return $result;
+            }
+        } else {
+            // handle subParameterGroup
+            if (is_object($requestParameter)) {
+                $requestParameter = get_object_vars($requestParameter);
+            }
+            foreach ($requestParameter as $parameterName => $parameterSubValue) {
+                $parameterName = is_numeric($parameterName)?$parameterName+1:$parameterName;
+                $tempResult = $result;
+                $result = array_merge(
+                    $tempResult,
+                    $this->buildSubParameterArray($parameterSubValue,
+                        $parentParameterName . '.' . $parameterName)
+                );
             }
         }
         return $result;
@@ -469,10 +484,60 @@ abstract class AbstractMethod implements MethodInterface
             $parameterGroupGetterFunc = 'get' . ucfirst($parameterGroupName);
             if (!empty($parameterGroupObject) && is_callable([$this, $parameterGroupGetterFunc])) {
                 foreach ($parameterGroupObject as $property => $value) {
-                    $this->{$parameterGroupGetterFunc}()->set($property, $value);
+                    if (!(is_object($value) || is_array($value))) {
+                        //echo print_r($value, 1) . "\n\t";
+                        $this->{$parameterGroupGetterFunc}()->set($property, $value);
+                    } else {
+                        $this->mapFromJsonSubGroups($this->{$parameterGroupGetterFunc}(), $property, $value);
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Maps subparametergroups of JSON object
+     *
+     * @param AbstractParameterGroup $parameterGroup
+     * @param string                 $propertyName
+     * @param mixed                  $content
+     */
+    protected function mapFromJsonSubGroups($parameterGroup, $propertyName, $content)
+    {
+        $getterFunction = 'get' . ucfirst($propertyName);
+        $addFunction = 'add' . ucfirst($propertyName);
+
+        if (is_callable([$parameterGroup, $getterFunction])) {
+            $subParameterGroup = $parameterGroup->{$getterFunction}();
+            if (is_object($content)) {
+                foreach ($content as $subParameterName => $subValue) {
+                    $this->mapFromJsonSubGroups($subParameterGroup, $subParameterName, $subValue);
+                }
+                return;
+            }
+            if (is_array($content)) {
+                foreach ($content as $index => $value) {
+                    if ($index+1 > count($subParameterGroup)) {
+                        $className = 'Heidelpay\PhpPaymentApi\ParameterGroups\\'.ucfirst($propertyName) . "ParameterGroup";
+                        $subParameterGroup[] = new $className();
+                        $parameterGroup->set($propertyName, $subParameterGroup);
+                    }
+
+                    if ($value == null) {
+                        continue;
+                    }
+
+                    foreach ($value as $arrayParameter => $arrayParameterValue) {
+                        if (!empty($subParameterGroup[$index])) {
+                            $this->mapFromJsonSubGroups($subParameterGroup[$index], $arrayParameter, $arrayParameterValue);
+                        }
+                    }
+                }
+                return;
+            }
+        }
+
+        $parameterGroup->set($propertyName, $content);
     }
 
     /**
@@ -496,7 +561,55 @@ abstract class AbstractMethod implements MethodInterface
 
             $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
             if ($paramGroupProp !== null && is_callable([$this, $parameterGroupGetterFunc])) {
-                $this->{$parameterGroupGetterFunc}()->set($paramGroupProp, $value);
+                $parameterGroup = $this->{$parameterGroupGetterFunc}();
+                //If property exists in parameter group set the value.
+                if (array_key_exists($paramGroupProp, get_object_vars($parameterGroup)) || $parameterGroup instanceof CriterionParameterGroup) {
+                    $parameterGroup->set($paramGroupProp, $value);
+                } else {
+                    // call function to map subParameterGroups
+                    $this->mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value);
+                }
+            }
+        }
+    }
+
+    /**
+     * Map response array attributes to sub parameter classes recursively
+     *
+     * @param mixed  $parameterGroup
+     * @param string $paramGroupProp
+     * @param string $value
+     */
+    protected function mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value)
+    {
+        $values = explode('_', strtolower($paramGroupProp), 2);
+
+        if (count($values) < 2) {
+            //set the parameter of the given subgroup
+            if ($parameterGroup instanceof AbstractParameterGroup && is_callable([$parameterGroup, 'get' . ucfirst($paramGroupProp)])) {
+                $parameterGroup->set($paramGroupProp, $value);
+            }
+        } else {
+            // look for subParameterGroup and call this function on it
+            list($paramGroupName, $paramGroupString) = $values;
+            $parameterGroupGetterFunc = 'get' . ucfirst($paramGroupName);
+            if ($paramGroupProp !== null && is_callable([$parameterGroup, $parameterGroupGetterFunc])) {
+                $parameterGroup = $parameterGroup->{$parameterGroupGetterFunc}();
+                if (is_array($parameterGroup)) {
+                    $parameterGroup = $paramGroupName;
+                }
+                $this->mapSubGroupsFromPost($parameterGroup, $paramGroupString, $value);
+            }
+
+            //Handle executive parametergroup
+            if (is_numeric($paramGroupName) && $parameterGroup === 'executive') {
+                if ((int)$paramGroupName > count(($this->getCompany()->executive))) {
+                    $executives = $this->getCompany()->getExecutive();
+                    $executives[] = new ExecutiveParameterGroup();
+                    $this->getCompany()->setExecutive($executives);
+                }
+                $executive = $this->getCompany()->getExecutive()[$paramGroupName-1];
+                $this->mapSubGroupsFromPost($executive, $paramGroupString, $value);
             }
         }
     }

@@ -3,9 +3,12 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\RegistrationType;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
-use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod as Invoice;
+use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2BSecuredPaymentMethod as Invoice;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Company;
+use Heidelpay\Tests\PhpPaymentApi\Helper\Executive;
 
 /**
  * Invoice B2C secured Test
@@ -18,11 +21,11 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author  Jens Richter
+ * @author  David Owusu
  *
  * @package heidelpay\php-payment-api\tests\integration
  */
-class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
+class InvoiceB2BSecuredPaymentMethodTest extends BasePaymentMethodTest
 {
     //<editor-fold desc="Init">
 
@@ -56,6 +59,10 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
      */
     protected $authorizeReference;
 
+    protected $companyData;
+
+    protected $executiveData;
+
     /**
      * Constructor used to set timezone to utc
      */
@@ -63,6 +70,9 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     {
         date_default_timezone_set('UTC');
         parent::__construct();
+
+        $this->companyData = new Company();
+        $this->executiveData = new Executive();
     }
 
     //</editor-fold>
@@ -79,13 +89,16 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setTransactionChannel('31HA07BC8129FBA7AF65934626B0F907')
+            ->setTransactionChannel('31HA07BC8129FBA7AF655AB2C27E5B3C')
             ->getAuthenticationArray();
+
         $customerDetails = $this->customerData->getCustomerDataArray();
+        $companyDetails = $this->companyData->getCompanyDataArray();
 
         $Invoice = new Invoice();
         $Invoice->getRequest()->authentification(...$authentication);
         $Invoice->getRequest()->customerAddress(...$customerDetails);
+        $Invoice->getRequest()->company(...$companyDetails);
         $this->paymentObject = $Invoice;
     }
 
@@ -111,6 +124,8 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
 
+        $this->setCompanyNotRegistered();
+
         $this->paymentObject->authorize();
 
         /* verify response */
@@ -126,6 +141,8 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
             $this->paymentObject->getResponse()->isError(),
             'authorize failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
         );
+        $this->assertEquals($this->paymentObject->getRequest()->getCompany(), $this->paymentObject->getResponse()->getCompany(),
+            'request\'s company object differs from respons\'s company object');
 
         $this->logDataToDebug();
 
@@ -237,6 +254,15 @@ class InvoiceB2CSecuredPaymentMethodTest extends BasePaymentMethodTest
         $this->assertEquals(PaymentMethod::INVOICE . '.' . TransactionType::REFUND, $this->paymentObject->getRequest()->getPayment()->getCode());
 
         $this->logDataToDebug();
+    }
+
+    public function setCompanyNotRegistered()
+    {
+        $executiveDetails = $this->executiveData->getExecutiveOneArray();
+
+        $this->paymentObject->getRequest()->getCompany()->setRegistrationtype(RegistrationType::NOT_REGISTERED);
+        $this->paymentObject->getRequest()->getCompany()->setVatid(null);
+        $this->paymentObject->getRequest()->getCompany()->addExecutive(...$executiveDetails);
     }
 
     //</editor-fold>

@@ -46,6 +46,21 @@ application takes care of sql injection, cross-site-scripting (xss) and so on. T
 
 You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
+## Support
+For any issues or questions please get in touch with our support.
+
+#### Web page
+https://dev.heidelpay.com/
+ 
+#### Email
+support@heidelpay.com
+ 
+#### Phone
++49 (0)6221/6471-100
+
+#### Twitter
+@devHeidelpay
+
 ## Documentation
 
 Please visit [http://dev.heidelpay.com/heidelpay-php-payment-api/](http://dev.heidelpay.com/heidelpay-php-payment-api/) for the developer documentation.

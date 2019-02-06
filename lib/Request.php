@@ -85,6 +85,50 @@ class Request extends AbstractMethod
     }
 
     /**
+     * Set all necessary parameter for company.
+     *
+     * The executive array can be created beforehand or kept empty and be added later
+     *
+     * @param string $companyName
+     * @param string $poBox
+     * @param string $street
+     * @param string $zip
+     * @param string $city
+     * @param string $country
+     * @param string $CommercialSector
+     * @param string $registrationType
+     * @param string $commercialRegisterNumber
+     * @param string $vatId
+     * @param array  $executives
+     */
+    public function company(
+        $companyName = null,
+        $poBox = null,
+        $street = null,
+        $zip = null,
+        $city = null,
+        $country = null,
+        $CommercialSector = null,
+        $registrationType = null,
+        $commercialRegisterNumber = null,
+        $vatId = null,
+        $executives = null
+    ) {
+        $this->getCompany()->setCompanyname($companyName)
+            ->setRegistrationtype($registrationType)
+            ->setCommercialregisternumber($commercialRegisterNumber)
+            ->setVatid($vatId)
+            ->setCommercialSector($CommercialSector)
+            ->setExecutive($executives)
+            ->getLocation()
+                ->setPobox($poBox)
+                ->setStreet($street)
+                ->setZip($zip)
+                ->setCity($city)
+                ->setCountry($country);
+    }
+
+    /**
      * Set all necessary customer parameter for a request
      *
      * @param string $nameGiven      customer given name, e.g. John
