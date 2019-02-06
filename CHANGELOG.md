@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [X.X.X][X.X.X]
+## [v1.7.0][v1.7.0]
 
 ### Fixed
 - Santanter Invoice integration tests.
@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Payment method for B2B invoice secured and corresponding tests.
 - Missing parameter CUSTOMER.OptIn_2 for Santander Invoice.
+- Example implementation for Santander paying by instalments.
 
 ### Changed
 - Used BasketApi to enable additional integration tests for Santander IV.
