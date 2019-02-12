@@ -80,7 +80,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setTransactionChannel('31HA07BC8129FBA7AF652F7F55919053')
+            ->setTransactionChannel('31HA07BC8129FBA7AF65A35EC4E540C2')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
@@ -100,6 +100,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
      * @return string payment reference id for the invoice authorize transaction
      * @group connectionTest
      *
+     * @dataProvider authorizeDataProvider
      * @test
      *
      * @throws \Exception
@@ -111,7 +112,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
         $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->getRequest()->b2cSecured('MRS', '1982-07-12');
-        $this->paymentObject->getRequest()->factoring('invoiceId', 'shopperId');
+        $this->paymentObject->getRequest()->factoring('iv' . date('YmdHis'), 'shopperId');
 
         $this->paymentObject->authorize();
 
@@ -134,6 +135,13 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
         return $this->authorizeReference = (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
 
+    public function authorizeDataProvider()
+    {
+        return [
+
+        ];
+    }
+
     /**
      * Test case for a invoice finalize of a existing authorisation
      *
@@ -151,25 +159,11 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
     {
         $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
         $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->factoring('invoiceid3');
-        
+
         $this->paymentObject->finalize($referenceId);
 
         /* verify response */
-        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
-
-        /* transaction result */
-        $this->assertTrue(
-            $this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
-        );
-        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse(
-            $this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
-        );
-
-        $this->logDataToDebug();
+        $this->successResponseAssertion($timestamp);
 
         return $referenceId;
     }
@@ -180,37 +174,77 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
      * @param $referenceId
      *
      * @return string payment reference id for the prepayment reversal transaction
-     * @depends authorize
+     * @depends finalize
      * @group connectionTest
      *
      * @test
      *
      * @throws \Exception
      */
-    public function reversal($referenceId)
+    public function reversalCancel($referenceId)
     {
-        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d-H-i-s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 10, $this->currency, $this->secret);
+
+        /* the refund can not be processed because there will be no receipt automatically on the sandbox */
+
+        $this->paymentObject->reversal($referenceId, ReversalType::RT_CANCEL);
+
+        /* verify response */
+        $this->successResponseAssertion($timestamp);
+
+        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+    }
+    /**
+     * Test case for a invoice reversal of a existing authorisation
+     *
+     * @param $referenceId
+     *
+     * @return string payment reference id for the prepayment reversal transaction
+     * @depends finalize
+     * @group connectionTest
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function reversalCredit($referenceId)
+    {
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d-H-i-s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 10, $this->currency, $this->secret);
+
+        /* the refund can not be processed because there will be no receipt automatically on the sandbox */
+
+        $this->paymentObject->reversal($referenceId, ReversalType::RT_CREDIT);
+
+        /* verify response */
+        $this->successResponseAssertion($timestamp);
+
+        return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
+    }
+
+    /**
+     * Test case for a invoice reversal of a existing authorisation
+     *
+     * @param $referenceId
+     *
+     * @return string payment reference id for the prepayment reversal transaction
+     * @depends finalize
+     * @group connectionTest
+     *
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function reversalReturn($referenceId)
+    {
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d-H-i-s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 3.12, $this->currency, $this->secret);
 
         /* the refund can not be processed because there will be no receipt automatically on the sandbox */
 
         $this->paymentObject->reversal($referenceId, ReversalType::RT_RETURN);
-
-        /* verify response */
-        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
-
-        /* transaction result */
-        $this->assertTrue(
-            $this->paymentObject->getResponse()->isSuccess(),
-            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
-        );
-        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
-        $this->assertFalse(
-            $this->paymentObject->getResponse()->isError(),
-            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
-        );
-
-        $this->logDataToDebug();
+        $this->successResponseAssertion($timestamp);
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
@@ -238,6 +272,29 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
         $this->paymentObject->refund((string)$referenceId);
 
         $this->assertEquals(PaymentMethod::INVOICE . '.' . TransactionType::REFUND, $this->paymentObject->getRequest()->getPayment()->getCode());
+
+        $this->logDataToDebug();
+    }
+
+    /**
+     * @param $timestamp
+     * @throws \Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException
+     */
+    protected function successResponseAssertion($timestamp)
+    {
+        /* verify response */
+        $this->assertTrue($this->paymentObject->getResponse()->verifySecurityHash($this->secret, $timestamp));
+
+        /* transaction result */
+        $this->assertTrue(
+            $this->paymentObject->getResponse()->isSuccess(),
+            'Transaction failed : ' . print_r($this->paymentObject->getResponse(), 1)
+        );
+        $this->assertFalse($this->paymentObject->getResponse()->isPending(), 'reversal is pending');
+        $this->assertFalse(
+            $this->paymentObject->getResponse()->isError(),
+            'reversal failed : ' . print_r($this->paymentObject->getResponse()->getError(), 1)
+        );
 
         $this->logDataToDebug();
     }

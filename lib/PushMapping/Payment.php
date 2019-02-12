@@ -16,6 +16,11 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  */
 class Payment extends AbstractPushMapper
 {
+
+    public $fields = [
+        'ReversalType' => 'reversaltype'
+    ];
+
     /**
      * @inheritdoc
      */
@@ -34,4 +39,15 @@ class Payment extends AbstractPushMapper
 
         return null;
     }
+
+    public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
+    {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Payment->$field)) {
+            return (string)$xmlElement->Transaction->Payment->$field;
+        }
+
+        return null;
+    }
+
+
 }
