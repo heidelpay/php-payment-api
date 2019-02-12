@@ -34,7 +34,7 @@ class PaymentParameterGroup extends AbstractParameterGroup
     public $code;
 
     /**
-     * @var string $reversaltype "CANCLE, RETURN or CREDIT"
+     * @var string $reversaltype available options are "CANCEL, RETURN or CREDIT"
      */
     public $reversaltype;
 
