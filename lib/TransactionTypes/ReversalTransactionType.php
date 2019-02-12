@@ -29,15 +29,17 @@ trait ReversalTransactionType
      * it back to the given account. This can be used to lower an amount on an
      * invoice for example.
      *
-     * @param mixed $paymentReferenceId payment reference id (unique id of the authorisation)
+     * @param mixed      $paymentReferenceId payment reference id (unique id of the authorisation)
+     * @param null|mixed $reversalType
      *
      * @return $this
      *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
-    public function reversal($paymentReferenceId)
+    public function reversal($paymentReferenceId, $reversalType = null)
     {
         $this->getRequest()->getPayment()->setCode($this->getPaymentCode() . '.' . TransactionType::REVERSAL);
+        $this->getRequest()->getPayment()->setReversaltype($reversalType);
         $this->getRequest()->getFrontend()->setEnabled('FALSE');
         $this->getRequest()->getIdentification()->setReferenceId($paymentReferenceId);
         $this->prepareRequest();

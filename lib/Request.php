@@ -133,14 +133,14 @@ class Request extends AbstractMethod
      *
      * @param string $nameGiven      customer given name, e.g. John
      * @param string $nameFamily     customer family name, e.g. Doe
-     * @param string $nameCompany    company name, e.g. Heidelpay
+     * @param string $nameCompany    company name, e.g. heidelpay
      * @param string $shopperId      customer id in your application, e.g. 1249
      * @param string $addressStreet  address street of the customer, e.g. Vagerowstr.
      * @param string $addressState   address state ot the customer, e.g. Bayern
      * @param string $addressZip     address zip code, e.g. 69115
      * @param string $addressCity    address city, e.g. Heidelberg
      * @param string $addressCountry address country code 2 letters, e.g. DE
-     * @param string $contactMail    email adress of the customer, e.g. ab@mail.de
+     * @param string $contactMail    email address of the customer, e.g. ab@mail.de
      *
      * @return \Heidelpay\PhpPaymentApi\Request
      */
@@ -171,15 +171,16 @@ class Request extends AbstractMethod
     }
 
     /**
-     * @param string $shopperid
-     * @param string $invoiceid
+     * @param string $shopperId
+     * @param string $invoiceId
      * @param string $reversaltype string $reversaltype "CANCLE, RETURN or CREDIT"
      */
-    public function factoring($shopperid, $invoiceid, $reversaltype)
+    public function factoring($invoiceId, $shopperId = null)
     {
-        $this->getIdentification()->setShopperid($shopperid);
-        $this->getIdentification()->setInvoiceid($invoiceid);
-        $this->getPayment()->setReversaltype($reversaltype);
+        $this->getIdentification()->setInvoiceid($invoiceId);
+        if ($shopperId !== null) {
+            $this->getIdentification()->setShopperid($shopperId);
+        }
     }
 
     /**

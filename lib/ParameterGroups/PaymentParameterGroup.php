@@ -77,5 +77,4 @@ class PaymentParameterGroup extends AbstractParameterGroup
         $this->reversaltype = $reversaltype;
         return $this;
     }
-
 }
