@@ -88,7 +88,7 @@ require_once __DIR__ . '/../../../autoload.php';
      );
  
  /**
-  * Set necessary parameters for Heidelpay payment and send the request
+  * Set necessary parameters for heidelpay payment and send the request
   */
  $Prepayment->authorize();
  ?>

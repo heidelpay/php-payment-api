@@ -19,7 +19,7 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-api/
  *
- * @author  Jens Richter
+ * @author  David Owusu
  *
  * @package heidelpay\php-payment-api\tests\integration
  */
@@ -169,7 +169,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
     }
 
     /**
-     * Test case for a invoice reversal of a existing authorisation
+     * Test case for a invoice reversal (type REVERSAL)of a existing authorisation
      *
      * @param $referenceId
      *
@@ -196,7 +196,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
     /**
-     * Test case for a invoice reversal of a existing authorisation
+     * Test case for a invoice reversal (type CREDIT) of a existing authorisation
      *
      * @param $referenceId
      *
@@ -224,7 +224,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
     }
 
     /**
-     * Test case for a invoice reversal of a existing authorisation
+     * Test case for a invoice reversal (type RETURN)of a existing authorisation
      *
      * @param $referenceId
      *

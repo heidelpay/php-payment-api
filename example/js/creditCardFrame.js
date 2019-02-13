@@ -2,7 +2,7 @@
  * Credit card javascript for payment frame
  * 
  * This is a coding example for credit and debit card integration
- * using Heidelpay Payment Frame
+ * using heidelpay Payment Frame
  *
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
