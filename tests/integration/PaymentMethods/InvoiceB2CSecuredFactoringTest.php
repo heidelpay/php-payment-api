@@ -195,6 +195,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
 
         return (string)$this->paymentObject->getResponse()->getPaymentReferenceId();
     }
+
     /**
      * Test case for a invoice reversal (type CREDIT) of a existing authorisation
      *
@@ -278,6 +279,7 @@ class InvoiceB2CSecuredFactoringTest extends BasePaymentMethodTest
 
     /**
      * @param $timestamp
+     *
      * @throws \Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException
      */
     protected function successResponseAssertion($timestamp)

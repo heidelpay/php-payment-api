@@ -16,7 +16,6 @@ namespace Heidelpay\PhpPaymentApi\PushMapping;
  */
 class Payment extends AbstractPushMapper
 {
-
     public $fields = [
         'ReversalType' => 'reversaltype'
     ];
@@ -47,6 +46,4 @@ class Payment extends AbstractPushMapper
         }
         return null;
     }
-
-
 }

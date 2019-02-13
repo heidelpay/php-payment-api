@@ -73,7 +73,8 @@ class PaymentMethodFactoringTest extends BasePaymentMethodTest
         $request = $invoiceB2CSecured->getRequest();
 
         $request->getIdentification()->setShopperid('OriginalShopperId');
-        $request->getIdentification()->setInvoiceid('OriginalInvoiceId');$invoiceB2CSecured->dryRun = false;
+        $request->getIdentification()->setInvoiceid('OriginalInvoiceId');
+        $invoiceB2CSecured->dryRun = false;
         $this->paymentObject = $invoiceB2CSecured;
 
         $this->mockCurlAdapter();
@@ -112,6 +113,7 @@ class PaymentMethodFactoringTest extends BasePaymentMethodTest
      * @param $shopperId
      * @param $expectedInvoiceId
      * @param $expectedShopperId
+     *
      * @return array
      */
     public function factoringParameterShouldBeSetAsExpected($invoiceId, $shopperId, $expectedInvoiceId, $expectedShopperId)
@@ -152,12 +154,13 @@ class PaymentMethodFactoringTest extends BasePaymentMethodTest
 
     /**
      * @test
+     *
      * @param $requestArray
+     *
      * @return mixed
      */
     public function arrayShouldBeMappedToObjectAsExpected()
     {
-
         $responseArray = [
             'CRITERION_SDK_NAME' => 'Heidelpay\PhpPaymentApi',
             'CRITERION_SDK_VERSION' => 'v1.7.0',
