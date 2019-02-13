@@ -42,10 +42,9 @@ class Payment extends AbstractPushMapper
 
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Payment->$field)) {
+        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Payment->$field) && $field === 'ReversalType') {
             return (string)$xmlElement->Transaction->Payment->$field;
         }
-
         return null;
     }
 
