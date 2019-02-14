@@ -21,6 +21,7 @@ class Identification extends AbstractPushMapper
      */
     public $fields = [
         'CreditorID' => 'creditor_id',
+        'InvoiceID' => 'invoiceid',
         'ReferenceID' => 'referenceid',
         'ShopperID' => 'shopperid',
         'ShortID' => 'shortid',

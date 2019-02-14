@@ -2,7 +2,7 @@
 namespace Heidelpay\Example\PhpPaymentApi;
 
 /**
- * Invoice b2c secured authorize example
+ * Invoice b2c secured authorize example with factoring
  *
  * This is a coding example for invoice b2c secured authorize using heidelpay php-payment-api
  * extension.
@@ -13,7 +13,7 @@ namespace Heidelpay\Example\PhpPaymentApi;
  *
  * @link  http://dev.heidelpay.com/heidelpay-php-payment-api/
  *
- * @author  Jens Richter
+ * @author  David Owusu
  *
  * @category example
  */
@@ -28,43 +28,59 @@ if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_
     exit();
 }
 
+//#######   Load EasyCredit constants.
+require_once __DIR__ . '/FactoringInvoice/FactoringInvoiceConstants.php';
+
+//#######   Checks whether the response file is writable. ##############################################################
+//#######   The results from the easyCredit payment plan selection will be sent via POST in a server-to-server request.#
+//#######   Normally the information will be stored within the database to make them accessable in the customer session#
+//#######   in order to safe the information in this example we use the file defined in RESPONSE_FILE_NAME constant.   #
+//#######   Only necessary for this example.                                                                           #
+if (!is_writable(RESPONSE_FILE_NAME)) {
+    echo '<h1>Factoring Examle example</h1>';
+    echo 'File: ' . RESPONSE_FILE_NAME . ' is not writable or does not exist. Please change permissions.';
+    exit;
+}
 
 /**
  * Require the composer autoloader file
  */
 require_once __DIR__ . '/../../../autoload.php';
 
+//####### 1. Create an instance of the InvoiceB2CSecured payment method. ###############################################
 /**
  * Load a new instance of the payment method
  */
-$Invoice = new InvoiceB2CSecuredPaymentMethod();
+$invoice = new InvoiceB2CSecuredPaymentMethod();
+
+
+//####### 2. Prepare and send an initialization request. ######################################################
+//#######    The response will provide a redirectUrl to where the customer can be redirected to. #
 
 /**
- * Set up your authentification data for Heidepay api
+ * Set up your authentification data for Heidepay api. The Constants are defined in FactoringInvoiceConstants.php
  *
  * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
  */
-$Invoice->getRequest()->authentification(
-    '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
-    '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
-    '93167DE7',                          // UserPassword
-    '31HA07BC8142C5A171744F3D6D155865',  // TransactionChannel credit card without 3d secure
+$invoice->getRequest()->authentification(
+    HEIDELPAY_SECURITY_SENDER,  // SecuritySender
+    HEIDELPAY_USER_LOGIN,  // UserLogin
+    HEIDELPAY_USER_PASSWORD,  // UserPassword
+    HEIDELPAY_TRANSACTION_CHANNEL,  // TransactionChannel credit card without 3d secure
     true                                 // Enable sandbox mode
 );
 /**
  * Set up asynchronous request parameters
  */
-$Invoice->getRequest()->async(
+$invoice->getRequest()->async(
     'EN', // Language code for the Frame
-    HEIDELPAY_PHP_PAYMENT_API_URL .
-    HEIDELPAY_PHP_PAYMENT_API_FOLDER .
-    'HeidelpayResponse.php'  // Response url from your application
+    RESPONSE_URL  // Response url from your application
 );
 
 /**
  * Set up customer information required for risk checks
  */
-$Invoice->getRequest()->customerAddress(
+$invoice->getRequest()->customerAddress(
     'Heidel',                  // Given name
     'Berger-Payment',           // Family name
     null,                     // Company Name
@@ -77,10 +93,21 @@ $Invoice->getRequest()->customerAddress(
     'support@heidelpay.com'     // Customer mail address
 );
 
+/********************************************************************************************************************'''
+ * ###### Call factoring function to set necessary parameters.
+ * ###### Second parameter $shopperId is not needed here since it is already set with function call customerAddress().
+ * ###### If not you can call the factoring() as you you can see below in the
+ * ###### commend.
+ *
+ * The InvoiceID has to be unique for the merchant.
+ */
+$invoice->getRequest()->factoring('iv' . date('YmdHis'));
+//$invoice->getRequest()->factoring('iv' . date('YmdHis'), '1234');
+
 /**
  * Set up basket or transaction information
  */
-$Invoice->getRequest()->basketData(
+$invoice->getRequest()->basketData(
     '2843294932', // Reference Id of your application
     23.12,                         // Amount of this request
     'EUR',                         // Currency code of this request
@@ -92,7 +119,7 @@ $Invoice->getRequest()->basketData(
  * information. For a better exception rate please also provide the basket details
  * by using the basket api.
  */
-$Invoice->getRequest()->b2cSecured(
+$invoice->getRequest()->b2cSecured(
     'MR',  // Customer salutation
     '1982-07-12', // Customer birth date
     null // Basket api id
@@ -102,18 +129,19 @@ $Invoice->getRequest()->b2cSecured(
 /**
  * Set necessary parameters for heidelpay payment and send the request
  */
-$Invoice->authorize();
+$invoice->authorize();
 ?>
 <html>
 <head>
-    <title>Invoice authorize example</title>
+    <title>Invoice authorize with factoring example</title>
 </head>
 <body>
 <?php
-if ($Invoice->getResponse()->isSuccess()) {
-    echo '<a href="' . $Invoice->getResponse()->getPaymentFormUrl() . '">place Invoice</a>';
+//####### 3. Display redirect URL.
+if ($invoice->getResponse()->isSuccess()) {
+    echo '<a href="' . $invoice->getResponse()->getPaymentFormUrl() . '">place Invoice</a>';
 } else {
-    echo '<pre>' . print_r($Invoice->getResponse()->getError(), 1) . '</pre>';
+    echo '<pre>' . print_r($invoice->getResponse()->getError(), 1) . '</pre>';
 }
 ?>
 <p>It is not necessary to show the redirect url to your customer. You can
@@ -123,10 +151,7 @@ if ($Invoice->getResponse()->isSuccess()) {
 </p>
 <p>Note: If you can not provide the customer details for secured invoice form your
     application. You can build a form using getPaymentFormUrl() and provide NAME.SALUTATION
-    and NAME.BIRTDATE as input fields.
+    and NAME.BIRTHDATE as input fields.
 </p>
 </body>
 </html>
- 
- 
- 

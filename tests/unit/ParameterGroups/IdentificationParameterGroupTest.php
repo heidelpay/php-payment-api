@@ -20,6 +20,21 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\IdentificationParameterGroup as Iden
 class IdentificationParameterGroupTest extends Test
 {
     /**
+     * @var Identification
+     */
+    protected $identification;
+
+    public function _before()
+    {
+        $this->identification = new Identification();
+    }
+
+    public function _after()
+    {
+        $this->identification = null;
+    }
+
+    /**
      * Creditor id getter/setter test
      *
      * @test
@@ -107,5 +122,18 @@ class IdentificationParameterGroupTest extends Test
         $identification->set('uniqueid', $value);
 
         $this->assertEquals($value, $identification->getUniqueId());
+    }
+
+    /**
+     * Invoice id getter/setter test
+     *
+     * @test
+     */
+    public function invoiceId()
+    {
+        $value = '132456';
+        $this->identification->setInvoiceid($value);
+
+        $this->assertEquals($value, $this->identification->getInvoiceid());
     }
 }

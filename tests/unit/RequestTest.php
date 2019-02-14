@@ -2,13 +2,13 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
+use AspectMock\Test as aspectMockTest;
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
-use Heidelpay\PhpPaymentApi\Request;
 use Heidelpay\PhpPaymentApi\ParameterGroups\CriterionParameterGroup;
-use AspectMock\Test as aspectMockTest;
-use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
+use Heidelpay\PhpPaymentApi\Request;
 
 /**
  *
@@ -176,6 +176,50 @@ class RequestTest extends Test
         );
 
         $this->assertEquals($referenceVars, $request->toArray());
+    }
+
+    /**
+     * @dataProvider FactoringParameterShouldBeSetAsExpectedDataProvider
+     * @test
+     *
+     * @param mixed $invoiceId
+     * @param mixed $shopperId
+     * @param mixed $expectedInvoiceId
+     * @param mixed $expectedShopperId
+     */
+    public function FactoringParameterShouldBeSetAsExpected($invoiceId, $shopperId, $expectedInvoiceId, $expectedShopperId)
+    {
+        $request = new Request();
+
+        $request->getIdentification()->setShopperid('OriginalShopperId');
+        $request->getIdentification()->setInvoiceid('OriginalInvoiceId');
+
+        if ($shopperId) {
+            $request->factoring($invoiceId, $shopperId);
+        } else {
+            $request->factoring($invoiceId);
+        }
+
+        $expectedRequestVars = [
+            'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
+            'CRITERION.SDK_VERSION' => 'v1.7.0',
+            'FRONTEND.ENABLED' => 'TRUE',
+            'FRONTEND.MODE' => 'WHITELABEL',
+            'IDENTIFICATION.INVOICEID' => $expectedInvoiceId,
+            'IDENTIFICATION.SHOPPERID' => $expectedShopperId,
+            'REQUEST.VERSION' => '1.0',
+            'TRANSACTION.MODE' => 'CONNECTOR_TEST',
+        ];
+
+        $this->assertEquals($expectedRequestVars, $request->toArray());
+    }
+
+    public function FactoringParameterShouldBeSetAsExpectedDataProvider()
+    {
+        return [
+            'shopperid null' => ['invoice01', null, 'invoice01', 'OriginalShopperId'],
+            'shopperid set separately' => ['invoice01', 'shopper01', 'invoice01', 'shopper01'],
+        ];
     }
 
     /**

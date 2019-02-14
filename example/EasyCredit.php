@@ -109,7 +109,7 @@ $easyCredit->getRequest()->getRiskInformation()
     ->setCustomerSince('2005-08-12');
 
 /**
- * Set necessary parameters for Heidelpay payment and send the request
+ * Set necessary parameters for heidelpay payment and send the request
  */
 $easyCredit->initialize();
 
