@@ -39,10 +39,18 @@ class Payment extends AbstractPushMapper
         return null;
     }
 
+    /**
+     * Only map fields that are listed here.
+     *
+     * @inheritdoc
+     */
     public function getXmlObjectField(\SimpleXMLElement $xmlElement, $field)
     {
-        if (isset($xmlElement->Transaction, $xmlElement->Transaction->Payment->$field) && $field === 'ReversalType') {
-            return (string)$xmlElement->Transaction->Payment->$field;
+        if (isset($xmlElement->Transaction->Payment, $field)) {
+            $xmlField = $xmlElement->Transaction->Payment->$field;
+            if (array_key_exists($xmlField->getName(), $this->fields)) {
+                return (string)$xmlField;
+            }
         }
         return null;
     }

@@ -86,17 +86,25 @@ if ($response->isSuccess()) {
             true                                 // Enable sandbox mode
         );
 
+        /**
+         * Following steps are done by the Merchant:
+         * Order was shipped and finalized automatically.
+         * Insurance is active from now on.
+         * Sometimes a reversal is necessary.
+         */
         $invoicePaymentMethod->finalize($response->getPaymentReferenceId());
-        if($invoicePaymentMethod->getResponse()->isSuccess()) {
-            echo'</p>'. REVERSAL_URL
-                . '"Following steps are done by the Merchant: \n
-                Order was shipped and finalized automatically. \n
-                Insurance is active from now on';
+        $finalizeResponse = $invoicePaymentMethod->getResponse();
+        if ($finalizeResponse->isSuccess() || $finalizeResponse->getError()['cod'] === '700.400.800') {
+            echo"<p>Following steps are done by the Merchant: \n
+                Usually the merchant finalizes the order with the shipping. In this example we did this automatically. <br/>
+                Insurance is active from now on.
+                </p>";
 
-            echo'</p>Sometimes a reversal is neccesary. This can<a href="'
-                . REVERSAL_URL .'">Continue with Reversal</a>';
+            echo '<p>Sometimes a reversal is necessary. This can be done here. <a href="'
+                . REVERSAL_URL .'">Continue with Reversal</a>
+                </p>';
         } else {
-            echo '<pre>'. print_r($invoicePaymentMethod->getResponse()->getError(), 1).'</pre>';
+            echo '<pre>'. print_r($finalizeResponse->getError(), 1).'</pre>';
         }
     }
 

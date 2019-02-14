@@ -101,7 +101,7 @@ $invoice->getRequest()->customerAddress(
  *
  * The InvoiceID has to be unique for the merchant.
  */
-$invoice->getRequest()->factoring('iv' . date('YmdHis')/*, '1234'*/);
+$invoice->getRequest()->factoring('iv' . date('YmdHis'));
 //$invoice->getRequest()->factoring('iv' . date('YmdHis'), '1234');
 
 /**
@@ -155,6 +155,3 @@ if ($invoice->getResponse()->isSuccess()) {
 </p>
 </body>
 </html>
- 
- 
- 
