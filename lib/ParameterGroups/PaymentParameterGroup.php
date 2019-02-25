@@ -70,7 +70,7 @@ class PaymentParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * @param string $reversaltype
+     * @param string|null $reversaltype
      */
     public function setReversaltype($reversaltype)
     {
