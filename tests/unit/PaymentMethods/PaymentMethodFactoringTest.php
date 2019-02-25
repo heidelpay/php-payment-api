@@ -3,6 +3,7 @@
 namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
 
 use AspectMock\Test as test;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\PaymentMethods\InvoiceB2CSecuredPaymentMethod;
@@ -131,7 +132,7 @@ class PaymentMethodFactoringTest extends BasePaymentMethodTest
 
         $this->expectedRequestVars = [
             'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => 'v1.7.0',
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.INVOICEID' => $expectedInvoiceId,
@@ -163,7 +164,7 @@ class PaymentMethodFactoringTest extends BasePaymentMethodTest
     {
         $responseArray = [
             'CRITERION_SDK_NAME' => 'Heidelpay\PhpPaymentApi',
-            'CRITERION_SDK_VERSION' => 'v1.7.0',
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND_ENABLED' => 'TRUE',
             'FRONTEND_MODE' => 'WHITELABEL',
             'IDENTIFICATION_INVOICEID' => 'OriginalInvoiceId',
