@@ -88,13 +88,13 @@ require_once __DIR__ . '/../../../autoload.php';
      );
  
  /**
-  * Set necessary parameters for Heidelpay payment Frame and send a registration request
+  * Set necessary parameters for heidelpay payment Frame and send a registration request
   */
  $DebitCard->debit(
     HEIDELPAY_PHP_PAYMENT_API_URL,                        // PaymentFrameOrigin - uri of your application like https://dev.heidelpay.com
     'FALSE',                                   // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
     HEIDELPAY_PHP_PAYMENT_API_URL .
-    HEIDELPAY_PHP_PAYMENT_API_FOLDER   // CSSPath - css url to style the Heidelpay payment frame
+    HEIDELPAY_PHP_PAYMENT_API_FOLDER   // CSSPath - css url to style the heidelpay payment frame
  );
  ?>
 <html>

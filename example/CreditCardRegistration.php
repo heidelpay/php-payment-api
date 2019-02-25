@@ -88,7 +88,7 @@ $CreditCard->getRequest()->basketData(
 );
 
 /**
- * Set necessary parameters for Heidelpay payment Frame and send a registration request
+ * Set necessary parameters for heidelpay payment Frame and send a registration request
  */
 $CreditCard->registration(
     HEIDELPAY_PHP_PAYMENT_API_URL,
@@ -97,7 +97,7 @@ $CreditCard->registration(
     // PreventAsyncRedirect - this will tell the payment weather it should redirect the customer or not
     HEIDELPAY_PHP_PAYMENT_API_URL .
     HEIDELPAY_PHP_PAYMENT_API_FOLDER .
-    'style.css'   // CSSPath - css url to style the Heidelpay payment frame
+    'style.css'   // CSSPath - css url to style the heidelpay payment frame
 );
 ?>
 <html>

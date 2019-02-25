@@ -24,6 +24,11 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     public $creditor_id;
 
     /**
+     * @var string $invoiceid
+     */
+    public $invoiceid;
+
+    /**
      * IdentificationShopperId
      *
      * Identification number of your customer, should be given by your application.
@@ -178,6 +183,23 @@ class IdentificationParameterGroup extends AbstractParameterGroup
     public function setReferenceid($referenceid)
     {
         $this->referenceid = $referenceid;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInvoiceid()
+    {
+        return $this->invoiceid;
+    }
+
+    /**
+     * @param string $invoiceid
+     */
+    public function setInvoiceid($invoiceid)
+    {
+        $this->invoiceid = $invoiceid;
         return $this;
     }
 }

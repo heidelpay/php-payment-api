@@ -100,7 +100,7 @@ $Invoice->getRequest()->b2cSecured(
 
 
 /**
- * Set necessary parameters for Heidelpay payment and send the request
+ * Set necessary parameters for heidelpay payment and send the request
  */
 $Invoice->authorize();
 

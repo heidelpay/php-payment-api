@@ -4,6 +4,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit\ParameterGroup;
 
 use Codeception\TestCase\Test;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\ReversalType;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup as Payment;
 
@@ -22,15 +23,36 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup as Payment;
 class PaymentParameterGroupTest extends Test
 {
     /**
+     * @var Payment
+     */
+    protected $payment;
+
+    public function _before()
+    {
+        $this->payment = new Payment();
+    }
+
+    /**
      * Payment code setter/getter test
      */
     public function testCode()
     {
-        $Payment = new Payment();
-
         $value = PaymentMethod::INVOICE . '.' . TransactionType::RESERVATION;
-        $Payment->setCode($value);
+        $this->payment->setCode($value);
 
-        $this->assertEquals($value, $Payment->getCode());
+        $this->assertEquals($value, $this->payment->getCode());
+    }
+
+    /**
+     * reversal type getter/setter test
+     *
+     * @test
+     */
+    public function reversalType()
+    {
+        $value = ReversalType::RT_CREDIT;
+        $this->payment->setReversaltype($value);
+
+        $this->assertEquals($value, $this->payment->getReversaltype());
     }
 }

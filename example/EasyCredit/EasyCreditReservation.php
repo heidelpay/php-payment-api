@@ -98,7 +98,7 @@ $request->getRiskInformation()
 //####### 11.2. This time we call the method authorizeOnRegistration passing along the uniqueId of the previous #######
 //#######       initialization as a reference to let the payment server know which payment plan to use.                #
 /**
- * Set necessary parameters for Heidelpay payment and send the request
+ * Set necessary parameters for heidelpay payment and send the request
  */
 $easyCredit->authorizeOnRegistration($response->getIdentification()->getUniqueId());
 $authorizationResponse = $easyCredit->getResponse();

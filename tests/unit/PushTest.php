@@ -2,10 +2,11 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
+use Codeception\TestCase\Test;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\ProcessingResult;
-use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Constants\StatusCode;
+use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\Exceptions\XmlResponseParserException;
 use Heidelpay\PhpPaymentApi\Push;
@@ -14,7 +15,6 @@ use Heidelpay\PhpPaymentApi\PushMapping\Connector;
 use Heidelpay\PhpPaymentApi\PushMapping\Payment;
 use Heidelpay\PhpPaymentApi\PushMapping\Processing;
 use Heidelpay\PhpPaymentApi\Response;
-use Codeception\TestCase\Test;
 use SimpleXMLElement;
 
 /**
@@ -88,6 +88,13 @@ class PushTest extends Test
     protected $xmlSampleCompanyResponse;
 
     /**
+     * Example response that contains properties relevant for factoring
+     *
+     * @var string
+     */
+    protected $xmlFactoringResponse;
+
+    /**
      * Sets up the fixture, for example, open a network connection.
      */
     // @codingStandardsIgnoreStart
@@ -101,6 +108,7 @@ class PushTest extends Test
         $this->setSamplePpPaResponse();
         $this->setSampleInvalidResponse();
         $this->setSampleCompanyResponse();
+        $this->setSampleFactoringResponse();
     }
 
     /**
@@ -512,6 +520,24 @@ class PushTest extends Test
         $this->assertNotNull($executive[2]);
 
         codecept_debug('response: ' . print_r($response, 1));
+    }
+
+    /**
+    * @test
+    */
+    public function hasValidMappedFactoringProperties()
+    {
+        $push = new Push($this->xmlFactoringResponse);
+        $response = $push->getResponse();
+
+
+        $this->assertEquals('1', $response->getIdentification()->getShopperId());
+        $this->assertEquals('123456', $response->getIdentification()->getInvoiceid());
+        $this->assertEquals('CANCEL', $response->getPayment()->getReversaltype());
+
+        if (!($response instanceof Response)) {
+            throw new \RuntimeException('Response is not set!');
+        }
     }
 
     /**
@@ -1010,6 +1036,24 @@ XML;
                 <CommercialSector>AIR_TRANSPORT</CommercialSector>
             </Company>
         </Customer>
+    </Transaction>
+</Response>
+XML;
+    }
+
+    public function setSampleFactoringResponse()
+    {
+        $this->xmlFactoringResponse = <<<XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response version="1.0">
+    <Transaction mode="CONNECTOR_TEST" response="SYNC" channel="31HA07BC8122B949FB64075AFB0798AE" source="WPF">
+        <Identification>
+            <ShopperID>1</ShopperID>
+            <InvoiceID>123456</InvoiceID>
+        </Identification>
+        <Payment code="PP.PA">
+            <ReversalType>CANCEL</ReversalType>
+        </Payment>
     </Transaction>
 </Response>
 XML;

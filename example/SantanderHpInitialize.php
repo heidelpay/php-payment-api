@@ -126,7 +126,7 @@ $santanderHp->getRequest()->getName()->setBirthdate("1987-12-12");
 $santanderHp->getRequest()->getName()->setSalutation("MR");
 
 /**
- * Set necessary parameters for Heidelpay payment and send the request
+ * Set necessary parameters for heidelpay payment and send the request
  */
 $santanderHp->initialize();
 

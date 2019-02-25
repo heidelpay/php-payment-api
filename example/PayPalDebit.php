@@ -88,7 +88,7 @@ require_once __DIR__ . '/../../../autoload.php';
      );
  
  /**
-  * Set necessary parameters for Heidelpay payment Frame and send a registration request
+  * Set necessary parameters for heidelpay payment Frame and send a registration request
   */
  $PayPal->debit();
  ?>
