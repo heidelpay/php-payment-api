@@ -4,6 +4,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Unit;
 
 use AspectMock\Test as aspectMockTest;
 use Codeception\TestCase\Test;
+use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\FrontendMode;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\JsonParserException;
@@ -202,7 +203,7 @@ class RequestTest extends Test
 
         $expectedRequestVars = [
             'CRITERION.SDK_NAME' => 'Heidelpay\PhpPaymentApi',
-            'CRITERION.SDK_VERSION' => 'v1.7.0',
+            'CRITERION.SDK_VERSION' => ApiConfig::SDK_VERSION,
             'FRONTEND.ENABLED' => 'TRUE',
             'FRONTEND.MODE' => 'WHITELABEL',
             'IDENTIFICATION.INVOICEID' => $expectedInvoiceId,
