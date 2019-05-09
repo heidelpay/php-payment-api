@@ -118,7 +118,3 @@ $CreditCard->registration(
 <script type="text/javascript" src="./js/creditCardFrame.js"></script>
 </body>
 </html>
- 
- 
- 
- 
