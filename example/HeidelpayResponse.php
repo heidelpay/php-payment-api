@@ -19,7 +19,7 @@
  * For security reason all examples are disabled by default.
  */
 require_once './_enableExamples.php';
-if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') and HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
+if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') && HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
     exit();
 }
 
@@ -28,7 +28,7 @@ require_once __DIR__ . '/../../../autoload.php';
 
 $HeidelpayResponse = new  Heidelpay\PhpPaymentApi\Response($_POST);
 
-$secretPass = "39542395235ßfsokkspreipsr";
+$secretPass = '39542395235ßfsokkspreipsr';
 
 $identificationTransactionId = $HeidelpayResponse->getIdentification()->getTransactionId();
 
@@ -39,7 +39,7 @@ try {
      * miss configuration. So you can log $e->getMessage() for debugging.*/
     return;
 }
- 
+
 if ($HeidelpayResponse->isSuccess()) {
     
     /* save order and transaction result to your database */
