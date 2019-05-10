@@ -73,7 +73,7 @@ class CurlAdapter implements HttpAdapterInterface
 
         curl_close($request);
 
-        if (isset($error) and !empty($error)) {
+        if (isset($error) && !empty($error)) {
             $errorCode =
                 (is_array($info) && array_key_exists('CURLINFO_HTTP_CODE', $info))
                     ? $info['CURLINFO_HTTP_CODE']

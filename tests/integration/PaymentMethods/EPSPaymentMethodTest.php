@@ -2,6 +2,7 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Exception;
 use Heidelpay\PhpPaymentApi\Response;
 use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod as EPS;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
@@ -29,6 +30,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      * @var string currency
      */
     protected $currency = 'EUR';
+
     /**
      * Secret
      *
@@ -44,7 +46,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod
+     * @var EPS
      */
     protected $paymentObject;
 
@@ -89,7 +91,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      * @return string payment reference id for the EPS authorize transaction
      * @group connectionTest
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function testAuthorize()
     {
