@@ -72,6 +72,19 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     public $status_code;
 
     /**
+     * @var RedirectParameterGroup $redirect
+     */
+    public $redirect;
+
+    /**
+     * ProcessingParameterGroup constructor.
+     */
+    public function __construct()
+    {
+        $this->redirect = new RedirectParameterGroup();
+    }
+
+    /**
      * ProcessingResult getter
      *
      * @return string result
@@ -109,5 +122,13 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     public function getStatusCode()
     {
         return $this->status_code;
+    }
+
+    /**
+     * @return RedirectParameterGroup
+     */
+    public function getRedirect()
+    {
+        return $this->redirect;
     }
 }

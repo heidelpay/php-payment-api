@@ -114,4 +114,39 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
 
         return (string)$response->getPaymentReferenceId();
     }
+
+    /**
+     * Test case for a single EPS authorize
+     *
+     * @return string payment reference id for the EPS authorize transaction
+     * @group connectionTest
+     *
+     * @throws Exception
+     */
+    public function testAuthorizeFrontendDisabled()
+    {
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $this->paymentObject->getRequest()->getFrontend()->setResponseUrl('http://technik.heidelpay.de/jonas/responseAdvanced/response.php');
+
+        $this->paymentObject->getRequest()->getAccount()->setCountry('DE');
+        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+
+        $this->paymentObject->authorize();
+
+        /* prepare request and send it to payment api */
+        $request = $this->paymentObject->getRequest()->toArray();
+        /** @var Response $response */
+        list($result, $response) =
+            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
+        $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
+        $this->assertNotEmpty($response->getProcessing()->getRedirect()->url);
+        $this->assertNotEmpty($response->getProcessing()->getRedirect()->getParameter());
+
+        $this->logDataToDebug($result);
+
+        return (string)$response->getPaymentReferenceId();
+    }
 }
