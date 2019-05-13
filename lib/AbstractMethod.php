@@ -602,13 +602,13 @@ abstract class AbstractMethod implements MethodInterface
                 $this->mapSubGroupsFromPost($parameterGroup, $paramGroupString, $value);
             }
 
-            if ($parameterGroup === 'parameter') {
+            if ($paramGroupName === 'parameter') {
                 /** @var ProcessingParameterGroup $processing */
                 $processing = $this->getProcessing();
                 $processing->getRedirect()->parameter[$paramGroupString] = $value;
             }
 
-            //Handle executive parametergroup
+            // handle executive parameter group
             if (is_numeric($paramGroupName) && $parameterGroup === 'executive') {
                 if ((int)$paramGroupName > count($this->getCompany()->executive)) {
                     $executives = $this->getCompany()->getExecutive();
