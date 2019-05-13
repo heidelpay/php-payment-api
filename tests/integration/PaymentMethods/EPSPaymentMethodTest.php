@@ -70,10 +70,10 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setSecuritySender('31HA07BC8124AD82A9E96D9A35FAFD2A')
-            ->setUserLogin('31ha07bc8124ad82a9e96d486d19edaa')
-            ->setUserPassword('password')
-            ->setTransactionChannel('31HA07BC812125981B4F52033DE486AB')
+            ->setSecuritySender('31HA07BC8142C5A171745D00AD63D182')
+            ->setUserLogin('31ha07bc8142c5a171744e5aef11ffd3')
+            ->setUserPassword('93167DE7')
+            ->setTransactionChannel('31HA07BC816492169CE30CFBBF83B1D5')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
@@ -109,6 +109,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
+        $this->assertEmpty($response->getProcessing()->getRedirect()->getUrl());
 
         $this->logDataToDebug($result);
 
@@ -125,25 +126,27 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      */
     public function testAuthorizeFrontendDisabled()
     {
-        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
-        $this->paymentObject->getRequest()->basketData($timestamp, 23.12, $this->currency, $this->secret);
-        $this->paymentObject->getRequest()->getFrontend()->setResponseUrl('http://technik.heidelpay.de/jonas/responseAdvanced/response.php');
+        $request = $this->paymentObject->getRequest();
 
-        $this->paymentObject->getRequest()->getAccount()->setCountry('DE');
-        $this->paymentObject->getRequest()->getFrontend()->setEnabled('FALSE');
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $request->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $request->getFrontend()->setResponseUrl('http://technik.heidelpay.de/jonas/responseAdvanced/response.php');
+
+        $request->getAccount()->setCountry('AT');
+        $request->getFrontend()->setEnabled('FALSE');
 
         $this->paymentObject->authorize();
 
         /* prepare request and send it to payment api */
-        $request = $this->paymentObject->getRequest()->toArray();
+        $requestArray = $request->toArray();
         /** @var Response $response */
-        list($result, $response) =
-            $this->paymentObject->getRequest()->send($this->paymentObject->getPaymentUrl(), $request);
+        list($result, $response) = $request->send($this->paymentObject->getPaymentUrl(), $requestArray);
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
         $this->assertNotEmpty($response->getProcessing()->getRedirect()->url);
-        $this->assertNotEmpty($response->getProcessing()->getRedirect()->getParameter());
+        // Unfortunately this can only be tested in live mode
+        //$this->assertNotEmpty($response->getProcessing()->getRedirect()->getParameter());
 
         $this->logDataToDebug($result);
 

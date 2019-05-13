@@ -53,7 +53,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      * @throws \PHPUnit\Framework\Exception
      * @throws ExpectationFailedException
      */
-    public function requestPostArrayParamsShouldBeMappedAsExpected()
+    public function responsePostArrayParamsShouldBeMappedAsExpected()
     {
         $url          = 'https://this-is-a-test-redirect-url-for-eps-testing.de';
         $firstParam   = 'This is the content of the first parameter';
