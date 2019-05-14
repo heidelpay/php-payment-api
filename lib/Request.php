@@ -44,7 +44,7 @@ class Request extends AbstractMethod
      * @param string $transactionChannel channel id of the payment method, e.g. 31HA07BC8142C5A171744F3D6D155865
      * @param bool   $sandboxRequest     choose between sandbox and productive payment system
      *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @return Request
      */
     public function authentification(
         $securitySender = null,
@@ -71,7 +71,7 @@ class Request extends AbstractMethod
      * @param string $languageCode language code 2 letters for error messages and iframe, e.g. EN
      * @param string $responseUrl  response url of your application, e.g. https://www.url.com/response.php
      *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @return Request
      */
     public function async($languageCode = 'EN', $responseUrl = null)
     {
@@ -142,7 +142,7 @@ class Request extends AbstractMethod
      * @param string $addressCountry address country code 2 letters, e.g. DE
      * @param string $contactMail    email address of the customer, e.g. ab@mail.de
      *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @return Request
      */
     public function customerAddress(
         $nameGiven = null,
@@ -173,7 +173,6 @@ class Request extends AbstractMethod
     /**
      * @param string $shopperId
      * @param string $invoiceId
-     * @param string $reversaltype string $reversaltype "CANCLE, RETURN or CREDIT"
      */
     public function factoring($invoiceId, $shopperId = null)
     {
@@ -191,7 +190,7 @@ class Request extends AbstractMethod
      * @param string $currency       currency code 3 letters, e.g. USD
      * @param string $secret         a secret to prevent your application against fake responses
      *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @return Request
      */
     public function basketData($shopIdentifier = null, $amount = null, $currency = null, $secret = null)
     {
@@ -244,7 +243,7 @@ class Request extends AbstractMethod
      * @param string $birthdate  customer birth date YYYY-MM-DD (Mandatory)
      * @param string $basketId   id of a given basket using heidelpay basket api (Optional)
      *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @return Request
      */
     public function b2cSecured($salutation = null, $birthdate = null, $basketId = null)
     {
