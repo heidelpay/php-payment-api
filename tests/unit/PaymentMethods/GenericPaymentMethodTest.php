@@ -1,13 +1,4 @@
 <?php
-
-namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
-
-use AspectMock\Test as test;
-use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
-use Heidelpay\PhpPaymentApi\Constants\TransactionType;
-use Heidelpay\PhpPaymentApi\PaymentMethods\BasicPaymentMethodTrait;
-use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
-
 /**
  * This test class performs tests to verify the general behaviour of each payment method thus verifies that certain
  * request parameters are set depending on the method.
@@ -22,6 +13,17 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  *
  * @package heidelpay\php-payment-api\tests\unit
  */
+namespace Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods;
+
+use AspectMock\Test as test;
+use Exception;
+use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
+use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use PHPUnit\Framework\Exception as PhpUnitException;
+use PHPUnit\Framework\ExpectationFailedException;
+
 class GenericPaymentMethodTest extends BasePaymentMethodTest
 {
     private $paymentMethodNamespace = "Heidelpay\\PhpPaymentApi\\PaymentMethods\\";
@@ -127,6 +129,11 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
      * @param $paymentMethodClass
      * @param $paymentCode
      * @param null $brand
+     *
+     * @throws UndefinedTransactionModeException
+     * @throws PhpUnitException
+     * @throws ExpectationFailedException
+     * @throws Exception
      */
     public function verifyPaymentMethodPresentsAsExpected($paymentMethodClass, $paymentCode, $brand = null)
     {
@@ -144,7 +151,7 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
         $this->assertArrayHasKey('PAYMENT.CODE', $requestArray);
         $this->assertSame($paymentCode . '.' . TransactionType::REFUND, $requestArray['PAYMENT.CODE']);
         $this->assertSame($paymentMethodClass, $requestArray['CRITERION.PAYMENT_METHOD']);
-        if (null !== $brand) {
+        if ($brand !== null) {
             $this->assertArrayHasKey('ACCOUNT.BRAND', $requestArray);
             $this->assertSame($brand, $requestArray['ACCOUNT.BRAND']);
         } else {
@@ -158,6 +165,8 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
      * Verify getPaymentCode returns null if the property 'paymentCode' does not exist.
      *
      * @test
+     *
+     * @throws ExpectationFailedException
      */
     public function basicPaymentMethodTraitShouldReturnNullWhenAPropertyIsNotDefined()
     {
@@ -166,14 +175,4 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
     }
 
     //</editor-fold>
-}
-
-/**
- * This class is used to test the perform trait test.
- *
- * @package Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods
- */
-class DummyPaymentMethod
-{
-    use BasicPaymentMethodTrait;
 }
