@@ -121,8 +121,8 @@ foreach($redirectParams as $key=>$value) {
                 event.preventDefault();
 
                 // get the number ob redirect parameters
-                var inputCount = form.getElementsByTagName('input').length;
-                if (inputCount === 0) {
+                var redirectParameterCount = form.getElementsByTagName('input').length;
+                if (redirectParameterCount === 0) {
                     // ... perform a get redirect if there are no parameters needed for the redirect ==> Sandbox  mode
                     window.location.href = form.getAttribute('action');
                 } else {
