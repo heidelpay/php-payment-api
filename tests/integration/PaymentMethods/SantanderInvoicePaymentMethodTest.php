@@ -2,13 +2,22 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Heidelpay\PhpBasketApi\Exception\BasketException;
+use Heidelpay\PhpBasketApi\Exception\CurlAdapterException;
+use Heidelpay\PhpBasketApi\Exception\InvalidBasketitemPositionException;
+use Heidelpay\PhpBasketApi\Exception\ParameterOverflowException;
 use Heidelpay\PhpBasketApi\Request as BasketRequest;
 use Heidelpay\PhpBasketApi\Response as BasketResponse;
 use Heidelpay\PhpBasketApi\Object\BasketItem;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
+use Heidelpay\PhpPaymentApi\Exceptions\HashVerificationException;
+use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\PhpPaymentApi\PaymentMethods\SantanderInvoicePaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Exception;
+use PHPUnit\Framework\ExpectationFailedException;
 
 /**
  * Invoice B2C secured Test
@@ -27,34 +36,21 @@ use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
  */
 class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
 {
-    /**
-     * Transaction currency
-     *
-     * @var string currency
-     */
+    /** @var string $currency */
     protected $currency = 'EUR';
+
     /**
-     * Secret
+     * The secret will be used to generate a hash using transaction id + secret. This hash can be used to verify
+     * the payment response. Can be used for  brute force protection.
      *
-     * The secret will be used to generate a hash using
-     * transaction id + secret. This hash can be used to
-     * verify the the payment response. Can be used for
-     * brute force protection.
-     *
-     * @var string secret
+     * @var string $secret
      */
     protected $secret = 'Heidelpay-PhpPaymentApi';
 
-    /**
-     * PaymentObject
-     *
-     * @var SantanderInvoicePaymentMethod
-     */
+    /** @var SantanderInvoicePaymentMethod $paymentObject */
     protected $paymentObject;
 
-    /**
-     * @var string $authorizeReference
-     */
+    /** @var string $authorizeReference */
     protected $authorizeReference;
 
     /**
@@ -175,14 +171,20 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
     /**
      * Test case for a invoice finalize of a existing authorisation
      *
-     * @param $referenceId string payment reference id of the invoice authorisation
-     *
      * @return string payment reference id for the prepayment reversal transaction
+     *
+     * @throws BasketException
+     * @throws CurlAdapterException
+     * @throws InvalidBasketitemPositionException
+     * @throws ParameterOverflowException
+     * @throws HashVerificationException
+     * @throws UndefinedTransactionModeException
+     * @throws AssertionFailedError
+     * @throws \Exception
      * @group connectionTest
      *
      * @test
      *
-     * @throws \Exception
      */
     public function finalize()
     {
@@ -220,12 +222,14 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
      *
      * @param string $referenceId reference id of the invoice to refund
      *
+     * @throws UndefinedTransactionModeException
+     * @throws Exception
+     * @throws ExpectationFailedException
      * @depends finalize
      * @test
      *
      * @group connectionTest
      *
-     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
      */
     public function refund($referenceId = null)
     {
@@ -248,11 +252,11 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
     /**
      * @return string
      *
-     * @throws \Heidelpay\PhpBasketApi\Exception\BasketException
-     * @throws \Heidelpay\PhpBasketApi\Exception\CurlAdapterException
-     * @throws \Heidelpay\PhpBasketApi\Exception\InvalidBasketitemPositionException
-     * @throws \Heidelpay\PhpBasketApi\Exception\ParameterOverflowException
-     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws BasketException
+     * @throws CurlAdapterException
+     * @throws InvalidBasketitemPositionException
+     * @throws ParameterOverflowException
+     * @throws AssertionFailedError
      */
     public function createTestBasket()
     {

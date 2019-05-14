@@ -2,8 +2,12 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Exception;
+use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
 use Heidelpay\PhpPaymentApi\PaymentMethods\SantanderHirePurchasePaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\ExpectationFailedException;
 
 /**
  * Santander hire purchase Tests
@@ -41,7 +45,7 @@ class SantanderHirePurchasePaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\SantanderHirePurchasePaymentMethod
+     * @var SantanderHirePurchasePaymentMethod
      */
     protected $paymentObject;
 
@@ -59,7 +63,7 @@ class SantanderHirePurchasePaymentMethodTest extends BasePaymentMethodTest
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      *
-     * @throws \Exception
+     * @throws Exception
      */
     // @codingStandardsIgnoreStart
     public function _before()
@@ -97,7 +101,9 @@ class SantanderHirePurchasePaymentMethodTest extends BasePaymentMethodTest
     /**
      * @test
      *
-     * @throws \Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException
+     * @throws UndefinedTransactionModeException
+     * @throws AssertionFailedError
+     * @throws ExpectationFailedException
      */
     public function initialRequest()
     {
