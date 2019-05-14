@@ -20,6 +20,7 @@ use Exception;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\Constants\TransactionType;
 use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
+use Heidelpay\PhpPaymentApi\PaymentMethods\BasicPaymentMethodTrait;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 use PHPUnit\Framework\Exception as PhpUnitException;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -176,3 +177,14 @@ class GenericPaymentMethodTest extends BasePaymentMethodTest
 
     //</editor-fold>
 }
+
+/**
+ * This class is used to test the perform trait test.
+ *
+ * @package Heidelpay\Tests\PhpPaymentApi\Unit\PaymentMethods
+ */
+class DummyPaymentMethod
+{
+    use BasicPaymentMethodTrait;
+}
+
