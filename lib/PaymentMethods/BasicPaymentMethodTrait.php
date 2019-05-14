@@ -6,7 +6,8 @@ use Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface;
 use Heidelpay\PhpPaymentApi\Constants\ApiConfig;
 use Heidelpay\PhpPaymentApi\Constants\TransactionMode;
 use Heidelpay\PhpPaymentApi\Exceptions\UndefinedTransactionModeException;
-use Heidelpay\PhpPaymentApi\Request as HeidelpayRequest;
+use Heidelpay\PhpPaymentApi\Request;
+use Heidelpay\PhpPaymentApi\Response;
 
 /**
  * This class is the basic payment method trait
@@ -35,7 +36,7 @@ trait BasicPaymentMethodTrait
     /**
      * Heidelpay request object
      *
-     * @var \Heidelpay\PhpPaymentApi\Request
+     * @var Request
      */
     protected $request;
 
@@ -49,7 +50,7 @@ trait BasicPaymentMethodTrait
     /**
      * Heidelpay response object
      *
-     * @var \Heidelpay\PhpPaymentApi\Response
+     * @var Response
      */
     protected $response;
 
@@ -111,7 +112,7 @@ trait BasicPaymentMethodTrait
     /**
      * @inheritdoc
      */
-    public function setRequest(HeidelpayRequest $heidelpayRequest)
+    public function setRequest(Request $heidelpayRequest)
     {
         $this->request = $heidelpayRequest;
     }
@@ -119,12 +120,12 @@ trait BasicPaymentMethodTrait
     /**
      * Returns the Request instance.
      *
-     * @return \Heidelpay\PhpPaymentApi\Request
+     * @return Request
      */
     public function getRequest()
     {
         if ($this->request === null) {
-            return $this->request = new HeidelpayRequest();
+            return $this->request = new Request();
         }
 
         return $this->request;
@@ -133,7 +134,7 @@ trait BasicPaymentMethodTrait
     /**
      * Returns the Response instance.
      *
-     * @return \Heidelpay\PhpPaymentApi\Response
+     * @return Response
      */
     public function getResponse()
     {
@@ -143,7 +144,7 @@ trait BasicPaymentMethodTrait
     /**
      * Set a HTTP Adapter for payment communication
      *
-     * @param \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface $adapter
+     * @param HttpAdapterInterface $adapter
      */
     public function setAdapter($adapter)
     {
@@ -153,7 +154,7 @@ trait BasicPaymentMethodTrait
     /**
      * Get HTTP Adapter for payment communication
      *
-     * @return \Heidelpay\PhpPaymentApi\Adapter\HttpAdapterInterface
+     * @return HttpAdapterInterface
      */
     public function getAdapter()
     {

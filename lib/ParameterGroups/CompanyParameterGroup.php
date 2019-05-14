@@ -66,18 +66,17 @@ class CompanyParameterGroup extends AbstractParameterGroup
     /**
      * Function to add an executive to the existing list
      *
-     * @param string             $function
-     * @param string             $salutation
-     * @param string             $given
-     * @param string             $family
-     * @param string             $birthdate
-     * @param string             $email
-     * @param string             $phone
-     * @param HomeParameterGroup $home
-     * @param mixed              $homeStreet
-     * @param mixed              $homeZip
-     * @param mixed              $homeCity
-     * @param mixed              $homeCountry
+     * @param string $function
+     * @param string $salutation
+     * @param string $given
+     * @param string $family
+     * @param string $birthdate
+     * @param string $email
+     * @param string $phone
+     * @param mixed  $homeStreet
+     * @param mixed  $homeZip
+     * @param mixed  $homeCity
+     * @param mixed  $homeCountry
      *
      * @return CompanyParameterGroup
      */
@@ -133,9 +132,9 @@ class CompanyParameterGroup extends AbstractParameterGroup
         if ($index !== null) {
             if (!is_bool($index) && isset($this->executive[$index])) {
                 return $this->executive[$index];
-            } else {
-                return null;
             }
+
+            return null;
         }
 
         return $this->executive;
@@ -145,6 +144,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Setter for company executive
      *
      * @param array $executive
+     *
+     * @return CompanyParameterGroup
      */
     public function setExecutive($executive)
     {
@@ -169,6 +170,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Setter for company location
      *
      * @param LocationParameterGroup $location
+     *
+     * @return CompanyParameterGroup
      */
     public function setLocation($location)
     {
@@ -190,6 +193,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Setter for companyname
      *
      * @param string $companyname
+     *
+     * @return CompanyParameterGroup
      */
     public function setCompanyname($companyname)
     {
@@ -198,7 +203,7 @@ class CompanyParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Company registrationtype getter
+     * Company registration type getter
      *
      * @return string | null
      */
@@ -208,9 +213,11 @@ class CompanyParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Setter for company registrationtype
+     * Setter for company registration type
      *
      * @param string $registrationtype
+     *
+     * @return CompanyParameterGroup
      */
     public function setRegistrationtype($registrationtype)
     {
@@ -232,6 +239,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Setter for commercialregistrnumber
      *
      * @param string $commercialregisternumber
+     *
+     * @return CompanyParameterGroup
      */
     public function setCommercialregisternumber($commercialregisternumber)
     {
@@ -253,6 +262,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Setter for vatid
      *
      * @param string $vatid
+     *
+     * @return CompanyParameterGroup
      */
     public function setVatid($vatid)
     {
@@ -261,7 +272,7 @@ class CompanyParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * Commercialsector getter
+     * Commercial sector getter
      *
      * @return string | null
      */
@@ -274,6 +285,8 @@ class CompanyParameterGroup extends AbstractParameterGroup
      * Setter commerialSector
      *
      * @param string $commercialSector
+     *
+     * @return CompanyParameterGroup
      */
     public function setCommercialSector($commercialSector)
     {
