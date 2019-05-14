@@ -169,7 +169,7 @@ class Response extends AbstractMethod
             throw new PaymentFormUrlException('The PaymentCode is not set.');
         }
 
-        list($code,) = explode('.', $this->getPayment()->getCode());
+        list($code, ) = explode('.', $this->getPayment()->getCode());
 
         if (($code === PaymentMethod::CREDIT_CARD || $code === PaymentMethod::DEBIT_CARD)
             && $this->getIdentification()->getReferenceId() === null

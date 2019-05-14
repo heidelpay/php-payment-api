@@ -55,6 +55,7 @@ class RedirectParameterGroup extends AbstractParameterGroup
 
     /**
      * @param string $url
+     *
      * @return RedirectParameterGroup
      */
     public function setUrl($url)
