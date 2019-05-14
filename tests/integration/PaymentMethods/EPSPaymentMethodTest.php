@@ -4,7 +4,7 @@ namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
 use Exception;
 use Heidelpay\PhpPaymentApi\Response;
-use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod as EPS;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
@@ -46,7 +46,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var EPS
+     * @var EPSPaymentMethod
      */
     protected $paymentObject;
 
@@ -77,7 +77,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
-        $EPS = new EPS();
+        $EPS = new EPSPaymentMethod();
         $EPS->getRequest()->authentification(...$authentication);
         $EPS->getRequest()->customerAddress(...$customerDetails);
         $EPS->dryRun = true;
