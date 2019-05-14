@@ -579,8 +579,9 @@ abstract class AbstractMethod implements MethodInterface
      * @param mixed  $parameterGroup
      * @param string $paramGroupProp
      * @param string $value
+     * @param string $parentGroup
      */
-    protected function mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value)
+    protected function mapSubGroupsFromPost($parameterGroup, $paramGroupProp, $value, $parentGroup = '')
     {
         $values = explode('_', strtolower($paramGroupProp), 2);
 
@@ -599,10 +600,10 @@ abstract class AbstractMethod implements MethodInterface
                 if (is_array($parameterGroup)) {
                     $parameterGroup = $paramGroupName;
                 }
-                $this->mapSubGroupsFromPost($parameterGroup, $paramGroupString, $value);
+                $this->mapSubGroupsFromPost($parameterGroup, $paramGroupString, $value, $paramGroupName);
             }
 
-            if ($paramGroupName === 'parameter') {
+            if ($parentGroup === 'redirect' && $paramGroupName === 'parameter') {
                 /** @var ProcessingParameterGroup $processing */
                 $processing = $this->getProcessing();
                 $processing->getRedirect()->parameter[$paramGroupString] = $value;

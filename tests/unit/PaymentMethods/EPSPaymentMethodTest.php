@@ -64,10 +64,12 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
         $url          = 'https://this-is-a-test-redirect-url-for-eps-testing.de';
         $firstParam   = 'This is the content of the first parameter';
         $secondParam  = 'This is the content of the second parameter';
+        $thirdParam   = 'This is the content of a third parameter, which is not to be processed since it is not in the redirect group.';
         $postResponse = [
             'PROCESSING_REDIRECT_PARAMETER_FIRST' => $firstParam,
             'PROCESSING_REDIRECT_PARAMETER_SECOND' => $secondParam,
-            'PROCESSING_REDIRECT_URL' => $url
+            'PROCESSING_REDIRECT_URL' => $url,
+            'PROCESSING_PARAMETER_THIRD' => $thirdParam
         ];
 
         /** @var RedirectParameterGroup $redirect */
