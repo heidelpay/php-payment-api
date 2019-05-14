@@ -88,7 +88,6 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     /**
      * Test case for a single EPS authorize
      *
-     * @return string payment reference id for the EPS authorize transaction
      * @group connectionTest
      *
      * @throws Exception
@@ -112,14 +111,11 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
         $this->assertEmpty($response->getProcessing()->getRedirect()->getUrl());
 
         $this->logDataToDebug($result);
-
-        return (string)$response->getPaymentReferenceId();
     }
 
     /**
      * Test case for a single EPS authorize
      *
-     * @return string payment reference id for the EPS authorize transaction
      * @group connectionTest
      *
      * @throws Exception
@@ -149,7 +145,5 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
         //$this->assertNotEmpty($response->getProcessing()->getRedirect()->getParameter());
 
         $this->logDataToDebug($result);
-
-        return (string)$response->getPaymentReferenceId();
     }
 }
