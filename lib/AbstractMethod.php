@@ -194,7 +194,7 @@ abstract class AbstractMethod implements MethodInterface
     }
 
     /**
-     * Frond end getter
+     * Frontend getter
      *
      * @return FrontendParameterGroup
      */
