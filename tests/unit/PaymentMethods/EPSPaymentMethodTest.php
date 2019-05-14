@@ -8,10 +8,13 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\RedirectParameterGroup;
 use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod;
 use Heidelpay\PhpPaymentApi\Response;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
+use PHPUnit\Framework\Exception as PhpUnitException;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class EPSPaymentMethodTest extends BasePaymentMethodTest
 {
+
+    //<editor-fold desc="Setup">
     /**
      * Set up function will create a payment method object for each test case
      *
@@ -47,10 +50,14 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
         test::clean();
     }
 
+    //</editor-fold>
+
+    //<editor-fold desc="Tests">
+
     /**
      * @test
      *
-     * @throws \PHPUnit\Framework\Exception
+     * @throws PhpUnitException
      * @throws ExpectationFailedException
      */
     public function responsePostArrayParamsShouldBeMappedAsExpected()
@@ -70,4 +77,6 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
         $this->assertEquals($url, $redirect->getUrl());
         $this->assertEquals(['first' => $firstParam, 'second' => $secondParam], $redirect->getParameter());
     }
+
+    //</editor-fold>
 }
