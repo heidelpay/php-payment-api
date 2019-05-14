@@ -78,9 +78,9 @@ $epsRequest->getFrontend()->setEnabled('FALSE');
 $eps->authorize();
 
 // get the redirect url and necessary parameters from the response.
-$redirectParameters = $eps->getResponse()->getProcessing()->getRedirect();
-$redirectUrl        = $redirectParameters->getUrl();
-$redirectParams     = $redirectParameters->getParameter();
+$redirectGroup  = $eps->getResponse()->getProcessing()->getRedirect();
+$redirectUrl    = $redirectGroup->getUrl();
+$redirectParams = $redirectGroup->getParameter();
 
 echo '<strong>RedirectUrl:</strong> ' . $redirectUrl;
 ksort($redirectParams);
