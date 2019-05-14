@@ -13,7 +13,6 @@ use PHPUnit\Framework\ExpectationFailedException;
 
 class EPSPaymentMethodTest extends BasePaymentMethodTest
 {
-
     //<editor-fold desc="Setup">
     /**
      * Set up function will create a payment method object for each test case

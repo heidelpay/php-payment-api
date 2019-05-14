@@ -187,4 +187,3 @@ class DummyPaymentMethod
 {
     use BasicPaymentMethodTrait;
 }
-
