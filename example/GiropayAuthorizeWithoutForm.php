@@ -1,7 +1,7 @@
 <?php
 /**
- * This example shows an example implementation for the eps payment type WITHOUT bank selection in the shop
- * but with redirect to the eps page providing the selection there.
+ * This example shows an example implementation for the giropay payment type WITHOUT bank selection in the shop
+ * but with redirect to the bank selection page providing the selection there.
  *
  * @license Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  * @copyright Copyright © 2019-present heidelpay GmbH. All rights reserved.
@@ -17,7 +17,7 @@ namespace Heidelpay\Example\PhpPaymentApi;
 /**
  * For security reason all examples are disabled by default.
  */
-use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod;
+use Heidelpay\PhpPaymentApi\PaymentMethods\GiropayPaymentMethod;
 
 require_once './_enableExamples.php';
 if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') && HEIDELPAY_PHP_PAYMENT_API_EXAMPLES !== true) {
@@ -28,26 +28,26 @@ if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') && HEIDELPAY_PHP_PAYMENT_API_E
 require_once __DIR__ . '/../../../autoload.php';
 
 /** create a new instance of the payment method */
-$eps = new EPSPaymentMethod();
-$epsRequest = $eps->getRequest();
+$giropay        = new GiropayPaymentMethod();
+$giropayRequest = $giropay->getRequest();
 
 /**
   * Set up your authentication data for heidelpay api
   *
   * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
   */
-$epsRequest->authentification(
-    '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
-    '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
-    '93167DE7',                          // UserPassword
-    '31HA07BC816492169CE30CFBBF83B1D5',  // TransactionChannel
-    true                                 // enable/disable sandbox mode
+$giropayRequest->authentification(
+    '31HA07BC8142C5A171745D00AD63D182',     // SecuritySender
+    '31ha07bc8142c5a171744e5aef11ffd3',        // UserLogin
+    '93167DE7',                             // UserPassword
+    '31HA07BC8142C5A171740166AF277E03', // TransactionChannel
+    true                                  // enable/disable sandbox mode
 );
 
-$epsRequest->getFrontend()->setResponseUrl('http://technik.heidelpay.de/jonas/responseAdvanced/response.php');
+$giropayRequest->getFrontend()->setResponseUrl('http://technik.heidelpay.de/jonas/responseAdvanced/response.php');
 
 // set up customer information required for risk checks
-$epsRequest->customerAddress(
+$giropayRequest->customerAddress(
     'Hans',                   // Given name
     'Zimmer',                 // Family name
     null,                     // Company Name
@@ -61,7 +61,7 @@ $epsRequest->customerAddress(
     );
 
 // set up basket or transaction information
-$epsRequest->basketData(
+$giropayRequest->basketData(
     '2843294932', // Reference Id of your application
     23.12,                         // Amount of this request
     'EUR',                         // Currency code of this request
@@ -69,16 +69,16 @@ $epsRequest->basketData(
     );
 
 // set bank country
-$epsRequest->getAccount()->setCountry('AT');
+$giropayRequest->getAccount()->setCountry('DE');
 
-// disable frontend mode -> this shows that there is no additional input necessary by the customer prior to the redirect to the eps page.
-$epsRequest->getFrontend()->setEnabled('FALSE');
+// disable frontend mode -> this shows that there is no additional input necessary by the customer prior to the redirect to the bank selection page.
+$giropayRequest->getFrontend()->setEnabled('FALSE');
 
 // perform the authorize transaction to retrieve the redirect url and parameters
-$eps->authorize();
+$giropay->authorize();
 
 // get the redirect url and necessary parameters from the response.
-$redirectGroup  = $eps->getResponse()->getProcessing()->getRedirect();
+$redirectGroup  = $giropay->getResponse()->getProcessing()->getRedirect();
 $redirectUrl    = $redirectGroup->getUrl();
 $redirectParams = $redirectGroup->getParameter();
 
@@ -101,7 +101,7 @@ foreach($redirectParams as $key=>$value) {
 
 <html>
     <head>
-        <title>EPS authorize example</title>
+        <title>Giropay authorize example</title>
     </head>
 
     <body>
