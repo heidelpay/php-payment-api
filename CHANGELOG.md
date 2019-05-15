@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [X.X.X][X.X.X]
 
 ### Added
-- Allow EPS payment type without bank selection in shop.
-- Example for EPS without bank selection.
+- Parameter group to allow Online Transfer payments (e.g. EPS, Giropay and iDeal) without bank selection in shop.
+- Example for EPS and Giropay without bank selection.
 
 ## [v1.7.1][v1.7.1]
 
