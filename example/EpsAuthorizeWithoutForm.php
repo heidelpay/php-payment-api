@@ -40,7 +40,7 @@ $epsRequest->authentification(
     '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
     '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
     '93167DE7',                          // UserPassword
-    '31HA07BC816492169CE30CFBBF83B1D5',  // TransactionChannel credit card without 3d secure
+    '31HA07BC816492169CE30CFBBF83B1D5',  // TransactionChannel
     true                                 // enable/disable sandbox mode
 );
 
