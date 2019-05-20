@@ -34,6 +34,7 @@ This is the php payment api for heidelpay. The library will help you to easily i
 * Santander hire purchase
 * easyCredit
 * Payolution invoice
+* PIS/FlexiPay
 
 ### SYSTEM REQUIREMENTS
 
