@@ -17,6 +17,7 @@ use Heidelpay\PhpPaymentApi\Constants\Brand;
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
 use Heidelpay\PhpPaymentApi\TransactionTypes\AuthorizeTransactionType;
 use Heidelpay\PhpPaymentApi\TransactionTypes\RefundTransactionType;
+
 class PISPaymentMethod implements PaymentMethodInterface
 {
     use BasicPaymentMethodTrait;

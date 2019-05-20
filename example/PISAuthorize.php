@@ -13,10 +13,7 @@
  */
 namespace Heidelpay\Example\PhpPaymentApi;
 
-/**
- * For security reason all examples are disabled by default.
- */
-
+// For security reason all examples are disabled by default.
 use Heidelpay\PhpPaymentApi\PaymentMethods\PISPaymentMethod;
 
 require_once './_enableExamples.php';
@@ -24,8 +21,7 @@ if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') && HEIDELPAY_PHP_PAYMENT_API_E
     exit();
 }
 
-
- //Require the composer autoloader file
+ // Require the composer autoloader file
 require_once __DIR__ . '/../../../autoload.php';
 
  // Create a new instance of the payment method
@@ -84,7 +80,7 @@ require_once __DIR__ . '/../../../autoload.php';
 <body>
 <?php 
     if ($PIS->getResponse()->isSuccess()) {
-        echo '<a href="'.$PIS->getResponse()->getPaymentFormUrl().'">to PIS</a>';
+        echo '<a href="' . $PIS->getResponse()->getPaymentFormUrl() . '">to PIS</a>';
     } else {
         echo '<pre>'. print_r($PIS->getResponse()->getError(), 1).'</pre>';
     }

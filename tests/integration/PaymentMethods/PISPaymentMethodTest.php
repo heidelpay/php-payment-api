@@ -14,7 +14,6 @@
  *
  * @package heidelpay\php-payment-api\tests\integration
  */
-
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
 use Heidelpay\PhpPaymentApi\Constants\PaymentMethod;
@@ -77,6 +76,7 @@ class PISPaymentMethodTest extends BasePaymentMethodTest
      * Test case for a single PIS authorize
      *
      * @return string payment reference id for the authorize transaction
+     *
      * @throws UndefinedTransactionModeException
      * @throws AssertionFailedError
      * @group connectionTest
@@ -108,7 +108,7 @@ class PISPaymentMethodTest extends BasePaymentMethodTest
     /**
      * Test case for PIS refund
      *
-     * @param string Reference id of the PIS to refund
+     * @param string|null $referenceId Reference id of the PIS to refund
      *
      * @throws UndefinedTransactionModeException
      * @throws ExpectationFailedException
