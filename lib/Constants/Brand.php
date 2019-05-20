@@ -60,6 +60,7 @@ class Brand
     const POSTFINANCE_EFINANCE = 'PFEFINANCE';
     const PRZELEWY24 = 'PRZELEWY24';
     const SOFORT = 'SOFORT';
+    const PIS = 'PIS';
     const SOFORT_PAYCODE = 'SOFORT_PAYCODE';
 
     // Virtual Account
