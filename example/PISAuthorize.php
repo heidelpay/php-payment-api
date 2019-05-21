@@ -36,7 +36,7 @@ require_once __DIR__ . '/../../../autoload.php';
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
        '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
        '93167DE7',                          // UserPassword
-       '31HA07BC8142C5A171749CDAA43365D2',  // TransactionChannel
+       '31HA07BC8176B8333AC423CC4EC0C2D4',  // TransactionChannel
        true                                 // Enable sandbox mode
      );
 
@@ -72,13 +72,6 @@ require_once __DIR__ . '/../../../autoload.php';
  
  // Send authorize request
  $pis->authorize();
-
- print_r($pis->getRequest()->toJson());
- echo '<br>';
- echo '<br>';
-print_r($pis->getResponse()->toJson());
-echo '<br>';
-echo '<br>';
 
 ?>
 <html>
