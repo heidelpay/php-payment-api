@@ -25,7 +25,7 @@ if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') && HEIDELPAY_PHP_PAYMENT_API_E
 require_once __DIR__ . '/../../../autoload.php';
 
  // Create a new instance of the payment method
- $PIS = new PISPaymentMethod();
+ $pis = new PISPaymentMethod();
  
  /**
   * Set up your authentication data for heidelpay SDK.
@@ -41,7 +41,7 @@ require_once __DIR__ . '/../../../autoload.php';
      );
 
  // Set up asynchronous request parameters
- $PIS->getRequest()->async(
+ $pis->getRequest()->async(
      'EN', // Language code for the Frame
      HEIDELPAY_PHP_PAYMENT_API_URL .
      HEIDELPAY_PHP_PAYMENT_API_FOLDER .
@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../../autoload.php';
  );
  
  // Set up customer information required for risk checks
- $PIS->getRequest()->customerAddress(
+ $pis->getRequest()->customerAddress(
      'Heidel',                  // Given name
      'Berger-Payment',          // Family name
      null,                      // Company Name
@@ -63,7 +63,7 @@ require_once __DIR__ . '/../../../autoload.php';
      );
  
  // Set up basket or transaction information
- $PIS->getRequest()->basketData(
+ $pis->getRequest()->basketData(
      '2843294932', // Reference Id of your application
      23.12,                         // Amount of this request
      'EUR',                         // Currency code of this request
@@ -71,18 +71,26 @@ require_once __DIR__ . '/../../../autoload.php';
      );
  
  // Send authorize request
- $PIS->authorize();
- ?>
+ $pis->authorize();
+
+ print_r($pis->getRequest()->toJson());
+ echo '<br>';
+ echo '<br>';
+print_r($pis->getResponse()->toJson());
+echo '<br>';
+echo '<br>';
+
+?>
 <html>
 <head>
 	<title>PIS/FlexiPay authorize example</title>
 </head>
 <body>
 <?php 
-    if ($PIS->getResponse()->isSuccess()) {
-        echo '<a href="' . $PIS->getResponse()->getPaymentFormUrl() . '">to PIS</a>';
+    if ($pis->getResponse()->isSuccess()) {
+        echo '<a href="' . $pis->getResponse()->getPaymentFormUrl() . '">to PIS</a>';
     } else {
-        echo '<pre>'. print_r($PIS->getResponse()->getError(), 1).'</pre>';
+        echo '<pre>'. print_r($pis->getResponse()->getError(), 1).'</pre>';
     }
  ?>
  <p>It is not necessary to show the redirect url to your customer. You can  

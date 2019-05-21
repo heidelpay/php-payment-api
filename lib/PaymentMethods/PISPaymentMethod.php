@@ -24,9 +24,9 @@ class PISPaymentMethod implements PaymentMethodInterface
     use AuthorizeTransactionType;
     use RefundTransactionType;
 
-    /** @var string $paymentCode Payment Code for this payment method */
+    /** @var string $paymentCode Payment code for this payment method */
     protected $paymentCode = PaymentMethod::ONLINE_TRANSFER;
 
-    /** @var string $brand Brand Code for this payment method */
+    /** @var string $brand Brand code for this payment method */
     protected $brand = Brand::PIS;
 }
