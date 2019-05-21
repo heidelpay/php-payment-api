@@ -26,33 +26,37 @@ if (defined('HEIDELPAY_PHP_PAYMENT_API_EXAMPLES') && HEIDELPAY_PHP_PAYMENT_API_E
 /*Require the composer autoloader file */
 require_once __DIR__ . '/../../../autoload.php';
 
-$HeidelpayResponse = new  Heidelpay\PhpPaymentApi\Response($_POST);
+$heidelpayResponse = new  Heidelpay\PhpPaymentApi\Response($_POST);
 
 $secretPass = '39542395235ßfsokkspreipsr';
 
-$identificationTransactionId = $HeidelpayResponse->getIdentification()->getTransactionId();
+$identificationTransactionId = $heidelpayResponse->getIdentification()->getTransactionId();
 
 try {
-    $HeidelpayResponse->verifySecurityHash($secretPass, $identificationTransactionId);
+    $heidelpayResponse->verifySecurityHash($secretPass, $identificationTransactionId);
 } catch (\Exception $e) {
     /* If the verification does not match this can mean some kind of manipulation or
      * miss configuration. So you can log $e->getMessage() for debugging.*/
     return;
 }
 
-if ($HeidelpayResponse->isSuccess()) {
+if ($heidelpayResponse->isSuccess()) {
     
     /* save order and transaction result to your database */
-    if ($HeidelpayResponse->isPending()) {
+    if ($heidelpayResponse->isPending()) {
         /* use this to set the order status to pending */
     }
     /* redirect customer to success page */
     echo HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpaySuccess.php';
     
     /*save order */
-} elseif ($HeidelpayResponse->isError()) {
-    $error = $HeidelpayResponse->getError();
+} elseif ($heidelpayResponse->isError()) {
+    $error = $heidelpayResponse->getError();
     
-    echo HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpayError.php?errorMessage=' .
-        urlencode(htmlspecialchars($error['message']));
+    echo HEIDELPAY_PHP_PAYMENT_API_URL . HEIDELPAY_PHP_PAYMENT_API_FOLDER . 'HeidelpayError.php?' .
+        implode('&',
+        [
+            'errorMessage=' . urlencode(htmlspecialchars($error['message'])),
+            'shortId=' . urlencode(htmlspecialchars($heidelpayResponse->getIdentification()->getShortId()))
+        ]);
 }

@@ -16,7 +16,15 @@
 </head>
 <body>
 <div style="color: red">
-<?php echo htmlentities($_GET['errorMessage'], ENT_HTML5)?>
+<?php
+    $message = isset($_GET['errorMessage']) ? $_GET['errorMessage'] : '';
+    $shortId = isset($_GET['shortId']) ? $_GET['shortId'] : '';
+
+    echo htmlentities($message);
+    if (!empty($shortId)) {
+        echo '<br> Please refer to shortId ' . htmlentities($shortId) . ' in hIP.';
+    }
+?>
 </div>
 </body>
 </html>
