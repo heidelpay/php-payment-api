@@ -32,7 +32,7 @@ require_once __DIR__ . '/../../../autoload.php';
   *
   * @link https://dev.heidelpay.com/testumgebung/#Authentifizierungsdaten
   */
- $PIS->getRequest()->authentification(
+ $pis->getRequest()->authentification(
        '31HA07BC8142C5A171745D00AD63D182',  // SecuritySender
        '31ha07bc8142c5a171744e5aef11ffd3',  // UserLogin
        '93167DE7',                          // UserPassword
