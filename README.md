@@ -41,7 +41,7 @@ php-payment-api requires PHP 5.6 or higher; we recommend using the latest stable
 
 ## SECURITY ADVICE
 If you want to store the output of this library e.g. into a database, please make sure that your
-application takes care of sql injection, cross-site-scripting (xss) and so on. There is currently no build-in protection.
+application takes care of sql injection, cross-site-scripting (xss) and so on. There is currently no built-in protection.
 
 ## LICENSE
 
