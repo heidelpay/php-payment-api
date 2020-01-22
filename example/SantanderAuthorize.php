@@ -78,6 +78,21 @@ $Invoice->getRequest()->customerAddress(
 );
 
 /**
+ * Set up customer information required for risk checks
+ */
+$Invoice->getRequest()->shippingAddress(
+    'MRS',
+    'Heidel',                  // Given name
+    'Berger-Payment',           // Family name
+    null,                     // Company Name
+    'Vagerowstr. 18',          // Shipping address street
+    'DE-BW',                   // Shipping address state
+    '69115',                   // Shipping address post code
+    'Heidelberg',              // Shipping address city
+    'DE'                       // Billing address country code
+);
+
+/**
  * Set up basket or transaction information
  */
 $Invoice->getRequest()->basketData(
@@ -97,6 +112,11 @@ $Invoice->getRequest()->b2cSecured(
     '1982-07-12', // Customer birth date
     null // Basket api id
 );
+
+/**
+ * Optionally add risk session id
+ */
+$Invoice->getRequest()->getRiskInformation()->setRiskSessionId('f1b883473dba68f655714ebe4d23bf1d');
 
 
 /**
