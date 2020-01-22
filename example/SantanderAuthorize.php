@@ -89,7 +89,7 @@ $Invoice->getRequest()->shippingAddress(
     'DE-BW',                   // Shipping address state
     '69115',                   // Shipping address post code
     'Heidelberg',              // Shipping address city
-    'DE'                       // Billing address country code
+    'DE'                       // Shipping address country code
 );
 
 /**
