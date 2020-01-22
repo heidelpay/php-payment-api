@@ -171,6 +171,45 @@ class Request extends AbstractMethod
     }
 
     /**
+     * Set shipping parameter for a request
+     *
+     * @param string $salutation     shipping address salutation MR/MRS
+     * @param string $nameGiven      shipping address given name, e.g. John
+     * @param string $nameFamily     shipping address family name, e.g. Doe
+     * @param string $nameCompany    shipping address company name, e.g. heidelpay
+     * @param string $addressStreet  shipping address street of the customer, e.g. Vagerowstr.
+     * @param string $addressState   shipping address state ot the customer, e.g. Bayern
+     * @param string $addressZip     shipping address zip code, e.g. 69115
+     * @param string $addressCity    shipping address city, e.g. Heidelberg
+     * @param string $addressCountry shipping address country code 2 letters, e.g. DE
+     *
+     * @return \Heidelpay\PhpPaymentApi\Request
+     */
+    public function shippingAddress(
+        $salutation = null,
+        $nameGiven = null,
+        $nameFamily = null,
+        $nameCompany = null,
+        $addressStreet = null,
+        $addressState = null,
+        $addressZip = null,
+        $addressCity = null,
+        $addressCountry = null
+    ) {
+        $this->getShipping()->getName()->setSalutation($salutation);
+        $this->getShipping()->getName()->setGiven($nameGiven);
+        $this->getShipping()->getName()->setFamily($nameFamily);
+        $this->getShipping()->getName()->setCompany($nameCompany);
+        $this->getShipping()->getAddress()->setStreet($addressStreet);
+        $this->getShipping()->getAddress()->setState($addressState);
+        $this->getShipping()->getAddress()->setZip($addressZip);
+        $this->getShipping()->getAddress()->setCity($addressCity);
+        $this->getShipping()->getAddress()->setCountry($addressCountry);
+
+        return $this;
+    }
+
+    /**
      * @param string $shopperId
      * @param string $invoiceId
      * @param string $reversaltype string $reversaltype "CANCLE, RETURN or CREDIT"

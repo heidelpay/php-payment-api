@@ -20,6 +20,7 @@ use Heidelpay\PhpPaymentApi\ParameterGroups\PaymentParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\PresentationParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\RequestParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\SecurityParameterGroup;
+use Heidelpay\PhpPaymentApi\ParameterGroups\ShippingParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\TransactionParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\UserParameterGroup;
 use Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup;
@@ -85,6 +86,9 @@ abstract class AbstractMethod implements MethodInterface
 
     /** @var SecurityParameterGroup */
     protected $security;
+
+    /** @var ShippingParameterGroup */
+    protected $shipping;
 
     /** @var TransactionParameterGroup */
     protected $transaction;
@@ -312,6 +316,20 @@ abstract class AbstractMethod implements MethodInterface
         }
 
         return $this->security;
+    }
+
+    /**
+     * Shipping getter
+     *
+     * @return ShippingParameterGroup
+     */
+    public function getShipping()
+    {
+        if ($this->shipping === null) {
+            return $this->shipping = new ShippingParameterGroup();
+        }
+
+        return $this->shipping;
     }
 
     /**

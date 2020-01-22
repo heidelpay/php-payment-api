@@ -32,6 +32,11 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     public $customerOrderCount;
 
     /**
+     * @var string risk session id
+     */
+    public $riskSessionId;
+
+    /**
      * Guestcheckout getter
      *
      * @return bool state
@@ -59,6 +64,16 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     public function getCustomerOrderCount()
     {
         return $this->customerOrderCount;
+    }
+
+    /**
+     * risk session id getter
+     *
+     * @return string
+     */
+    public function getRiskSessionId()
+    {
+        return $this->riskSessionId;
     }
 
     /**
@@ -97,6 +112,19 @@ class RiskInformationParameterGroup extends AbstractParameterGroup
     public function setCustomerOrderCount($customerOrderCount)
     {
         $this->customerOrderCount = $customerOrderCount;
+        return $this;
+    }
+
+    /**
+     * setter for risk session id
+     *
+     * @param string $riskSessionId
+     *
+     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\RiskInformationParameterGroup
+     */
+    public function setRiskSessionId($riskSessionId)
+    {
+        $this->riskSessionId = $riskSessionId;
         return $this;
     }
 }
