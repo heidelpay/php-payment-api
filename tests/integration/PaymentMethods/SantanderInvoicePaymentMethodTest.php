@@ -75,6 +75,12 @@ class SantanderInvoicePaymentMethodTest extends BasePaymentMethodTest
             ->setTransactionChannel('31HA07BC81856CAD6D8E07858ACD6CFB')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
+        $customerDetails[0] = 'Grün';
+        $customerDetails[1] = 'Ampel';
+        $customerDetails[3] = '12345';
+        $customerDetails[4] = 'Lichtweg 2';
+        $customerDetails[7] = 'Laterne';
+        $customerDetails[9] = 'g.ampel@test.de';
 
         $paymentMethod = new SantanderInvoicePaymentMethod();
         $paymentMethod->getRequest()->authentification(...$authentication);
