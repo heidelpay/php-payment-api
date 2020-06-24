@@ -13,4 +13,3 @@ mkdir -p "$HOME/.php-cs-fixer"
 mkdir -p build/logs
 
 composer self-update
-composer diagnose --verbose
