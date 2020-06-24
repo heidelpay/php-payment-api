@@ -8,9 +8,11 @@ INSTALL_COMMAND="composer install --no-interaction --prefer-dist --verbose"
 UPDATE_COMMAND="composer update --no-interaction --prefer-source --verbose"
 
 if [ "$deps" == "no" ]; then
-    ${INSTALL_COMMAND}
+  echo ${INSTALL_COMMAND}
+  ${INSTALL_COMMAND}
 fi
 
 if [ "$deps" == "high" ]; then
-    ${UPDATE_COMMAND}
+  echo ${UPDATE_COMMAND}
+  ${UPDATE_COMMAND}
 fi
