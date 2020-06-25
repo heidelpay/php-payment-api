@@ -13,6 +13,3 @@ mkdir -p "$HOME/.php-cs-fixer"
 mkdir -p build/logs
 
 composer self-update
-
-echo "Java Version"
-java -version

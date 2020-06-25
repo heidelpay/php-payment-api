@@ -30,4 +30,4 @@ install:
 script:
     - ./tests/script/travis_script.sh
 after_success:
-    - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l PHP -r tests/_output/coverage.xml
