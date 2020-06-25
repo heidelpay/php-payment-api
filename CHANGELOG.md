@@ -3,25 +3,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [v1.7.3][v1.7.3]
-
-### Fixed
-- Remove package which led to errors in CI.
-
-### Changed
-- Updated dependencies.
-- Refactored ArraysMatchConstraint to new dependency version.
-- Replaced codacy/coverage with codacy/codacy-coverage-reporter.
-- Set integration tests to use PHP 7.1.
-- Several minor changes.
-
 ## [v1.7.2][v1.7.2]
+
+### Removed
+- Remove package which led to errors in CI.
 
 ### Added
 - Parameter group to allow Online Transfer payments (e.g. EPS, Giropay and iDeal) without bank selection in shop.
 - Example for EPS and Giropay without bank selection.
 
 ### Changed
+- Updated dependencies.
+- Refactored ArraysMatchConstraint to new dependency version.
+- Replaced codacy/coverage with codacy/codacy-coverage-reporter.
+- Set integration tests to use PHP 7.1.
 - Several minor updates.
 
 ## [v1.7.1][v1.7.1]
@@ -189,4 +184,3 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 [v1.7.0]: https://github.com/heidelpay/php-payment-api/compare/v1.6.2...v1.7.0
 [v1.7.1]: https://github.com/heidelpay/php-payment-api/compare/v1.7.0...v1.7.1
 [v1.7.2]: https://github.com/heidelpay/php-payment-api/compare/v1.7.1...v1.7.2
-[v1.7.3]: https://github.com/heidelpay/php-payment-api/compare/v1.7.2...v1.7.3
