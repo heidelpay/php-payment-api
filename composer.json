@@ -3,7 +3,7 @@
     "description": "New client library for heidelpay payments replacing heidelpay/php-api.",
     "license": "proprietary",
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.1",
         "lib-curl": "*",
         "lib-openssl": "*",
         "ext-SimpleXML": "*",
