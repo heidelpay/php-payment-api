@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Updated dependencies.
 - Refactored ArraysMatchConstraint to new dependency version.
+- Replaced codacy/coverage with codacy/codacy-coverage-reporter.
+- Set integration tests to use PHP 7.1.
 - Several minor changes.
 
 ## [v1.7.2][v1.7.2]
