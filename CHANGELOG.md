@@ -5,8 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [v1.7.3][v1.7.3]
 
-### Fix
+### Fixed
 - Remove package which led to errors in CI.
+
+### Changed
+- Updated dependencies.
+- Refactored ArraysMatchConstraint to new dependency version.
+- Several minor changes.
 
 ## [v1.7.2][v1.7.2]
 
