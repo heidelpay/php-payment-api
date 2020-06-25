@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Util\InvalidArgumentHelper;
 
-use function array_key_exists as array_key_existsAlias;
+use function array_key_exists;
 use function count;
 use function is_array;
 use function is_bool;
@@ -76,7 +76,7 @@ class ArraysMatchConstraint extends Constraint
         }
 
         foreach ($this->value as $key => $value) {
-            if (!array_key_existsAlias($key, $other)) {
+            if (!array_key_exists($key, $other)) {
                 $this->failureMessage = "Expected key: '" . $key . "' " . 'is missing';
                 return false;
             }
