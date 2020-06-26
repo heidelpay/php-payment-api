@@ -2,9 +2,16 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Helper\Constraints;
 
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Exception;
 use PHPUnit\Util\InvalidArgumentHelper;
 
-class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
+use function array_key_exists;
+use function count;
+use function is_array;
+use function is_bool;
+
+class ArraysMatchConstraint extends Constraint
 {
     /**
      * @var array
@@ -29,21 +36,21 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
      * @param bool  $count
      * @param bool  $strict
      *
-     * @throws \PHPUnit\Framework\Exception
+     * @throws Exception
      */
     public function __construct($value, $count = false, $strict = false)
     {
         parent::__construct();
 
-        if (!\is_array($value)) {
+        if (!is_array($value)) {
             throw InvalidArgumentHelper::factory(1, 'array');
         }
 
-        if (!\is_bool($count)) {
+        if (!is_bool($count)) {
             throw InvalidArgumentHelper::factory(2, 'boolean');
         }
 
-        if (!\is_bool($strict)) {
+        if (!is_bool($strict)) {
             throw InvalidArgumentHelper::factory(3, 'boolean');
         }
 
@@ -62,7 +69,7 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
      *
      * @return bool
      */
-    public function matches($other)
+    public function matches($other) :bool
     {
         if (!is_array($other)) {
             return false;
@@ -111,7 +118,7 @@ class ArraysMatchConstraint extends \PHPUnit_Framework_Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString() :string
     {
         $ret_val = 'matches expected Array (';
 

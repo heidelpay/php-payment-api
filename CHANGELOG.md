@@ -5,11 +5,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [v1.7.2][v1.7.2]
 
+### Removed
+- Remove package which led to errors in CI.
+
 ### Added
 - Parameter group to allow Online Transfer payments (e.g. EPS, Giropay and iDeal) without bank selection in shop.
 - Example for EPS and Giropay without bank selection.
 
 ### Changed
+- Updated dependencies.
+- Refactored ArraysMatchConstraint to new dependency version.
+- Replaced codacy/coverage with codacy/codacy-coverage-reporter.
+- Set integration tests to use PHP 7.1.
 - Several minor updates.
 
 ## [v1.7.1][v1.7.1]

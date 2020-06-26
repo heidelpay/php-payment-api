@@ -1,12 +1,7 @@
 language: php
-dist: trusty
 matrix:
   fast_finish: true
   include:
-    - php: 7.0
-      env: deps=no
-    - php: 7.0
-      env: deps=high
     - php: 7.1
       env: deps=no
     - php: 7.1
@@ -14,6 +9,14 @@ matrix:
     - php: 7.2
       env: deps=no
     - php: 7.2
+      env: deps=high
+    - php: 7.3
+      env: deps=no
+    - php: 7.3
+      env: deps=high
+    - php: 7.4
+      env: deps=no
+    - php: 7.4
       env: deps=high
 cache:
   directories:
@@ -23,8 +26,8 @@ cache:
 before_install:
     - ./tests/script/travis_before_install.sh
 install:
-    - if [ "$(phpenv version-name)" == "5.6" ]; then travis_wait ./tests/script/travis_install.sh; else ./tests/script/travis_install.sh; fi
+    - ./tests/script/travis_install.sh
 script:
     - ./tests/script/travis_script.sh
 after_success:
-    - php vendor/bin/codacycoverage clover tests/_output/coverage.xml
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l PHP -r tests/_output/coverage.xml
