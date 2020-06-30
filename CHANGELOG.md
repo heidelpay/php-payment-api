@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Removed
 - Remove package which led to errors in CI.
+- Remove support for PHP 5.6 and 7.0.
 
 ### Added
 - Parameter group to allow Online Transfer payments (e.g. EPS, Giropay and iDeal) without bank selection in shop.
