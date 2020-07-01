@@ -2,8 +2,9 @@
 
 namespace Heidelpay\Tests\PhpPaymentApi\Integration\PaymentMethods;
 
+use Exception;
 use Heidelpay\PhpPaymentApi\Response;
-use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod as EPS;
+use Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod;
 use Heidelpay\Tests\PhpPaymentApi\Helper\BasePaymentMethodTest;
 
 /**
@@ -29,6 +30,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
      * @var string currency
      */
     protected $currency = 'EUR';
+
     /**
      * Secret
      *
@@ -44,7 +46,7 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     /**
      * PaymentObject
      *
-     * @var \Heidelpay\PhpPaymentApi\PaymentMethods\EPSPaymentMethod
+     * @var EPSPaymentMethod
      */
     protected $paymentObject;
 
@@ -68,14 +70,14 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     {
         // @codingStandardsIgnoreEnd
         $authentication = $this->authentication
-            ->setSecuritySender('31HA07BC8124AD82A9E96D9A35FAFD2A')
-            ->setUserLogin('31ha07bc8124ad82a9e96d486d19edaa')
-            ->setUserPassword('password')
-            ->setTransactionChannel('31HA07BC812125981B4F52033DE486AB')
+            ->setSecuritySender('31HA07BC8142C5A171745D00AD63D182')
+            ->setUserLogin('31ha07bc8142c5a171744e5aef11ffd3')
+            ->setUserPassword('93167DE7')
+            ->setTransactionChannel('31HA07BC816492169CE30CFBBF83B1D5')
             ->getAuthenticationArray();
         $customerDetails = $this->customerData->getCustomerDataArray();
 
-        $EPS = new EPS();
+        $EPS = new EPSPaymentMethod();
         $EPS->getRequest()->authentification(...$authentication);
         $EPS->getRequest()->customerAddress(...$customerDetails);
         $EPS->dryRun = true;
@@ -86,10 +88,9 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
     /**
      * Test case for a single EPS authorize
      *
-     * @return string payment reference id for the EPS authorize transaction
      * @group connectionTest
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function testAuthorize()
     {
@@ -107,9 +108,42 @@ class EPSPaymentMethodTest extends BasePaymentMethodTest
 
         $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
         $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
+        $this->assertEmpty($response->getProcessing()->getRedirect()->getUrl());
 
         $this->logDataToDebug($result);
+    }
 
-        return (string)$response->getPaymentReferenceId();
+    /**
+     * Test case for a single EPS authorize
+     *
+     * @group connectionTest
+     *
+     * @throws Exception
+     */
+    public function testAuthorizeFrontendDisabled()
+    {
+        $request = $this->paymentObject->getRequest();
+
+        $timestamp = $this->getMethod(__METHOD__) . ' ' . date('Y-m-d H:i:s');
+        $request->basketData($timestamp, 23.12, $this->currency, $this->secret);
+        $request->getFrontend()->setResponseUrl('http://technik.heidelpay.de/jonas/responseAdvanced/response.php');
+
+        $request->getAccount()->setCountry('AT');
+        $request->getFrontend()->setEnabled('FALSE');
+
+        $this->paymentObject->authorize();
+
+        /* prepare request and send it to payment api */
+        $requestArray = $request->toArray();
+        /** @var Response $response */
+        list($result, $response) = $request->send($this->paymentObject->getPaymentUrl(), $requestArray);
+
+        $this->assertTrue($response->isSuccess(), 'Transaction failed : ' . print_r($response, 1));
+        $this->assertFalse($response->isError(), 'authorize failed : ' . print_r($response->getError(), 1));
+        $this->assertNotEmpty($response->getProcessing()->getRedirect()->url);
+        // Unfortunately this can only be tested in live mode
+        //$this->assertNotEmpty($response->getProcessing()->getRedirect()->getParameter());
+
+        $this->logDataToDebug($result);
     }
 }

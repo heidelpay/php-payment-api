@@ -42,7 +42,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     /**
      * FrontendMode
      *
-     * @var string always set to withelabel on ngw (mandatory)
+     * @var string always set to whitelabel on ngw (mandatory)
      */
     public $mode = FrontendMode::FRONTEND_MODE_WHITELABEL;
 
@@ -168,7 +168,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * FrontendReventAsyncRedirect
+     * FrontendPreventAsyncRedirect
      *
      * @return boolean weather is enabled or not
      */
@@ -186,7 +186,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $css_path url to a css file, e.g. http://dev.heidelpay.com/heidelpay_iframe.css
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function setCssPath($css_path)
     {
@@ -203,7 +203,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $enabled 'FALSE' or 'TRUE'
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function setEnabled($enabled)
     {
@@ -218,7 +218,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $language iso language code 2 letters
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function setLanguage($language)
     {
@@ -231,9 +231,9 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $mode
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      *
-     * @deprecated Change of the mode propertie is prohibited since ngw-api needs WHITELABLE mode.
+     * @deprecated Change of the mode property is prohibited since ngw-api needs WHITELABEL mode.
      */
     public function setMode($mode)
     {
@@ -243,12 +243,12 @@ class FrontendParameterGroup extends AbstractParameterGroup
     /**
      * Setter for payment frame origin
      *
-     * for the credit and debit card iframe you have to set the source of the javascipt
+     * for the credit and debit card iframe you have to set the source of the javascript
      * post request., e.g. http://dev.heidelpay.com
      *
      * @param string $payment_frame_origin, e.g. http://dev.heidelpay.com
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function setPaymentFrameOrigin($payment_frame_origin)
     {
@@ -265,7 +265,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $prevent_async_redirect
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      */
     public function setPreventAsyncRedirect($prevent_async_redirect)
     {
@@ -285,7 +285,7 @@ class FrontendParameterGroup extends AbstractParameterGroup
      *
      * @param string $response_url, e.g. http://dev.heidelpay.com/reponse.php
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\FrontendParameterGroup
+     * @return FrontendParameterGroup
      *
      */
     public function setResponseUrl($response_url)

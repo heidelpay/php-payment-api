@@ -27,14 +27,14 @@ class Response extends AbstractMethod
     /**
      * ConnectorParameterGroup
      *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
+     * @var ConnectorParameterGroup
      */
     protected $connector;
 
     /**
      * ProcessingParameterGroup
      *
-     * @var \Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup
+     * @var ProcessingParameterGroup
      */
     protected $processing;
 
@@ -54,7 +54,7 @@ class Response extends AbstractMethod
     /**
      * Processing getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ProcessingParameterGroup
+     * @return ProcessingParameterGroup
      */
     public function getProcessing()
     {
@@ -68,7 +68,7 @@ class Response extends AbstractMethod
     /**
      * Connector getter
      *
-     * @return \Heidelpay\PhpPaymentApi\ParameterGroups\ConnectorParameterGroup
+     * @return ConnectorParameterGroup
      */
     public function getConnector()
     {
@@ -84,7 +84,7 @@ class Response extends AbstractMethod
      *
      * @param array $rawResponse
      *
-     * @return \Heidelpay\PhpPaymentApi\Response
+     * @return Response
      *
      * @deprecated 1.3.0 Response::fromPost should be used to create an instance with POST parameters.
      */
@@ -95,7 +95,7 @@ class Response extends AbstractMethod
     }
 
     /**
-     * Response was successfull
+     * Response was successful
      *
      * @return boolean
      */
@@ -138,9 +138,9 @@ class Response extends AbstractMethod
     }
 
     /**
-     * Get payment reference id or uniqe id
+     * Get payment reference id or unique id
      *
-     * @return string payment uniqe id
+     * @return string payment unique id
      */
     public function getPaymentReferenceId()
     {
@@ -169,7 +169,7 @@ class Response extends AbstractMethod
             throw new PaymentFormUrlException('The PaymentCode is not set.');
         }
 
-        list($code, $type) = explode('.', $this->getPayment()->getCode());
+        list($code, ) = explode('.', $this->getPayment()->getCode());
 
         if (($code === PaymentMethod::CREDIT_CARD || $code === PaymentMethod::DEBIT_CARD)
             && $this->getIdentification()->getReferenceId() === null

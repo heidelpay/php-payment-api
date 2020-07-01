@@ -37,12 +37,12 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     public $result;
 
     /**
-     * @var string reson_code transaction result
+     * @var string reason_code transaction result
      */
     public $reason_code;
 
     /**
-     * @var string reson transaction result
+     * @var string reason transaction result
      */
     public $reason;
 
@@ -72,6 +72,11 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     public $status_code;
 
     /**
+     * @var RedirectParameterGroup $redirect
+     */
+    public $redirect;
+
+    /**
      * ProcessingResult getter
      *
      * @return string result
@@ -82,7 +87,7 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * ProcessingRetrun message getter
+     * ProcessingReturn message getter
      *
      * @return string return
      */
@@ -92,7 +97,7 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     }
 
     /**
-     * ProcessingRetrun code getter
+     * ProcessingReturn code getter
      *
      * @return string return code
      */
@@ -109,5 +114,17 @@ class ProcessingParameterGroup extends AbstractParameterGroup
     public function getStatusCode()
     {
         return $this->status_code;
+    }
+
+    /**
+     * @return RedirectParameterGroup
+     */
+    public function getRedirect()
+    {
+        if (!$this->redirect instanceof RedirectParameterGroup) {
+            $this->redirect = new RedirectParameterGroup();
+        }
+
+        return $this->redirect;
     }
 }

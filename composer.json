@@ -3,19 +3,20 @@
     "description": "New client library for heidelpay payments replacing heidelpay/php-api.",
     "license": "proprietary",
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.1",
         "lib-curl": "*",
         "lib-openssl": "*",
         "ext-SimpleXML": "*",
         "ext-json": "*"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.0",
-        "heidelpay/phpdocumentor": "2.9.1",
-        "codeception/codeception": "~2.3.9",
-        "codeception/aspect-mock": "~3.0.0",
-        "codacy/coverage": "^1.4",
-        "heidelpay/php-basket-api": "^1.0"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "codeception/codeception": "^4.1",
+        "codeception/aspect-mock": "^3.1",
+        "heidelpay/php-basket-api": "^1.0",
+        "monolog/monolog": "^1.25",
+        "codeception/module-asserts": "^1.2",
+        "phpunit/phpunit": "^7.5"
     },
     "suggest": {
         "heidelpay/php-message-code-mapper": "You can use this package to provide user-friendly messages instead of error codes.",
